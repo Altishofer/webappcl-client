@@ -15,6 +15,3 @@ export class ApiService {
     return this.http.get<any>(`${this.apiUrl}`);
   }
 }
-
-
-// API key: AIzaSyBN-xTXQR38tqTq6DoWNfFlwzduyYv3WUI
