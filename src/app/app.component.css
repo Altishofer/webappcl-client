@@ -112,6 +112,12 @@ svg.material-icons:not(:last-child) {
   width: 168px;
 }
 
+.card.card-centered {
+  height: 16px;
+  width: 168px;
+  text-align: center;
+}
+
 .card-container .card:not(.highlight-card) {
   cursor: pointer;
 }
