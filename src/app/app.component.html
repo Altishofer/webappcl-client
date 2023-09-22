@@ -48,7 +48,7 @@
       </g>
     </svg>
 
-    <span>{{ title }} app is running!</span>
+    <span>{{ title }} is running but won't deploy :(</span>
 
     <svg id="rocket-smoke" xmlns="http://www.w3.org/2000/svg" width="516.119" height="1083.632" viewBox="0 0 516.119 1083.632">
       <title>Rocket Ship Smoke</title>
@@ -57,7 +57,7 @@
 
   </div>
 
-  <!-- Resources -->
+  <!-- Resources
   <h2>Resources</h2>
   <p>Here are some links to help you get started:</p>
 
@@ -91,9 +91,9 @@
       <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
     </a>
 
-  </div>
+  </div> -->
 
-  <!-- Next Steps -->
+  <!-- Next Steps
   <h2>Next Steps</h2>
   <p>What do you want to do next with your app?</p>
 
@@ -129,9 +129,9 @@
       <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
       <span>Build for Production</span>
     </button>
-  </div>
+  </div> -->
 
-  <!-- Terminal -->
+  <!-- Terminal
   <div class="terminal" [ngSwitch]="selection.value">
       <pre *ngSwitchDefault>ng generate component xyz</pre>
       <pre *ngSwitchCase="'material'">ng add @angular/material</pre>
@@ -139,16 +139,23 @@
       <pre *ngSwitchCase="'dependency'">ng add _____</pre>
       <pre *ngSwitchCase="'test'">ng test</pre>
       <pre *ngSwitchCase="'build'">ng build</pre>
-      <pre *ngSwitchCase="'destroy india'">ng destroy india</pre>
-  </div>
+  </div> -->
+
+
+  <input type="hidden" #fact>
 
   <div class="card-container">
-    <button class="card card-centered" (click)="getFact()">
-      <span>GET SOME FACTS</span>
+    <button class="card card-centered" (click)="fact.value = freeFact()">
+      <span>GET FACT</span>
     </button>
   </div>
 
-  <!-- Links -->
+  <div class="terminal">
+    <pre>{{ fact.value }}</pre>
+  </div>
+
+
+  <!-- Links
   <div class="card-container">
     <a class="circle-link" title="Find a Local Meetup" href="https://www.meetup.com/find/?keywords=angular" target="_blank" rel="noopener">
       <svg xmlns="http://www.w3.org/2000/svg" width="24.607" height="23.447" viewBox="0 0 24.607 23.447">
@@ -165,11 +172,12 @@
       </svg>
     </a>
   </div>
+  -->
 
   <!-- Footer -->
   <footer>
       Love Angular?&nbsp;
-      <a href="https://github.com/angular/angular" target="_blank" rel="noopener"> Give our repo a star.
+      <a href="https://github.com/angular/angular" target="_blank" rel="noopener"> You're a
         <div class="github-star-badge">
             <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
           Star

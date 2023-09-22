@@ -174,7 +174,9 @@ a:hover {
 .terminal {
   position: relative;
   width: 80%;
+  white-space: normal;
   max-width: 600px;
+  min-height: 34px;
   border-radius: 6px;
   padding-top: 45px;
   margin-top: 8px;

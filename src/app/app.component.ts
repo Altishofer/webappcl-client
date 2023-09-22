@@ -7,16 +7,21 @@ import { ApiService } from "./api.service";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
-  title = 'my-app';
+  title = 'Get Fact';
+  currentFact = "Cats can have multiple colours";
 
   constructor(private service: ApiService) {}
 
-  getFact() {
-    this.service.freeFact().subscribe((results) => {
-      console.log('Pineapples have been received - Result:\n', results);
-    })
+  freeFact() {
+    this.service.getFact()
+      .subscribe((results) => {
+        const factString = Object.values(results);
+        this.currentFact = factString[0];
+    });
+    return this.currentFact;
   }
 
   ngOnInit(): void {
+    this.freeFact();
   }
 }
