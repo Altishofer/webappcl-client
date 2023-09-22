@@ -11,6 +11,8 @@ COPY . .
 RUN npm install
 RUN ng build --configuration=production
 
-EXPOSE 8017
+#EXPOSE 8017
 
-CMD ["ng", "serve", "--host", "0.0.0.0", "--port", "8017"]
+#CMD ["ng", "serve", "--host", "0.0.0.0", "--port", "8017"]
+
+CMD ["ng", "serve", "--host", "0.0.0.0", "--port", "5000"]
