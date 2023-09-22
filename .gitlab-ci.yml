@@ -1,5 +1,16 @@
+image: node:20
+
 stages:
+  - build
   - deploy
+
+build:
+  stage: build
+  script:
+    - apt-get update -qy
+    - npm install -g @angular/cli
+    - npm install
+    - ng build --configuration=production
 
 deploy:
   stage: deploy
