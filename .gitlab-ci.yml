@@ -1,21 +1,15 @@
+image: node:14
+
 stages:
-  - setup
   - build
   - deploy
-
-variables:
-  DOKKU_HOST: dokku.example.com # Replace with your Dokku server hostname
-
-setup:
-  stage: setup
-  script:
-    - apt-get update -qy
-    - apt-get install -y nodejs npm
-    - npm install -g @angular/cli
 
 build:
   stage: build
   script:
+    - apt-get update -qy
+    - apt-get install -y nodejs npm
+    - npm install -g @angular/cli
     - npm install
     - ng build --prod
 
