@@ -10,7 +10,7 @@ build:
     - apt-get update -qy
     - npm install -g @angular/cli
     - npm install
-    - ng build --prod
+    - ng build --configuration=production
 
 deploy:
   stage: deploy
