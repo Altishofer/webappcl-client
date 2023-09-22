@@ -8,6 +8,6 @@ deploy:
   environment:
     name: production
   only:
-    - main
+    - master
   script:
     - git push dokku@localhost:$CI_PROJECT_NAME-$CI_PROJECT_ID HEAD:refs/heads/master
