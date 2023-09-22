@@ -9,8 +9,8 @@ deploy:
     name: production
   only:
     - master
-  services:
-    - docker:dind
   script:
-    - docker exec -it docker:dind docker run --rm -v $(pwd):/app -w /app node:14 bash -c "npm install -g @angular/cli && npm install && ng build --prod"
+    - docker pull your-angular-image:latest
+    - docker run --rm -v $(pwd):/app -w /app your-angular-image:latest npm install
+    - docker run --rm -v $(pwd):/app -w /app your-angular-image:latest ng build --prod
     - git push dokku@localhost:$CI_PROJECT_NAME-$CI_PROJECT_ID HEAD:refs/heads/master
