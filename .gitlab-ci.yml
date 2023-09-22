@@ -1,5 +1,23 @@
 stages:
+  - setup
+  - build
   - deploy
+
+variables:
+  DOKKU_HOST: dokku.example.com # Replace with your Dokku server hostname
+
+setup:
+  stage: setup
+  script:
+    - apt-get update -qy
+    - apt-get install -y nodejs npm
+    - npm install -g @angular/cli
+
+build:
+  stage: build
+  script:
+    - npm install
+    - ng build --prod
 
 deploy:
   stage: deploy
@@ -10,7 +28,4 @@ deploy:
   only:
     - master
   script:
-    - docker pull your-angular-image:latest
-    - docker run --rm -v $(pwd):/app -w /app your-angular-image:latest npm install
-    - docker run --rm -v $(pwd):/app -w /app your-angular-image:latest ng build --prod
     - git push dokku@localhost:$CI_PROJECT_NAME-$CI_PROJECT_ID HEAD:refs/heads/master
