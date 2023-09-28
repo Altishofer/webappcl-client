@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -10,8 +10,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MainpageComponent } from '@layout/mainpage/mainpage.component';
 import { HeaderComponent } from '@layout/header/header.component';
 import { FooterComponent } from '@layout/footer/footer.component'
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from "@shared/shared.module";
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from "@angular/material/icon";
+import { MatButtonModule } from "@angular/material/button";
 
-import {SharedModule} from "@shared/shared.module";
+import {AngularMaterialModule} from "@app/angular-material.module";
 
 @NgModule({
   declarations: [
@@ -21,14 +27,22 @@ import {SharedModule} from "@shared/shared.module";
     FooterComponent
   ],
   imports: [
+    AngularMaterialModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
     CoreModule,
-    SharedModule
+    SharedModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatButtonModule,
+    FlexLayoutModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }

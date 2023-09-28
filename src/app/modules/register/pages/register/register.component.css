@@ -17,7 +17,7 @@ body {
   z-index: 2;
   box-shadow: 0 3px 5px -1px rgba(0, 0, 0, .2), 0 6px 10px 0 rgba(0, 0, 0, .14), 0 1px 18px 0 rgba(0, 0, 0, .12);
 }
-.login-wrapper {
+.register-wrapper {
   height: 100%;
 }
 .positronx {
@@ -61,33 +61,33 @@ body {
   -ms-transform: scale(.95);
   z-index: -1;
 }
-.login-wrapper .example-form {
+.register-wrapper .example-form {
   min-width: 100%;
   max-width: 300px;
   width: 100%;
 }
-.login-wrapper .example-full-width,
-.login-wrapper .btn-block {
+.register-wrapper .example-full-width,
+.register-wrapper .btn-block {
   width: 100%;
 }
-.login-wrapper mat-card-header {
+.register-wrapper mat-card-header {
   text-align: left;
   width: 100%;
   display: block;
   font-weight: 700;
 }
-.login-wrapper mat-card-header mat-card-title {
+.register-wrapper mat-card-header mat-card-title {
   font-size: 30px;
   margin: 0;
 }
-.login-wrapper .mat-card {
+.register-wrapper .mat-card {
   padding: 40px 70px 50px;
 }
-.login-wrapper .mat-stroked-button {
+.register-wrapper .mat-stroked-button {
   border: 1px solid currentColor;
   line-height: 54px;
   background: #FFF7FA;
 }
-.login-wrapper .mat-form-field-appearance-legacy .mat-form-field-infix {
+.register-wrapper .mat-form-field-appearance-legacy .mat-form-field-infix {
   padding: 0.8375em 0;
 }
