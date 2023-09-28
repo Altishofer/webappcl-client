@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import {HomeModule} from "./modules/home/home.module";
-import {MainpageComponent} from "./layout/mainpage/mainpage.component";
-import {LoginModule} from "./modules/login/login.module";
-import {AboutModule} from "./modules/about/about.module";
+import {HomeModule} from "@modules/home/home.module";
+import {MainpageComponent} from "@layout/mainpage/mainpage.component";
+import {LoginModule} from "@modules/login/login.module";
+import {AboutModule} from "@modules/about/about.module";
 
 const routes: Routes = [
   {
