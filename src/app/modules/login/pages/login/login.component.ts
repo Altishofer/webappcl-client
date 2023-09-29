@@ -10,6 +10,13 @@ import {UserService} from "@data/services/user.service";
 export class LoginComponent {
   constructor(private userService: UserService) {}
 
+  user: User = {
+    userId: "",
+    userName: "",
+    password: "",
+    token: ""
+  };
+
   ngOnInit(): void {
     const user: User = {
       userId:'testUserUUID',
@@ -17,17 +24,17 @@ export class LoginComponent {
       password:'testUserPassword',
       token:'testUserToken'
     };
+  }
 
-    const token = 'Bearer your-token-here';
+  doLogin() {
+    console.log(this.user);
+  }
 
-    this.userService.getUser(user, token).subscribe(
-      (response) => {
+  onKey_userName(value: string) {
+    this.user.userName = value;
+  }
 
-        console.log(response);
-      },
-      (error) => {
-        console.error(error);
-      }
-    );
+  onKey_password(value: string) {
+    this.user.password = value;
   }
 }

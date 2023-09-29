@@ -1,12 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import {Observable, share} from 'rxjs';
-import { User} from '../interfaces/user.model'
+
+import { Observable } from 'rxjs';
+
+import { User } from '../interfaces/user.model'
+
+
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  private baseUrl = 'http://localhost:5072/api/user';
+  private baseUrl = 'http://localhost:5072/api/User';
 
   constructor(private http: HttpClient) {}
 
@@ -23,8 +27,9 @@ export class UserService {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
-
-    return this.http.post(`${this.baseUrl}/Register`, JSON.stringify(user), { headers });
+    const body = JSON.stringify(user);
+    console.log(body);
+    return this.http.post(`${this.baseUrl}/Register`, body, { headers });
   }
 
   login(user: User): Observable<any> {

@@ -25,7 +25,7 @@ import { LocationStrategy, PathLocationStrategy} from "@angular/common";
     AppRoutingModule,
     BrowserAnimationsModule,
     CoreModule,
-    SharedModule,
+    SharedModule
   ],
   providers: [{
     provide: LocationStrategy,
