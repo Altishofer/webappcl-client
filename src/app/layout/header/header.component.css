@@ -10,7 +10,11 @@ h6 {
 p {
   text-align: center;
 }
-
 .example-spacer {
   flex: 1 1 auto;
+}
+.mat-divider {
+  color: lightgrey;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
