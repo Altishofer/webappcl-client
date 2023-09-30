@@ -11,17 +11,17 @@ export class LoginComponent {
   constructor(private userService: UserService) {}
 
   user: User = {
-    userId: "",
+    userId: 1,
     userName: "",
-    password: "",
+    userPassword: "",
     token: ""
   };
 
   ngOnInit(): void {
     const user: User = {
-      userId:'testUserUUID',
+      userId:123,
       userName:'testUserName',
-      password:'testUserPassword',
+      userPassword:'testUserPassword',
       token:'testUserToken'
     };
   }
@@ -35,6 +35,6 @@ export class LoginComponent {
   }
 
   onKey_password(value: string) {
-    this.user.password = value;
+    this.user.userPassword = value;
   }
 }

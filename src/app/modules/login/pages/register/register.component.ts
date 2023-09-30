@@ -12,15 +12,14 @@ export class RegisterComponent{
   constructor(private userService:UserService) {}
 
   user: User = {
-    userId: "0",
+    userId: 1,
     userName: "",
-    password: "",
+    userPassword: "",
     token: "someToken"
   };
 
   addUser() {
-    console.log(this.user)
-    this.userService.register(this.user)
+    this.userService.register(this.user);
   }
 
   onKey_userName(value: string) {
@@ -28,6 +27,6 @@ export class RegisterComponent{
   }
 
   onKey_password(value: string) {
-    this.user.password = value;
+    this.user.userPassword = value;
   }
 }

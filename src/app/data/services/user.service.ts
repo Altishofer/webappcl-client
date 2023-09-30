@@ -28,8 +28,9 @@ export class UserService {
       'Content-Type': 'application/json',
     });
     const body = JSON.stringify(user);
-    console.log(body);
-    return this.http.post(`${this.baseUrl}/Register`, body, { headers });
+    const response = this.http.post(`${this.baseUrl}/Register`, body, { headers });
+    console.log(response.subscribe(answer => console.log(answer)));
+    return response;
   }
 
   login(user: User): Observable<any> {
