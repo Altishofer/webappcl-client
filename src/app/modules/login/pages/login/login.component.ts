@@ -11,18 +11,14 @@ export class LoginComponent {
   constructor(private userService: UserService) {}
 
   user: User = {
-    userId: 1,
     userName: "",
-    userPassword: "",
-    token: ""
+    userPassword: ""
   };
 
   ngOnInit(): void {
     const user: User = {
-      userId:123,
       userName:'testUserName',
-      userPassword:'testUserPassword',
-      token:'testUserToken'
+      userPassword:'testUserPassword'
     };
   }
 
