@@ -32,6 +32,7 @@ export class UserService {
     this.http.post(`${this.baseUrl}/Register`, body, { headers }).subscribe((response: any) => {
       this.cookieService.set('token', response.token);
       this.cookieService.set('userName', user.userName);
+      console.log("Registration was successful: "+user.userName+", received token: "+response.token);
       this.refreshTokenPeriodically();
     });
   }
@@ -44,6 +45,7 @@ export class UserService {
     this.http.post(`${this.baseUrl}/Login`, JSON.stringify(user), { headers }).subscribe((response: any) => {
       this.cookieService.set('token', response.token);
       this.cookieService.set('userName', user.userName);
+      console.log("Login was successful: "+user.userName+", received token: "+response.token);
       this.refreshTokenPeriodically();
     });
   }
@@ -52,6 +54,7 @@ export class UserService {
     setInterval(() => {
       this.http.get(`${this.baseUrl}/RefreshToken`).subscribe((response: any) => {
         this.cookieService.set('token', response.token);
+        console.log("TokenRefresh was successful: "+this.cookieService.get("userName")+", received token: "+response.token);
       });
     }, 15 * 60 * 1000); // Refresh every 15 minutes
   }

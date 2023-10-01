@@ -15,15 +15,8 @@ export class LoginComponent {
     userPassword: ""
   };
 
-  ngOnInit(): void {
-    const user: User = {
-      userName:'testUserName',
-      userPassword:'testUserPassword'
-    };
-  }
-
   doLogin() {
-    console.log(this.user);
+    this.userService.login(this.user);
   }
 
   onKey_userName(value: string) {
