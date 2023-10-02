@@ -12,7 +12,7 @@
           <input matInput placeholder="Password" type="password" #pw_box (keyup)="onKey_password(pw_box.value)">
         </mat-form-field>
       </mat-card-content>
-      <button mat-raised-button color="accent" class="btn-block" routerLink="" routerLinkActive="active" (click)="doLogin()">Sign in</button>
+      <button mat-raised-button color="accent" class="btn-block" routerLink="/home" routerLinkActive="active" (click)="doLogin()">Sign in</button>
       <p style="text-align: center; padding-top: 20px">No account yet?</p>
       <button mat-raised-button color="accent" class="btn-block" routerLink="register" routerLinkActive="active">Register</button>
     </form>
