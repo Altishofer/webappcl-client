@@ -17,6 +17,14 @@ body {
   z-index: 2;
   box-shadow: 0 3px 5px -1px rgba(0, 0, 0, .2), 0 6px 10px 0 rgba(0, 0, 0, .14), 0 1px 18px 0 rgba(0, 0, 0, .12);
 }
+.button-big {
+  font-family: monospace;
+  font-size: 40px;
+  padding: 40px
+}
+.spacer {
+  margin-bottom: 120px;
+}
 .home-wrapper {
   height: 100%;
 }
@@ -29,7 +37,7 @@ body {
   top: 0;
   opacity: 1;
   float: left;
-  padding: 60px 50px 40px 50px;
+  padding: 10px 50px 40px 50px;
   width: 100%;
   background: #fff;
   border-radius: 10px;
@@ -62,6 +70,7 @@ body {
   z-index: -1;
 }
 .home-wrapper .example-form {
+  margin-top: 20px;
   min-width: 100%;
   max-width: 300px;
   width: 100%;

@@ -40,5 +40,5 @@ p {
   display: block;
   margin-left: 30px;
   border-radius: 50%;
-  border: 3px solid grey;
+  border: 3px solid #000000;
 }

@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { AboutRoutingModule } from './about-routing.module';
 import {SharedModule} from "@shared/shared.module";
 import { AboutComponent } from './pages/about/about.component';
+import {HeaderComponent} from "@layout/header/header.component";
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { AboutComponent } from './pages/about/about.component';
   imports: [
     CommonModule,
     SharedModule,
-    AboutRoutingModule
+    AboutRoutingModule,
+    HeaderComponent
   ]
 })
 export class AboutModule { }
