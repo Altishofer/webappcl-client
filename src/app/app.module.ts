@@ -17,7 +17,6 @@ import { LocationStrategy, PathLocationStrategy} from "@angular/common";
   declarations: [
     AppComponent,
     MainpageComponent,
-    HeaderComponent,
     FooterComponent
   ],
   imports: [
@@ -25,7 +24,8 @@ import { LocationStrategy, PathLocationStrategy} from "@angular/common";
     AppRoutingModule,
     BrowserAnimationsModule,
     CoreModule,
-    SharedModule
+    SharedModule,
+    HeaderComponent
   ],
   providers: [{
     provide: LocationStrategy,
