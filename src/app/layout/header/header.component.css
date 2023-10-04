@@ -10,14 +10,13 @@ h6 {
 p {
   text-align: center;
 }
-.abusive-paragraph {
-  margin: 20px 0 40px 4px;
-}
 .toolbar-main {
   border-radius: 25px;
+  height: 40px;
 }
 .header-spacer.far {
   font-family: monospace;
+  font-size: 18px;
   flex: 1 1 auto;
   text-align: left;
 }
@@ -27,18 +26,36 @@ p {
 .header-button {
   font-family: monospace;
   border-radius: 10px;
+  height: 30px;
   width: 170px;
   margin-left: 20px;
   margin-right: 20px;
 }
 .header-button:hover {
-  margin-bottom: 5px;
+  background-color: lightgrey;
+  color: black;
 }
 .img-circular-left {
   background-color: white;
-  height: 70px;
+  height: 40px;
   display: block;
   margin-left: 30px;
   border-radius: 50%;
   border: 3px solid #000000;
+}
+.overlay-window {
+  justify-content: left;
+}
+.overlay-list {
+  justify-self: center;
+  height: 400px;
+  width: 600px;
+  margin-top: 20px;
+  text-align: left;
+  background-color: black;
+  border-radius: 15px;
+}
+.overlay-list.item {
+  color: black;
+  margin: 0;
 }

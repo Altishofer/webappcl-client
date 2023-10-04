@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { SharedModule } from "@shared/shared.module";
+import { OverlayModule } from "@angular/cdk/overlay";
 
 @Component({
   selector: 'app-header',
@@ -7,9 +8,10 @@ import { SharedModule } from "@shared/shared.module";
   styleUrls: ['./header.component.css'],
   standalone: true,
   imports: [
-    SharedModule
+    SharedModule,
+    OverlayModule
   ]
 })
 export class HeaderComponent {
-
+  isTesterOpen: boolean = false;
 }

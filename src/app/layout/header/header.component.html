@@ -1,4 +1,4 @@
-<p class="abusive-paragraph">
+<p>
   <mat-toolbar class="toolbar-main">
     <span class="header-spacer narrow">
       <img class="img-circular-left" src="assets/regex_logo_2.png" alt="regex logo" routerLink="home" routerLinkActive="active"/>
@@ -6,7 +6,9 @@
     <span class="header-spacer far">Regex Tokenizer</span>
     <span class="header-spacer narrow">
       <button mat-raised-button class="header-button">Ranking</button>
-      <button mat-raised-button class="header-button">Regex Tester</button>
+      <button mat-raised-button class="header-button" (click)="isTesterOpen = !isTesterOpen" cdkOverlayOrigin #demotrigger="cdkOverlayOrigin">
+        {{isTesterOpen ? "Close" : "Regex Tester"}}
+      </button>
       <button mat-raised-button class="header-button">About</button>
       <button mat-raised-button class="header-button" routerLink="/login">Logout</button>
     </span>
@@ -14,3 +16,17 @@
     <span class="header-spacer far"></span>
   </mat-toolbar>
 </p>
+
+
+<ng-template class="overlay-window"
+  cdkConnectedOverlay
+  [cdkConnectedOverlayOrigin]="demotrigger"
+  [cdkConnectedOverlayOpen]="isTesterOpen">
+  <mat-list class="overlay-list">
+    <mat-list-item class="overlay-list item">At least this content is showed now.</mat-list-item>
+    <mat-list-item>But how can this window be closed again by clicking outside of it???</mat-list-item>
+    <mat-list-item>And how can line breaks be added?</mat-list-item>
+    <mat-list-item>This sucks.</mat-list-item>
+    <mat-list-item>How does do?</mat-list-item>
+  </mat-list>
+</ng-template>
