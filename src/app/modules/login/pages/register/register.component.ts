@@ -5,7 +5,7 @@ import {User} from "@app/data/interfaces/user.model";
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['../../shared/login.shared.css']
+  styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
 
