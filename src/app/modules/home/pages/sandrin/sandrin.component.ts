@@ -19,19 +19,17 @@ export class SandrinComponent {
 
   public constructor(private sanitizer: DomSanitizer) {
     this.content = 'Hello! mac "n" cheese Sandrin! TeSt'.trim();
-    this.tokens = ['He', '!', 'mac', '"','n','"', 'cheese', 'Sandrin', "!", "TeSt"];
+    this.tokens = []; // ['He', '!', 'mac', '"','n','"', 'cheese', 'Sandrin', "!", "TeSt"];
     this.solution = ['Hello', '!', 'mac "n" cheese', "Sandrin", "!", "Te", "St"];
   }
 
   public getColTok():SafeHtml{
     this.dynamicProgramming();
-    // console.log(this.colTok);
     return this.sanitizer.bypassSecurityTrustHtml(this.colTok);
   }
 
   public getColSol():SafeHtml{
     this.dynamicProgramming();
-    // console.log(this.colSol);
     return this.sanitizer.bypassSecurityTrustHtml(this.colSol);
   }
 
