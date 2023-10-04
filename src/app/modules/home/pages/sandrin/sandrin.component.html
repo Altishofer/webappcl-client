@@ -1,1 +1,16 @@
-<p>sandrin works a lot!</p>
+<div>
+  <label for="regexInput">Regex Expression:</label>
+  <input #inputBox id="regexInput" [(ngModel)]="query" (input)="handleInputChange()" />
+</div>
+<div>
+  <div>Original Text:</div>
+  <pre>{{ content }}</pre>
+</div>
+<div>
+  <div>Result:</div>
+  <div [innerHTML]="getColTok()"></div>
+</div>
+<div>
+  <div>Solution:</div>
+  <div [innerHTML]="getColSol()"></div>
+</div>

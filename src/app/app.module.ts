@@ -12,6 +12,7 @@ import { FooterComponent } from '@layout/footer/footer.component';
 
 import { SharedModule } from '@shared/shared.module';
 import { LocationStrategy, PathLocationStrategy} from "@angular/common";
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { LocationStrategy, PathLocationStrategy} from "@angular/common";
     AppRoutingModule,
     BrowserAnimationsModule,
     CoreModule,
-    SharedModule
+    SharedModule,
+    FormsModule
   ],
   providers: [{
     provide: LocationStrategy,
