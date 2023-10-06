@@ -45,18 +45,16 @@ p {
   border: 3px solid #000000;
 }
 .overlay-window {
+  color: black;
+  background-color: black;
   justify-content: left;
+  padding: 20px;
 }
-.overlay-list {
-  justify-self: center;
-  height: 400px;
+.overlay-content {
   width: 600px;
   margin-top: 20px;
   text-align: left;
-  background-color: black;
+  background-color: whitesmoke;
   border-radius: 15px;
-}
-.overlay-list.item {
-  color: black;
-  margin: 0;
+  border: 3px solid #000000;
 }

@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import { SharedModule } from "@shared/shared.module";
 import { OverlayModule } from "@angular/cdk/overlay";
+import {RegexTesterComponent} from "@layout/regex-tester/regex-tester.component";
 
 @Component({
   selector: 'app-header',
@@ -9,7 +10,8 @@ import { OverlayModule } from "@angular/cdk/overlay";
   standalone: true,
   imports: [
     SharedModule,
-    OverlayModule
+    OverlayModule,
+    RegexTesterComponent
   ]
 })
 export class HeaderComponent {

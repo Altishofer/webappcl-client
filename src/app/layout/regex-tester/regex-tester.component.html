@@ -1,0 +1,28 @@
+<div class="tester-all">
+  <div class="tester-head">
+    Regex Tester
+  </div>
+
+  <div class="tester-body">
+    <div>
+      <mat-form-field class="mat-input-main">
+        <mat-label class="mat-input-label">Regular Expression:</mat-label>
+        <input matInput #inputBox id="regexInput" [(ngModel)]="query" (input)="handleInputChange()" />
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field class="mat-input-main">
+        <mat-label class="mat-input-label">Example Text:</mat-label>
+        <input matInput #inputTextBox id="textInput" [(ngModel)]="query" (keyup)="onKey_textInput(inputTextBox.value)" />
+      </mat-form-field>
+    </div>
+    <div class="tester-text">
+      <div>Result:</div>
+      <div [innerHTML]="getColTok()"></div>
+    </div>
+    <div class="tester-text">
+      <div>Solution:</div>
+      <div [innerHTML]="getColSol()"></div>
+    </div>
+  </div>
+</div>
