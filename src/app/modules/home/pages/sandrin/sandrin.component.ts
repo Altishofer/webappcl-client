@@ -132,7 +132,7 @@ export class SandrinComponent {
       else if (s[i]==t[i] && s[i]!=0 && i<s.length-1 && ((c[i+1]==colSolA || c[i+1]==colSolB)) && t[i+1]!=s[i+1] && s[i+1]<=s[i]){
         c[i] = c[i+1]==colSolB ? colSolA : colSolB;
       }
-      else if (s[i]==t[i] && s[i]!=0 && i<s.length-1 && ((c[i+1]==colSolA || c[i+1]==colSolB))){
+      else if (s[i]==t[i] && s[i]!=0 && i<s.length-1 && ((c[i+1]==colSolCorA || c[i+1]==colSolB))){
         c[i] = c[i+1];
       }
     }
