@@ -1,4 +1,6 @@
 <div>
+  <button (click)="getServerStatus()">Log Server Status</button>
+<div>
   <label for="regexInput">Regex Expression:</label>
   <input #inputBox id="regexInput" [(ngModel)]="query" (input)="handleInputChange()" />
 </div>

@@ -1,5 +1,8 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {User} from "@data/interfaces/user.model";
+import {environment} from "../../../../../environments/environment";
 
 @Component({
   selector: 'app-sandrin',
@@ -16,11 +19,27 @@ export class SandrinComponent {
   public solution: string[] = [];
   public colTok: string = "";
   public colSol: string = "";
+  private baseUrl = environment.API_URL + "/TodoItems";
 
-  public constructor(private sanitizer: DomSanitizer) {
+  public constructor(
+      private sanitizer: DomSanitizer,
+      private http: HttpClient
+  ) {
     this.content = 'Hello! mac "n" cheese Sandrin! TeSt'.trim();
     this.tokens = []; // ['He', '!', 'mac', '"','n','"', 'cheese', 'Sandrin', "!", "TeSt"];
     this.solution = ['Hello', '!', 'mac "n" cheese', "Sandrin", "!", "Te", "St"];
+  }
+
+  getServerStatus() {
+    this.http.get(`${this.baseUrl}/status`)
+      .subscribe(
+        (response: any) => {
+          console.log('Success: ', response.message);
+        },
+        (error) => {
+          console.error('Error: Failed to get data from baseUrl:', error);
+        }
+      );
   }
 
   public getColTok():SafeHtml{
@@ -132,7 +151,7 @@ export class SandrinComponent {
       else if (s[i]==t[i] && s[i]!=0 && i<s.length-1 && ((c[i+1]==colSolA || c[i+1]==colSolB)) && t[i+1]!=s[i+1] && s[i+1]<=s[i]){
         c[i] = c[i+1]==colSolB ? colSolA : colSolB;
       }
-      else if (s[i]==t[i] && s[i]!=0 && i<s.length-1 && ((c[i+1]==colSolA || c[i+1]==colSolB))){
+      else if (s[i]==t[i] && s[i]!=0 && i<s.length-1 && ((c[i+1]==colSolCorA || c[i+1]==colSolB))){
         c[i] = c[i+1];
       }
     }

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CookieService } from "ngx-cookie-service";
+import { environment } from "../../../environments/environment";
 
 import { User } from '../interfaces/user.model'
 
@@ -8,8 +9,7 @@ import { User } from '../interfaces/user.model'
   providedIn: 'root',
 })
 export class UserService {
-  private baseUrl = 'http://localhost:5072/api/User';
-
+  private baseUrl = environment.API_URL + "/User";
   constructor(private http: HttpClient, private cookieService: CookieService) {}
 
   getUser(user: User): void {
