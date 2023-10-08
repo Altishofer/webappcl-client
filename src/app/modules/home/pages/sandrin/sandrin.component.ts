@@ -20,7 +20,6 @@ export class SandrinComponent {
   public colTok: string = "";
   public colSol: string = "";
   private baseUrl = environment.API_URL + "/TodoItems";
-  private saveUrl:string = "http://172.23.49.21:8019/api/TodoItems/status"
 
   public constructor(
       private sanitizer: DomSanitizer,
@@ -31,27 +30,16 @@ export class SandrinComponent {
     this.solution = ['Hello', '!', 'mac "n" cheese', "Sandrin", "!", "Te", "St"];
   }
 
-  sendBaseGetRequest() {
+  getServerStatus() {
     this.http.get(`${this.baseUrl}/status`)
       .subscribe(
         (response: any) => {
-          console.log('Success: Received response from baseUrl:', response.message);
+          console.log('Success: ', response.message);
         },
         (error) => {
           console.error('Error: Failed to get data from baseUrl:', error);
         }
       );
-  }
-
-  sendSaveGetRequest() {
-    this.http.get(this.saveUrl).subscribe(
-      (response: any) => {
-        console.log('Success: Received response from saveUrl:', response.message);
-      },
-      (error) => {
-        console.error('Error: Failed to get data from saveUrl:', error);
-      }
-    );
   }
 
   public getColTok():SafeHtml{
