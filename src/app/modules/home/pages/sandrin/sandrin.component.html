@@ -1,18 +1,16 @@
 <div>
   <button (click)="getServerStatus()">Log Server Status</button>
-<div>
-  <label for="regexInput">Regex Expression:</label>
-  <input #inputBox id="regexInput" [(ngModel)]="query" (input)="handleInputChange()" />
 </div>
 <div>
-  <div>Original Text:</div>
-  <pre>{{ content }}</pre>
+  <button (click)="registerToGroup()">Register</button>
+  <button (click)="unregisterFromGroup()">Unregister</button>
 </div>
+
 <div>
-  <div>Result:</div>
-  <div [innerHTML]="getColTok()"></div>
+  <div *ngFor="let message of messages">{{ message }}</div>
 </div>
+
 <div>
-  <div>Solution:</div>
-  <div [innerHTML]="getColSol()"></div>
+  <input type="text" [(ngModel)]="messageToSend" placeholder="Enter your message">
+  <button (click)="sendMessage()">Send Message</button>
 </div>
