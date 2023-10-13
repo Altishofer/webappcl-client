@@ -14,3 +14,18 @@
   <input type="text" [(ngModel)]="messageToSend" placeholder="Enter your message">
   <button (click)="sendMessage()">Send Message</button>
 </div>
+
+
+
+<div>
+  <input type="text" [(ngModel)]="word" placeholder="Word">
+  <input type="number" [(ngModel)]="count" placeholder="Count">
+  <button (click)="getSimilarWords()">get n similar words</button>
+</div>
+
+
+<div>
+  <div *ngFor="let similarWord of similarWords">{{ similarWord }}</div>
+</div>
+
+

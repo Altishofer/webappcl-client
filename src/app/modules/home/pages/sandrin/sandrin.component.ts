@@ -4,6 +4,7 @@ import { HttpClient } from "@angular/common/http";
 import { User } from "@data/interfaces/user.model";
 import { environment } from "../../../../../environments/environment";
 import { SignalRService } from "../../../../data/services/SignalRService";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-sandrin',
@@ -15,9 +16,13 @@ export class SandrinComponent {
   @ViewChild('outputBox') resultBox!: ElementRef;
 
   private baseUrl = environment.API_URL + "/TodoItems";
+  private vectorUrl = environment.API_URL + "/Word2Vector";
   private groupName: string = "0";
   public messages: string[] = [];
   public messageToSend: string = '';
+  public similarWords: string[] = [];
+  word: string = 'dog';
+  count: number = 10;
 
   constructor(
     private http: HttpClient,
@@ -32,7 +37,7 @@ export class SandrinComponent {
   }
 
   getServerStatus() {
-    this.http.get(`${this.baseUrl}/status`)
+    this.http.get(`${this.baseUrl}/`)
       .subscribe(
         (response: any) => {
           console.log('Success: ', response.message);
@@ -41,6 +46,17 @@ export class SandrinComponent {
           console.error('Error: Failed to get data from baseUrl:', error);
         }
       );
+  }
+
+  getSimilarWords(): void {
+    this.http.get(`${this.vectorUrl}/closestWords/${this.word}/${this.count}`).subscribe(
+      (similarWords:any) => {
+        this.similarWords = similarWords;
+      },
+      (error) => {
+        console.error('Error fetching similar words:', error);
+      }
+    );
   }
 
   registerToGroup() {
