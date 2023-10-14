@@ -6,12 +6,13 @@ h5,
 h6 {
   text-align: center;
 }
-
+mat-toolbar {
+  background-color: rgba(109,88,0,0.18);
+}
 p {
   text-align: center;
 }
 .toolbar-main {
-  border-radius: 25px;
   height: 40px;
 }
 .header-spacer.far {
