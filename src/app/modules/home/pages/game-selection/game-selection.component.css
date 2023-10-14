@@ -1,0 +1,25 @@
+@import "../shared/home.shared.css";
+
+body {
+  background-color: white;
+  text-align: center;
+  align-items: center;
+}
+
+.id {
+  display: inline-block;
+  color: darkred;
+  margin-right: 20px;
+  padding: 9px;
+}
+
+.games-list .name {
+  align-self: center;
+  vertical-align: middle;
+}
+
+.button-big {
+  font-family: monospace;
+  font-size: 40px;
+  padding: 40px
+}

@@ -75,14 +75,14 @@ body {
   width: 100%;
 }
 .home-wrapper mat-card-header {
-  text-align: left;
+  padding-left: 0;
+  text-align: center;
   width: 100%;
   display: block;
   font-weight: 700;
 }
 .home-wrapper mat-card-header mat-card-title {
   font-size: 30px;
-  margin: 0;
 }
 .home-wrapper .mat-card {
   padding: 40px 70px 50px;
