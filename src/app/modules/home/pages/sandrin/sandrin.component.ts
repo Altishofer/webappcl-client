@@ -1,6 +1,6 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { HttpClient } from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import { User } from "@data/interfaces/user.model";
 import { environment } from "../../../../../environments/environment";
 import { SignalRService } from "../../../../data/services/SignalRService";
@@ -37,7 +37,10 @@ export class SandrinComponent {
   }
 
   getServerStatus() {
-    this.http.get(`${this.baseUrl}/`)
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+    this.http.get(`${this.baseUrl}/`, {headers})
       .subscribe(
         (response: any) => {
           console.log('Success: ', response.message);
@@ -49,7 +52,10 @@ export class SandrinComponent {
   }
 
   getSimilarWords(): void {
-    this.http.get(`${this.vectorUrl}/closestWords/${this.word}/${this.count}`).subscribe(
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+    this.http.get(`${this.vectorUrl}/closestWords/${this.word}/${this.count}`, {headers}).subscribe(
       (similarWords:any) => {
         this.similarWords = similarWords;
       },
