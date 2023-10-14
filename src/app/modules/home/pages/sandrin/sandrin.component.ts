@@ -53,7 +53,9 @@ export class SandrinComponent {
 
   getSimilarWords(): void {
     const headers = new HttpHeaders({
+      Accept: 'application/json',
       'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
     });
     this.http.get(`${this.vectorUrl}/closestWords/${this.word}/${this.count}`, {headers}).subscribe(
       (similarWords:any) => {
