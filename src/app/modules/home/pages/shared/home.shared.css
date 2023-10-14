@@ -74,11 +74,13 @@ body {
 }
 .home-wrapper .example-full-width,
 .home-wrapper .btn-block {
+  display: block;
   width: 100%;
   margin-bottom: 10px;
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;
+  text-align: left;
+  padding-right: 10px;
 }
 .home-wrapper mat-card-header {
   padding-left: 0;

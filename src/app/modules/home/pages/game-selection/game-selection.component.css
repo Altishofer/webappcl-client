@@ -1,17 +1,17 @@
 @import "../shared/home.shared.css";
 
-span.id {
-  width: 20px;
-  max-width: 20px;
-  min-width: 20px;
+span .id {
+  display: inline-block;
+  text-align: left;
   color: darkred;
   margin-right: 10px;
-  padding: 4px;
+  padding: 4px 1px;
 }
-span.name {
+span .name {
+  display: inline-block;
   text-align: left;
-  vertical-align: middle;
-  padding: 4px;
+  margin-right: 10px;
+  padding: 4px 1px;
 }
 .button-big {
   font-family: monospace;
