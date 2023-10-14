@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { User } from "@data/interfaces/user.model";
-import { UserService } from "@data/services/user.service";
+import { Host } from "@data/interfaces/host.model";
+import { HostService } from "@data/services/host.service";
 
 @Component({
   selector: 'app-login',
@@ -8,22 +8,22 @@ import { UserService } from "@data/services/user.service";
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  constructor(private userService: UserService) {}
+  constructor(private hostService: HostService) {}
 
-  user: User = {
-    userName: "",
-    userPassword: ""
+  host: Host = {
+    hostName: "",
+    hostPassword: ""
   };
 
   doLogin() {
-    this.userService.login(this.user);
+    this.hostService.login(this.host);
   }
 
-  onKey_userName(value: string) {
-    this.user.userName = value;
+  onKey_hostName(value: string) {
+    this.host.hostName = value;
   }
 
   onKey_password(value: string) {
-    this.user.userPassword = value;
+    this.host.hostPassword = value;
   }
 }

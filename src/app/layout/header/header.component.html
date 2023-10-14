@@ -1,16 +1,19 @@
 <p>
   <mat-toolbar class="toolbar-main">
     <span class="header-spacer narrow">
+      <!--
       <button mat-raised-button class="header-button" (click)="isTesterOpen = !isTesterOpen" cdkOverlayOrigin #trigger="cdkOverlayOrigin">
         {{isTesterOpen ? "Close" : "Regex Tester"}}
       </button>
+      -->
     </span>
     <span class="header-spacer far"></span>
     <span class="header-spacer far"></span>
+    <button mat-raised-button class="header-button" routerLink="/login" routerLinkActive="active">Logout</button>
   </mat-toolbar>
 </p>
 
-
+<!--
 <ng-template class="overlay-window"
   cdkConnectedOverlay
   [cdkConnectedOverlayOrigin]="trigger"
@@ -18,7 +21,6 @@
   <div class="overlay-content">
     <app-regex-tester></app-regex-tester>
   </div>
-  <!--
   <mat-list class="overlay-list">
     <mat-list-item class="overlay-list item">At least this content is showed now.</mat-list-item>
     <mat-list-item>But how can this window be closed again by clicking outside of it???</mat-list-item>
@@ -26,5 +28,5 @@
     <mat-list-item>This sucks.</mat-list-item>
     <mat-list-item>How does do?</mat-list-item>
   </mat-list>
-  -->
 </ng-template>
+-->

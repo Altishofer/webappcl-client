@@ -1,7 +1,7 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { HttpClient } from "@angular/common/http";
-import { User } from "@data/interfaces/user.model";
+import { Host } from "@data/interfaces/host.model";
 import { environment } from "../../../../../environments/environment";
 import { SignalRService } from "../../../../data/services/SignalRService";
 import {Observable} from "rxjs";

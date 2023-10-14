@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { UserService } from "@data/services/user.service";
-import {User} from "@app/data/interfaces/user.model";
+import { HostService } from "@data/services/host.service";
+import {Host} from "@data/interfaces/host.model";
 
 @Component({
   selector: 'app-register',
@@ -9,23 +9,23 @@ import {User} from "@app/data/interfaces/user.model";
 })
 export class RegisterComponent {
 
-  constructor(private userService: UserService) {
+  constructor(private hostService: HostService) {
   }
 
-  user: User = {
-    userName: "",
-    userPassword: ""
+  host: Host = {
+    hostName: "",
+    hostPassword: ""
   };
 
-  addUser() {
-    this.userService.register(this.user);
+  addHost() {
+    this.hostService.register(this.host);
   }
 
-  onKey_userName(value: string) {
-    this.user.userName = value;
+  onKey_hostName(value: string) {
+    this.host.hostName = value;
   }
 
   onKey_password(value: string) {
-    this.user.userPassword = value;
+    this.host.hostPassword = value;
   }
 }
