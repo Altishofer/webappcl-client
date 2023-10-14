@@ -1,25 +1,26 @@
 @import "../shared/home.shared.css";
 
-body {
-  background-color: white;
-  text-align: center;
-  align-items: center;
-}
-
-.id {
-  display: inline-block;
+span.id {
+  width: 20px;
+  max-width: 20px;
+  min-width: 20px;
   color: darkred;
-  margin-right: 20px;
-  padding: 9px;
+  margin-right: 10px;
+  padding: 4px;
 }
-
-.games-list .name {
-  align-self: center;
+span.name {
+  text-align: left;
   vertical-align: middle;
+  padding: 4px;
 }
-
 .button-big {
   font-family: monospace;
   font-size: 40px;
   padding: 40px
+}
+.button-normal {
+  width: 230px;
+}
+.center {
+  text-align: center;
 }
