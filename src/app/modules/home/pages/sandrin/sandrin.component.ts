@@ -40,7 +40,7 @@ export class SandrinComponent {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
-    this.http.get(`${this.baseUrl}/status`, {headers})
+    this.http.get(`${this.vectorUrl}/status`, {headers})
       .subscribe(
         (response: any) => {
           console.log(response);
@@ -53,16 +53,14 @@ export class SandrinComponent {
 
   getSimilarWords(): void {
     const headers = new HttpHeaders({
-      Accept: 'application/json',
       'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*',
     });
     this.http.get(`${this.vectorUrl}/closestWords/${this.word}/${this.count}`, {headers}).subscribe(
       (similarWords:any) => {
         this.similarWords = similarWords;
       },
       (error) => {
-        console.error('Error fetching similar words:', error);
+        console.error('Error during fetching similar words:', error);
       }
     );
   }
