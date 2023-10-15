@@ -40,13 +40,13 @@ export class SandrinComponent {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
-    this.http.get(`${this.baseUrl}/`, {headers})
+    this.http.get(`${this.baseUrl}/status`, {headers})
       .subscribe(
         (response: any) => {
-          console.log('Success: ', response.message);
+          console.log(response);
         },
         (error) => {
-          console.error('Error: Failed to get data from baseUrl:', error);
+          console.error('Error: ', error);
         }
       );
   }
