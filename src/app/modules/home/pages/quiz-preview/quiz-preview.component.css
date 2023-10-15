@@ -1,0 +1,23 @@
+@import "../shared/home.shared.css";
+
+span .id {
+  display: inline-block;
+  text-align: left;
+  color: darkred;
+  margin-right: 10px;
+  padding: 4px 1px;
+}
+span .name {
+  display: inline-block;
+  text-align: left;
+  margin-right: 10px;
+  padding: 4px 1px;
+}
+.button-big {
+  font-family: monospace;
+  font-size: 40px;
+  padding: 40px
+}
+.center {
+  text-align: center;
+}

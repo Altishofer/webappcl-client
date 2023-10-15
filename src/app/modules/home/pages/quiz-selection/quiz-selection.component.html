@@ -3,10 +3,10 @@
 <span class="home-wrapper" fxLayout="row" fxLayoutAlign="center center">
   <mat-card class="box">
     <mat-card-header>
-      <mat-card-title>Created Quizzes</mat-card-title>
+      <mat-card-title>Existing Quizzes</mat-card-title>
     </mat-card-header>
     <form class="example-form">
-      <button mat-raised-button color="accent" class="btn-block" routerLink="/home/preview" routerLinkActive="active">
+      <button mat-raised-button color="accent" class="btn-block" (click)="getHostQuizzes()">
         <span class="id">1</span>
         <span class="name">Placehorefgrgdrgrdgl Example</span>
       </button>
