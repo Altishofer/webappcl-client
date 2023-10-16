@@ -19,7 +19,7 @@ export class HostService {
     });
 
     this.http.get(`${this.baseUrl}/GetHosts`, { headers }).subscribe((response: any) => {
-      console.log("got username from request: " + response.hostName);
+      console.log("got hostName from request: " + response.hostName);
     });
   }
 
@@ -44,7 +44,7 @@ export class HostService {
 
     this.http.post(`${this.baseUrl}/Login`, JSON.stringify(host), { headers }).subscribe((response: any) => {
       this.cookieService.set('token', response.token);
-      this.cookieService.set('userName', host.hostName);
+      this.cookieService.set('hostName', host.hostName);
       console.log("Login was successful: "+host.hostName+", received token: "+response.token);
       this.refreshTokenPeriodically();
     });
@@ -54,7 +54,7 @@ export class HostService {
     setInterval(() => {
       this.http.get(`${this.baseUrl}/RefreshToken`).subscribe((response: any) => {
         this.cookieService.set('token', response.token);
-        console.log("TokenRefresh was successful: "+this.cookieService.get("userName")+", received token: "+response.token);
+        console.log("TokenRefresh was successful: "+this.cookieService.get("hostName")+", received token: "+response.token);
       });
     }, 15 * 60 * 1000); // Refresh every 15 minutes
   }

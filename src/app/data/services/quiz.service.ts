@@ -2,31 +2,39 @@ import { Injectable } from '@angular/core';
 import {environment} from "../../../environments/environment";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {CookieService} from "ngx-cookie-service";
+import {Quiz} from "@data/interfaces/quiz.model";
 
 @Injectable({
   providedIn: 'root'
 })
 export class QuizService {
   private baseUrl = environment.API_URL + "/Quiz"
-
-  placeholderJSON: Array<JSON> =
-    [
-      JSON.parse('{"Id": 1, "HostId": 69, "Title": "Example One Hardcoded"}'),
-      JSON.parse('{"Id": 2, "HostId": 69, "Title": "Example Two Hardcoded"}'),
-      JSON.parse('{"Id": 3, "HostId": 69, "Title": "Example Three Hardcoded"}')
-    ];
+  public allQuizzes: Quiz[] = [];
 
   constructor(private http: HttpClient, private cookieService: CookieService) {}
 
-  getAllQuiz() {
-    return this.placeholderJSON
-    /*const headers = new HttpHeaders({
+  getAllQuizzes(): Quiz[] {
+
+    const headers = new HttpHeaders({
       'Authorization': "Bearer " + this.cookieService.get("token"),
       'Content-Type': 'application/json',
     });
 
-    this.http.get(`${this.baseUrl}/GetAllQuiz`, { headers }).subscribe((response: any) => {
-      console.log("got quizzes from request: " + response.quizzes);
-    });*/
+    this.http.get(`${this.baseUrl}/GetAllQuizzes`, { headers }).subscribe((response: any) => {
+      this.allQuizzes = <Quiz[]> response;
+    });
+    return this.allQuizzes;
+  }
+
+
+  getQuiz(quizId: number) {
+    const headers = new HttpHeaders({
+      'Authorization': "Bearer " + this.cookieService.get("token"),
+      'Content-Type': 'application/json',
+    });
+
+    this.http.get(`${this.baseUrl}/GetQuiz/${quizId}`, { headers }).subscribe((response: any) => { //Todo: Replace fixed ID with dynamic solution
+      console.log("got quizzes from request: " + response);
+    });
   }
 }

@@ -9,7 +9,8 @@ const routes: Routes = [
     path:'', redirectTo: 'selection', pathMatch: "full"
   },
   {
-    path:'selection', component:QuizSelectionComponent
+    path:'selection',
+    component:QuizSelectionComponent
   },
   {
     path:'preview', component: QuizPreviewComponent
