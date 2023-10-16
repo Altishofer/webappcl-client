@@ -1,0 +1,38 @@
+@import "../../shared/player.shared.css";
+
+.inner-title {
+  margin-bottom: 5px;
+  font-size: 120%;
+}
+.rules-container {
+  font-size: 100%;
+  text-align: center;
+  margin-bottom: 10px;
+  padding: 5px;
+}
+.target-word {
+  margin-bottom: 10px;
+  background-color: lightgreen;
+  padding: 12px;
+  border-radius: 12px;
+}
+.forbidden-word {
+  margin-bottom: 5px;
+  background-color: darkred;
+  color: white;
+  padding: 12px;
+  border-radius: 12px;
+}
+.word-calc-container {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.word-calc-field {
+  margin-bottom: 7px;
+}
+.word-calc-switch {
+  margin-right: 5px;
+}
+.word-calc-input {
+  padding: 10px 5px;
+}

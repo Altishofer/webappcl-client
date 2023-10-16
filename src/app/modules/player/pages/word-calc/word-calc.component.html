@@ -1,0 +1,29 @@
+
+<span class="player-wrapper" fxLayout="row" fxLayoutAlign="center center">
+  <mat-card class="box">
+    <div class="rules-container">
+      <div mat-card-title class="inner-title">Target Word:</div>
+      <div class="target-container">
+        <div class="target-word">Aye</div>
+      </div>
+
+      <div mat-card-title class="inner-title">Forbidden Words:</div>
+      <div class="forbidden-container">
+        <div class="forbidden-word">Blunderbuss</div>
+        <div class="forbidden-word">Sword</div>
+        <div class="forbidden-word">Fishstickman</div>
+      </div>
+    </div>
+
+    <div class="word-calc-container">
+      <div class="word-calc-field">
+        <span>
+          <mat-slide-toggle class="word-calc-switch" #calculatorSwitch></mat-slide-toggle>
+          <input class="word-calc-input" matInput placeholder="new word">
+        </span>
+      </div>
+    </div>
+
+    <button mat-raised-button color="accent" class="btn-block">Submit</button>
+  </mat-card>
+</span>
