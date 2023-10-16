@@ -1,7 +1,6 @@
 import {Component, inject, OnInit} from '@angular/core';
 import { QuizService } from "@data/services/quiz.service";
 import {Quiz} from "@data/interfaces/quiz.model";
-import {ActivatedRoute, ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot} from "@angular/router";
 
 @Component({
   selector: 'app-quiz-selection',
@@ -11,7 +10,7 @@ import {ActivatedRoute, ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot} 
 export class QuizSelectionComponent implements OnInit {
   allQuizzes: Quiz[] = [];
 
-  constructor(private quizService: QuizService, private activatedRoute: ActivatedRoute) {
+  constructor(private quizService: QuizService) {
   }
 
   getHostQuizzes() {
