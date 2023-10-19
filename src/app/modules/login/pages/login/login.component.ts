@@ -3,9 +3,9 @@ import { Host } from "@data/interfaces/host.model";
 import { HostService } from "@data/services/host.service";
 import {CookieService} from "ngx-cookie-service";
 import {catchError, Observable, throwError} from "rxjs";
-import {HttpErrorResponse} from "@angular/common/http";
 import { Router } from '@angular/router';
 import {FormGroup, FormControl, Validators, FormBuilder} from '@angular/forms';
+import {HttpErrorResponse} from "@angular/common/http";
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -43,8 +43,6 @@ export class LoginComponent {
   toggleForm() {
     this.isLogin = !this.isLogin;
     this.errorMsg = "";
-    this.loginForm.value.hostName = "";
-    this.loginForm.value.hostPassword = "";
   }
 
   doLogin(): void {
@@ -69,20 +67,21 @@ export class LoginComponent {
     serviceMethod(this.host)
       .pipe(
         catchError((error: HttpErrorResponse) => {
-          console.log(JSON.stringify(error));
+          console.log(JSON.stringify(error.error));
           if (error.status != 500) {
-            this.errorMsg = error.error || this.unexpectedErrorMsg;
+            this.errorMsg = error.error;
           } else {
             this.errorMsg = this.unexpectedErrorMsg;
           }
-          return throwError(this.unexpectedErrorMsg);
+          return[];
         })
       )
       .subscribe((response: any): void => {
-        if (response.ok) {
-          this.cookieService.set('token', response.token);
+        console.log("response", JSON.stringify(response.body));
+        if ((response.status >= 200 && response.status < 300) || response.status == 304) {
+          this.cookieService.set('token', response.body.result);
           this.cookieService.set('hostName', this.host.hostName);
-          console.log(actionName + " was successful: " + this.host.hostName + ", received token: " + response.token);
+          console.log(actionName + " was successful -> user '" + this.host.hostName + "', received token: " + response.body.result);
           this.hostService.refreshTokenPeriodically();
           this.router.navigate(['/home']);
         } else {
@@ -90,4 +89,5 @@ export class LoginComponent {
         }
       });
   }
+
 }
