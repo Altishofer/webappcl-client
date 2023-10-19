@@ -4,6 +4,7 @@ import { CookieService } from "ngx-cookie-service";
 import { environment } from "../../../environments/environment";
 
 import { Host } from '../interfaces/host.model'
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root',
@@ -23,31 +24,20 @@ export class HostService {
     });
   }
 
-  register(host: Host): void {
-    const headers = new HttpHeaders({
+  register(host: Host): Observable<any> {
+    const headers : HttpHeaders = new HttpHeaders ({
       'Content-Type': 'application/json',
     });
-    const body = JSON.stringify(host);
-
-    this.http.post(`${this.baseUrl}/Register`, body, { headers }).subscribe((response: any) => {
-      this.cookieService.set('token', response.token);
-      this.cookieService.set('hostName', host.hostName);
-      console.log("Registration was successful: "+host.hostName+", received token: "+response.token);
-      this.refreshTokenPeriodically();
-    });
+    const body : string = JSON.stringify(host);
+    return this.http.post(`${this.baseUrl}/Register`, body, { headers });
   }
 
-  login(host: Host): void {
-    const headers = new HttpHeaders({
+  login(host: Host): Observable<any> {
+    const headers : HttpHeaders = new HttpHeaders({
       'Content-Type': 'application/json',
     });
-
-    this.http.post(`${this.baseUrl}/Login`, JSON.stringify(host), { headers }).subscribe((response: any) => {
-      this.cookieService.set('token', response.token);
-      this.cookieService.set('hostName', host.hostName);
-      console.log("Login was successful: "+host.hostName+", received token: "+response.token);
-      this.refreshTokenPeriodically();
-    });
+    const body : string = JSON.stringify(host);
+    return this.http.post(`${this.baseUrl}/Login`, body, { headers });
   }
 
   refreshTokenPeriodically() {

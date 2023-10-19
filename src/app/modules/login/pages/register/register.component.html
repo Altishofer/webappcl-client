@@ -14,6 +14,9 @@
       </mat-card-content>
       <button mat-raised-button color="accent" class="btn-block" routerLink="/home" routerLinkActive="active" (click)="addHost()">Create Account</button>
       <mat-divider class="login-divider"></mat-divider>
+      <div *ngIf="errorMsg" class="error-message">
+        {{ errorMsg }}
+      </div>
       <p style="text-align: center; padding-top: 20px">Already have an account?</p>
       <button mat-raised-button color="accent" class="btn-block" routerLink="" routerLinkActive="active">Login</button>
     </form>
