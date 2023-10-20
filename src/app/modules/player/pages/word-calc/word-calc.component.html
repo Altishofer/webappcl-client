@@ -16,12 +16,16 @@
     </div>
 
     <div class="word-calc-container">
-      <div *ngFor="let word of enteredWords; let position = index" class="word-calc-field">
-        <span>
-          <mat-slide-toggle class="word-calc-switch" color="primary" #calculatorSwitch (change)="changeSubtract(position, $event)"></mat-slide-toggle>
-          <input class="word-calc-input" matInput placeholder="enter word" (keyup)="changeWord(position, $event)">
-        </span>
-      </div>
+      <ng-template ngFor let-word [ngForOf]="enteredWords"
+                   let-position = "index">
+        <div class="word-calc-field">
+          <span>
+            <mat-slide-toggle class="word-calc-switch" color="accent" #calculatorSwitch (change)="changeSubtract(position, $event)"></mat-slide-toggle>
+            <input class="word-calc-input" matInput placeholder="enter word" (keyup)="changeWord(position, $event)">
+          </span>
+        </div>
+      </ng-template>
+
       <div class="centered-container">
         <button mat-raised-button color="accent" class="marginalized" (click)="addField()">Add Field</button>
       </div>
