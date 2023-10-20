@@ -16,11 +16,14 @@
     </div>
 
     <div class="word-calc-container">
-      <div class="word-calc-field">
+      <div *ngFor="let word of enteredWords; let position = index" class="word-calc-field">
         <span>
-          <mat-slide-toggle class="word-calc-switch" color="primary" #calculatorSwitch></mat-slide-toggle>
+          <mat-slide-toggle class="word-calc-switch" color="primary" #calculatorSwitch (click)="updateSubtract(position)"></mat-slide-toggle>
           <input class="word-calc-input" matInput placeholder="enter word">
         </span>
+      </div>
+      <div class="centered-container">
+        <button mat-raised-button color="accent" class="marginalized" (click)="addField()">Add Field</button>
       </div>
     </div>
 
