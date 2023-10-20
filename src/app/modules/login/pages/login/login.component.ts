@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { Host } from "@data/interfaces/host.model";
 import { HostService } from "@data/services/host.service";
 import {CookieService} from "ngx-cookie-service";
-import {catchError, Observable, throwError} from "rxjs";
+import {catchError, Observable} from "rxjs";
 import { Router } from '@angular/router';
-import {FormGroup, FormControl, Validators, FormBuilder} from '@angular/forms';
+import {FormGroup, Validators, FormBuilder} from '@angular/forms';
 import {HttpErrorResponse} from "@angular/common/http";
 @Component({
   selector: 'app-login',

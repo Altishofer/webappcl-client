@@ -1,4 +1,6 @@
-import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, ViewChild} from '@angular/core';
+import {FormBuilder, FormGroup} from "@angular/forms";
+import {MatSlideToggleChange} from "@angular/material/slide-toggle";
 
 @Component({
   selector: 'app-word-calc',
@@ -8,11 +10,20 @@ import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/
 export class WordCalcComponent implements AfterViewInit {
   enteredWords = [{subtract: false, word: ''}]
 
-  updateSubtract(position: number) {
-    console.log(position);
+  changeSubtract(position: number, change: MatSlideToggleChange) {
+    this.enteredWords[position]['subtract'] = change.checked;
   }
+
+  changeWord(position: number, event: any) {
+    this.enteredWords[position]['word'] = event.target.value;
+  }
+
   addField() {
     this.enteredWords.push({subtract: false, word: ''})
+  }
+
+  printArray() {
+    console.log(this.enteredWords);
   }
 
 
