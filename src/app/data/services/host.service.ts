@@ -5,6 +5,7 @@ import { environment } from "../../../environments/environment";
 
 import { Host } from '../interfaces/host.model'
 import {Observable} from "rxjs";
+import {VectorCalculationModel} from "@data/interfaces/VectorCalculation.model";
 
 @Injectable({
   providedIn: 'root',
@@ -54,6 +55,6 @@ export class HostService {
             console.log("ERROR: refreshing token was not successful");
           }
       });
-    }, 15 * 60 * 1000); // Refresh every 15 minutes
+    }, 60); // Refresh every 1 minutes
   }
 }

@@ -1,4 +1,3 @@
-
 <span class="player-wrapper" fxLayout="row" fxLayoutAlign="center center">
   <mat-card class="box">
     <div class="rules-container">
@@ -14,19 +13,22 @@
         <div class="forbidden-word">Fishstickman</div>
       </div>
     </div>
-
-    <div class="word-calc-container">
-      <div *ngFor="let word of enteredWords; let position = index" class="word-calc-field">
-        <span>
-          <mat-slide-toggle class="word-calc-switch" color="primary" #calculatorSwitch (change)="changeSubtract(position, $event)"></mat-slide-toggle>
-          <input class="word-calc-input" matInput placeholder="enter word" (keyup)="changeWord(position, $event)">
-        </span>
+    <div>
+      <div [formGroup]="wordCalcForm">
+        <div *ngFor="let word of wordsArray.controls; let position = index" class="word-calc-field" [formGroupName]="position">
+          <span>
+          <mat-slide-toggle class="word-calc-switch" color="primary" (change)="changeSubtract(position, $event)" formControlName="isSubtracted"></mat-slide-toggle>
+            <input class="word-calc-input" matInput placeholder="enter word" (input)="changeWord(position, $event)" formControlName="word">
+            <button mat-icon-button color="warn" (click)="removeField(position)">
+              <mat-icon>remove_circle</mat-icon>
+            </button>
+          </span>
+        </div>
       </div>
       <div class="centered-container">
         <button mat-raised-button color="accent" class="marginalized" (click)="addField()">Add Field</button>
       </div>
     </div>
-
     <button mat-raised-button color="accent" class="btn-block" (click)="printArray()">Submit</button>
   </mat-card>
 </span>
