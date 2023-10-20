@@ -56,7 +56,7 @@ export class SandrinComponent {
       'Content-Type': 'application/json',
     });
     this.http.get(`${this.vectorUrl}/closestWords/${this.word}/${this.count}`, {headers}).subscribe(
-      (similarWords:any) => {
+      (similarWords:any) : void => {
         this.similarWords = similarWords;
       },
       (error) => {

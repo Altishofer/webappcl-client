@@ -1,21 +1,29 @@
+<!-- src/app/login/login.component.html -->
 <span class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
   <mat-card class="box">
     <mat-card-header>
-      <mat-card-title>Login</mat-card-title>
+      <mat-card-title>{{ isLogin ? 'Login' : 'Register' }}</mat-card-title>
     </mat-card-header>
-    <form class="example-form">
+    <form [formGroup]="loginForm">
       <mat-card-content>
         <mat-form-field class="example-full-width">
-          <input matInput placeholder="Username" #un_box (keyup)="onKey_hostName(un_box.value)">
+          <input matInput placeholder="Username" formControlName="username">
         </mat-form-field>
         <mat-form-field class="example-full-width">
-          <input matInput placeholder="Password" type="password" #pw_box (keyup)="onKey_password(pw_box.value)">
+          <input matInput placeholder="Password" type="password" formControlName="password">
         </mat-form-field>
+        <p *ngIf="errorMsg" class="error-message">
+          {{ errorMsg }}
+        </p>
       </mat-card-content>
-      <button mat-raised-button color="accent" class="btn-block" routerLink="/home" routerLinkActive="active" (click)="doLogin()">Sign in</button>
+      <button mat-raised-button color="accent" class="btn-block" routerLinkActive="active" [disabled]="loginForm.invalid" (click)="doAction()">
+        {{ isLogin ? 'Sign In' : 'Register' }}
+      </button>
       <mat-divider class="login-divider"></mat-divider>
-      <p style="text-align: center; padding-top: 20px">No account yet?</p>
-      <button mat-raised-button color="accent" class="btn-block" routerLink="register" routerLinkActive="active">Register</button>
+      <p class="login-message">{{ isLogin ? 'No account yet?' : 'Already have an account?' }}</p>
+      <button mat-raised-button color="accent" class="btn-block" (click)="toggleForm()">
+        {{ isLogin ? 'Register' : 'Sign In' }}
+      </button>
     </form>
   </mat-card>
 </span>

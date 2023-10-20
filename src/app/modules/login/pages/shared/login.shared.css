@@ -89,6 +89,20 @@ body {
   line-height: 54px;
   background: #FFF7FA;
 }
+.login-message {
+  text-align: center;
+  padding-top: 20px;
+}
+.error-message {
+  text-align: center;
+  padding-bottom: 20px;
+}
+button:disabled {
+  background-color: #888888;
+  color: white;
+  cursor: not-allowed;
+}
+
 .login-wrapper .mat-form-field-appearance-legacy .mat-form-field-infix {
   padding: 0.8375em 0;
 }
