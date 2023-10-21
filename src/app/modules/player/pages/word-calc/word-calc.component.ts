@@ -13,6 +13,7 @@ export class WordCalcComponent implements AfterViewInit {
   wordCalcForm: FormGroup;
   wordsArray: FormArray;
   addFieldDisabled : boolean;
+  isReady : boolean;
 
   cal: VectorCalculationModel = {
     Additions: [],
@@ -20,15 +21,17 @@ export class WordCalcComponent implements AfterViewInit {
   };
 
   constructor(private fb: FormBuilder, private cdr: ChangeDetectorRef) {
+    this.isReady = false;
+    this.addFieldDisabled = true;
     this.wordCalcForm = this.fb.group({
       wordsArray: this.fb.array([this.createWordFormGroup()])
     });
     this.wordsArray = this.wordCalcForm.get('wordsArray') as FormArray;
     console.log('Constructor:', this.wordsArray);
-    this.addFieldDisabled = true;
   }
 
   ngAfterViewInit(): void{
+    this.isReady = true;
     this.cdr.detectChanges();
   }
 
@@ -48,8 +51,8 @@ export class WordCalcComponent implements AfterViewInit {
 
   lastIndexWordEmpty():boolean{
     const lastIndex : number = this.wordsArray.length-1;
-    const lastWord = this.wordsArray.at(lastIndex).get('word')?.value;
     if (lastIndex === 0) {return false;}
+    const lastWord = this.wordsArray.at(lastIndex).get('word')?.value;
     return !lastWord;
   }
 
@@ -60,21 +63,24 @@ export class WordCalcComponent implements AfterViewInit {
     this.addFieldDisabled = this.lastIndexWordEmpty();
   }
 
-  changeSubtract(index: number, event: MatSlideToggleChange) {
-    const wordGroup : AbstractControl<any, any> = this.wordsArray.at(index);
-    if (wordGroup) {
-      wordGroup.get('isSubtracted')?.setValue(event.checked);
-      console.log('Changed subtract for index', index, 'to', event.checked);
-    }
+  changeSubtract(index: number, event: MatSlideToggleChange) : void {
+    this.wordsArray.at(index).get('isSubtracted')?.setValue(event.checked);
+
+    //const wordGroup : AbstractControl<any, any> = this.wordsArray.at(index);
+    //if (wordGroup) {
+    //  wordGroup.get('isSubtracted')?.setValue(event.checked);
+    //  console.log('Changed subtract for index', index, 'to', event.checked);
+    //}
   }
 
-  changeWord(index: number, event: Event) {
-    const wordGroup : AbstractControl<any, any> = this.wordsArray.at(index);
-    const word : string = (event.target as HTMLInputElement).value;
-    if (wordGroup) {
-      wordGroup.get('word')?.setValue(word);
-      console.log('Changed word for index', index, 'to', word);
-    }
+  changeWord(index: number, event: Event) : void {
+    this.wordsArray.at(index).get('word')?.setValue((event.target as HTMLInputElement).value)
+    //const wordGroup : AbstractControl<any, any> = this.wordsArray.at(index);
+    //const word : string = (event.target as HTMLInputElement).value;
+    //if (wordGroup) {
+    //  wordGroup.get('word')?.setValue(word);
+    //  console.log('Changed word for index', index, 'to', word);
+    //}
     this.addFieldDisabled = this.lastIndexWordEmpty();
   }
 

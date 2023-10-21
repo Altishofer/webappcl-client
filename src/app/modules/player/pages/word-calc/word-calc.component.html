@@ -13,8 +13,8 @@
         <div class="forbidden-word">Fishstickman</div>
       </div>
     </div>
-    <div>
-      <div [formGroup]="wordCalcForm">
+    <div [formGroup]="wordCalcForm">
+      <div *ngIf="isReady" formArrayName="wordsArray">
         <div *ngFor="let word of wordsArray.controls; let position = index" class="word-calc-field" [formGroupName]="position">
           <span>
           <mat-slide-toggle class="word-calc-switch" color="primary" (change)="changeSubtract(position, $event)" formControlName="isSubtracted"></mat-slide-toggle>
