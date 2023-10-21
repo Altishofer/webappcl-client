@@ -9,11 +9,10 @@ import { VectorCalculationModel } from '@data/interfaces/VectorCalculation.model
   styleUrls: ['./word-calc.component.css']
 })
 
-export class WordCalcComponent implements AfterViewInit {
+export class WordCalcComponent {
   wordCalcForm: FormGroup;
   wordsArray: FormArray;
   addFieldDisabled : boolean;
-  isReady : boolean;
 
   cal: VectorCalculationModel = {
     Additions: [],
@@ -21,18 +20,12 @@ export class WordCalcComponent implements AfterViewInit {
   };
 
   constructor(private fb: FormBuilder, private cdr: ChangeDetectorRef) {
-    this.isReady = false;
     this.addFieldDisabled = true;
     this.wordCalcForm = this.fb.group({
       wordsArray: this.fb.array([this.createWordFormGroup()])
     });
     this.wordsArray = this.wordCalcForm.get('wordsArray') as FormArray;
     console.log('Constructor:', this.wordsArray);
-  }
-
-  ngAfterViewInit(): void{
-    this.isReady = true;
-    this.cdr.detectChanges();
   }
 
   createWordFormGroup(word:string='', isSubtracted:boolean=false): FormGroup {
