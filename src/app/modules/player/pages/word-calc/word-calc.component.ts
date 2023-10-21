@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, FormArray, AbstractControl} from '@angular/forms';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { VectorCalculationModel } from '@data/interfaces/VectorCalculation.model';
@@ -8,48 +8,56 @@ import { VectorCalculationModel } from '@data/interfaces/VectorCalculation.model
   templateUrl: './word-calc.component.html',
   styleUrls: ['./word-calc.component.css']
 })
-export class WordCalcComponent implements OnInit {
+
+export class WordCalcComponent implements AfterViewInit {
   wordCalcForm: FormGroup;
   wordsArray: FormArray;
+  addFieldDisabled : boolean;
 
   cal: VectorCalculationModel = {
     Additions: [],
     Subtractions: []
   };
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private cdr: ChangeDetectorRef) {
     this.wordCalcForm = this.fb.group({
-      wordsArray: this.fb.array([])
+      wordsArray: this.fb.array([this.createWordFormGroup()])
     });
     this.wordsArray = this.wordCalcForm.get('wordsArray') as FormArray;
     console.log('Constructor:', this.wordsArray);
+    this.addFieldDisabled = true;
   }
 
-  ngOnInit() {
-    this.wordCalcForm = this.fb.group({
-      wordsArray: this.fb.array([])
-    });
-    this.wordsArray = this.wordCalcForm.get('wordsArray') as FormArray;
-    console.log('OnInit:', this.wordsArray);
+  ngAfterViewInit(): void{
+    this.cdr.detectChanges();
   }
 
-  createWordFormGroup(word = 'default', isSubtracted: boolean = false): FormGroup {
+  createWordFormGroup(word:string='', isSubtracted:boolean=false): FormGroup {
     return this.fb.group({
       word: word,
       isSubtracted: isSubtracted
     });
   }
 
-  addField() {
+  addField(word:string = '', isSubtracted:boolean = false) : void {
     console.log('Before adding field:', this.wordsArray.value);
-    this.wordsArray.push(this.createWordFormGroup());
+    this.wordsArray.push(this.createWordFormGroup(word, isSubtracted));
     console.log('After adding field:', this.wordsArray.value);
+    this.addFieldDisabled = true;
   }
 
-  removeField(index: number) {
+  lastIndexWordEmpty():boolean{
+    const lastIndex : number = this.wordsArray.length-1;
+    const lastWord = this.wordsArray.at(lastIndex).get('word')?.value;
+    if (lastIndex === 0) {return false;}
+    return !lastWord;
+  }
+
+  removeField(index: number) : void {
     console.log('Before removing field:', this.wordsArray.value);
     this.wordsArray.removeAt(index);
     console.log('After removing field:', this.wordsArray.value);
+    this.addFieldDisabled = this.lastIndexWordEmpty();
   }
 
   changeSubtract(index: number, event: MatSlideToggleChange) {
@@ -62,10 +70,12 @@ export class WordCalcComponent implements OnInit {
 
   changeWord(index: number, event: Event) {
     const wordGroup : AbstractControl<any, any> = this.wordsArray.at(index);
+    const word : string = (event.target as HTMLInputElement).value;
     if (wordGroup) {
-      wordGroup.get('word')?.setValue((event.target as HTMLInputElement).value);
-      console.log('Changed word for index', index, 'to', (event.target as HTMLInputElement).value);
+      wordGroup.get('word')?.setValue(word);
+      console.log('Changed word for index', index, 'to', word);
     }
+    this.addFieldDisabled = this.lastIndexWordEmpty();
   }
 
   printArray() {
