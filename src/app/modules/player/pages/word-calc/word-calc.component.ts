@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
+import {FormBuilder, FormGroup, FormArray, AbstractControl} from '@angular/forms';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { VectorCalculationModel } from '@data/interfaces/VectorCalculation.model';
 
@@ -53,7 +53,7 @@ export class WordCalcComponent implements OnInit {
   }
 
   changeSubtract(index: number, event: MatSlideToggleChange) {
-    const wordGroup = this.wordsArray.at(index);
+    const wordGroup : AbstractControl<any, any> = this.wordsArray.at(index);
     if (wordGroup) {
       wordGroup.get('isSubtracted')?.setValue(event.checked);
       console.log('Changed subtract for index', index, 'to', event.checked);
@@ -61,7 +61,7 @@ export class WordCalcComponent implements OnInit {
   }
 
   changeWord(index: number, event: Event) {
-    const wordGroup = this.wordsArray.at(index);
+    const wordGroup : AbstractControl<any, any> = this.wordsArray.at(index);
     if (wordGroup) {
       wordGroup.get('word')?.setValue((event.target as HTMLInputElement).value);
       console.log('Changed word for index', index, 'to', (event.target as HTMLInputElement).value);
