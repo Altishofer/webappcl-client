@@ -20,7 +20,7 @@
           <span style="display: flex; align-items: center;">
           <mat-slide-toggle class="word-calc-switch" color="primary" (change)="changeSubtract(position, $event)" formControlName="isSubtracted"></mat-slide-toggle>
             <input class="word-calc-input" matInput placeholder="enter word" (input)="changeWord(position, $event)" formControlName="word">
-            <button mat-icon-button color="warn" [disabled]="addFieldDisabled" (click)="removeField(position)">
+            <button mat-icon-button color="warn" (click)="removeField(position)">
               <mat-icon>remove_circle</mat-icon>
             </button>
           </span>
