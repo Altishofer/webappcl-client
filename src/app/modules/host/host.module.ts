@@ -1,24 +1,26 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from "@shared/shared.module";
-import { HomeRoutingModule } from "@modules/home/home-routing.module";
+import { HostRoutingModule } from "@modules/host/host-routing.module";
 
-import { QuizSelectionComponent } from '@modules/home/pages/quiz-selection/quiz-selection.component';
+import { QuizSelectionComponent } from '@modules/host/pages/quiz-selection/quiz-selection.component';
 import { SandrinComponent } from './pages/sandrin/sandrin.component';
 import { HeaderComponent } from "@layout/header/header.component";
 import { QuizPreviewComponent } from './pages/quiz-preview/quiz-preview.component';
+import { LoginComponent } from "@modules/host/pages/login/login.component";
 
 @NgModule({
   declarations: [
     QuizSelectionComponent,
     SandrinComponent,
-    QuizPreviewComponent
+    QuizPreviewComponent,
+    LoginComponent
   ],
   imports: [
     CommonModule,
     SharedModule,
-    HomeRoutingModule,
+    HostRoutingModule,
     HeaderComponent
   ]
 })
-export class HomeModule { }
+export class HostModule { }

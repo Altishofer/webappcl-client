@@ -1,12 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {QuizSelectionComponent} from "@modules/home/pages/quiz-selection/quiz-selection.component";
+import {QuizSelectionComponent} from "@modules/host/pages/quiz-selection/quiz-selection.component";
 import {SandrinComponent} from "./pages/sandrin/sandrin.component";
-import {QuizPreviewComponent} from "@modules/home/pages/quiz-preview/quiz-preview.component";
+import {QuizPreviewComponent} from "@modules/host/pages/quiz-preview/quiz-preview.component";
+import {LoginComponent} from "@modules/host/pages/login/login.component";
 
 const routes: Routes = [
   {
-    path:'', redirectTo: 'selection', pathMatch: "full"
+    path:'', redirectTo: 'login', pathMatch: "full"
+  },
+  {
+    path:'login',
+    component:LoginComponent
   },
   {
     path:'selection',
@@ -24,4 +29,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class HomeRoutingModule { }
+export class HostRoutingModule { }
