@@ -1,18 +1,18 @@
 <!-- src/app/login/login.component.html -->
 <span class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
   <mat-card class="box">
-    <mat-card-header>
+    <mat-card-header style="padding-left: 0">
       <mat-card-title>Register</mat-card-title>
     </mat-card-header>
 
     <form [formGroup]="playerRegForm">
-      <mat-card-content>
-        <mat-form-field class="example-full-width">
+      <mat-card-content style="padding-left: 0; padding-right: 0">
+        <mat-form-field class="example-full-width" style="width: 100%">
           <input matInput placeholder="Username" formControlName="username">
         </mat-form-field>
 
         <ng-template [ngIf]="errorMsg">
-          <p *ngIf="errorMsg" class="error-message">
+          <p class="error-message">
             {{ errorMsg }}
           </p>
         </ng-template>

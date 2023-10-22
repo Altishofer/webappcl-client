@@ -80,7 +80,7 @@ body {
   white-space: nowrap;
   overflow: hidden;
   text-align: center;
-  padding-right: 10px;
+  padding: 0;
 }
 .host-wrapper mat-card-header {
   padding-left: 0;
