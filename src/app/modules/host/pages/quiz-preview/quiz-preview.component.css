@@ -1,1 +1,15 @@
-@import "../shared/host.shared.css";
+@import "../../shared/host.shared.css";
+
+span .id {
+  display: inline-block;
+  text-align: left;
+  color: darkred;
+  margin-right: 10px;
+  padding: 4px 1px;
+}
+span .name {
+  display: inline-block;
+  text-align: left;
+  margin-right: 10px;
+  padding: 4px 1px;
+}
