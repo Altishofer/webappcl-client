@@ -4,10 +4,16 @@ import {QuizSelectionComponent} from "@modules/host/pages/quiz-selection/quiz-se
 import {SandrinComponent} from "./pages/sandrin/sandrin.component";
 import {QuizPreviewComponent} from "@modules/host/pages/quiz-preview/quiz-preview.component";
 import {LoginComponent} from "@modules/host/pages/login/login.component";
+import {LobbyComponent} from "@modules/host/pages/lobby/lobby.component";
+import {RoundMainComponent} from "@modules/host/pages/round-main/round-main.component";
+import {ResultsComponent} from "@modules/host/pages/results/results.component";
 
 const routes: Routes = [
   {
     path:'', redirectTo: 'login', pathMatch: "full"
+  },
+  {
+    path:'sandrin', component:SandrinComponent
   },
   {
     path:'login',
@@ -21,7 +27,13 @@ const routes: Routes = [
     path:'preview', component: QuizPreviewComponent
   },
   {
-    path:'sandrin', component:SandrinComponent
+    path:'lobby', component: LobbyComponent
+  },
+  {
+    path:'round', component: RoundMainComponent
+  },
+  {
+    path:'results', component: ResultsComponent
   }
   ];
 

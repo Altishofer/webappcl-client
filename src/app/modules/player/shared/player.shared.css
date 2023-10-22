@@ -70,6 +70,7 @@ body {
 .player-wrapper .example-full-width,
 .player-wrapper .btn-block {
   width: 100%;
+  text-align: center;
 }
 .player-wrapper mat-card-header {
   text-align: left;

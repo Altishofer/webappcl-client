@@ -10,14 +10,17 @@
         <mat-form-field class="example-full-width">
           <input matInput placeholder="Username" formControlName="username">
         </mat-form-field>
-        <p *ngIf="errorMsg" class="error-message">
-          {{ errorMsg }}
-        </p>
-      </mat-card-content>
 
-      <button mat-raised-button color="accent" class="btn-block" routerLinkActive="active" [disabled]="playerRegForm.invalid">
-        Register
-      </button>
+        <ng-template [ngIf]="errorMsg">
+          <p *ngIf="errorMsg" class="error-message">
+            {{ errorMsg }}
+          </p>
+        </ng-template>
+      </mat-card-content>
     </form>
+
+    <button mat-raised-button color="accent" class="btn-block" routerLinkActive="active" [disabled]="playerRegForm.invalid">
+      Register
+    </button>
   </mat-card>
 </span>
