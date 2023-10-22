@@ -1,1 +1,23 @@
-<p>register works!</p>
+<!-- src/app/login/login.component.html -->
+<span class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+  <mat-card class="box">
+    <mat-card-header>
+      <mat-card-title>Register</mat-card-title>
+    </mat-card-header>
+
+    <form [formGroup]="playerRegForm">
+      <mat-card-content>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Username" formControlName="username">
+        </mat-form-field>
+        <p *ngIf="errorMsg" class="error-message">
+          {{ errorMsg }}
+        </p>
+      </mat-card-content>
+
+      <button mat-raised-button color="accent" class="btn-block" routerLinkActive="active" [disabled]="playerRegForm.invalid">
+        Register
+      </button>
+    </form>
+  </mat-card>
+</span>

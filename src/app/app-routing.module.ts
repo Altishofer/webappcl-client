@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 
 import {HomeModule} from "@modules/home/home.module";
 import {LoginModule} from "@modules/login/login.module";
-import {AboutModule} from "@modules/about/about.module";
 import {PlayerModule} from "@modules/player/player.module";
 
 const routes: Routes = [
@@ -23,10 +22,6 @@ const routes: Routes = [
   {
     path: 'player',
     loadChildren: () => import('@modules/player/player.module').then((m):typeof  PlayerModule => m.PlayerModule)
-  },
-  {
-    path: 'about',
-    loadChildren: () => import('@modules/about/about.module').then((m):typeof AboutModule => m.AboutModule)
   }
 ];
 @NgModule({
