@@ -8,13 +8,19 @@ import { SandrinComponent } from './pages/sandrin/sandrin.component';
 import { HeaderComponent } from "@layout/header/header.component";
 import { QuizPreviewComponent } from './pages/quiz-preview/quiz-preview.component';
 import { LoginComponent } from "@modules/host/pages/login/login.component";
+import { LobbyComponent } from './pages/lobby/lobby.component';
+import { RoundMainComponent } from './pages/round-main/round-main.component';
+import { ResultsComponent } from './pages/results/results.component';
 
 @NgModule({
   declarations: [
     QuizSelectionComponent,
     SandrinComponent,
     QuizPreviewComponent,
-    LoginComponent
+    LoginComponent,
+    LobbyComponent,
+    RoundMainComponent,
+    ResultsComponent
   ],
   imports: [
     CommonModule,
