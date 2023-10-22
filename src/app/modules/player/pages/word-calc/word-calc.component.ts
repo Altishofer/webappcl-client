@@ -49,6 +49,10 @@ export class WordCalcComponent {
     return !lastWord;
   }
 
+  onlyOneField():boolean{
+    return this.wordsArray.length === 1;
+  }
+
   removeField(index: number) : void {
     console.log('Before removing field:', this.wordsArray.value);
     this.wordsArray.removeAt(index);
