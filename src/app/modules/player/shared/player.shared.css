@@ -100,3 +100,8 @@ body {
   color: black;
   background-color: #888888;
 }
+button:disabled {
+  background-color: #888888;
+  color: white;
+  cursor: not-allowed;
+}
