@@ -4,6 +4,7 @@ import {Quiz} from "@data/interfaces/quiz.model";
 import {Host} from "@data/interfaces/host.model";
 import {catchError, Observable} from "rxjs";
 import {HttpErrorResponse} from "@angular/common/http";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-quiz-selection',
@@ -15,7 +16,7 @@ export class QuizSelectionComponent implements OnInit {
   errorMsg : string = '';
   unexpectedErrorMsg : string = "An unexpected error occurred."
 
-  constructor(private quizService: QuizService) {
+  constructor(private quizService: QuizService, private router: Router) {
 
   }
 
@@ -36,5 +37,9 @@ export class QuizSelectionComponent implements OnInit {
 
   ngOnInit() {
     this.getHostQuizzes();
+  }
+
+  redirect(quizId: number) {
+    this.router.navigate([`host/preview/${quizId}`])
   }
 }
