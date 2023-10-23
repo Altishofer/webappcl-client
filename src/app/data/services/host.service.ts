@@ -16,7 +16,7 @@ export class HostService {
 
   getHosts(host: Host): void {
     const headers = new HttpHeaders({
-      'Authorization': "Bearer " + this.cookieService.get("token"),
+      'Authorization': "Bearer " + this.cookieService.get("hostToken"),
       'Content-Type': 'application/json',
     });
 

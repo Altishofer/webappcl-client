@@ -3,7 +3,7 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import { Host } from "@data/interfaces/host.model";
 import { environment } from "../../../../../environments/environment";
-import { SignalRService } from "../../../../data/services/SignalRService";
+import { SignalRService } from "@data/services/SignalRService";
 import {Observable} from "rxjs";
 
 @Component({

@@ -10,16 +10,16 @@ const routes: Routes = [
     path:'', redirectTo:'register', pathMatch:'full'
   },
   {
-    path:'register', component:RegisterComponent
+    path:'register/:quizId', component:RegisterComponent
   },
   {
-    path:'waiting', component:WaitingComponent
+    path:'waiting/:quizId', component:WaitingComponent
   },
   {
-    path:'game', component:WordCalcComponent
+    path:'game/:quizId', component:WordCalcComponent
   },
   {
-    path:'ranking', component:RankingComponent
+    path:'ranking/:quizId', component:RankingComponent
   }
   ];
 
