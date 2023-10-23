@@ -45,6 +45,8 @@ export class HostService {
     setInterval(() => {
       const headers : HttpHeaders = new HttpHeaders({
         'Content-Type': 'application/json',
+        'Bearer-Token':  this.cookieService.get("token"),
+        'Authorization': `bearer ${this.cookieService.get("token")}`
       });
       return this.http.get(`${this.baseUrl}/RefreshToken`, { observe:'response', headers })
         .subscribe((response: any) => {
@@ -55,6 +57,6 @@ export class HostService {
             console.log("ERROR: refreshing token was not successful");
           }
       });
-    }, 60); // Refresh every 1 minutes
+    }, 60 * 1000); // Refresh every minute
   }
 }

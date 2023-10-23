@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
+import {FormBuilder, FormGroup, FormArray, AbstractControl} from '@angular/forms';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { VectorCalculationModel } from '@data/interfaces/VectorCalculation.model';
 
@@ -42,11 +42,11 @@ export class WordCalcComponent {
     this.addFieldDisabled = true;
   }
 
-  lastIndexWordEmpty():boolean{
-    const lastIndex : number = this.wordsArray.length-1;
-    if (lastIndex === 0) {return false;}
-    const lastWord = this.wordsArray.at(lastIndex).get('word')?.value;
-    return !lastWord;
+  allIndexWordNonEmpty():boolean{
+    for (let i : number = 0; i < this.wordsArray.length; i++) {
+      if (!this.wordsArray.at(i).get('word')?.value) {return false;}
+    }
+    return true;
   }
 
   onlyOneField():boolean{
@@ -57,7 +57,7 @@ export class WordCalcComponent {
     console.log('Before removing field:', this.wordsArray.value);
     this.wordsArray.removeAt(index);
     console.log('After removing field:', this.wordsArray.value);
-    this.addFieldDisabled = this.lastIndexWordEmpty();
+    this.addFieldDisabled = this.allIndexWordNonEmpty();
   }
 
   changeSubtract(index: number, event: MatSlideToggleChange) : void {
@@ -78,7 +78,7 @@ export class WordCalcComponent {
     //  wordGroup.get('word')?.setValue(word);
     //  console.log('Changed word for index', index, 'to', word);
     //}
-    this.addFieldDisabled = this.lastIndexWordEmpty();
+    this.addFieldDisabled = this.allIndexWordNonEmpty();
   }
 
   printArray() {
