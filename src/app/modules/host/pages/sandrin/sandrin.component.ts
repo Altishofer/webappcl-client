@@ -75,7 +75,7 @@ export class SandrinComponent {
 
   sendMessage() {
     if (this.messageToSend) {
-      this.signalRService.sendMessageToGroup(this.groupName, this.messageToSend);
+      this.signalRService.sendMessageToGroup(this.groupName, "sockMsg", this.messageToSend);
       this.messageToSend = '';
     }
   }

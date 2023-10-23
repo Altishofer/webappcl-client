@@ -1,24 +1,25 @@
-
-
-
-// Angular client code
 import { Injectable } from '@angular/core';
 import * as signalR from '@microsoft/signalr';
-import {environment} from "../../../environments/environment";
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SignalRService {
-  private hubConnection: signalR.HubConnection;
-  private baseUrl = environment.HUB_URL + "/chatHub";
+  private hubConnection!: signalR.HubConnection;
+  private baseUrl: string;
 
   constructor() {
+    this.baseUrl = environment.HUB_URL + '/quizHub';
+    this.createHubConnection(this.baseUrl);
+  }
+
+  private createHubConnection(url: string) {
     this.hubConnection = new signalR.HubConnectionBuilder()
       .configureLogging(signalR.LogLevel.Debug)
-      .withUrl(this.baseUrl, {
+      .withUrl(url, {
         skipNegotiation: true,
-        transport: signalR.HttpTransportType.WebSockets
+        transport: signalR.HttpTransportType.WebSockets,
       })
       .build();
 
@@ -29,39 +30,40 @@ export class SignalRService {
   }
 
   public setReceiveMessageListener(listener: (message: string) => void) {
-    console.log("setReceiveMessageListener")
     this.receiveMessageListener = listener;
   }
 
-  private receiveMessageListener: (message: string) => void = (message) => {};
+  private receiveMessageListener: (message: string) => void = (message) => {
+    console.log(JSON.stringify(message));
+  };
 
-  joinGroup(groupName: string) {
-    console.log("join Group " + groupName);
-    this.hubConnection.invoke('JoinGroup', groupName)
-      .catch(err => console.error('Error joining group: ' + err));
-  }
-
-  leaveGroup(groupName: string) {
-    this.hubConnection.invoke('LeaveGroup', groupName)
-      .catch(err => console.error('Error leaving group: ' + err));
-  }
-
-  sendMessageToGroup(groupName: string, message: string) {
+  joinGroup(groupName: string, channel?: string) {
     this.hubConnection
-      .invoke('SendMessageToGroup', groupName, message)
+      .invoke('JoinGroup', groupName, channel)
+      .catch((err) => console.error('Error joining group: ' + err));
+  }
+
+  joinGroup2(groupName: string) {
+    this.hubConnection
+      .invoke('JoinGroup2', groupName)
+      .catch((err) => console.error('Error joining group: ' + err));
+  }
+
+  leaveGroup(groupName: string, channel?: string) {
+    this.hubConnection
+      .invoke('LeaveGroup', groupName, channel)
+      .catch((err) => console.error('Error leaving group: ' + err));
+  }
+
+  sendMessageToGroup(groupName: string, channel: string, message: string) {
+    this.hubConnection
+      .invoke('SendMessageToGroup', groupName, channel, message)
       .catch((err) => {
         console.error('Error sending message: ' + err);
       });
   }
 
-  startConnection() {
-    this.hubConnection
-      .start()
-      .then(() => {
-        console.log('SignalR connection started');
-      })
-      .catch((err) => {
-        console.error('Error starting SignalR connection: ' + err);
-      });
+  startConnection() : Promise<void> {
+    return this.hubConnection.start();
   }
 }
