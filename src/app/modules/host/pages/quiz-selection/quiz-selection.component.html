@@ -1,6 +1,6 @@
 <app-header></app-header>
 
-<span class="home-wrapper" fxLayout="row" fxLayoutAlign="center center">
+<span class="common-wrapper" fxLayout="row" fxLayoutAlign="center center">
   <mat-card class="box">
     <mat-card-header>
       <mat-card-title>Existing Quizzes</mat-card-title>
@@ -15,29 +15,10 @@
   </mat-card>
 </span>
 
-<!--
-<div class="center">
-  <button mat-raised-button color="accent" class="button-normal">Create New Quiz</button>
-</div>
--->
-
 <div class="center" style="margin-top: 10px;" (click)="getHostQuizzes()">
   <button mat-raised-button color="primary" class="button-normal">Temp: Get Quizzes</button>
 </div>
 
-<!--
-<div class="games-container">
-  <ul class="games-list">
-    <li>
-      <button mat-raised-button type="button" class="home-wrapper mat-stroked-button">
-        <span class="badge">1</span>
-        <span class="name">Quiz Name</span>
-      </button>
-    </li>
-  </ul>
-</div>
--->
-
-<span class="home-wrapper" fxLayout="row" fxLayoutAlign="center center">
+<span class="common-wrapper" fxLayout="row" fxLayoutAlign="center center">
   <button mat-raised-button color="accent" class="button-normal" routerLink="/home/sandrin" routerLinkActive="active">Sandrin</button>
 </span>

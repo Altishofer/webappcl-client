@@ -1,5 +1,5 @@
 <!-- src/app/login/login.component.html -->
-<span class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+<span class="common-wrapper" fxLayout="row" fxLayoutAlign="center center">
   <mat-card class="box">
     <mat-card-header>
       <mat-card-title>{{ isLogin ? 'Login' : 'Register' }}</mat-card-title>
@@ -19,7 +19,7 @@
       <button mat-raised-button color="accent" class="btn-block" routerLinkActive="active" [disabled]="loginForm.invalid" (click)="doAction()">
         {{ isLogin ? 'Sign In' : 'Register' }}
       </button>
-      <mat-divider class="login-divider"></mat-divider>
+      <mat-divider class="common-divider"></mat-divider>
       <p class="login-message">{{ isLogin ? 'No account yet?' : 'Already have an account?' }}</p>
       <button mat-raised-button color="accent" class="btn-block" (click)="toggleForm()">
         {{ isLogin ? 'Register' : 'Sign In' }}

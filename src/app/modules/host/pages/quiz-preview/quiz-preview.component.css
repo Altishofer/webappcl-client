@@ -1,4 +1,4 @@
-@import "../shared/home.shared.css";
+@import "../../shared/host.shared.css";
 
 span .id {
   display: inline-block;
@@ -12,12 +12,4 @@ span .name {
   text-align: left;
   margin-right: 10px;
   padding: 4px 1px;
-}
-.button-big {
-  font-family: monospace;
-  font-size: 40px;
-  padding: 40px
-}
-.center {
-  text-align: center;
 }

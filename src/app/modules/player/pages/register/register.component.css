@@ -1,1 +1,5 @@
 @import "../../shared/player.shared.css";
+
+mat-card-content {
+  padding: 0;
+}
