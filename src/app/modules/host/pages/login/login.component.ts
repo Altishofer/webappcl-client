@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { Host } from "@data/interfaces/host.model";
-import { HostService } from "@data/services/host.service";
-import {CookieService} from "ngx-cookie-service";
-import {catchError, Observable} from "rxjs";
+import { Host } from "app/data/interfaces/host.model";
+import { HostService } from "app/data/services/host.service";
+import { CookieService } from "ngx-cookie-service";
+import { catchError, Observable } from "rxjs";
 import { Router } from '@angular/router';
-import {FormGroup, Validators, FormBuilder} from '@angular/forms';
-import {HttpErrorResponse} from "@angular/common/http";
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { HttpErrorResponse } from "@angular/common/http";
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -83,7 +83,7 @@ export class LoginComponent {
           this.cookieService.set('hostName', this.host.hostName);
           console.log(actionName + " was successful -> user '" + this.host.hostName + "', received token: " + response.body.result);
           this.hostService.refreshTokenPeriodically();
-          this.router.navigate(['/home']);
+          this.router.navigate(['/host']);
         } else {
           this.errorMsg = this.unexpectedErrorMsg;
         }

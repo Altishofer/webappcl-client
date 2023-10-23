@@ -17,10 +17,7 @@ body {
   z-index: 2;
   box-shadow: 0 3px 5px -1px rgba(0, 0, 0, .2), 0 6px 10px 0 rgba(0, 0, 0, .14), 0 1px 18px 0 rgba(0, 0, 0, .12);
 }
-.spacer {
-  margin-bottom: 100px;
-}
-.home-wrapper {
+.common-wrapper {
   height: 100%;
   margin-top: 100px;
   margin-bottom: 20px;
@@ -66,43 +63,76 @@ body {
   -ms-transform: scale(.95);
   z-index: -1;
 }
-.home-wrapper .example-form {
+.common-wrapper .example-form {
   margin-top: 20px;
   min-width: 100%;
   max-width: 300px;
   width: 100%;
 }
-.home-wrapper .example-full-width,
-.home-wrapper .btn-block {
+.common-wrapper .example-full-width,
+.common-wrapper .btn-block {
   display: block;
   width: 100%;
-  margin-bottom: 10px;
+  margin-bottom: 0;
   white-space: nowrap;
   overflow: hidden;
-  text-align: left;
-  padding-right: 10px;
+  text-align: center;
+  padding: 0;
 }
-.home-wrapper mat-card-header {
+.common-wrapper mat-card-header {
   padding-left: 0;
   text-align: center;
   width: 100%;
   display: block;
   font-weight: 700;
 }
-.home-wrapper mat-card-header mat-card-title {
+.common-wrapper mat-card-header mat-card-title {
   font-size: 30px;
 }
-.home-wrapper .mat-card {
+.common-wrapper .mat-card {
   padding: 40px 70px 50px;
 }
-.home-wrapper .mat-stroked-button {
+.common-wrapper .mat-stroked-button {
   border: 1px solid currentColor;
   line-height: 54px;
   background: #FFF7FA;
 }
-.home-wrapper .mat-form-field-appearance-legacy .mat-form-field-infix {
+.common-wrapper .mat-form-field-appearance-legacy .mat-form-field-infix {
   padding: 0.8375em 0;
+}
+.common-wrapper .mat-form-field-appearance-legacy .mat-form-field-infix {
+  padding: 0.8375em 0;
+}
+.common-divider {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 100%;
+  color: black;
+  background-color: #888888;
+}
+button:disabled {
+  background-color: #888888;
+  color: white;
+  cursor: not-allowed;
 }
 .button-normal {
   width: 230px;
+}
+.button-big {
+  font-family: monospace;
+  font-size: 40px;
+  padding: 40px
+}
+.center {
+  text-align: center;
+}
+.spacer {
+  margin-bottom: 100px;
+}
+.error-message {
+  text-align: center;
+  padding-bottom: 20px;
+}
+mat-card-content {
+  padding: 0;
 }

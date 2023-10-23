@@ -61,7 +61,7 @@ export class RegisterComponent {
           this.cookieService.set('playerName', this.player.playerName);
           console.log(actionName + " was successful -> user '" + this.player.playerName + "', received token: " + response.body.result);
           //this.playerService.refreshTokenPeriodically();
-          this.router.navigate(['/home']);
+          this.router.navigate(['/host']);
         } else {
           this.errorMsg = this.unexpectedErrorMsg;
         }

@@ -1,5 +1,4 @@
-<!-- src/app/login/login.component.html -->
-<span class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+<span class="common-wrapper" fxLayout="row" fxLayoutAlign="center center">
   <mat-card class="box">
     <mat-card-header>
       <mat-card-title>Register</mat-card-title>
@@ -7,17 +6,20 @@
 
     <form [formGroup]="playerRegForm">
       <mat-card-content>
-        <mat-form-field class="example-full-width">
+        <mat-form-field class="example-full-width" style="width: 100%">
           <input matInput placeholder="Username" formControlName="username">
         </mat-form-field>
-        <p *ngIf="errorMsg" class="error-message">
-          {{ errorMsg }}
-        </p>
-      </mat-card-content>
 
-      <button mat-raised-button color="accent" class="btn-block" routerLinkActive="active" [disabled]="playerRegForm.invalid">
-        Register
-      </button>
+        <ng-template [ngIf]="errorMsg">
+          <p class="error-message">
+            {{ errorMsg }}
+          </p>
+        </ng-template>
+      </mat-card-content>
     </form>
+
+    <button mat-raised-button color="accent" class="btn-block" routerLinkActive="active" [disabled]="playerRegForm.invalid">
+      Register
+    </button>
   </mat-card>
 </span>
