@@ -28,8 +28,8 @@
         </ng-template>
       </div>
       <div class="center">
-        <ng-template [ngIf]="!addFieldDisabled">
-          <button mat-raised-button color="accent" class="marginalized" [disabled]="addFieldDisabled" (click)="addField()">Add Field</button>
+        <ng-template [ngIf]="allIndexWordNonEmpty()">
+          <button mat-raised-button color="accent" class="marginalized" [disabled]="!allIndexWordNonEmpty()" (click)="addField()">Add Field</button>
         </ng-template>
       </div>
     </div>
