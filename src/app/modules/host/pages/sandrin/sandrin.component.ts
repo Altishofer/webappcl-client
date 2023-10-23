@@ -20,6 +20,8 @@ export class SandrinComponent {
   private groupName: string = "0";
   public messages: string[] = [];
   public messageToSend: string = '';
+  public nextRound: string = '';
+  public players: string[] = [];
   public similarWords: string[] = [];
   word: string = 'dog';
   count: number = 10;

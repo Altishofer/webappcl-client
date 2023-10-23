@@ -26,6 +26,16 @@ export class SignalRService {
       console.log(message);
       this.receiveMessageListener(message);
     });
+
+    this.hubConnection.on('nextRound', (message: string) => {
+      console.log("nextRound", message);
+      this.receiveMessageListener(message);
+    });
+
+    this.hubConnection.on('players', (message: string) => {
+      console.log("players", message);
+      this.receiveMessageListener(message);
+    });
   }
 
   public setReceiveMessageListener(listener: (message: string) => void) {
