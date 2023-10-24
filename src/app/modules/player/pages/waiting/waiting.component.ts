@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { CookieService } from "ngx-cookie-service";
 import { PlayerService } from "@data/services/player.service";
@@ -9,8 +9,7 @@ import { SignalRService } from "@data/services/SignalRService";
   templateUrl: './waiting.component.html',
   styleUrls: ['./waiting.component.css']
 })
-
-export class WaitingComponent {
+export class WaitingComponent implements OnInit {
   quizId!: string;
   players: string[] = [];
   nextRound: string = "";
@@ -29,7 +28,9 @@ export class WaitingComponent {
       this.quizId = params['quizId'];
     });
     this.players.push(this.playerName);
+  }
 
+  ngOnInit(): void {
     this.signalRService.startConnection().then(() => {
       this.registerListeners();
       this.registerToGroup();
