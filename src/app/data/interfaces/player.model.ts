@@ -1,3 +1,4 @@
 export interface Player {
-  playerName: string;
+  PlayerName: string;
+  QuizId:string;
 }

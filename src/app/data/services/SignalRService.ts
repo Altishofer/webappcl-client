@@ -1,52 +1,43 @@
-
-
-
-// Angular client code
 import { Injectable } from '@angular/core';
 import * as signalR from '@microsoft/signalr';
-import {environment} from "../../../environments/environment";
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SignalRService {
-  private hubConnection: signalR.HubConnection;
-  private baseUrl = environment.HUB_URL + "/chatHub";
+  private hubConnection!: signalR.HubConnection;
 
   constructor() {
+    const baseUrl = environment.HUB_URL + '/quizHub';
+    this.createHubConnection(baseUrl);
+  }
+
+  private createHubConnection(url: string) {
     this.hubConnection = new signalR.HubConnectionBuilder()
       .configureLogging(signalR.LogLevel.Debug)
-      .withUrl(this.baseUrl, {
+      .withUrl(url, {
         skipNegotiation: true,
-        transport: signalR.HttpTransportType.WebSockets
+        transport: signalR.HttpTransportType.WebSockets,
       })
       .build();
-
-    this.hubConnection.on('ReceiveMessage', (message: string) => {
-      console.log(message);
-      this.receiveMessageListener(message);
-    });
   }
 
-  public setReceiveMessageListener(listener: (message: string) => void) {
-    console.log("setReceiveMessageListener")
-    this.receiveMessageListener = listener;
+  joinGroup(groupName: string, playerName: string) {
+    console.log("joinGroup", groupName, playerName);
+    this.hubConnection
+      .invoke('JoinGroup', groupName, playerName)
+      .catch((err) => console.error('Error joining group: ' + err));
   }
 
-  private receiveMessageListener: (message: string) => void = (message) => {};
-
-  joinGroup(groupName: string) {
-    console.log("join Group " + groupName);
-    this.hubConnection.invoke('JoinGroup', groupName)
-      .catch(err => console.error('Error joining group: ' + err));
-  }
-
-  leaveGroup(groupName: string) {
-    this.hubConnection.invoke('LeaveGroup', groupName)
-      .catch(err => console.error('Error leaving group: ' + err));
+  leaveGroup(groupName: string, playerName: string) {
+    this.hubConnection
+      .invoke('LeaveGroup', groupName, playerName)
+      .catch((err) => console.error('Error leaving group: ' + err));
   }
 
   sendMessageToGroup(groupName: string, message: string) {
+    console.log("sendMessageToGroup", groupName, message);
     this.hubConnection
       .invoke('SendMessageToGroup', groupName, message)
       .catch((err) => {
@@ -54,14 +45,31 @@ export class SignalRService {
       });
   }
 
-  startConnection() {
+  sendPlayersToGroup(groupName: string) {
+    console.log("sendPlayersToGroup", groupName);
     this.hubConnection
-      .start()
-      .then(() => {
-        console.log('SignalR connection started');
-      })
+      .invoke('SendPlayersToGroup', groupName)
       .catch((err) => {
-        console.error('Error starting SignalR connection: ' + err);
+        console.error('Error sending message: ' + err);
       });
+  }
+
+  startConnection(): Promise<void> {
+    if (this.hubConnection.state === signalR.HubConnectionState.Connected) {
+      return Promise.resolve();
+    }
+    return this.hubConnection.start();
+  }
+
+  setReceiveMessageListener(listener: (message: string) => void) {
+    this.hubConnection.on('ReceiveMessage', listener);
+  }
+
+  setReceivePlayerListener(listener: (message: string) => void) {
+    this.hubConnection.on('ReceivePlayers', listener);
+  }
+
+  setReceiveRoundListener(listener: (round: string) => void) {
+    this.hubConnection.on('ReceiveRound', listener);
   }
 }

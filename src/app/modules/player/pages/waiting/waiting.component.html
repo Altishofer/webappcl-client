@@ -1,5 +1,4 @@
 <div style="text-align: center">
-  <p>this is the waiting room.</p>
-  <p>a player list would be nice...</p>
-  <p>or just a message that the game will start shortly</p>
+    <div *ngFor="let str of players">{{str}}</div>
+  <button (click)="getPlayers()">update manually </button>
 </div>
