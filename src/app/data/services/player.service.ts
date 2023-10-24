@@ -10,7 +10,9 @@ import {Observable} from "rxjs";
   providedIn: 'root'
 })
 export class PlayerService {
-  private baseUrl = environment.API_URL + "/Player";
+  private playerUrl = environment.API_URL + "/Player";
+  private quizUrl = environment.API_URL + "/Quiz";
+
   constructor(private http: HttpClient, private cookieService: CookieService) {}
 
   getPlayer(player: Player): void {
@@ -19,7 +21,7 @@ export class PlayerService {
       'Content-Type': 'application/json',
     });
 
-    this.http.get(`${this.baseUrl}`, { headers }).subscribe((response: any) => {
+    this.http.get(`${this.playerUrl}`, { headers }).subscribe((response: any) => {
       console.log("got player from request: " + response.playerName);
     });
   }
@@ -29,6 +31,14 @@ export class PlayerService {
       'Content-Type': 'application/json',
     });
     const body : string = JSON.stringify(player);
-    return this.http.post(`${this.baseUrl}/Register`, body, { observe:'response', headers });
+    return this.http.post(`${this.playerUrl}/Register`, body, { observe:'response', headers });
+  }
+
+  getPlayers(quizId : string) : Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': "Bearer " + this.cookieService.get("hostToken"),
+      'Content-Type': 'application/json',
+    });
+    return this.http.get(`${this.quizUrl}/GetPlayers/${quizId}`, { observe:'response', headers  });
   }
 }

@@ -28,6 +28,7 @@ export class RegisterComponent {
       username: ['', [Validators.required, Validators.pattern(/^(\S){1,50}$/)]]});
     this.route.params.subscribe(params => {
       this.quizId = params['quizId'];
+      this.player.QuizId = this.quizId;
     });
 
     this.playerRegForm.valueChanges.subscribe(value => {
@@ -36,14 +37,15 @@ export class RegisterComponent {
 
     this.playerRegForm.statusChanges.subscribe(status => {
       if (status == "VALID"){
-        this.player.playerName = this.playerRegForm.value.username;
+        this.player.PlayerName = this.playerRegForm.value.username;
       }
       console.log('Form status changed', status);
     });
   };
 
   player: Player = {
-    playerName: ""
+    PlayerName: "",
+    QuizId: ""
   };
 
   doRegister(): void {
@@ -67,8 +69,8 @@ export class RegisterComponent {
         console.log("response", JSON.stringify(response.body));
         if ((response.status >= 200 && response.status < 300) || response.status == 304) {
           this.cookieService.set('playerToken', response.body.result);
-          this.cookieService.set('playerName', this.player.playerName);
-          console.log(actionName + " was successful -> user '" + this.player.playerName + "', received token: " + response.body.result);
+          this.cookieService.set('playerName', this.player.PlayerName);
+          console.log(actionName + " was successful -> user '" + this.player.PlayerName + "', received token: " + response.body.result);
           //this.playerService.refreshTokenPeriodically();
           this.router.navigate([`player/waiting/${this.quizId}`]);
         } else {

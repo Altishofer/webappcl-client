@@ -1,10 +1,8 @@
-import {Component, ViewChild} from '@angular/core';
-import {environment} from "../../../../../environments/environment";
-import {HttpClient} from "@angular/common/http";
-import {SignalRService} from "@data/services/SignalRService";
-import {ActivatedRoute, Router} from "@angular/router";
-import {FormBuilder} from "@angular/forms";
-import {CookieService} from "ngx-cookie-service";
+import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from "@angular/router";
+import { CookieService } from "ngx-cookie-service";
+import { PlayerService } from "@data/services/player.service";
+import { SignalRService } from "@data/services/SignalRService";
 
 @Component({
   selector: 'app-waiting',
@@ -13,19 +11,20 @@ import {CookieService} from "ngx-cookie-service";
 })
 
 export class WaitingComponent {
-  quizId! : string;
-  players : string[] = [];
-  nextRound : string = "";
-  playerName : string = "";
-  messages : string[] = [];
+  quizId!: string;
+  players: string[] = [];
+  nextRound: string = "";
+  playerName: string = "";
+  messages: string[] = [];
 
   constructor(
     private signalRService: SignalRService,
     private router: Router,
     private route: ActivatedRoute,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private playerService: PlayerService
   ) {
-    this.playerName =  this.cookieService.get('playerName') ?? "default_player";
+    this.playerName = this.cookieService.get('playerName') ?? "default_player";
     this.route.params.subscribe(params => {
       this.quizId = params['quizId'];
     });
@@ -37,35 +36,44 @@ export class WaitingComponent {
     }).catch(error => {
       console.error("SignalR connection error:", error);
     });
+    this.getPlayers();
   }
 
-  sendMessage() {
-    console.log("start sending", this.quizId);
-    this.signalRService.sendMessageToGroup(this.quizId, "test");
+  getPlayers(): void {
+    this.playerService.getPlayers(this.quizId).subscribe(
+      (response: any): void => {
+        if ((response.status >= 200 && response.status < 300) || response.status == 304) {
+          console.log("REST player: ", response.body);
+          this.players = response.body.message.split(" ");
+        } else {
+          console.log("ERROR: updating players via REST");
+        }
+      });
   }
 
   registerToGroup() {
-    console.log("registerToGroup", this.quizId);
+    console.log("SOCKET: registerToGroup", this.quizId);
     this.signalRService.joinGroup(this.quizId, this.playerName);
   }
 
   unregisterFromGroup() {
+    console.log("SOCKET: unregister from group", this.quizId);
     this.signalRService.leaveGroup(this.quizId, this.playerName);
   }
 
-  registerListeners() : void{
+  registerListeners(): void {
     this.signalRService.setReceiveMessageListener((message: string) => {
-      console.log("message", message);
-        this.messages.push(message);
+      console.log("SOCKET message:", message);
+      this.messages.push(message);
     });
 
     this.signalRService.setReceivePlayerListener((player: string) => {
-      console.log("player", player);
-      this.players.push(player);
+      console.log("SOCKET player: ", player);
+      this.players = player.split(" ");
     });
 
     this.signalRService.setReceiveRoundListener((round: string) => {
-      console.log("player", round);
+      console.log("SOCKET round: ", round);
       this.nextRound = round;
     });
   }

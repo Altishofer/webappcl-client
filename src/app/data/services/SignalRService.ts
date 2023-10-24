@@ -7,11 +7,10 @@ import { environment } from '../../../environments/environment';
 })
 export class SignalRService {
   private hubConnection!: signalR.HubConnection;
-  private baseUrl: string;
 
   constructor() {
-    this.baseUrl = environment.HUB_URL + '/quizHub';
-    this.createHubConnection(this.baseUrl);
+    const baseUrl = environment.HUB_URL + '/quizHub';
+    this.createHubConnection(baseUrl);
   }
 
   private createHubConnection(url: string) {
@@ -22,44 +21,9 @@ export class SignalRService {
         transport: signalR.HttpTransportType.WebSockets,
       })
       .build();
-
-    this.hubConnection.on('ReceiveMessage', (message: string) => {
-      console.log(message);
-      this.receiveMessageListener(message);
-    });
-
-    this.hubConnection.on('ReceiveRound', (round: string) => {
-      console.log("nextRound", round);
-      this.receiveRoundListener(round);
-    });
-
-    this.hubConnection.on('ReceivePlayers', (message: string) => {
-      console.log("players", message);
-      this.receivePlayerListener(message);
-    });
   }
 
-  public setReceiveMessageListener(listener: (message: string) => void) {
-    this.receiveMessageListener = listener;
-  }
-  private receiveMessageListener: (message: string) => void = (message) => {
-    console.log(message);
-  };
-
-  public setReceivePlayerListener(listener: (message: string) => void) {
-    this.receiveMessageListener = listener;
-  }
-  private receivePlayerListener: (message: string) => void = (message) => {
-    console.log(message);
-  };
-  public setReceiveRoundListener(listener: (message: string) => void) {
-    this.receiveMessageListener = listener;
-  }
-  private receiveRoundListener: (round: string) => void = (round) => {
-    console.log(round);
-  };
-
-  joinGroup(groupName: string, playerName: string){
+  joinGroup(groupName: string, playerName: string) {
     console.log("joinGroup", groupName, playerName);
     this.hubConnection
       .invoke('JoinGroup', groupName, playerName)
@@ -81,8 +45,31 @@ export class SignalRService {
       });
   }
 
-  startConnection() : Promise<void> {
-    if (this.hubConnection.state === signalR.HubConnectionState.Connected){return Promise.resolve();}
+  sendPlayersToGroup(groupName: string) {
+    console.log("sendPlayersToGroup", groupName);
+    this.hubConnection
+      .invoke('SendPlayersToGroup', groupName)
+      .catch((err) => {
+        console.error('Error sending message: ' + err);
+      });
+  }
+
+  startConnection(): Promise<void> {
+    if (this.hubConnection.state === signalR.HubConnectionState.Connected) {
+      return Promise.resolve();
+    }
     return this.hubConnection.start();
+  }
+
+  setReceiveMessageListener(listener: (message: string) => void) {
+    this.hubConnection.on('ReceiveMessage', listener);
+  }
+
+  setReceivePlayerListener(listener: (message: string) => void) {
+    this.hubConnection.on('ReceivePlayers', listener);
+  }
+
+  setReceiveRoundListener(listener: (round: string) => void) {
+    this.hubConnection.on('ReceiveRound', listener);
   }
 }
