@@ -24,16 +24,16 @@ const routes: Routes = [
     component:QuizSelectionComponent
   },
   {
-    path:'preview', component: QuizPreviewComponent
+    path:'preview/:quizId', component: QuizPreviewComponent
   },
   {
-    path:'lobby', component: LobbyComponent
+    path:'lobby/:quizId', component: LobbyComponent
   },
   {
-    path:'round', component: RoundMainComponent
+    path:'round/:quizId/:roundId', component: RoundMainComponent
   },
   {
-    path:'results', component: ResultsComponent
+    path:'results/:quizId', component: ResultsComponent
   }
   ];
 

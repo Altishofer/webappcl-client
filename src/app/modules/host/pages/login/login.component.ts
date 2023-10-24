@@ -83,7 +83,7 @@ export class LoginComponent {
           this.cookieService.set('hostName', this.host.hostName);
           console.log(actionName + " was successful -> user '" + this.host.hostName + "', received token: " + response.body.result);
           this.hostService.refreshTokenPeriodically();
-          this.router.navigate(['/host']);
+          this.router.navigate(['/host/selection']);
         } else {
           this.errorMsg = this.unexpectedErrorMsg;
         }
