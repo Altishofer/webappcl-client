@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { CookieService } from "ngx-cookie-service";
-import { Router } from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import { catchError, Observable } from "rxjs";
 import { HttpErrorResponse } from "@angular/common/http";
 import { PlayerService } from "@data/services/player.service";
@@ -12,13 +12,22 @@ import { Player } from "@data/interfaces/player.model";
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
+
 export class RegisterComponent {
   errorMsg : string = '';
   playerRegForm: FormGroup;
   unexpectedErrorMsg : string = "An unexpected error occurred."
-  constructor(private playerService: PlayerService, private cookieService: CookieService, private router: Router, private fb: FormBuilder) {
-    this.playerRegForm = this.fb.group({
-      username: ['', [Validators.required, Validators.pattern(/^(\S){1,50}$/)]]
+  quizId: string = '';
+  constructor(
+      private playerService: PlayerService,
+      private cookieService: CookieService,
+      private router: Router,
+      private fb: FormBuilder,
+      private route: ActivatedRoute) {
+      this.playerRegForm = this.fb.group({
+      username: ['', [Validators.required, Validators.pattern(/^(\S){1,50}$/)]]});
+    this.route.params.subscribe(params => {
+      this.quizId = params['quizId'];
     });
 
     this.playerRegForm.valueChanges.subscribe(value => {
@@ -38,7 +47,7 @@ export class RegisterComponent {
   };
 
   doRegister(): void {
-    //this.actionWrapper(this.playerService.register.bind(this.playerService), "Register");
+    this.actionWrapper(this.playerService.register.bind(this.playerService), "Register");
   }
 
   actionWrapper(serviceMethod: (player: Player) => Observable<any>, actionName: string): void {
@@ -57,11 +66,11 @@ export class RegisterComponent {
       .subscribe((response: any): void => {
         console.log("response", JSON.stringify(response.body));
         if ((response.status >= 200 && response.status < 300) || response.status == 304) {
-          this.cookieService.set('token', response.body.result);
+          this.cookieService.set('playerToken', response.body.result);
           this.cookieService.set('playerName', this.player.playerName);
           console.log(actionName + " was successful -> user '" + this.player.playerName + "', received token: " + response.body.result);
           //this.playerService.refreshTokenPeriodically();
-          this.router.navigate(['/host']);
+          this.router.navigate([`player/waiting/${this.quizId}`]);
         } else {
           this.errorMsg = this.unexpectedErrorMsg;
         }

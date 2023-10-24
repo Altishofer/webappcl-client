@@ -1,24 +1,25 @@
-
-
-
-// Angular client code
 import { Injectable } from '@angular/core';
 import * as signalR from '@microsoft/signalr';
-import {environment} from "../../../environments/environment";
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SignalRService {
-  private hubConnection: signalR.HubConnection;
-  private baseUrl = environment.HUB_URL + "/chatHub";
+  private hubConnection!: signalR.HubConnection;
+  private baseUrl: string;
 
   constructor() {
+    this.baseUrl = environment.HUB_URL + '/quizHub';
+    this.createHubConnection(this.baseUrl);
+  }
+
+  private createHubConnection(url: string) {
     this.hubConnection = new signalR.HubConnectionBuilder()
       .configureLogging(signalR.LogLevel.Debug)
-      .withUrl(this.baseUrl, {
+      .withUrl(url, {
         skipNegotiation: true,
-        transport: signalR.HttpTransportType.WebSockets
+        transport: signalR.HttpTransportType.WebSockets,
       })
       .build();
 
@@ -27,36 +28,52 @@ export class SignalRService {
       this.receiveMessageListener(message);
     });
 
-    this.hubConnection.on('nextRound', (message: string) => {
-      console.log("nextRound", message);
-      this.receiveMessageListener(message);
+    this.hubConnection.on('ReceiveRound', (round: string) => {
+      console.log("nextRound", round);
+      this.receiveRoundListener(round);
     });
 
-    this.hubConnection.on('players', (message: string) => {
+    this.hubConnection.on('ReceivePlayers', (message: string) => {
       console.log("players", message);
-      this.receiveMessageListener(message);
+      this.receivePlayerListener(message);
     });
   }
 
   public setReceiveMessageListener(listener: (message: string) => void) {
-    console.log("setReceiveMessageListener")
     this.receiveMessageListener = listener;
   }
+  private receiveMessageListener: (message: string) => void = (message) => {
+    console.log(message);
+  };
 
-  private receiveMessageListener: (message: string) => void = (message) => {};
+  public setReceivePlayerListener(listener: (message: string) => void) {
+    this.receiveMessageListener = listener;
+  }
+  private receivePlayerListener: (message: string) => void = (message) => {
+    console.log(message);
+  };
+  public setReceiveRoundListener(listener: (message: string) => void) {
+    this.receiveMessageListener = listener;
+  }
+  private receiveRoundListener: (round: string) => void = (round) => {
+    console.log(round);
+  };
 
-  joinGroup(groupName: string) {
-    console.log("join Group " + groupName);
-    this.hubConnection.invoke('JoinGroup', groupName)
-      .catch(err => console.error('Error joining group: ' + err));
+  joinGroup(groupName: string, playerName: string){
+    console.log("joinGroup", groupName, playerName);
+    this.hubConnection
+      .invoke('JoinGroup', groupName, playerName)
+      .catch((err) => console.error('Error joining group: ' + err));
   }
 
-  leaveGroup(groupName: string) {
-    this.hubConnection.invoke('LeaveGroup', groupName)
-      .catch(err => console.error('Error leaving group: ' + err));
+  leaveGroup(groupName: string, playerName: string) {
+    this.hubConnection
+      .invoke('LeaveGroup', groupName, playerName)
+      .catch((err) => console.error('Error leaving group: ' + err));
   }
 
   sendMessageToGroup(groupName: string, message: string) {
+    console.log("sendMessageToGroup", groupName, message);
     this.hubConnection
       .invoke('SendMessageToGroup', groupName, message)
       .catch((err) => {
@@ -64,14 +81,8 @@ export class SignalRService {
       });
   }
 
-  startConnection() {
-    this.hubConnection
-      .start()
-      .then(() => {
-        console.log('SignalR connection started');
-      })
-      .catch((err) => {
-        console.error('Error starting SignalR connection: ' + err);
-      });
+  startConnection() : Promise<void> {
+    if (this.hubConnection.state === signalR.HubConnectionState.Connected){return Promise.resolve();}
+    return this.hubConnection.start();
   }
 }

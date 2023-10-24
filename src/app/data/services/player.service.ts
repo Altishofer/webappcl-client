@@ -4,6 +4,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {CookieService} from "ngx-cookie-service";
 import {Host} from "../interfaces/host.model";
 import {Player} from "../interfaces/player.model";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -12,9 +13,9 @@ export class PlayerService {
   private baseUrl = environment.API_URL + "/Player";
   constructor(private http: HttpClient, private cookieService: CookieService) {}
 
-  getPlayer(host: Host): void {
+  getPlayer(player: Player): void {
     const headers = new HttpHeaders({
-      'Authorization': "Bearer " + this.cookieService.get("token"),
+      'Authorization': "Bearer " + this.cookieService.get("hostToken"),
       'Content-Type': 'application/json',
     });
 
@@ -23,17 +24,11 @@ export class PlayerService {
     });
   }
 
-  register(player: Player): void {
-    const headers = new HttpHeaders({
+  register(player: Player): Observable<any> {
+    const headers : HttpHeaders = new HttpHeaders ({
       'Content-Type': 'application/json',
     });
-    const body = JSON.stringify(player);
-
-    this.http.post(`${this.baseUrl}/Register`, body, { headers }).subscribe((response: any) => {
-      this.cookieService.set('token', response.token);
-      this.cookieService.set('playerName', player.playerName);
-      console.log("Registration was successful: "+player.playerName+", received token: "+response.token);
-      /*this.refreshTokenPeriodically();*/
-    });
+    const body : string = JSON.stringify(player);
+    return this.http.post(`${this.baseUrl}/Register`, body, { observe:'response', headers });
   }
 }

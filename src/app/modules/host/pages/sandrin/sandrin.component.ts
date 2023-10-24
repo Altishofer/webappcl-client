@@ -3,7 +3,7 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import { Host } from "@data/interfaces/host.model";
 import { environment } from "../../../../../environments/environment";
-import { SignalRService } from "../../../../data/services/SignalRService";
+import { SignalRService } from "@data/services/SignalRService";
 import {Observable} from "rxjs";
 
 @Component({
@@ -17,7 +17,7 @@ export class SandrinComponent {
 
   private baseUrl = environment.API_URL + "/TodoItems";
   private vectorUrl = environment.API_URL + "/Word2Vector";
-  private groupName: string = "0";
+  private groupName: string = "9";
   public messages: string[] = [];
   public messageToSend: string = '';
   public nextRound: string = '';
@@ -68,11 +68,11 @@ export class SandrinComponent {
   }
 
   registerToGroup() {
-    this.signalRService.joinGroup(this.groupName);
+    this.signalRService.joinGroup(this.groupName, "0");
   }
 
   unregisterFromGroup() {
-    this.signalRService.leaveGroup(this.groupName);
+    this.signalRService.leaveGroup(this.groupName, "0");
   }
 
   sendMessage() {
