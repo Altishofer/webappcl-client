@@ -3,14 +3,21 @@
 
 <span class="common-wrapper" fxLayout="row" fxLayoutAlign="center center">
   <mat-card class="box">
-    <mat-card-header>
-      <mat-card-title>[Quiz Title]</mat-card-title>
+    <mat-card-header class="balanced">
+      <ng-template *ngIf="quiz == null; else titleBlock">
+        <mat-card-title>*** Loading ***</mat-card-title>
+      </ng-template>
+      <ng-template #titleBlock>
+        <mat-card-title class="cheeky">{{ quiz.title }}</mat-card-title>
+      </ng-template>
     </mat-card-header>
     <form class="example-form">
-      <button mat-raised-button color="accent" class="btn-block">
-        <span class="id">Target 1:</span>
-        <span class="name">Egg</span>
-      </button>
+      <ng-template ngFor let-round [ngForOf]="allRounds" let-position="index">
+        <button mat-raised-button color="accent" class="btn-block" style="text-align: left; margin-bottom: 8px">
+          <span class="id" >Target {{ position+1 }}:</span>
+          <span class="name">{{ round['roundTarget'] }}</span>
+        </button>
+      </ng-template>
     </form>
   </mat-card>
 </span>

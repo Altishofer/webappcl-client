@@ -4,7 +4,8 @@ span .id {
   display: inline-block;
   text-align: left;
   color: darkred;
-  margin-right: 10px;
+  margin-left: 15px;
+  margin-right: 5px;
   padding: 4px 1px;
 }
 span .name {
@@ -12,4 +13,17 @@ span .name {
   text-align: left;
   margin-right: 10px;
   padding: 4px 1px;
+}
+.balanced {
+  text-wrap: balance;
+  rotation-point: center;
+  rotate: -4deg;
+}
+.cheeky {
+  transition: rotate 2s;
+}
+.cheeky:hover {
+  rotation-point: center;
+  rotate: 3604deg;
+  ;
 }
