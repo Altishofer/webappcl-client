@@ -7,6 +7,7 @@ import {SignalRService} from "@data/services/SignalRService";
 import {CookieService} from "ngx-cookie-service";
 import {PlayerService} from "@data/services/player.service";
 import {Round} from "@data/interfaces/round.model";
+import {BehaviorSubject} from "rxjs";
 
 @Component({
   selector: 'app-word-calc',
@@ -23,12 +24,12 @@ export class WordCalcComponent {
   quizId : string = '';
   roundId : string = '';
 
-  round : Round = {
-    Id : "",
-    QuizId : "",
-    RoundTarget : "",
-    ForbiddenWords : []
-  }
+  roundSubject: BehaviorSubject<Round> = new BehaviorSubject<Round>({
+    Id: "",
+    QuizId: "",
+    RoundTarget: "",
+    ForbiddenWords: []
+  });
 
   cal: VectorCalculationModel = {
     Additions: [],
@@ -60,14 +61,16 @@ export class WordCalcComponent {
     this.playerService.getRound(this.roundId).subscribe(
       (response: any): void => {
         if ((response.status >= 200 && response.status < 300) || response.status == 304) {
-          console.log("REST round: ", response.body);
-          this.round = response.body;
-          console.log("REST round: ", this.round);
+          const roundData = response.body;
+          this.roundSubject.next(roundData);
+          console.log("Got round via REST", this.roundSubject.value);
         } else {
           console.log("ERROR: getting round via REST");
         }
-      });
+      }
+    );
   }
+
 
   createWordFormGroup(word:string='', isSubtracted:boolean=false): FormGroup {
     return this.fb.group({

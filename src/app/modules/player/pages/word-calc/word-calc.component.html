@@ -3,12 +3,12 @@
     <div class="rules-container">
       <div mat-card-title class="inner-title">Target Word</div>
       <div class="target-container">
-        <div class="target-word">{{round.RoundTarget}}</div>
-      </div>
-      <div mat-card-title class="inner-title">Forbidden Words</div>
-      <div class="forbidden-container">
-        <div class="forbidden-word" *ngFor="let forbidden of round.ForbiddenWords">{{forbidden}}</div>
-      </div>
+      <div class="target-word">{{ (roundSubject | async)?.RoundTarget }}</div>
+    </div>
+    <div mat-card-title class="inner-title">Forbidden Words</div>
+    <div class="forbidden-container">
+      <div class="forbidden-word" *ngFor="let forbidden of (roundSubject | async)?.ForbiddenWords">{{ forbidden }}</div>
+    </div>
     </div>
     <div [formGroup]="wordCalcForm">
       <div formArrayName="wordsArray">
@@ -32,5 +32,6 @@
       </div>
     </div>
     <button mat-raised-button color="accent" class="btn-block" (click)="printArray()">Submit</button>
+    <button mat-raised-button color="accent" class="btn-block" (click)="getRound()">refresh manually</button>
   </mat-card>
 </span>
