@@ -29,6 +29,7 @@ export class QuizPreviewComponent implements OnInit{
       } else {
         this.errorMsg = this.unexpectedErrorMsg;
       }
+      console.log(this.allRounds.length);
     });
   }
 

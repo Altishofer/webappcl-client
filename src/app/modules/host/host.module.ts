@@ -11,6 +11,7 @@ import { LoginComponent } from "@modules/host/pages/login/login.component";
 import { LobbyComponent } from './pages/lobby/lobby.component';
 import { RoundMainComponent } from './pages/round-main/round-main.component';
 import { ResultsComponent } from './pages/results/results.component';
+import {CdkAccordionModule} from "@angular/cdk/accordion";
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { ResultsComponent } from './pages/results/results.component';
     CommonModule,
     SharedModule,
     HostRoutingModule,
-    HeaderComponent
+    HeaderComponent,
+    CdkAccordionModule
   ]
 })
 export class HostModule { }

@@ -6,14 +6,14 @@
       <mat-card-title>Existing Quizzes</mat-card-title>
     </mat-card-header>
 
-    <form class="example-form">
+    <div class="example-form">
       <ng-template ngFor let-quiz [ngForOf]="allQuizzes">
         <button mat-raised-button color="accent" class="btn-block" style="text-align: left; margin-bottom: 8px" (click)="redirect(quiz['id'])">
           <span class="id" >{{ quiz['id'] }}</span>
           <span class="name">{{ quiz['title'] }}</span>
         </button>
       </ng-template>
-    </form>
+    </div>
   </mat-card>
 </span>
 
