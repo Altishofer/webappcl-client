@@ -16,23 +16,16 @@ export class QuizSelectionComponent implements OnInit {
   errorMsg : string = '';
   unexpectedErrorMsg : string = "An unexpected error occurred."
 
-  constructor(private quizService: QuizService, private router: Router) {
-
-  }
+  constructor(private quizService: QuizService, private router: Router) {}
 
   getHostQuizzes() {
     this.quizService.getAllQuizzes().subscribe((response: any): void => {
       if ((response.status >= 200 && response.status < 300) || response.status == 304) {
         this.allQuizzes = response.body;
-        //this.router.navigate(['/host']);
       } else {
         this.errorMsg = this.unexpectedErrorMsg;
       }
     });
-  }
-
-  printArr() {
-    console.log(this.allQuizzes);
   }
 
   ngOnInit() {

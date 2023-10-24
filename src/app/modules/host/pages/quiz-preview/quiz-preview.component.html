@@ -3,15 +3,75 @@
 
 <span class="common-wrapper" fxLayout="row" fxLayoutAlign="center center">
   <mat-card class="box">
-    <mat-card-header>
-      <mat-card-title>[Quiz Title]</mat-card-title>
+    <mat-card-header class="balanced">
+      <ng-template *ngIf="quiz == null; else titleBlock">
+        <mat-card-title>*** Loading ***</mat-card-title>
+      </ng-template>
+      <ng-template #titleBlock>
+        <mat-card-title class="cheeky">{{ quiz.title }}</mat-card-title>
+      </ng-template>
     </mat-card-header>
-    <form class="example-form">
-      <button mat-raised-button color="accent" class="btn-block">
-        <span class="id">Target 1:</span>
-        <span class="name">Egg</span>
-      </button>
-    </form>
+    <div class="example-form">
+      <ng-template *ngIf="allRounds.length === 0; else roundsBlock">
+        <div class="inter-title" style="font-family: monospace">
+          nothing to display :(
+        </div>
+      </ng-template>
+      <ng-template #roundsBlock>
+        <cdk-accordion class="example-accordion">
+          <cdk-accordion-item *ngFor="let round of allRounds; let position = index;"
+                              #accordionItem="cdkAccordionItem"
+                              class="quiz-accordion-round"
+                              role="button"
+                              tabindex="0"
+                              [attr.id]="'accordion-header-' + position"
+                              [attr.aria-expanded]="accordionItem.expanded"
+                              [attr.aria-controls]="'accordion-body-' + position">
+            <div class="quiz-accordion-round-target" (click)="accordionItem.toggle()">
+              <span class="target-numeration-element">
+                Round {{ position }}:
+              </span>
+
+              <span class="target-word-tease">
+                {{ round['roundTarget'] }}
+              </span>
+            </div>
+
+            <div class="quiz-accordion-round-details"
+                              role="region"
+                              [style.display]="accordionItem.expanded ? '' : 'none'"
+                              [attr.id]="'accordion-body-' + position"
+                              [attr.aria-labelledby]="'accordion-header-' + position">
+              <div class="inter-title" style="margin-top: 0">
+                Target Word:
+              </div>
+
+              <div class="target-word-element">
+                {{ round['roundTarget'] }}
+              </div>
+
+              <div class="inter-title">
+                Forbidden Words:
+              </div>
+
+              <ng-template ngFor let-forbiddenWord [ngForOf]="round['forbiddenWords']">
+                <div class="forbidden-word-element">
+                  {{ forbiddenWord }}
+                </div>
+              </ng-template>
+            </div>
+          </cdk-accordion-item>
+        </cdk-accordion>
+      </ng-template>
+    </div>
+    <div style="margin-top: 40px">
+      <span>
+        <button mat-raised-button color="accent" class="back-btn" style="background-color: darkred" routerLink="/host/selection">Back</button>
+      </span>
+        <span>
+          <button mat-raised-button color="accent" class="start-btn" style="float: right; background-color: darkgreen">Start</button>
+        </span>
+    </div>
   </mat-card>
 </span>
 <div class="center">
