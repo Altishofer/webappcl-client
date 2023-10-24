@@ -16,7 +16,7 @@ const routes: Routes = [
     path:'waiting/:quizId', component:WaitingComponent
   },
   {
-    path:'game/:quizId', component:WordCalcComponent
+    path:'game/:quizId/:roundId', component:WordCalcComponent
   },
   {
     path:'ranking/:quizId', component:RankingComponent

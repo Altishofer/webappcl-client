@@ -1,15 +1,13 @@
 <span class="common-wrapper" fxLayout="row" fxLayoutAlign="center center">
   <mat-card class="box">
     <div class="rules-container">
-      <div mat-card-title class="inner-title">Target Word:</div>
+      <div mat-card-title class="inner-title">Target Word</div>
       <div class="target-container">
-        <div class="target-word">Aye</div>
+        <div class="target-word">{{round.RoundTarget}}</div>
       </div>
-      <div mat-card-title class="inner-title">Forbidden Words:</div>
+      <div mat-card-title class="inner-title">Forbidden Words</div>
       <div class="forbidden-container">
-        <div class="forbidden-word">Blunderbuss</div>
-        <div class="forbidden-word">Sword</div>
-        <div class="forbidden-word">Fishstickman</div>
+        <div class="forbidden-word" *ngFor="let forbidden of round.ForbiddenWords">{{forbidden}}</div>
       </div>
     </div>
     <div [formGroup]="wordCalcForm">

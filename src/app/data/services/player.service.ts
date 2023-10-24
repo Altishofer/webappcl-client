@@ -41,4 +41,12 @@ export class PlayerService {
     });
     return this.http.get(`${this.quizUrl}/GetPlayers/${quizId}`, { observe:'response', headers  });
   }
+
+  getRound(roundId : string) : Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': "Bearer " + this.cookieService.get("hostToken"),
+      'Content-Type': 'application/json',
+    });
+    return this.http.get(`${this.quizUrl}/GetRound/${roundId}`, { observe:'response', headers  });
+  }
 }

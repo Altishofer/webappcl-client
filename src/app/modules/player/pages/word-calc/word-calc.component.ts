@@ -2,6 +2,11 @@ import { ChangeDetectorRef, Component } from '@angular/core';
 import {FormBuilder, FormGroup, FormArray, AbstractControl} from '@angular/forms';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { VectorCalculationModel } from '@data/interfaces/VectorCalculation.model';
+import {ActivatedRoute, Router} from "@angular/router";
+import {SignalRService} from "@data/services/SignalRService";
+import {CookieService} from "ngx-cookie-service";
+import {PlayerService} from "@data/services/player.service";
+import {Round} from "@data/interfaces/round.model";
 
 @Component({
   selector: 'app-word-calc',
@@ -13,19 +18,55 @@ export class WordCalcComponent {
   wordCalcForm: FormGroup;
   wordsArray: FormArray;
   addFieldDisabled : boolean;
+  forbiddenWords : string[] = [];
+  targetWord : string = '';
+  quizId : string = '';
+  roundId : string = '';
+
+  round : Round = {
+    Id : "",
+    QuizId : "",
+    RoundTarget : "",
+    ForbiddenWords : []
+  }
 
   cal: VectorCalculationModel = {
     Additions: [],
     Subtractions: []
   };
 
-  constructor(private fb: FormBuilder, private cdr: ChangeDetectorRef) {
+  constructor(
+      private fb: FormBuilder,
+      private cdr: ChangeDetectorRef,
+      private signalRService: SignalRService,
+      private router: Router,
+      private route: ActivatedRoute,
+      private cookieService: CookieService,
+      private playerService: PlayerService
+  ) {
     this.addFieldDisabled = true;
     this.wordCalcForm = this.fb.group({
       wordsArray: this.fb.array([this.createWordFormGroup()])
     });
     this.wordsArray = this.wordCalcForm.get('wordsArray') as FormArray;
-    console.log('Constructor:', this.wordsArray);
+    this.route.params.subscribe(params => {
+      this.quizId = params['quizId'];
+      this.roundId = params['roundId'];
+    });
+    this.getRound();
+  }
+
+  getRound(): void {
+    this.playerService.getRound(this.roundId).subscribe(
+      (response: any): void => {
+        if ((response.status >= 200 && response.status < 300) || response.status == 304) {
+          console.log("REST round: ", response.body);
+          this.round = response.body;
+          console.log("REST round: ", this.round);
+        } else {
+          console.log("ERROR: getting round via REST");
+        }
+      });
   }
 
   createWordFormGroup(word:string='', isSubtracted:boolean=false): FormGroup {
