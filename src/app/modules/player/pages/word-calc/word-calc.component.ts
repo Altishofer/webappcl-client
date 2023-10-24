@@ -1,7 +1,13 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, FormArray, AbstractControl} from '@angular/forms';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { VectorCalculationModel } from '@data/interfaces/VectorCalculation.model';
+import {ActivatedRoute, Router} from "@angular/router";
+import {SignalRService} from "@data/services/SignalRService";
+import {CookieService} from "ngx-cookie-service";
+import {PlayerService} from "@data/services/player.service";
+import {Round} from "@data/interfaces/round.model";
+import {BehaviorSubject, map, Observable, window} from "rxjs";
 
 @Component({
   selector: 'app-word-calc',
@@ -9,23 +15,65 @@ import { VectorCalculationModel } from '@data/interfaces/VectorCalculation.model
   styleUrls: ['./word-calc.component.css']
 })
 
-export class WordCalcComponent {
+export class WordCalcComponent implements OnInit{
   wordCalcForm: FormGroup;
   wordsArray: FormArray;
   addFieldDisabled : boolean;
+  quizId : string = '';
+  roundId : string = '';
+  unexpectedErrorMsg : string = "An unexpected error occurred."
+  errorMsg : string = '';
+
+  round : Round = {
+    id: "",
+    quizId: "",
+    roundTarget: "",
+    forbiddenWords: []
+  };
 
   cal: VectorCalculationModel = {
     Additions: [],
     Subtractions: []
   };
 
-  constructor(private fb: FormBuilder, private cdr: ChangeDetectorRef) {
+  constructor(
+      private fb: FormBuilder,
+      private cdr: ChangeDetectorRef,
+      private signalRService: SignalRService,
+      private router: Router,
+      private route: ActivatedRoute,
+      private cookieService: CookieService,
+      private playerService: PlayerService
+  ) {
     this.addFieldDisabled = true;
     this.wordCalcForm = this.fb.group({
       wordsArray: this.fb.array([this.createWordFormGroup()])
     });
     this.wordsArray = this.wordCalcForm.get('wordsArray') as FormArray;
-    console.log('Constructor:', this.wordsArray);
+    this.route.params.subscribe(params => {
+      this.quizId = params['quizId'];
+      this.roundId = params['roundId'];
+    });
+  }
+
+  print(){
+    console.log(this.round);
+    console.log(this.round.forbiddenWords);
+  }
+
+  ngOnInit() {
+    this.getRound();
+  }
+
+  getRound(): void {
+    this.playerService.getRound(this.roundId).subscribe((response: any): void => {
+      if ((response.status >= 200 && response.status < 300) || response.status == 304) {
+        console.log(response.body)
+        this.round = response.body;
+      } else {
+        this.errorMsg = this.unexpectedErrorMsg;
+      }
+    });
   }
 
   createWordFormGroup(word:string='', isSubtracted:boolean=false): FormGroup {
@@ -93,4 +141,6 @@ export class WordCalcComponent {
     });
     console.log('Printed array:', this.cal);
   }
+
+  protected readonly window = window;
 }

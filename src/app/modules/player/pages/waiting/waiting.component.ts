@@ -78,4 +78,8 @@ export class WaitingComponent implements OnInit {
       this.nextRound = round;
     });
   }
+
+  switchToRound(roundId:number): void {
+    this.router.navigate(['/player', 'game', this.quizId, roundId]);
+  }
 }

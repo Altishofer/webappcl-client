@@ -1,16 +1,17 @@
 <span class="common-wrapper" fxLayout="row" fxLayoutAlign="center center">
   <mat-card class="box">
     <div class="rules-container">
-      <div mat-card-title class="inner-title">Target Word:</div>
+      <div mat-card-title class="inner-title">Target Word</div>
       <div class="target-container">
-        <div class="target-word">Aye</div>
-      </div>
-      <div mat-card-title class="inner-title">Forbidden Words:</div>
-      <div class="forbidden-container">
-        <div class="forbidden-word">Blunderbuss</div>
-        <div class="forbidden-word">Sword</div>
-        <div class="forbidden-word">Fishstickman</div>
-      </div>
+      <div class="target-word">{{round.roundTarget }}</div>
+    </div>
+    <div mat-card-title class="inner-title">Forbidden Words</div>
+    <div class="forbidden-container">
+      <ng-template ngFor let-word [ngForOf]="round.forbiddenWords">
+        <div class="forbidden-word">{{word}}</div>
+      </ng-template>
+    </div>
+
     </div>
     <div [formGroup]="wordCalcForm">
       <div formArrayName="wordsArray">
@@ -34,5 +35,7 @@
       </div>
     </div>
     <button mat-raised-button color="accent" class="btn-block" (click)="printArray()">Submit</button>
+    <button mat-raised-button color="accent" class="btn-block" (click)="ngOnInit()">refresh manually</button>
+    <button mat-raised-button color="accent" class="btn-block" (click)="print()">console</button>
   </mat-card>
 </span>
