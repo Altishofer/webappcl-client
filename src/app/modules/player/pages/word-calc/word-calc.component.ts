@@ -21,9 +21,15 @@ export class WordCalcComponent implements OnInit{
   addFieldDisabled : boolean;
   quizId : string = '';
   roundId : string = '';
+  unexpectedErrorMsg : string = "An unexpected error occurred."
+  errorMsg : string = '';
 
-  roundSubject!: Observable<Round>;
-  round!: BehaviorSubject<Round>;
+  round : Round = {
+    id: "",
+    quizId: "",
+    roundTarget: "",
+    forbiddenWords: []
+  };
 
   cal: VectorCalculationModel = {
     Additions: [],
@@ -48,43 +54,26 @@ export class WordCalcComponent implements OnInit{
       this.quizId = params['quizId'];
       this.roundId = params['roundId'];
     });
-    this.round = new BehaviorSubject<Round>({} as Round)
-    this.roundSubject = this.getRound();
   }
 
   print(){
-    console.log(this.round.value);
+    console.log(this.round);
+    console.log(this.round.forbiddenWords);
   }
 
   ngOnInit() {
-    console.log("OnInit WordCalcComponent")
-    this.roundSubject.subscribe(
-      (response: Round) => {
-        console.log("Got round via REST", response);
-      },
-      (error: any) => {
-        console.log("ERROR: getting round via REST", error);
-      },
-      () => {
-        console.log("Completed getting round via REST");
-      }
-    );
+    this.getRound();
   }
 
-  getRound(): Observable<Round> {
-    return this.playerService.getRound(this.roundId).pipe(
-      map( (response: any): Round => {
-
-        this.round.next(response.body);
-        console.log("assigned with next", this.round.value);
-        if ((response.status >= 200 && response.status < 300) || response.status == 304) {
-          return response.body;
-        } else {
-          console.log("ERROR: getting round via REST");
-          return {} as Round;
-        }
-      })
-    );
+  getRound(): void {
+    this.playerService.getRound(this.roundId).subscribe((response: any): void => {
+      if ((response.status >= 200 && response.status < 300) || response.status == 304) {
+        console.log(response.body)
+        this.round = response.body;
+      } else {
+        this.errorMsg = this.unexpectedErrorMsg;
+      }
+    });
   }
 
   createWordFormGroup(word:string='', isSubtracted:boolean=false): FormGroup {

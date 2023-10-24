@@ -3,11 +3,13 @@
     <div class="rules-container">
       <div mat-card-title class="inner-title">Target Word</div>
       <div class="target-container">
-      <div class="target-word">{{ (roundSubject | async)?.RoundTarget }}</div>
+      <div class="target-word">{{round.roundTarget }}</div>
     </div>
     <div mat-card-title class="inner-title">Forbidden Words</div>
     <div class="forbidden-container">
-      <div class="forbidden-word" *ngFor="let forbidden of (roundSubject | async)?.ForbiddenWords">{{ forbidden }}</div>
+      <ng-template ngFor let-word [ngForOf]="round.forbiddenWords">
+        <div class="forbidden-word">{{word}}</div>
+      </ng-template>
     </div>
 
     </div>

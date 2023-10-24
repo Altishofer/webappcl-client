@@ -1,6 +1,6 @@
 export interface Round {
-  Id: string;
-  QuizId: string;
-  RoundTarget: string;
-  ForbiddenWords: string[];
+  id: string;
+  quizId: string;
+  roundTarget: string;
+  forbiddenWords: string[];
 }
