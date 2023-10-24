@@ -7,17 +7,21 @@
     </mat-card-header>
 
     <form class="example-form">
-      <button *ngFor="let quiz of allQuizzes" mat-raised-button color="accent" class="btn-block">
-        <span class="id">{{ quiz['id'] }}</span>
-        <span class="name">{{ quiz['title'] }}</span>
-      </button>
+      <ng-template ngFor let-quiz [ngForOf]="allQuizzes">
+        <button mat-raised-button color="accent" class="btn-block" style="text-align: left; margin-bottom: 8px" (click)="redirect(quiz['id'])">
+          <span class="id" >{{ quiz['id'] }}</span>
+          <span class="name">{{ quiz['title'] }}</span>
+        </button>
+      </ng-template>
     </form>
   </mat-card>
 </span>
 
-<div class="center" style="margin-top: 10px;" (click)="getHostQuizzes()">
-  <button mat-raised-button color="primary" class="button-normal">Temp: Get Quizzes</button>
+<!--
+<div class="center" style="margin-top: 10px;">
+  <button mat-raised-button color="primary" class="button-normal" (click)="getHostQuizzes()">Temp: Get Quizzes</button>
 </div>
+-->
 
 <span class="common-wrapper" fxLayout="row" fxLayoutAlign="center center">
   <button mat-raised-button color="accent" class="button-normal" routerLink="/home/sandrin" routerLinkActive="active">Sandrin</button>
