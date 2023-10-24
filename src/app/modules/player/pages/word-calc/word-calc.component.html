@@ -9,6 +9,7 @@
     <div class="forbidden-container">
       <div class="forbidden-word" *ngFor="let forbidden of (roundSubject | async)?.ForbiddenWords">{{ forbidden }}</div>
     </div>
+
     </div>
     <div [formGroup]="wordCalcForm">
       <div formArrayName="wordsArray">
@@ -32,6 +33,7 @@
       </div>
     </div>
     <button mat-raised-button color="accent" class="btn-block" (click)="printArray()">Submit</button>
-    <button mat-raised-button color="accent" class="btn-block" (click)="getRound()">refresh manually</button>
+    <button mat-raised-button color="accent" class="btn-block" (click)="ngOnInit()">refresh manually</button>
+    <button mat-raised-button color="accent" class="btn-block" (click)="print()">console</button>
   </mat-card>
 </span>

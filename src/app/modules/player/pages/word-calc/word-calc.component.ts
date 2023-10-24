@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, FormArray, AbstractControl} from '@angular/forms';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { VectorCalculationModel } from '@data/interfaces/VectorCalculation.model';
@@ -7,7 +7,7 @@ import {SignalRService} from "@data/services/SignalRService";
 import {CookieService} from "ngx-cookie-service";
 import {PlayerService} from "@data/services/player.service";
 import {Round} from "@data/interfaces/round.model";
-import {BehaviorSubject} from "rxjs";
+import {BehaviorSubject, map, Observable, window} from "rxjs";
 
 @Component({
   selector: 'app-word-calc',
@@ -15,21 +15,15 @@ import {BehaviorSubject} from "rxjs";
   styleUrls: ['./word-calc.component.css']
 })
 
-export class WordCalcComponent {
+export class WordCalcComponent implements OnInit{
   wordCalcForm: FormGroup;
   wordsArray: FormArray;
   addFieldDisabled : boolean;
-  forbiddenWords : string[] = [];
-  targetWord : string = '';
   quizId : string = '';
   roundId : string = '';
 
-  roundSubject: BehaviorSubject<Round> = new BehaviorSubject<Round>({
-    Id: "",
-    QuizId: "",
-    RoundTarget: "",
-    ForbiddenWords: []
-  });
+  roundSubject!: Observable<Round>;
+  round!: BehaviorSubject<Round>;
 
   cal: VectorCalculationModel = {
     Additions: [],
@@ -54,23 +48,44 @@ export class WordCalcComponent {
       this.quizId = params['quizId'];
       this.roundId = params['roundId'];
     });
-    this.getRound();
+    this.round = new BehaviorSubject<Round>({} as Round)
+    this.roundSubject = this.getRound();
   }
 
-  getRound(): void {
-    this.playerService.getRound(this.roundId).subscribe(
-      (response: any): void => {
-        if ((response.status >= 200 && response.status < 300) || response.status == 304) {
-          const roundData = response.body;
-          this.roundSubject.next(roundData);
-          console.log("Got round via REST", this.roundSubject.value);
-        } else {
-          console.log("ERROR: getting round via REST");
-        }
+  print(){
+    console.log(this.round.value);
+  }
+
+  ngOnInit() {
+    console.log("OnInit WordCalcComponent")
+    this.roundSubject.subscribe(
+      (response: Round) => {
+        console.log("Got round via REST", response);
+      },
+      (error: any) => {
+        console.log("ERROR: getting round via REST", error);
+      },
+      () => {
+        console.log("Completed getting round via REST");
       }
     );
   }
 
+  getRound(): Observable<Round> {
+    return this.playerService.getRound(this.roundId).pipe(
+      map( (response: any): Round => {
+
+        this.round.next(response.body);
+        console.log("assigned with next", this.round.value);
+        if ((response.status >= 200 && response.status < 300) || response.status == 304) {
+          return response.body;
+        } else {
+          console.log("ERROR: getting round via REST");
+          return {} as Round;
+        }
+      })
+    );
+  }
 
   createWordFormGroup(word:string='', isSubtracted:boolean=false): FormGroup {
     return this.fb.group({
@@ -137,4 +152,6 @@ export class WordCalcComponent {
     });
     console.log('Printed array:', this.cal);
   }
+
+  protected readonly window = window;
 }
