@@ -34,7 +34,12 @@
         </ng-template>
       </div>
     </div>
-    <button mat-raised-button color="accent" class="btn-block" (click)="printArray()">Submit</button>
+    <ng-template [ngIf]="errorMsg">
+      <p class="error-message">
+        {{ errorMsg }}
+      </p>
+    </ng-template>
+    <button mat-raised-button color="accent" class="btn-block" (click)="submit()">Submit</button>
     <button mat-raised-button color="accent" class="btn-block" (click)="ngOnInit()">refresh manually</button>
     <button mat-raised-button color="accent" class="btn-block" (click)="print()">console</button>
   </mat-card>

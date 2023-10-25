@@ -5,6 +5,7 @@ import {CookieService} from "ngx-cookie-service";
 import {Host} from "../interfaces/host.model";
 import {Player} from "../interfaces/player.model";
 import {Observable} from "rxjs";
+import {Answer} from "@data/interfaces/answer.model";
 
 @Injectable({
   providedIn: 'root'
@@ -15,15 +16,14 @@ export class PlayerService {
 
   constructor(private http: HttpClient, private cookieService: CookieService) {}
 
-  getPlayer(player: Player): void {
-    const headers = new HttpHeaders({
-      'Authorization': "Bearer " + this.cookieService.get("hostToken"),
+  sendAnswer(answer: Answer): Observable<any> {
+    const headers : HttpHeaders = new HttpHeaders ({
+      'Authorization': "Bearer " + this.cookieService.get("playerToken"),
       'Content-Type': 'application/json',
     });
-
-    this.http.get(`${this.playerUrl}`, { headers }).subscribe((response: any) => {
-      console.log("got player from request: " + response.playerName);
-    });
+    const body : string = JSON.stringify(answer);
+    console.log(body);
+    return this.http.post(`${this.quizUrl}/CreateAnswer`, body, { observe:'response', headers });
   }
 
   register(player: Player): Observable<any> {
@@ -36,10 +36,18 @@ export class PlayerService {
 
   getPlayers(quizId : string) : Observable<any> {
     const headers = new HttpHeaders({
-      'Authorization': "Bearer " + this.cookieService.get("hostToken"),
+      'Authorization': "Bearer " + this.cookieService.get("playerToken"),
       'Content-Type': 'application/json',
     });
     return this.http.get(`${this.quizUrl}/GetPlayers/${quizId}`, { observe:'response', headers  });
+  }
+
+  getWaitResult(quizId : string, roundId:string) : Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': "Bearer " + this.cookieService.get("playerToken"),
+      'Content-Type': 'application/json',
+    });
+    return this.http.get(`${this.quizUrl}/Ranking/${quizId}/${roundId}`, { observe:'response', headers  });
   }
 
   getRound(roundId : string) : Observable<any> {
