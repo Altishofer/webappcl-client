@@ -23,9 +23,9 @@ export class WaitingComponent implements OnInit {
     private cookieService: CookieService,
     private playerService: PlayerService
   ) {
-    this.playerName = this.cookieService.get('playerName') ?? "default_player";
     this.route.params.subscribe(params => {
       this.quizId = params['quizId'];
+      this.playerName = params['playerName'];
     });
     this.players.push(this.playerName);
   }
@@ -80,6 +80,6 @@ export class WaitingComponent implements OnInit {
   }
 
   switchToRound(roundId:number): void {
-    this.router.navigate(['/player', 'game', this.quizId, roundId]);
+    this.router.navigate(['/player', 'game', this.quizId, roundId, this.playerName]);
   }
 }

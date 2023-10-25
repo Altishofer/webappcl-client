@@ -13,13 +13,13 @@ const routes: Routes = [
     path:'register/:quizId', component:RegisterComponent
   },
   {
-    path:'waiting/:quizId', component:WaitingComponent
+    path:'waiting/:quizId/:playerName', component:WaitingComponent
   },
   {
-    path:'game/:quizId/:roundId', component:WordCalcComponent
+    path:'game/:quizId/:roundId/:playerName', component:WordCalcComponent
   },
   {
-    path:'ranking/:quizId', component:RankingComponent
+    path:'ranking/:quizId/:roundId/:playerName', component:RankingComponent
   }
   ];
 

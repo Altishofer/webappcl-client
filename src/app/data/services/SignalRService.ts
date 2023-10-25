@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as signalR from '@microsoft/signalr';
 import { environment } from '../../../environments/environment';
+import {WaitResult} from "@data/interfaces/WaitResult.model";
 
 @Injectable({
   providedIn: 'root',
@@ -45,20 +46,13 @@ export class SignalRService {
       });
   }
 
-  sendPlayersToGroup(groupName: string) {
-    console.log("sendPlayersToGroup", groupName);
-    this.hubConnection
-      .invoke('SendPlayersToGroup', groupName)
-      .catch((err) => {
-        console.error('Error sending message: ' + err);
-      });
-  }
-
   startConnection(): Promise<void> {
     if (this.hubConnection.state === signalR.HubConnectionState.Connected) {
       return Promise.resolve();
+    } else {
+      return this.hubConnection.start();
     }
-    return this.hubConnection.start();
+
   }
 
   setReceiveMessageListener(listener: (message: string) => void) {
@@ -71,5 +65,9 @@ export class SignalRService {
 
   setReceiveRoundListener(listener: (round: string) => void) {
     this.hubConnection.on('ReceiveRound', listener);
+  }
+
+  setReceiveWaitResultListener(listener: (waitResult: WaitResult) => void) {
+    this.hubConnection.on('ReceiveWaitResult', listener);
   }
 }

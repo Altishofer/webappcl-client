@@ -7,7 +7,9 @@ import {SignalRService} from "@data/services/SignalRService";
 import {CookieService} from "ngx-cookie-service";
 import {PlayerService} from "@data/services/player.service";
 import {Round} from "@data/interfaces/round.model";
-import {BehaviorSubject, map, Observable, window} from "rxjs";
+import {BehaviorSubject, catchError, map, Observable, window} from "rxjs";
+import {Answer} from "@data/interfaces/answer.model";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-word-calc',
@@ -21,6 +23,7 @@ export class WordCalcComponent implements OnInit{
   addFieldDisabled : boolean;
   quizId : string = '';
   roundId : string = '';
+  playerName : string = '';
   unexpectedErrorMsg : string = "An unexpected error occurred."
   errorMsg : string = '';
 
@@ -34,6 +37,15 @@ export class WordCalcComponent implements OnInit{
   cal: VectorCalculationModel = {
     Additions: [],
     Subtractions: []
+  };
+
+  answer : Answer = {
+    quizId: "",
+    roundId: "",
+    playerName: "",
+    additions: [],
+    subtractions: [],
+    answerTarget: "",
   };
 
   constructor(
@@ -53,6 +65,7 @@ export class WordCalcComponent implements OnInit{
     this.route.params.subscribe(params => {
       this.quizId = params['quizId'];
       this.roundId = params['roundId'];
+      this.playerName = params['playerName'];
     });
   }
 
@@ -66,7 +79,17 @@ export class WordCalcComponent implements OnInit{
   }
 
   getRound(): void {
-    this.playerService.getRound(this.roundId).subscribe((response: any): void => {
+    this.playerService.getRound(this.roundId).pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.log(JSON.stringify(error.error));
+        if (error.status != 500) {
+          this.errorMsg = error.error;
+        } else {
+          this.errorMsg = this.unexpectedErrorMsg;
+        }
+        return[];
+      })
+    ).subscribe((response: any): void => {
       if ((response.status >= 200 && response.status < 300) || response.status == 304) {
         console.log(response.body)
         this.round = response.body;
@@ -133,14 +156,61 @@ export class WordCalcComponent implements OnInit{
     this.cal.Additions = [];
     this.cal.Subtractions = [];
     this.wordsArray.value.forEach((word: any) => {
-      if (word.isSubtracted) {
+      if (word.isSubtracted && word.word) {
         this.cal.Subtractions.push(word.word);
-      } else {
+      } else if (!word.isSubtracted && word.word){
         this.cal.Additions.push(word.word);
       }
     });
     console.log('Printed array:', this.cal);
   }
 
-  protected readonly window = window;
+  submit() : void {
+    this.assignValues();
+    this.sendAnswer();
+  }
+
+  sendAnswer(): void{
+    this.errorMsg = '';
+    console.log('Printed array:', this.answer);
+    this.playerService.sendAnswer(this.answer).pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.log(JSON.stringify(error.error));
+        if (error.status != 500) {
+          this.errorMsg = error.error;
+        } else {
+          this.errorMsg = this.unexpectedErrorMsg;
+        }
+        return[];
+      })
+    ).subscribe((response: any): void => {
+    if ((response.status >= 200 && response.status < 300) || response.status == 304) {
+      console.log(response.body);
+      this.switchToRanking();
+    } else {
+      console.log(response);
+      console.log("error", response.error);
+      this.errorMsg = response.error;
+    }
+  });
+  }
+
+  assignValues(){
+    this.answer.roundId = this.roundId;
+    this.answer.playerName = this.cookieService.get("playerName");
+    this.answer.quizId = this.quizId;
+    this.answer.additions = [];
+    this.answer.subtractions = [];
+    this.wordsArray.value.forEach((word: any) => {
+      if (word.isSubtracted && word.word) {
+        this.answer.subtractions.push(word.word);
+      } else if (!word.isSubtracted && word.word){
+        this.answer.additions.push(word.word);
+      }
+    });
+  }
+
+  switchToRanking(): void {
+    this.router.navigate(['/player', 'ranking', this.quizId, this.roundId, this.playerName]);
+  }
 }
