@@ -45,13 +45,13 @@ export class HostService {
     setInterval(() => {
       const headers : HttpHeaders = new HttpHeaders({
         'Content-Type': 'application/json',
-        'Bearer-Token':  this.cookieService.get("token"),
-        'Authorization': `bearer ${this.cookieService.get("token")}`
+        'Bearer-Token':  this.cookieService.get("hostToken"),
+        'Authorization': `bearer ${this.cookieService.get("hostToken")}`
       });
       return this.http.get(`${this.baseUrl}/RefreshToken`, { observe:'response', headers })
         .subscribe((response: any) => {
           if ((response.status >= 200 && response.status < 300) || response.status == 304) {
-            this.cookieService.set('token', response.body.result);
+            this.cookieService.set('hostToken', response.body.result);
             console.log("TokenRefresh was successful: "+this.cookieService.get("hostName")+", received token: "+response.body.result);
           } else {
             console.log("ERROR: refreshing token was not successful");
