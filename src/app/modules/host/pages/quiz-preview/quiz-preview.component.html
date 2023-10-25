@@ -29,7 +29,7 @@
                               [attr.aria-controls]="'accordion-body-' + position">
             <div class="quiz-accordion-round-target" (click)="accordionItem.toggle()">
               <span class="target-numeration-element">
-                Round {{ position }}:
+                Round {{ position+1 }}:
               </span>
 
               <span class="target-word-tease">
@@ -74,6 +74,3 @@
     </div>
   </mat-card>
 </span>
-<div class="center">
-  <button mat-raised-button color="accent" class="button-normal">Create New Quiz</button>
-</div>
