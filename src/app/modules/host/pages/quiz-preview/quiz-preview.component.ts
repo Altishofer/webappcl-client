@@ -22,18 +22,17 @@ export class QuizPreviewComponent implements OnInit{
     });
   }
 
-  getAllRoundsByQuiz(quizId: string) {
+  getAllRoundsByQuiz(quizId: string): void {
     this.quizService.getAllRoundsByQuiz(quizId).subscribe((response: any): void => {
       if ((response.status >= 200 && response.status < 300) || response.status == 304) {
         this.allRounds = response.body;
       } else {
         this.errorMsg = this.unexpectedErrorMsg;
       }
-      console.log(this.allRounds.length);
     });
   }
 
-  getQuiz(quizId: string) {
+  getQuiz(quizId: string): void {
     this.quizService.getQuiz(quizId).subscribe((response: any): void => {
       if ((response.status >= 200 && response.status < 300) || response.status == 304) {
         this.quiz = response.body["quizDto"];
@@ -43,8 +42,13 @@ export class QuizPreviewComponent implements OnInit{
     });
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.getQuiz(this.quizId);
     this.getAllRoundsByQuiz(this.quizId);
+  }
+
+  roundsPresent(position: number): boolean {
+    console.log(this.allRounds[position].forbiddenWords.length > 0)
+    return this.allRounds[position].forbiddenWords.length > 0;
   }
 }

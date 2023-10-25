@@ -54,9 +54,16 @@
                 Forbidden Words:
               </div>
 
-              <ng-template ngFor let-forbiddenWord [ngForOf]="round['forbiddenWords']">
-                <div class="forbidden-word-element">
-                  {{ forbiddenWord }}
+              <ng-template *ngIf="roundsPresent(position); else noRoundsBlock">
+                <div *ngFor="let forbiddenWord of round['forbiddenWords']">
+                  <div class="forbidden-word-element">
+                    {{ forbiddenWord }}
+                  </div>
+                </div>
+              </ng-template>
+              <ng-template #noRoundsBlock>
+                <div style="color: black; text-align: center">
+                  This quiz does not have any rounds.
                 </div>
               </ng-template>
             </div>
@@ -68,9 +75,11 @@
       <span>
         <button mat-raised-button color="accent" class="back-btn" style="background-color: darkred" routerLink="/host/selection">Back</button>
       </span>
+      <ng-template *ngIf="roundsPresent">
         <span>
           <button mat-raised-button color="accent" class="start-btn" style="float: right; background-color: darkgreen">Start</button>
         </span>
+      </ng-template>
     </div>
   </mat-card>
 </span>
