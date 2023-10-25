@@ -13,3 +13,15 @@
   <button (click)="getWaitResult()">update manually </button>
   <button (click)="ngOnInit()">refresh</button>
 </div>
+<table>
+  <tr>
+    <th>Player</th>
+    <th>Result</th>
+    <th>Points</th>
+  </tr>
+  <tr *ngFor="let result of intermediateResult">
+    <td>{{result.playerName}}</td>
+    <td>{{result.answerTarget}}</td>
+    <td>{{result.points}}</td>
+  </tr>
+</table>

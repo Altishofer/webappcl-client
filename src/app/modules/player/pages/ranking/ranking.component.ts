@@ -7,6 +7,7 @@ import {CookieService} from "ngx-cookie-service";
 import {PlayerService} from "@data/services/player.service";
 import {catchError} from "rxjs";
 import {HttpErrorResponse} from "@angular/common/http";
+import {IntermediateResult} from "@data/interfaces/IntermediateResult.model";
 
 @Component({
   selector: 'app-ranking',
@@ -19,6 +20,8 @@ export class RankingComponent implements OnInit{
   playerName : string = '';
   unexpectedErrorMsg : string = "An unexpected error occurred."
   errorMsg : string = '';
+
+  intermediateResult : IntermediateResult[] = [];
 
   answer : Answer = {
     quizId: "",
@@ -57,6 +60,7 @@ export class RankingComponent implements OnInit{
       console.error("SignalR connection error:", error);
     });
     this.getWaitResult();
+    this.getIntermediateResult();
   }
 
   registerToGroup() {
@@ -89,6 +93,29 @@ export class RankingComponent implements OnInit{
         console.log(response.body)
         this.errorMsg = '';
         this.waitResult = response.body;
+      } else {
+        this.errorMsg = this.unexpectedErrorMsg;
+      }
+    });
+  }
+
+  getIntermediateResult(): void {
+    console.log("REST: getIntermediateResult", this.quizId, this.roundId);
+    this.playerService.getIntermediateResult(this.quizId, this.roundId).pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.log(JSON.stringify(error.error));
+        if (error.status != 500) {
+          this.errorMsg = error.error;
+        } else {
+          this.errorMsg = this.unexpectedErrorMsg;
+        }
+        return[];
+      })
+    ).subscribe((response: any): void => {
+      if ((response.status >= 200 && response.status < 300) || response.status == 304) {
+        console.log(response.body);
+        this.errorMsg = '';
+        this.intermediateResult = response.body;
       } else {
         this.errorMsg = this.unexpectedErrorMsg;
       }

@@ -52,7 +52,6 @@ export class SignalRService {
     } else {
       return this.hubConnection.start();
     }
-
   }
 
   setReceiveMessageListener(listener: (message: string) => void) {
@@ -69,5 +68,9 @@ export class SignalRService {
 
   setReceiveWaitResultListener(listener: (waitResult: WaitResult) => void) {
     this.hubConnection.on('ReceiveWaitResult', listener);
+  }
+
+  setReceiveIntermediateResultListener(listener: (waitResult: WaitResult) => void) {
+    this.hubConnection.on('ReceiveIntermediateResult', listener);
   }
 }
