@@ -197,7 +197,7 @@ export class WordCalcComponent implements OnInit{
 
   assignValues(){
     this.answer.roundId = this.roundId;
-    this.answer.playerName = this.cookieService.get("playerName");
+    this.answer.playerName = this.playerName
     this.answer.quizId = this.quizId;
     this.answer.additions = [];
     this.answer.subtractions = [];

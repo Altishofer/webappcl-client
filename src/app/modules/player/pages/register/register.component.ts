@@ -69,6 +69,7 @@ export class RegisterComponent {
         if ((response.status >= 200 && response.status < 300) || response.status == 304) {
 
           this.cookieService.set('playerToken', response.body.result);
+          //this.cookieService.set("playerName", this.player.PlayerName);
           console.log(actionName + " was successful -> user '" + this.player.PlayerName + "', received token: " + response.body.result);
           //this.playerService.refreshTokenPeriodically();
           this.router.navigate(['/player', 'waiting', this.quizId, this.player.PlayerName]);
