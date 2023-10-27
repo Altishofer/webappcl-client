@@ -7,7 +7,7 @@ import {PlayerModule} from "@modules/player/player.module";
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'host/login',
+    redirectTo: 'host',
     pathMatch: 'full'
   },
   {

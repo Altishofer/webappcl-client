@@ -1,24 +1,24 @@
 <app-header></app-header>
 
-<span class="common-wrapper" fxLayout="row" fxLayoutAlign="center center">
-  <mat-card class="box">
-    <mat-card-header>
-      <mat-card-title>Existing Quizzes</mat-card-title>
-    </mat-card-header>
+<div class="center">
+  <h1>Game Title</h1>
+</div>
 
-    <div class="example-form">
-      <ng-template ngFor let-quiz [ngForOf]="allQuizzes">
-        <button mat-raised-button color="accent" class="btn-block" style="text-align: left; margin-bottom: 8px" (click)="redirect(quiz['id'])">
-          <span class="id" >{{ quiz['id'] }}</span>
-          <span class="name">{{ quiz['title'] }}</span>
-        </button>
-      </ng-template>
-    </div>
-  </mat-card>
+<span class="left-element">
+  <div class="quiz-element">
+    <h2>My Quizzes</h2>
+
+    <button mat-raised-button color="positive" class="btn-quiz">+ Create New Quiz</button>
+    <ng-template ngFor let-quiz [ngForOf]="allQuizzes">
+      <button mat-raised-button color="accent" class="btn-quiz" style="text-align: left; margin-bottom: 8px" (click)="redirect(quiz['id'])">
+        <span class="id" >{{ quiz['id'] }}</span>
+        <span class="name">{{ quiz['title'] }}</span>
+      </button>
+    </ng-template>
+  </div>
 </span>
 
 <div class="center">
-  <button mat-raised-button color="accent" class="button-normal" routerLink="/host/creation" routerLinkActive="active">Create New Quiz</button>
 </div>
 
 <div class="center" style="margin-top: 40px">

@@ -1,17 +1,45 @@
 @import "../../shared/host.shared.css";
 
-span .id {
+h1 {
+  font-size: 50px;
+  rotate: -4deg;
+}
+.left-element {
+  max-width: 25%;
+}
+.quiz-element {
+  background: lightsteelblue;
+  padding: 5px 15px;
+  text-align: center;
+  max-width: 25%;
+  border-radius: 15px;
+}
+.btn-quiz {
+  justify-content: left;
+  width: 100%;
+  text-align: left;
+  margin-bottom: 8px;
+}
+.id {
   display: inline-block;
   text-align: left;
   color: darkred;
   margin-left: 15px;
   padding: 4px 1px;
   width: 20px;
+  max-width: 20%;
 }
-span .name {
+.name {
   display: inline-block;
   text-align: left;
+  max-width: 80%;
   margin-right: 10px;
   margin-left: 10px;
   padding: 4px 1px;
+  line-break: none;
+  overflow: hidden;
+}
+.mat-positive {
+  background: darkolivegreen;
+  color: white;
 }
