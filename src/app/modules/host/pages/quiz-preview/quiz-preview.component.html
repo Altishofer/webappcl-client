@@ -47,15 +47,14 @@
               </div>
 
               <div class="target-word-element">
-                {{ round['roundTarget'] }}
+                {{ round.roundTarget }}
               </div>
 
               <div class="inter-title">
                 Forbidden Words:
               </div>
-
-              <ng-template *ngIf="roundsPresent(position); else noRoundsBlock">
-                <div *ngFor="let forbiddenWord of round['forbiddenWords']">
+              <ng-template>
+                <div *ngFor="let forbiddenWord of round.forbiddenWords">
                   <div class="forbidden-word-element">
                     {{ forbiddenWord }}
                   </div>
@@ -75,11 +74,9 @@
       <span>
         <button mat-raised-button color="accent" class="back-btn" style="background-color: darkred" routerLink="/host/selection">Back</button>
       </span>
-      <ng-template *ngIf="roundsPresent">
-        <span>
-          <button mat-raised-button color="accent" class="start-btn" style="float: right; background-color: darkgreen">Start</button>
-        </span>
-      </ng-template>
+      <span>
+          <button (click)="start()" mat-raised-button color="accent" class="start-btn" style="float: right; background-color: darkgreen">Start</button>
+      </span>
     </div>
   </mat-card>
 </span>

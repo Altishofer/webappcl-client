@@ -8,6 +8,7 @@ import {PlayerService} from "@data/services/player.service";
 import {catchError} from "rxjs";
 import {HttpErrorResponse} from "@angular/common/http";
 import {IntermediateResult} from "@data/interfaces/IntermediateResult.model";
+import {HostService} from "@data/services/host.service";
 
 @Component({
   selector: 'app-ranking',
@@ -43,7 +44,8 @@ export class RankingComponent implements OnInit{
     private router: Router,
     private route: ActivatedRoute,
     private cookieService: CookieService,
-    private playerService: PlayerService
+    private playerService: PlayerService,
+    private hostService : HostService
   ) {
     this.route.params.subscribe(params => {
       this.quizId = params['quizId'];
@@ -65,7 +67,7 @@ export class RankingComponent implements OnInit{
 
   registerToGroup() {
     console.log("SOCKET: registerToGroup", this.quizId);
-    this.signalRService.joinGroup(this.quizId, this.playerName);
+    this.signalRService.joinGroup(this.quizId);
   }
 
   get answeredPercentage() {
@@ -78,7 +80,7 @@ export class RankingComponent implements OnInit{
 
   getWaitResult(): void {
     console.log("REST: getWaitResult", this.quizId, this.roundId);
-    this.playerService.getWaitResult(this.quizId, this.roundId).pipe(
+    this.hostService.getWaitResult(this.quizId, this.roundId).pipe(
       catchError((error: HttpErrorResponse) => {
         console.log(JSON.stringify(error.error));
         if (error.status != 500) {
@@ -101,7 +103,7 @@ export class RankingComponent implements OnInit{
 
   getIntermediateResult(): void {
     console.log("REST: getIntermediateResult", this.quizId, this.roundId);
-    this.playerService.getIntermediateResult(this.quizId, this.roundId).pipe(
+    this.hostService.getIntermediateResult(this.quizId, this.roundId).pipe(
       catchError((error: HttpErrorResponse) => {
         console.log(JSON.stringify(error.error));
         if (error.status != 500) {

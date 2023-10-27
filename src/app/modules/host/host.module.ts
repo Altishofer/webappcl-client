@@ -13,6 +13,7 @@ import { RoundMainComponent } from './pages/round-main/round-main.component';
 import { ResultsComponent } from './pages/results/results.component';
 import {CdkAccordionModule} from "@angular/cdk/accordion";
 import { QuizCreationComponent } from './pages/quiz-creation/quiz-creation.component';
+import {QRCodeModule} from "angularx-qrcode";
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { QuizCreationComponent } from './pages/quiz-creation/quiz-creation.compo
     SharedModule,
     HostRoutingModule,
     HeaderComponent,
-    CdkAccordionModule
+    CdkAccordionModule,
+    QRCodeModule
   ]
 })
 export class HostModule { }

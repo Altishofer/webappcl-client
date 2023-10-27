@@ -24,6 +24,7 @@ export class QuizPreviewComponent implements OnInit{
 
   getAllRoundsByQuiz(quizId: string): void {
     this.quizService.getAllRoundsByQuiz(quizId).subscribe((response: any): void => {
+      console.log(response.body);
       if ((response.status >= 200 && response.status < 300) || response.status == 304) {
         this.allRounds = response.body;
       } else {
@@ -35,7 +36,7 @@ export class QuizPreviewComponent implements OnInit{
   getQuiz(quizId: string): void {
     this.quizService.getQuiz(quizId).subscribe((response: any): void => {
       if ((response.status >= 200 && response.status < 300) || response.status == 304) {
-        this.quiz = response.body["quizDto"];
+        this.quiz = response.body.quizDto;
       } else {
         this.errorMsg = this.unexpectedErrorMsg;
       }
@@ -48,7 +49,10 @@ export class QuizPreviewComponent implements OnInit{
   }
 
   roundsPresent(position: number): boolean {
-    console.log(this.allRounds[position].forbiddenWords.length > 0)
     return this.allRounds[position].forbiddenWords.length > 0;
+  }
+
+  start() : void{
+    this.router.navigate([`host/lobby/${this.quizId}`])
   }
 }
