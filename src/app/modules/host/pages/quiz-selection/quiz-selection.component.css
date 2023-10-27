@@ -3,16 +3,19 @@
 h1 {
   font-size: 50px;
   rotate: -4deg;
+  transition: rotate 2s;
+}
+h1:hover {
+  rotate: 4deg;
 }
 .left-element {
   max-width: 25%;
 }
 .quiz-element {
-  background: lightsteelblue;
+  background: lightgray;
   padding: 5px 15px;
   text-align: center;
   max-width: 25%;
-  border-radius: 15px;
 }
 .btn-quiz {
   justify-content: left;

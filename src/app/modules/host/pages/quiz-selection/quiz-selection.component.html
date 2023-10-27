@@ -5,17 +5,21 @@
 </div>
 
 <span class="left-element">
-  <div class="quiz-element">
+  <mat-card class="quiz-element">
     <h2>My Quizzes</h2>
 
-    <button mat-raised-button color="positive" class="btn-quiz">+ Create New Quiz</button>
-    <ng-template ngFor let-quiz [ngForOf]="allQuizzes">
-      <button mat-raised-button color="accent" class="btn-quiz" style="text-align: left; margin-bottom: 8px" (click)="redirect(quiz['id'])">
-        <span class="id" >{{ quiz['id'] }}</span>
-        <span class="name">{{ quiz['title'] }}</span>
-      </button>
-    </ng-template>
-  </div>
+    <button mat-raised-button color="positive" class="btn-quiz">
+        + Create New Quiz
+    </button>
+    <mat-card-content>
+      <ng-template ngFor let-quiz [ngForOf]="allQuizzes">
+        <button mat-raised-button color="accent" class="btn-quiz" style="text-align: left; margin-bottom: 8px" (click)="redirect(quiz['id'])">
+          <span class="id" >{{ quiz['id'] }}</span>
+          <span class="name">{{ quiz['title'] }}</span>
+        </button>
+      </ng-template>
+    </mat-card-content>
+  </mat-card>
 </span>
 
 <div class="center">
