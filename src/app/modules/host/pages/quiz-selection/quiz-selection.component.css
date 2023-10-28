@@ -2,11 +2,12 @@
 
 h1 {
   font-size: 50px;
-  rotate: -4deg;
-  transition: rotate 2s;
 }
-h1:hover {
-  rotate: 4deg;
+h1,
+h2 {
+  animation-duration: 3s;
+  animation-name: wiggleTitle;
+  animation-iteration-count: infinite;
 }
 .left-element {
   max-width: 25%;
@@ -45,4 +46,15 @@ h1:hover {
 .mat-positive {
   background: darkolivegreen;
   color: white;
+}
+@keyframes wiggleTitle {
+  0% {
+    rotate: -3deg;
+  }
+  50% {
+    rotate: 3deg;
+  }
+  100% {
+    rotate: -3deg;
+  }
 }
