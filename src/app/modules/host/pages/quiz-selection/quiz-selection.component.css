@@ -2,33 +2,35 @@
 
 h1 {
   font-size: 50px;
-}
-h1,
-h2 {
   animation-duration: 3s;
-  animation-name: wiggleTitle, pulsating;
+  animation-name: wiggleTitle;
   animation-iteration-count: infinite;
 }
+h2 {
+  animation-duration: 2s;
+  animation-name: pulsating;
+  animation-iteration-count: infinite;
+}
+.h1-replacer {
+
+}
 .grid-container {
+  padding-left: 15px;
   display: grid;
   gap: 8px;
   grid-template-columns: 25% 25% 25% 25%;
   grid-template-rows: auto auto;
   justify-content: space-around;
   align-content: start;
-  margin: 1%;
 }
 .grid-message {
   grid-column: 1;
   grid-row: 1;
-  animation-duration: 3s;
-  animation-name: pulsating;
-  animation-iteration-count: infinite;
 }
 .double-center-content {
+  margin-top: 10%;
   display: flex;
   text-align: center;
-  margin-top: 20%;
   justify-content: center;
   align-items: center;
 }
@@ -48,6 +50,15 @@ h2 {
   padding: 5px 15px;
   text-align: center;
   width: 100%;
+}
+.quiz-preview-portal {
+  padding-right: 10px;
+  grid-column: 2 / span 3;
+  grid-row: 2;
+  float: right;
+}
+.quiz-preview-portal .quiz-element {
+
 }
 .btn-quiz,
 .btn-add {
@@ -75,9 +86,9 @@ h2 {
 }
 mat-icon.id {
   font-size: 130%;
-  padding: 0 10px 0 0;
-  margin: 5px;
+  padding: 2px 10px 2px 0;
   color: white;
+  margin-left: 4px;
 }
 .name {
   display: inline-block;
@@ -89,14 +100,6 @@ mat-icon.id {
 .mat-positive {
   background: darkolivegreen;
   color: white;
-}
-.quiz-preview-portal {
-  grid-column: 2 / span 3;
-  grid-row: 2;
-  float: right;
-}
-.quiz-preview-portal .quiz-element {
-  margin-left: 8px;
 }
 
 
@@ -118,7 +121,7 @@ mat-icon.id {
     transform: scale(100%);
   }
   50% {
-    transform: scale(130%);
+    transform: scale(105%);
   }
   100% {
     transform: scale(100%);

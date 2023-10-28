@@ -51,7 +51,7 @@
                 Forbidden Words:
               </div>
 
-              <ng-template *ngIf="roundsPresent(position); else noRoundsBlock">
+              <ng-template *ngIf="roundsPresent(position) else noRoundsBlock">
                 <div *ngFor="let forbiddenWord of round['forbiddenWords']">
                   <div class="forbidden-word-element">
                     {{ forbiddenWord }}
@@ -70,11 +70,11 @@
     </div>
     <div style="margin-top: 40px">
       <span>
-        <button mat-raised-button color="accent" class="back-btn" style="background-color: darkred" routerLink="/host/selection">Back</button>
+        <button mat-mini-fab color="accent" style="background-color: darkred; color: white" routerLink="/host/selection"><mat-icon>keyboard_backspace</mat-icon></button>
       </span>
       <ng-template *ngIf="roundsPresent">
         <span>
-          <button mat-raised-button color="accent" class="start-btn" style="float: right; background-color: darkgreen">Start</button>
+          <button mat-mini-fab color="accent" style="float: right; background-color: darkgreen; color: white"><mat-icon>fast_forward</mat-icon></button>
         </span>
       </ng-template>
     </div>
