@@ -1,5 +1,8 @@
 @import "../../shared/host.shared.css";
 
+* {
+  background: none;
+}
 span .icon {
   display: inline-block;
   text-align: left;
@@ -13,18 +16,6 @@ span .name {
   text-align: left;
   margin-right: 10px;
   padding: 4px 1px;
-}
-.balanced {
-  text-wrap: balance;
-  rotation-point: center;
-  rotate: -4deg;
-}
-.cheeky {
-  transition: rotate 2s;
-}
-.cheeky:hover {
-  rotation-point: center;
-  rotate: 3604deg;
 }
 .example-accordion {
   display: block;
@@ -105,8 +96,19 @@ span .name {
 .forbidden-word-element + .forbidden-word-element {
   margin: 5px 0;
 }
+.nav-btn-container {
+  margin-top: 40px;
+  justify-content: space-between;
+}
 .start-btn,
 .back-btn {
   color: white;
-  width: 46%;
+}
+.back-btn {
+  background-color: darkred;
+  float: left;
+}
+.start-btn {
+  background-color: darkgreen;
+  float: right;
 }

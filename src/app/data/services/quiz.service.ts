@@ -23,7 +23,7 @@ export class QuizService {
     return this.http.get(`${this.baseUrl}/GetAllQuizzes`, { observe:'response', headers });
   }
 
-  getAllRoundsByQuiz(quizId: string): Observable<any> {
+  getAllRoundsByQuiz(quizId: number): Observable<any> {
     const headers: HttpHeaders = new HttpHeaders({
       'Authorization': "Bearer " + this.cookieService.get("hostToken"),
       'Content-Type': 'application/json',
@@ -32,7 +32,7 @@ export class QuizService {
   }
 
   // ToDo: remove debug method
-  getQuiz(quizId: string) {
+  getQuiz(quizId: number) {
     const headers = new HttpHeaders({
       'Authorization': "Bearer " + this.cookieService.get("hostToken"),
       'Content-Type': 'application/json',

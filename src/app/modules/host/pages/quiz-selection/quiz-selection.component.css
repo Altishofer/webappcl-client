@@ -40,6 +40,14 @@ h2 {
   align-content: start;
   text-align: center;
 }
+.buttons-top-right {
+  grid-column: 4 / span 1;
+  grid-row: 1;
+  align-content: center;
+  text-align: right;
+  margin-right: 15px;
+  margin-top: 15px;
+}
 .left-element {
   grid-column: 1;
   grid-row: 2;

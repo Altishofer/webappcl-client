@@ -1,5 +1,3 @@
-<app-header></app-header>
-
 <div class="grid-container">
   <div class="grid-message">
     <h3 class="double-center-content">
@@ -8,6 +6,11 @@
   </div>
   <div class="grid-header">
     <h1>Game Title</h1>
+  </div>
+  <div class="buttons-top-right">
+    <button mat-mini-fab routerLink="/host" routerLinkActive="active">
+      <mat-icon routerLink="/host" routerLinkActive="active" fontIcon="directions_run"></mat-icon>
+    </button>
   </div>
   <span class="left-element">
     <mat-card class="card-element">
@@ -25,7 +28,7 @@
         </button>
 
         <ng-template ngFor let-quiz [ngForOf]="allQuizzes">
-          <button mat-raised-button color="accent" class="btn-quiz" [ngClass]="{'active': quiz['id'] == selectedQuizId}" (click)="selectedPortal = quizPreviewPortal; setSelectedQuiz(quiz['id'])">
+          <button mat-raised-button color="accent" class="btn-quiz" [ngClass]="{'active': quiz['id'] === selectedQuizId}" (click)="selectedPortal = quizPreviewPortal; setSelectedQuiz(quiz['id'])">
             <mat-icon class="icon">question_answer</mat-icon>
             <span class="name">{{ quiz['title'] }}</span>
           </button>
@@ -35,7 +38,6 @@
   </span>
   <span class="quiz-preview-portal">
     <mat-card class="card-element">
-      <h2>{{ getPortalTitle() }}</h2>
       <mat-card-content>
         <ng-template [cdkPortalOutlet]="selectedPortal"></ng-template>
       </mat-card-content>
