@@ -1,6 +1,15 @@
-<div>Result Submitted, wait until the host releases the results</div>
-<tr *ngFor="let result of intermediateResult">
-  <td>{{result.playerName}}</td>
-  <td>{{result.answerTarget}}</td>
-  <td>{{result.points}}</td>
-</tr>
+<div *ngIf="intermediateResult.length ==0">Result Submitted, wait until the host releases the results</div>
+<table>
+  <tr *ngIf="intermediateResult.length >0">
+    <th>Player</th>
+    <th>Result</th>
+    <th>Points</th>
+  </tr>
+  <tr *ngFor="let result of intermediateResult">
+    <ng-container  *ngIf="result.playerName == playerName">
+      <td>{{result.playerName}}</td>
+      <td>{{result.answerTarget}}</td>
+      <td>{{result.points}}</td>
+    </ng-container>
+  </tr>
+</table>

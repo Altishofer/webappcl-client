@@ -23,6 +23,9 @@
     <div class="list-title">Unanswered Players: {{unansweredPercentage}}%</div>
     <div *ngFor="let notPl of waitResult.notAnsweredPlayerName" class="player-name">{{notPl}}</div>
   </div>
+</div>
+<div fxLayoutAlign="center center">
   <button (click)="switchToResults()">switch to results</button>
 </div>
+
 
