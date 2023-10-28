@@ -10,23 +10,23 @@
     <h1>Game Title</h1>
   </div>
   <span class="left-element">
-    <mat-card class="quiz-element">
+    <mat-card class="card-element">
       <h2>My Quizzes</h2>
 
       <mat-card-content>
-        <button mat-raised-button color="warning" class="btn-add" (click)="selectedPortal = defaultPortal; setSelectedQuiz(-1)">
-          <mat-icon class="id" style="color: black">close</mat-icon>
+        <button mat-raised-button color="accent" class="btn-add" (click)="selectedPortal = defaultPortal; setSelectedQuiz(-1)">
+          <mat-icon class="icon">close</mat-icon>
           <span class="name">close all</span>
         </button>
 
         <button mat-raised-button color="positive" class="btn-add" (click)="selectedPortal = quizCreationPortal; setSelectedQuiz(-1)">
-          <mat-icon class="id">library_add</mat-icon>
+          <mat-icon class="icon white">library_add</mat-icon>
           <span class="name">Create New Quiz</span>
         </button>
 
         <ng-template ngFor let-quiz [ngForOf]="allQuizzes">
           <button mat-raised-button color="accent" class="btn-quiz" [ngClass]="{'active': quiz['id'] == selectedQuizId}" (click)="selectedPortal = quizPreviewPortal; setSelectedQuiz(quiz['id'])">
-            <span class="id" >{{ quiz['id'] }}</span>
+            <mat-icon class="icon">question_answer</mat-icon>
             <span class="name">{{ quiz['title'] }}</span>
           </button>
         </ng-template>
@@ -34,7 +34,7 @@
     </mat-card>
   </span>
   <span class="quiz-preview-portal">
-    <mat-card class="quiz-element">
+    <mat-card class="card-element">
       <h2>{{ getPortalTitle() }}</h2>
       <mat-card-content>
         <ng-template [cdkPortalOutlet]="selectedPortal"></ng-template>

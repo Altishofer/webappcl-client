@@ -1,6 +1,6 @@
 @import "../../shared/host.shared.css";
 
-span .id {
+span .icon {
   display: inline-block;
   text-align: left;
   color: darkred;
