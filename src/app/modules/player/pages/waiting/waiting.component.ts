@@ -37,29 +37,16 @@ export class WaitingComponent implements OnInit {
     }).catch(error => {
       console.error("SignalR connection error:", error);
     });
-    this.getPlayers();
-  }
-
-  getPlayers(): void {
-    this.playerService.getPlayers(this.quizId).subscribe(
-      (response: any): void => {
-        if ((response.status >= 200 && response.status < 300) || response.status == 304) {
-          console.log("REST player: ", response.body);
-          this.players = response.body.message.split(" ");
-        } else {
-          console.log("ERROR: updating players via REST");
-        }
-      });
   }
 
   registerToGroup() {
     console.log("SOCKET: registerToGroup", this.quizId);
-    this.signalRService.joinGroup(this.quizId, this.playerName);
+    this.signalRService.joinGroup(this.quizId);
   }
 
   unregisterFromGroup() {
     console.log("SOCKET: unregister from group", this.quizId);
-    this.signalRService.leaveGroup(this.quizId, this.playerName);
+    this.signalRService.leaveGroup(this.quizId);
   }
 
   registerListeners(): void {
@@ -75,11 +62,7 @@ export class WaitingComponent implements OnInit {
 
     this.signalRService.setReceiveRoundListener((round: string) => {
       console.log("SOCKET round: ", round);
-      this.nextRound = round;
+      this.router.navigate(['/player', 'game', this.quizId, round, this.playerName]);
     });
-  }
-
-  switchToRound(roundId:number): void {
-    this.router.navigate(['/player', 'game', this.quizId, roundId, this.playerName]);
   }
 }

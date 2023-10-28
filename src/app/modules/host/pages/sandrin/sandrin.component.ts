@@ -68,11 +68,11 @@ export class SandrinComponent {
   }
 
   registerToGroup() {
-    this.signalRService.joinGroup(this.groupName, "0");
+    this.signalRService.joinGroup(this.groupName);
   }
 
   unregisterFromGroup() {
-    this.signalRService.leaveGroup(this.groupName, "0");
+    this.signalRService.leaveGroup(this.groupName);
   }
 
   sendMessage() {

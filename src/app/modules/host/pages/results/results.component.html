@@ -1,1 +1,14 @@
-<p>results works!</p>
+<table>
+  <tr>
+    <th>Player</th>
+    <th>Result</th>
+    <th>Points</th>
+  </tr>
+  <tr *ngFor="let result of intermediateResult">
+    <td>{{result.playerName}}</td>
+    <td>{{result.answerTarget}}</td>
+    <td>{{result.points}}</td>
+  </tr>
+  <button (click)="startGame()">switch to round</button>
+</table>
+

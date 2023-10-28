@@ -10,6 +10,7 @@ import {Round} from "@data/interfaces/round.model";
 import {BehaviorSubject, catchError, map, Observable, window} from "rxjs";
 import {Answer} from "@data/interfaces/answer.model";
 import {HttpErrorResponse} from "@angular/common/http";
+import {HostService} from "@data/services/host.service";
 
 @Component({
   selector: 'app-word-calc',
@@ -17,7 +18,7 @@ import {HttpErrorResponse} from "@angular/common/http";
   styleUrls: ['./word-calc.component.css']
 })
 
-export class WordCalcComponent implements OnInit{
+export class WordCalcComponent{
   wordCalcForm: FormGroup;
   wordsArray: FormArray;
   addFieldDisabled : boolean;
@@ -26,13 +27,6 @@ export class WordCalcComponent implements OnInit{
   playerName : string = '';
   unexpectedErrorMsg : string = "An unexpected error occurred."
   errorMsg : string = '';
-
-  round : Round = {
-    id: "",
-    quizId: "",
-    roundTarget: "",
-    forbiddenWords: []
-  };
 
   cal: VectorCalculationModel = {
     Additions: [],
@@ -66,36 +60,6 @@ export class WordCalcComponent implements OnInit{
       this.quizId = params['quizId'];
       this.roundId = params['roundId'];
       this.playerName = params['playerName'];
-    });
-  }
-
-  print(){
-    console.log(this.round);
-    console.log(this.round.forbiddenWords);
-  }
-
-  ngOnInit() {
-    this.getRound();
-  }
-
-  getRound(): void {
-    this.playerService.getRound(this.roundId).pipe(
-      catchError((error: HttpErrorResponse) => {
-        console.log(JSON.stringify(error.error));
-        if (error.status != 500) {
-          this.errorMsg = error.error;
-        } else {
-          this.errorMsg = this.unexpectedErrorMsg;
-        }
-        return[];
-      })
-    ).subscribe((response: any): void => {
-      if ((response.status >= 200 && response.status < 300) || response.status == 304) {
-        console.log(response.body)
-        this.round = response.body;
-      } else {
-        this.errorMsg = this.unexpectedErrorMsg;
-      }
     });
   }
 

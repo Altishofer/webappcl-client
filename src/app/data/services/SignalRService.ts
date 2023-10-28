@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import * as signalR from '@microsoft/signalr';
 import { environment } from '../../../environments/environment';
 import {WaitResult} from "@data/interfaces/WaitResult.model";
+import {IntermediateResult} from "@data/interfaces/IntermediateResult.model";
 
 @Injectable({
   providedIn: 'root',
@@ -24,16 +25,16 @@ export class SignalRService {
       .build();
   }
 
-  joinGroup(groupName: string, playerName: string) {
-    console.log("joinGroup", groupName, playerName);
+  joinGroup(groupName: string) {
+    console.log("joinGroup", groupName);
     this.hubConnection
-      .invoke('JoinGroup', groupName, playerName)
+      .invoke('JoinGroup', groupName)
       .catch((err) => console.error('Error joining group: ' + err));
   }
 
-  leaveGroup(groupName: string, playerName: string) {
+  leaveGroup(groupName: string) {
     this.hubConnection
-      .invoke('LeaveGroup', groupName, playerName)
+      .invoke('LeaveGroup', groupName)
       .catch((err) => console.error('Error leaving group: ' + err));
   }
 
@@ -70,7 +71,7 @@ export class SignalRService {
     this.hubConnection.on('ReceiveWaitResult', listener);
   }
 
-  setReceiveIntermediateResultListener(listener: (waitResult: WaitResult) => void) {
+  setReceiveIntermediateResultListener(listener: (intermediateResults: IntermediateResult[]) => void) {
     this.hubConnection.on('ReceiveIntermediateResult', listener);
   }
 }

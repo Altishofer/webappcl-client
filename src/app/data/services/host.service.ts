@@ -12,6 +12,8 @@ import {VectorCalculationModel} from "@data/interfaces/VectorCalculation.model";
 })
 export class HostService {
   private baseUrl : string = environment.API_URL + "/Host";
+  private quizUrl : string = environment.API_URL + "/Quiz";
+
   constructor(private http: HttpClient, private cookieService: CookieService) {}
 
   getHosts(host: Host): void {
@@ -59,4 +61,61 @@ export class HostService {
       });
     }, 60 * 1000); // Refresh every minute
   }
+
+  getPlayers(quizId : string) : Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': "Bearer " + this.cookieService.get("playerToken"),
+      'Content-Type': 'application/json',
+    });
+    return this.http.get(`${this.quizUrl}/GetPlayers/${quizId}`, { observe:'response', headers  });
+  }
+
+  getWaitResult(quizId : string, roundId:string) : Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': "Bearer " + this.cookieService.get("playerToken"),
+      'Content-Type': 'application/json',
+    });
+    return this.http.get(`${this.quizUrl}/WaitResult/${quizId}/${roundId}`, { observe:'response', headers  });
+  }
+
+  getIntermediateResult(quizId : string, roundId:string) : Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': "Bearer " + this.cookieService.get("playerToken"),
+      'Content-Type': 'application/json',
+    });
+    return this.http.get(`${this.quizUrl}/IntermediateResult/${quizId}/${roundId}`, { observe:'response', headers  });
+  }
+
+  pushRound(roundId : string) : Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': "Bearer " + this.cookieService.get("hostToken"),
+      'Content-Type': 'application/json',
+    });
+    return this.http.put(`${this.quizUrl}/PushRound/${roundId}`, { observe:'response', headers  });
+  }
+
+  getRound(roundId : string) : Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': "Bearer " + this.cookieService.get("hostToken"),
+      'Content-Type': 'application/json',
+    });
+    return this.http.get(`${this.quizUrl}/GetRound/${roundId}`, { observe:'response', headers  });
+  }
+
+  getAllRoundsByQuiz(quizId: string): Observable<any> {
+    const headers: HttpHeaders = new HttpHeaders({
+      'Authorization': "Bearer " + this.cookieService.get("hostToken"),
+      'Content-Type': 'application/json',
+    });
+    return this.http.get(`${this.baseUrl}/GetAllRoundsByQuiz?quizId=${quizId}`, {observe: 'response', headers});
+  }
+
+  getAllRoundIdsByQuiz(quizId: string): Observable<any> {
+    const headers: HttpHeaders = new HttpHeaders({
+      'Authorization': "Bearer " + this.cookieService.get("hostToken"),
+      'Content-Type': 'application/json',
+    });
+    return this.http.get(`${this.quizUrl}/GetAllRoundIdsByQuiz/${quizId}`, {observe: 'response', headers});
+  }
+
 }
