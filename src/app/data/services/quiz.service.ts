@@ -14,9 +14,10 @@ export class QuizService {
 
   constructor(private http: HttpClient, private cookieService: CookieService) {}
 
+  // ToDo: remove debug method
   getAllQuizzes(): Observable<any> {
     const headers : HttpHeaders = new HttpHeaders ({
-      'Authorization': "Bearer " + this.cookieService.get("token"),
+      'Authorization': "Bearer " + this.cookieService.get("hostToken"),
       'Content-Type': 'application/json',
     });
     return this.http.get(`${this.baseUrl}/GetAllQuizzes`, { observe:'response', headers });
@@ -24,15 +25,16 @@ export class QuizService {
 
   getAllRoundsByQuiz(quizId: string): Observable<any> {
     const headers: HttpHeaders = new HttpHeaders({
-      'Authorization': "Bearer " + this.cookieService.get("token"),
+      'Authorization': "Bearer " + this.cookieService.get("hostToken"),
       'Content-Type': 'application/json',
     });
     return this.http.get(`${this.baseUrl}/GetAllRoundsByQuiz?quizId=${quizId}`, {observe: 'response', headers});
   }
 
+  // ToDo: remove debug method
   getQuiz(quizId: string) {
     const headers = new HttpHeaders({
-      'Authorization': "Bearer " + this.cookieService.get("token"),
+      'Authorization': "Bearer " + this.cookieService.get("hostToken"),
       'Content-Type': 'application/json',
     });
 
