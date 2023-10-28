@@ -32,7 +32,7 @@ const routes: Routes = [
     path:'round/:quizId/:roundId', component: RoundMainComponent
   },
   {
-    path:'results/:quizId', component: ResultsComponent
+    path:'results/:quizId/:roundId', component: ResultsComponent
   },
   {
     path:'creation', component:QuizCreationComponent

@@ -9,6 +9,7 @@ import {SignalRService} from "@data/services/SignalRService";
 import {ActivatedRoute, Router} from "@angular/router";
 import {CookieService} from "ngx-cookie-service";
 import {HostService} from "@data/services/host.service";
+import {WaitResult} from "@data/interfaces/WaitResult.model";
 
 @Component({
   selector: 'app-round-main',
@@ -21,6 +22,11 @@ export class RoundMainComponent {
   playerName : string = '';
   unexpectedErrorMsg : string = "An unexpected error occurred."
   errorMsg : string = '';
+
+  waitResult : WaitResult = {
+    notAnsweredPlayerName : [],
+    answeredPlayerName : []
+  }
 
   round : Round = {
     id: "",
@@ -49,8 +55,15 @@ export class RoundMainComponent {
     console.log(this.round.forbiddenWords);
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.getRound();
+    this.signalRService.startConnection().then(() => {
+      this.registerToGroup();
+      this.registerListeners();
+    }).catch(error => {
+      console.error("SignalR connection error:", error);
+    });
+    this.getWaitResult();
   }
 
   getRound(): void {
@@ -77,4 +90,53 @@ export class RoundMainComponent {
   switchToRanking(): void {
     this.router.navigate(['/host', 'result', this.quizId, this.roundId]);
   }
+
+  registerToGroup() {
+    console.log("SOCKET: registerToGroup", this.quizId);
+    this.signalRService.joinGroup(this.quizId);
+  }
+
+  registerListeners(): void {
+    this.signalRService.setReceiveWaitResultListener((waitResult: WaitResult) => {
+      console.log("SOCKET waitResult: ", waitResult)
+      this.waitResult = waitResult;
+    });
+  }
+
+  switchToResults(): void {
+    this.router.navigate(['/host', 'results', this.quizId, this.roundId]);
+  }
+
+
+  get answeredPercentage() {
+    return Math.round(this.waitResult.answeredPlayerName.length / (this.waitResult.notAnsweredPlayerName.length + this.waitResult.answeredPlayerName.length) * 100);
+  }
+
+  get unansweredPercentage() {
+    return Math.round(100 - this.answeredPercentage);
+  }
+
+  getWaitResult(): void {
+    console.log("REST: getWaitResult", this.quizId, this.roundId);
+    this.hostService.getWaitResult(this.quizId, this.roundId).pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.log(JSON.stringify(error.error));
+        if (error.status != 500) {
+          this.errorMsg = error.error;
+        } else {
+          this.errorMsg = this.unexpectedErrorMsg;
+        }
+        return[];
+      })
+    ).subscribe((response: any): void => {
+      if ((response.status >= 200 && response.status < 300) || response.status == 304) {
+        console.log(response.body)
+        this.errorMsg = '';
+        this.waitResult = response.body;
+      } else {
+        this.errorMsg = this.unexpectedErrorMsg;
+      }
+    });
+  }
+
 }

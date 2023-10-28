@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import * as signalR from '@microsoft/signalr';
 import { environment } from '../../../environments/environment';
 import {WaitResult} from "@data/interfaces/WaitResult.model";
+import {IntermediateResult} from "@data/interfaces/IntermediateResult.model";
 
 @Injectable({
   providedIn: 'root',
@@ -70,7 +71,7 @@ export class SignalRService {
     this.hubConnection.on('ReceiveWaitResult', listener);
   }
 
-  setReceiveIntermediateResultListener(listener: (waitResult: WaitResult) => void) {
+  setReceiveIntermediateResultListener(listener: (intermediateResults: IntermediateResult[]) => void) {
     this.hubConnection.on('ReceiveIntermediateResult', listener);
   }
 }

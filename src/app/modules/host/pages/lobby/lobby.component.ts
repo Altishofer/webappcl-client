@@ -22,7 +22,6 @@ export class LobbyComponent {
   players: string[] = [];
   unexpectedErrorMsg : string = "An unexpected error occurred."
   errorMsg : string = '';
-  registerUrl : string = "";
   roundIds : string[] = [];
 
   constructor(
@@ -102,15 +101,15 @@ export class LobbyComponent {
     if (roundIds.length != 0){
       roundId = roundIds.shift() as string;
       this.cookieService.set("roundIds", roundIds.join(","));
-      this.pushRound();
+      this.pushRound(roundId);
       this.router.navigate(['/host', 'round', this.quizId, roundId]);
     } else {
       this.router.navigate(['/host', 'results', this.quizId]);
     }
   }
 
-  pushRound() {
-    this.hostService.pushRound(this.quizId).subscribe(
+  pushRound(roundId : string) {
+    this.hostService.pushRound(roundId).subscribe(
       (response: any): void => {
         if ((response.status >= 200 && response.status < 300) || response.status == 304) {
           console.log("REST pushRound: ", response.body);

@@ -16,53 +16,31 @@ import {HostService} from "@data/services/host.service";
   styleUrls: ['./ranking.component.css']
 })
 export class RankingComponent implements OnInit{
-  quizId : string = '';
-  roundId : string = '';
-  playerName : string = '';
-  unexpectedErrorMsg : string = "An unexpected error occurred."
-  errorMsg : string = '';
-
+  quizId!: string;
+  nextRound: string = "";
+  playerName: string = "";
   intermediateResult : IntermediateResult[] = [];
 
-  answer : Answer = {
-    quizId: "",
-    roundId: "",
-    playerName: "",
-    additions: [],
-    subtractions: [],
-    answerTarget: "",
-  };
-
-  waitResult : WaitResult = {
-    notAnsweredPlayerName : [],
-    answeredPlayerName : []
-  }
-
   constructor(
-    private cdr: ChangeDetectorRef,
     private signalRService: SignalRService,
     private router: Router,
     private route: ActivatedRoute,
     private cookieService: CookieService,
-    private playerService: PlayerService,
-    private hostService : HostService
+    private playerService: PlayerService
   ) {
     this.route.params.subscribe(params => {
       this.quizId = params['quizId'];
-      this.roundId = params['roundId'];
       this.playerName = params['playerName'];
     });
   }
 
   ngOnInit(): void {
     this.signalRService.startConnection().then(() => {
-      this.registerToGroup();
       this.registerListeners();
+      this.registerToGroup();
     }).catch(error => {
       console.error("SignalR connection error:", error);
     });
-    this.getWaitResult();
-    this.getIntermediateResult();
   }
 
   registerToGroup() {
@@ -70,68 +48,22 @@ export class RankingComponent implements OnInit{
     this.signalRService.joinGroup(this.quizId);
   }
 
-  get answeredPercentage() {
-    return Math.round(this.waitResult.answeredPlayerName.length / (this.waitResult.notAnsweredPlayerName.length + this.waitResult.answeredPlayerName.length) * 100);
-  }
-
-  get unansweredPercentage() {
-    return Math.round(100 - this.answeredPercentage);
-  }
-
-  getWaitResult(): void {
-    console.log("REST: getWaitResult", this.quizId, this.roundId);
-    this.hostService.getWaitResult(this.quizId, this.roundId).pipe(
-      catchError((error: HttpErrorResponse) => {
-        console.log(JSON.stringify(error.error));
-        if (error.status != 500) {
-          this.errorMsg = error.error;
-        } else {
-          this.errorMsg = this.unexpectedErrorMsg;
-        }
-        return[];
-      })
-    ).subscribe((response: any): void => {
-      if ((response.status >= 200 && response.status < 300) || response.status == 304) {
-        console.log(response.body)
-        this.errorMsg = '';
-        this.waitResult = response.body;
-      } else {
-        this.errorMsg = this.unexpectedErrorMsg;
-      }
-    });
-  }
-
-  getIntermediateResult(): void {
-    console.log("REST: getIntermediateResult", this.quizId, this.roundId);
-    this.hostService.getIntermediateResult(this.quizId, this.roundId).pipe(
-      catchError((error: HttpErrorResponse) => {
-        console.log(JSON.stringify(error.error));
-        if (error.status != 500) {
-          this.errorMsg = error.error;
-        } else {
-          this.errorMsg = this.unexpectedErrorMsg;
-        }
-        return[];
-      })
-    ).subscribe((response: any): void => {
-      if ((response.status >= 200 && response.status < 300) || response.status == 304) {
-        console.log(response.body);
-        this.errorMsg = '';
-        this.intermediateResult = response.body;
-      } else {
-        this.errorMsg = this.unexpectedErrorMsg;
-      }
-    });
+  unregisterFromGroup() {
+    console.log("SOCKET: unregister from group", this.quizId);
+    this.signalRService.leaveGroup(this.quizId);
   }
 
   registerListeners(): void {
-    this.signalRService.setReceiveWaitResultListener((waitResult: WaitResult) => {
-      console.log("SOCKET waitResult: ", waitResult)
-      this.waitResult = waitResult;
+    this.signalRService.setReceiveIntermediateResultListener((results: IntermediateResult[]) => {
+      console.log("SOCKET round: ", results);
+      this.intermediateResult = results;
+      console.log("SOCKET: intermediateResults")
+    });
+
+    this.signalRService.setReceiveRoundListener((round: string) => {
+      console.log("SOCKET round: ", round);
+      this.router.navigate(['/player', 'game', this.quizId, round, this.playerName]);
     });
   }
 
-  switchToRound(roundId:number): void {
-    this.router.navigate(['/player', 'game', this.quizId, roundId, this.playerName]);
-  }
 }

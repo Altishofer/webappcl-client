@@ -14,3 +14,15 @@
     </div>
   </mat-card>
 </span>
+<div class="player-list-container">
+  <div class="player-list answered-list">
+    <div class="list-title">Answered Players: {{answeredPercentage}}%</div>
+    <div *ngFor="let ansPl of waitResult.answeredPlayerName" class="player-name">{{ansPl}}</div>
+  </div>
+  <div class="player-list unanswered-list">
+    <div class="list-title">Unanswered Players: {{unansweredPercentage}}%</div>
+    <div *ngFor="let notPl of waitResult.notAnsweredPlayerName" class="player-name">{{notPl}}</div>
+  </div>
+  <button (click)="switchToResults()">switch to results</button>
+</div>
+
