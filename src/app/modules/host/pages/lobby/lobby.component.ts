@@ -8,7 +8,6 @@ import {HttpErrorResponse} from "@angular/common/http";
 import {HostService} from "@data/services/host.service";
 import {FormArray, FormGroup} from "@angular/forms";
 import {Round} from "@data/interfaces/round.model";
-import { QRCodeModule } from 'angularx-qrcode';
 
 @Component({
   selector: 'app-lobby',
