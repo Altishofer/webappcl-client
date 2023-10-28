@@ -1,6 +1,3 @@
-<app-header></app-header>
-
-
 <span class="common-wrapper" fxLayout="row" fxLayoutAlign="center center">
   <mat-card class="box">
     <mat-card-header class="balanced">
@@ -72,10 +69,10 @@
     </div>
     <div style="margin-top: 40px">
       <span>
-        <button mat-raised-button color="accent" class="back-btn" style="background-color: darkred" routerLink="/host/selection">Back</button>
+        <button mat-mini-fab color="accent" style="background-color: darkred; color: white" routerLink="/host/selection"><mat-icon>keyboard_backspace</mat-icon></button>
       </span>
       <span>
-          <button (click)="start()" mat-raised-button color="accent" class="start-btn" style="float: right; background-color: darkgreen">Start</button>
+        <button mat-mini-fab color="accent" style="float: right; background-color: darkgreen; color: white" (click)="start()"><mat-icon>fast_forward</mat-icon></button>
       </span>
     </div>
   </mat-card>

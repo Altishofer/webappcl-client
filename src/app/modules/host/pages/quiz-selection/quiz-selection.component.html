@@ -1,30 +1,44 @@
 <app-header></app-header>
 
-<div class="center">
-  <h1>Game Title</h1>
-</div>
+<div class="grid-container">
+  <div class="grid-message">
+    <h3 class="double-center-content">
+      Welcome back!
+    </h3>
+  </div>
+  <div class="grid-header">
+    <h1>Game Title</h1>
+  </div>
+  <span class="left-element">
+    <mat-card class="card-element">
+      <h2>My Quizzes</h2>
 
-<span class="left-element">
-  <mat-card class="quiz-element">
-    <h2>My Quizzes</h2>
-
-    <button mat-raised-button color="positive" class="btn-quiz">
-        + Create New Quiz
-    </button>
-    <mat-card-content>
-      <ng-template ngFor let-quiz [ngForOf]="allQuizzes">
-        <button mat-raised-button color="accent" class="btn-quiz" style="text-align: left; margin-bottom: 8px" (click)="redirect(quiz['id'])">
-          <span class="id" >{{ quiz['id'] }}</span>
-          <span class="name">{{ quiz['title'] }}</span>
+      <mat-card-content>
+        <button mat-raised-button color="accent" class="btn-add" (click)="selectedPortal = defaultPortal; setSelectedQuiz(-1)">
+          <mat-icon class="icon">close</mat-icon>
+          <span class="name">close all</span>
         </button>
-      </ng-template>
-    </mat-card-content>
-  </mat-card>
-</span>
 
-<div class="center">
-</div>
+        <button mat-raised-button color="positive" class="btn-add" (click)="selectedPortal = quizCreationPortal; setSelectedQuiz(-1)">
+          <mat-icon class="icon white">library_add</mat-icon>
+          <span class="name">Create New Quiz</span>
+        </button>
 
-<div class="center" style="margin-top: 40px">
-  <button mat-raised-button color="accent" class="button-normal" routerLink="/host/sandrin" routerLinkActive="active">Sandrin</button>
+        <ng-template ngFor let-quiz [ngForOf]="allQuizzes">
+          <button mat-raised-button color="accent" class="btn-quiz" [ngClass]="{'active': quiz['id'] == selectedQuizId}" (click)="selectedPortal = quizPreviewPortal; setSelectedQuiz(quiz['id'])">
+            <mat-icon class="icon">question_answer</mat-icon>
+            <span class="name">{{ quiz['title'] }}</span>
+          </button>
+        </ng-template>
+      </mat-card-content>
+    </mat-card>
+  </span>
+  <span class="quiz-preview-portal">
+    <mat-card class="card-element">
+      <h2>{{ getPortalTitle() }}</h2>
+      <mat-card-content>
+        <ng-template [cdkPortalOutlet]="selectedPortal"></ng-template>
+      </mat-card-content>
+    </mat-card>
+  </span>
 </div>

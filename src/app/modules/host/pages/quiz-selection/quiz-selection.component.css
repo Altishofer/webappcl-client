@@ -2,47 +2,128 @@
 
 h1 {
   font-size: 50px;
-  rotate: -4deg;
-  transition: rotate 2s;
+  animation-duration: 3s;
+  animation-name: wiggleTitle;
+  animation-iteration-count: infinite;
 }
-h1:hover {
-  rotate: 4deg;
+h2 {
+  animation-duration: 2s;
+  animation-name: pulsating;
+  animation-iteration-count: infinite;
+}
+.h1-replacer {
+
+}
+.grid-container {
+  padding-left: 15px;
+  display: grid;
+  gap: 8px;
+  grid-template-columns: 25% 25% 25% 25%;
+  grid-template-rows: auto auto;
+  justify-content: space-around;
+  align-content: start;
+}
+.grid-message {
+  grid-column: 1;
+  grid-row: 1;
+}
+.double-center-content {
+  margin-top: 10%;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+.grid-header {
+  grid-column: 1 / span 4;
+  grid-row: 1;
+  align-content: start;
+  text-align: center;
 }
 .left-element {
-  max-width: 25%;
+  grid-column: 1;
+  grid-row: 2;
+  display: inline-block;
 }
-.quiz-element {
-  background: lightgray;
+.card-element {
+  background: lightsteelblue;
   padding: 5px 15px;
   text-align: center;
-  max-width: 25%;
-}
-.btn-quiz {
-  justify-content: left;
   width: 100%;
+}
+.quiz-preview-portal {
+  padding-right: 10px;
+  grid-column: 2 / span 3;
+  grid-row: 2;
+  float: right;
+}
+.btn-quiz,
+.btn-add {
+  font-size: 120%;
+  justify-content: left;
   text-align: left;
+  height: fit-content;
+  width: 100%;
+  margin-bottom: 8px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  text-wrap: nowrap;
+  white-space: nowrap;
+  word-break: break-all;
+}
+.btn-quiz:active,
+.btn-add:active {
   margin-bottom: 8px;
 }
-.id {
+.btn-add {
+  height: fit-content;
+}
+.icon {
   display: inline-block;
-  text-align: left;
-  color: darkred;
-  margin-left: 15px;
-  padding: 4px 1px;
-  width: 20px;
-  max-width: 20%;
+  color: black;
+  font-size: 130%;
+  padding: 2px 10px 2px 0;
+  margin-left: 4px;
+}
+.icon.white {
+  color: white;
 }
 .name {
   display: inline-block;
-  text-align: left;
   max-width: 80%;
   margin-right: 10px;
   margin-left: 10px;
   padding: 4px 1px;
-  line-break: none;
-  overflow: hidden;
 }
 .mat-positive {
   background: darkolivegreen;
   color: white;
+}
+
+
+
+
+@keyframes wiggleTitle {
+  0% {
+    rotate: -3deg;
+  }
+  50% {
+    rotate: 3deg;
+  }
+  100% {
+    rotate: -3deg;
+  }
+}
+@keyframes pulsating {
+  0% {
+    transform: scale(100%);
+  }
+  50% {
+    transform: scale(105%);
+  }
+  100% {
+    transform: scale(100%);
+  }
 }
