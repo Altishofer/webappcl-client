@@ -57,9 +57,6 @@ h2 {
   grid-row: 2;
   float: right;
 }
-.quiz-preview-portal .quiz-element {
-
-}
 .btn-quiz,
 .btn-add {
   font-size: 120%;
@@ -75,6 +72,10 @@ h2 {
   text-wrap: nowrap;
   white-space: nowrap;
   word-break: break-all;
+}
+.btn-quiz:active,
+.btn-add:active {
+  margin-bottom: 8px;
 }
 .btn-add {
   height: fit-content;

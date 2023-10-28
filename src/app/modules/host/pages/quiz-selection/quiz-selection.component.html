@@ -13,19 +13,19 @@
     <mat-card class="quiz-element">
       <h2>My Quizzes</h2>
 
-      <button mat-raised-button color="warning" class="btn-add" (click)="selectedPortal = defaultPortal; setSelectedQuiz(-1)">
-        <mat-icon class="id">close</mat-icon>
-        <span class="name">close all</span>
-      </button>
-
-      <button mat-raised-button color="positive" class="btn-add" (click)="selectedPortal = quizCreationPortal; setSelectedQuiz(-1)">
-        <mat-icon class="id">library_add</mat-icon>
-        <span class="name">Create New Quiz</span>
-      </button>
-
       <mat-card-content>
+        <button mat-raised-button color="warning" class="btn-add" (click)="selectedPortal = defaultPortal; setSelectedQuiz(-1)">
+          <mat-icon class="id" style="color: black">close</mat-icon>
+          <span class="name">close all</span>
+        </button>
+
+        <button mat-raised-button color="positive" class="btn-add" (click)="selectedPortal = quizCreationPortal; setSelectedQuiz(-1)">
+          <mat-icon class="id">library_add</mat-icon>
+          <span class="name">Create New Quiz</span>
+        </button>
+
         <ng-template ngFor let-quiz [ngForOf]="allQuizzes">
-          <button mat-raised-button color="accent" class="btn-quiz" [ngClass]="{'active': quiz['id'] === selectedQuizId}" (click)="selectedPortal = quizPreviewPortal; setSelectedQuiz(quiz['id'])">
+          <button mat-raised-button color="accent" class="btn-quiz" [ngClass]="{'active': quiz['id'] == selectedQuizId}" (click)="selectedPortal = quizPreviewPortal; setSelectedQuiz(quiz['id'])">
             <span class="id" >{{ quiz['id'] }}</span>
             <span class="name">{{ quiz['title'] }}</span>
           </button>
