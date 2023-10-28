@@ -1,17 +1,15 @@
 <p>
   <mat-toolbar class="toolbar-main">
-    <span class="header-spacer narrow">
-      <!--
-      <button mat-raised-button class="header-button" (click)="isTesterOpen = !isTesterOpen" cdkOverlayOrigin #trigger="cdkOverlayOrigin">
-        {{isTesterOpen ? "Close" : "Regex Tester"}}
-      </button>
-      -->
-    </span>
-    <span class="header-spacer far"></span>
-    <span class="header-spacer far"></span>
-    <button mat-fab routerLink="/host" routerLinkActive="active">
-      <mat-icon routerLink="/host" routerLinkActive="active" fontIcon="directions_run"></mat-icon>
+    <!--
+    <button mat-raised-button class="header-button" (click)="isTesterOpen = !isTesterOpen" cdkOverlayOrigin #trigger="cdkOverlayOrigin">
+      {{isTesterOpen ? "Close" : "Regex Tester"}}
     </button>
+    -->
+    <span>
+      <button mat-fab routerLink="/host" routerLinkActive="active">
+        <mat-icon routerLink="/host" routerLinkActive="active" fontIcon="directions_run"></mat-icon>
+      </button>
+    </span>
   </mat-toolbar>
 </p>
 

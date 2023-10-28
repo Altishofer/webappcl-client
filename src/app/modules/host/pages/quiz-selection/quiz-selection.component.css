@@ -6,47 +6,102 @@ h1 {
 h1,
 h2 {
   animation-duration: 3s;
-  animation-name: wiggleTitle;
+  animation-name: wiggleTitle, pulsating;
   animation-iteration-count: infinite;
 }
+.grid-container {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: 25% 25% 25% 25%;
+  grid-template-rows: auto auto;
+  justify-content: space-around;
+  align-content: start;
+  margin: 1%;
+}
+.grid-message {
+  grid-column: 1;
+  grid-row: 1;
+  animation-duration: 3s;
+  animation-name: pulsating;
+  animation-iteration-count: infinite;
+}
+.double-center-content {
+  display: flex;
+  text-align: center;
+  margin-top: 20%;
+  justify-content: center;
+  align-items: center;
+}
+.grid-header {
+  grid-column: 1 / span 4;
+  grid-row: 1;
+  align-content: start;
+  text-align: center;
+}
 .left-element {
-  max-width: 25%;
+  grid-column: 1;
+  grid-row: 2;
+  display: inline-block;
 }
 .quiz-element {
   background: lightgray;
   padding: 5px 15px;
   text-align: center;
-  max-width: 25%;
-}
-.btn-quiz {
-  justify-content: left;
   width: 100%;
+}
+.btn-quiz,
+.btn-add {
+  font-size: 120%;
+  justify-content: left;
   text-align: left;
+  height: fit-content;
+  width: 100%;
   margin-bottom: 8px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  text-wrap: nowrap;
+  white-space: nowrap;
+  word-break: break-all;
+}
+.btn-add {
+  height: fit-content;
 }
 .id {
   display: inline-block;
-  text-align: left;
   color: darkred;
-  margin-left: 15px;
   padding: 4px 1px;
-  width: 20px;
-  max-width: 20%;
+}
+mat-icon.id {
+  font-size: 130%;
+  padding: 0 10px 0 0;
+  margin: 5px;
+  color: white;
 }
 .name {
   display: inline-block;
-  text-align: left;
   max-width: 80%;
   margin-right: 10px;
   margin-left: 10px;
   padding: 4px 1px;
-  line-break: none;
-  overflow: hidden;
 }
 .mat-positive {
   background: darkolivegreen;
   color: white;
 }
+.quiz-preview-portal {
+  grid-column: 2 / span 3;
+  grid-row: 2;
+  float: right;
+}
+.quiz-preview-portal .quiz-element {
+  margin-left: 8px;
+}
+
+
+
+
 @keyframes wiggleTitle {
   0% {
     rotate: -3deg;
@@ -56,5 +111,16 @@ h2 {
   }
   100% {
     rotate: -3deg;
+  }
+}
+@keyframes pulsating {
+  0% {
+    transform: scale(100%);
+  }
+  50% {
+    transform: scale(130%);
+  }
+  100% {
+    transform: scale(100%);
   }
 }

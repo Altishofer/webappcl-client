@@ -13,7 +13,8 @@ p {
   text-align: center;
 }
 .toolbar-main {
-  height: 40px;
+  justify-content: right;
+  height: fit-content;
 }
 .header-spacer.far {
   font-family: monospace;
