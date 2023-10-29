@@ -15,7 +15,7 @@ export class QuizPreviewComponent implements OnInit{
   errorMsg : string = '';
   unexpectedErrorMsg : string = "An unexpected error occurred."
 
-  @Input() quizId: number = 0;
+  @Input() quizId: number = 9;
 
   @Output() previewClosed: EventEmitter<boolean> = new EventEmitter<boolean>();
 
