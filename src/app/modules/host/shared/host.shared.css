@@ -3,9 +3,9 @@
 .portal-grid {
   display: grid;
   column-gap: 8px;
-  row-gap: 40px;
+  row-gap: 8px;
   grid-template-columns: 20% 20% 20% 20% 20%;
-  grid-template-rows: 50px auto;
+  grid-template-rows: 50px 50px auto;
   justify-content: space-evenly;
   align-content: start;
 }
@@ -19,13 +19,19 @@
   grid-column: 1;
   grid-row: 1;
   text-align: center;
-  justify-content: center;
+  justify-content: end;
+}
+.left-2nd-btn {
+  grid-column: 1;
+  grid-row: 2;
+  text-align: center;
+  justify-content: start;
 }
 .right-btn {
   grid-column: 5;
   grid-row: 1;
   text-align: center;
-  justify-content: center;
+  justify-content: end;
 }
 .green-fab-btn,
 .red-fab-btn {
@@ -39,7 +45,8 @@
 }
 .content-grid {
   grid-column: 2 / 5;
-  grid-row: 2;
+  grid-row: 2 / span 2;
   text-align: center;
   justify-content: center;
+  padding-top: 30px;
 }

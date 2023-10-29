@@ -7,6 +7,7 @@ import {ComponentPortal, Portal, TemplatePortal} from "@angular/cdk/portal";
 import { WelcomePortalComponent } from "@modules/host/pages/welcome-portal/welcome-portal.component";
 import { QuizCreationComponent } from "@modules/host/pages/quiz-creation/quiz-creation.component";
 import { QuizPreviewComponent } from "@modules/host/pages/quiz-preview/quiz-preview.component";
+import {CookieService} from "ngx-cookie-service";
 
 @Component({
   selector: 'app-quiz-selection',
@@ -29,28 +30,18 @@ export class QuizSelectionComponent implements OnInit,AfterViewInit {
   quizPreviewPortal!: TemplatePortal;
   selectedPortal: Portal<any> = this.defaultPortal;
 
-  constructor(private _quizService: QuizService, private _router: Router, private _viewContainerRef: ViewContainerRef) {
+  constructor(private _quizService: QuizService, private _router: Router, private _viewContainerRef: ViewContainerRef, private _cookieService: CookieService) {
     this.selectedQuizId = -1;
     this.selectedQuizTitle = '';
   }
 
   ngOnInit() {
-    this.getHostQuizzes();
+    this.getAllQuizzesByHost();
   }
 
   ngAfterViewInit() {
     this.quizCreationPortal = new TemplatePortal(this.quizCreationContent, this._viewContainerRef);
     this.quizPreviewPortal = new TemplatePortal(this.quizPreviewContent, this._viewContainerRef);
-  }
-
-  getHostQuizzes() {
-    this._quizService.getAllQuizzes().subscribe((response: any): void => {
-      if ((response.status >= 200 && response.status < 300) || response.status == 304) {
-        this.allQuizzes = response.body;
-      } else {
-        this.errorMsg = this.unexpectedErrorMsg;
-      }
-    });
   }
 
   getAllRoundsByQuiz(quizId: number): void {
@@ -61,6 +52,28 @@ export class QuizSelectionComponent implements OnInit,AfterViewInit {
         this.errorMsg = this.unexpectedErrorMsg;
       }
     });
+  }
+
+  //Todo: Change 'getAllQuizzes' to 'getAllQuizzesByHost'
+  getAllQuizzesByHost(): Round[] {
+    this._quizService.getAllQuizzes().subscribe((response: any): void => {
+      if ((response.status >= 200 && response.status < 300) || response.status == 304) {
+        this.allQuizzes = response.body;
+      } else {
+        this.errorMsg = this.unexpectedErrorMsg;
+      }
+    });
+    return this.allRounds;
+  }
+
+  preloadRelevantRounds(): void {
+    for (let pos = 0; pos < this.allQuizzes.length; pos++) {
+      this.getAllRoundsByQuiz(this.allQuizzes[pos].id);
+    }
+  }
+
+  getHostName(): string {
+    return this._cookieService.get('hostName');
   }
 
   redirect(quizId: number) {
@@ -74,5 +87,17 @@ export class QuizSelectionComponent implements OnInit,AfterViewInit {
 
   closePortal() {
     this.selectedPortal = this.defaultPortal;
+  }
+
+  startQuiz() {
+    console.log(`Theoretically starting quiz "${this.selectedQuizTitle}"...`)
+  }
+
+  saveChanges() {
+    console.log(`Theoretically saving changes to quiz "${this.selectedQuizTitle}"...`)
+  }
+
+  saveCreation() {
+    console.log(`Theoretically saving newly created quiz...`)
   }
 }

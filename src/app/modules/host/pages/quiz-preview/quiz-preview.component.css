@@ -51,7 +51,7 @@ span .name {
   font-size: 16px;
   border-top-style: dotted;
   border-top-width: 1px;
-  border-top-color: lightgrey;
+  border-top-color: grey;
 }
 .quiz-accordion-round-target,
 .quiz-accordion-round-details {
@@ -59,7 +59,7 @@ span .name {
 }
 .quiz-accordion-round-target:hover {
   cursor: pointer;
-  transform: scale(110%);
+  transform: scale(102%);
   background-color: white;
   border-style: solid;
   border-color: black;

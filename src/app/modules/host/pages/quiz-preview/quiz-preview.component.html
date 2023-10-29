@@ -1,7 +1,10 @@
 <div class="portal-grid">
   <h2 class="h2-grid">Details for Quiz "{{selectedQuizTitle}}":</h2>
   <span class="left-btn">
-    <button mat-mini-fab color="accent" class="red-fab-btn" (click)="closePreview()"><mat-icon>close</mat-icon></button>
+    <button mat-mini-fab color="accent" class="red-fab-btn" (click)="closePreview()"><mat-icon>arrow_back_ios</mat-icon></button>
+  </span>
+  <span class="left-2nd-btn">
+    <button mat-mini-fab color="accent" class="green-fab-btn" (click)="saveChanges()"><mat-icon>save</mat-icon></button>
   </span>
   <span class="right-btn">
     <button mat-mini-fab color="accent" class="green-fab-btn" (click)="start()"><mat-icon>fast_forward</mat-icon></button>
@@ -43,13 +46,11 @@
           <div class="inter-title">
             Forbidden Words:
           </div>
-          <ng-template>
-            <div *ngFor="let forbiddenWord of round.forbiddenWords">
-              <div class="forbidden-word-element">
-                {{ forbiddenWord }}
-              </div>
+          <div *ngFor="let forbiddenWord of round.forbiddenWords">
+            <div class="forbidden-word-element">
+              {{ forbiddenWord }}
             </div>
-          </ng-template>
+          </div>
         </div>
       </cdk-accordion-item>
     </cdk-accordion>
