@@ -12,7 +12,7 @@
 
   <span class="content-grid">
     <cdk-accordion class="preview-accordion">
-      <cdk-accordion-item *ngFor="let round of allRounds; let position = index;"
+      <cdk-accordion-item *ngFor="let round of selectedQuizRounds; let position = index;"
                           #accordionItem="cdkAccordionItem"
                           class="quiz-accordion-round"
                           role="button"

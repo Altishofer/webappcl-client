@@ -9,13 +9,14 @@ import {Quiz} from "@data/interfaces/quiz.model";
   templateUrl: './quiz-preview.component.html',
   styleUrls: ['./quiz-preview.component.css']
 })
-export class QuizPreviewComponent implements OnInit{
+export class QuizPreviewComponent {
   allRounds: Round[] = [];
   errorMsg : string = '';
   unexpectedErrorMsg : string = "An unexpected error occurred."
 
   @Input() selectedQuizId: number = 0;
   @Input() selectedQuizTitle: string = '';
+  @Input() selectedQuizRounds: Round[] = [];
 
   @Output() previewClosed: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() startQuiz: EventEmitter<number> = new EventEmitter<number>();
@@ -23,21 +24,6 @@ export class QuizPreviewComponent implements OnInit{
 
   constructor(private quizService: QuizService, private router: Router) {
 
-  }
-
-  getAllRoundsByQuiz(quizId: number): void {
-    this.quizService.getAllRoundsByQuiz(quizId).subscribe((response: any): void => {
-      console.log(response.body);
-      if ((response.status >= 200 && response.status < 300) || response.status == 304) {
-        this.allRounds = response.body;
-      } else {
-        this.errorMsg = this.unexpectedErrorMsg;
-      }
-    });
-  }
-
-  ngOnInit(): void {
-    this.getAllRoundsByQuiz(this.selectedQuizId);
   }
 
   roundsPresent(position: number): boolean {

@@ -12,7 +12,6 @@
     <button mat-mini-fab routerLink="/host" routerLinkActive="active">
       <mat-icon routerLink="/host" routerLinkActive="active" fontIcon="directions_run"></mat-icon>
     </button>
-    <button mat-mini-fab (click)="getQuizzesWithRounds()" >getAllQuizRound</button>
   </div>
   <span class="left-element">
     <mat-card class="card-element">
@@ -43,7 +42,7 @@
 </div>
 
 <ng-template #quizPreviewContent>
-  <app-quiz-preview [selectedQuizId]="selectedQuizId" [selectedQuizTitle]="selectedQuizTitle" (previewClosed)="closePortal()" (changesSaved)="saveChanges()" (startQuiz)="startQuiz()"></app-quiz-preview>
+  <app-quiz-preview [selectedQuizId]="selectedQuizId" [selectedQuizTitle]="selectedQuizTitle" [selectedQuizRounds]="getSelectedQuizRounds(selectedQuizId)" (previewClosed)="closePortal()" (changesSaved)="saveChanges()" (startQuiz)="startQuiz()"></app-quiz-preview>
 </ng-template>
 
 <ng-template #quizCreationContent>

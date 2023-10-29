@@ -82,13 +82,15 @@ span .name {
   overflow-wrap: break-word;
   text-align: center;
   margin: 10px 0;
-  background-color: lightgreen;
-  padding: 12px;
+  padding: 12px 30px;
   border-radius: 12px;
+  color: white;
+}
+.target-word-element {
+  background-color: darkgreen;
 }
 .forbidden-word-element {
   background-color: darkred;
-  color: white;
   margin: 10px 0 5px 0;
 }
 .forbidden-word-element + .forbidden-word-element {

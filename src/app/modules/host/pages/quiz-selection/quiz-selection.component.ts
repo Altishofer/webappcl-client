@@ -1,6 +1,5 @@
 import {AfterViewInit, Component, OnInit, TemplateRef, ViewChild, ViewContainerRef} from '@angular/core';
 import { QuizService } from "@data/services/quiz.service";
-import { Quiz } from "@data/interfaces/quiz.model";
 import { Router } from "@angular/router";
 import { Round } from "@data/interfaces/round.model";
 import {ComponentPortal, Portal, TemplatePortal} from "@angular/cdk/portal";
@@ -14,7 +13,7 @@ import {CookieService} from "ngx-cookie-service";
 })
 export class QuizSelectionComponent implements OnInit,AfterViewInit {
   allQuizzes!: [{hostId: number, id: number, title: string, rounds: Round[]}];
-  allRounds: Round[] = [];
+  allRoundsOfQuiz: Round[] = [];
   errorMsg : string = '';
   unexpectedErrorMsg : string = "An unexpected error occurred."
   selectedQuizId: number;
@@ -52,19 +51,6 @@ export class QuizSelectionComponent implements OnInit,AfterViewInit {
     });
   }
 
-  //Todo: Change 'getAllQuizzes' to 'getAllQuizzesByHost'
-  /*
-  getAllQuizzesByHost(): Round[] {
-    this._quizService.getAllQuizzes().subscribe((response: any): void => {
-      if ((response.status >= 200 && response.status < 300) || response.status == 304) {
-        this.allQuizzes = response.body;
-      } else {
-        this.errorMsg = this.unexpectedErrorMsg;
-      }
-    });
-    return this.allRounds;
-  }*/
-
   getHostName(): string {
     return this._cookieService.get('hostName');
   }
@@ -76,6 +62,16 @@ export class QuizSelectionComponent implements OnInit,AfterViewInit {
   setSelectedQuiz(quizId: number, quizTitle: string): void {
     this.selectedQuizId = quizId;
     this.selectedQuizTitle = quizTitle;
+  }
+
+  getSelectedQuizRounds(requestedQuizId: number): Round[] {
+    for (let pos: number = 0; pos < this.allQuizzes.length; pos++) {
+      if (this.allQuizzes[pos].id === requestedQuizId) {
+        this.allRoundsOfQuiz = this.allQuizzes[pos].rounds;
+        return this.allRoundsOfQuiz;
+      }
+    }
+    return [];
   }
 
   closePortal() {
