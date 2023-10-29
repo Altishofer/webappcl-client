@@ -1,8 +1,5 @@
 @import "../../shared/host.shared.css";
 
-* {
-  background: none;
-}
 span .icon {
   display: inline-block;
   text-align: left;
@@ -17,13 +14,14 @@ span .name {
   margin-right: 10px;
   padding: 4px 1px;
 }
-.example-accordion {
+.preview-accordion {
+  background-color: lightgray;
   display: block;
   max-width: 500px;
 }
 .quiz-accordion-round {
   display: block;
-  border: solid 1px #ccc;
+  border: solid 1px grey;
 }
 .target-numeration-element {
   display: block;
@@ -99,16 +97,4 @@ span .name {
 .nav-btn-container {
   margin-top: 40px;
   justify-content: space-between;
-}
-.start-btn,
-.back-btn {
-  color: white;
-}
-.back-btn {
-  background-color: darkred;
-  float: left;
-}
-.start-btn {
-  background-color: darkgreen;
-  float: right;
 }

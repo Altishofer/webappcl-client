@@ -11,26 +11,22 @@
     <button mat-mini-fab routerLink="/host" routerLinkActive="active">
       <mat-icon routerLink="/host" routerLinkActive="active" fontIcon="directions_run"></mat-icon>
     </button>
+    <button mat-mini-fab (click)="getAllQuizRound()" >getAllQuizRound</button>
   </div>
   <span class="left-element">
     <mat-card class="card-element">
       <h2>My Quizzes</h2>
 
       <mat-card-content>
-        <button mat-raised-button color="accent" class="btn-add" (click)="selectedPortal = defaultPortal; setSelectedQuiz(-1)">
-          <mat-icon class="icon">close</mat-icon>
-          <span class="name">close all</span>
-        </button>
-
-        <button mat-raised-button color="positive" class="btn-add" (click)="selectedPortal = quizCreationPortal; setSelectedQuiz(-1)">
+        <button mat-raised-button color="positive" class="btn-add" (click)="selectedPortal = quizCreationPortal; setSelectedQuiz(-1, 'eee')">
           <mat-icon class="icon white">library_add</mat-icon>
           <span class="name">Create New Quiz</span>
         </button>
 
         <ng-template ngFor let-quiz [ngForOf]="allQuizzes">
-          <button mat-raised-button color="accent" class="btn-quiz" [ngClass]="{'active': quiz['id'] === selectedQuizId}" (click)="selectedPortal = quizPreviewPortal; setSelectedQuiz(quiz['id'])">
+          <button mat-raised-button color="accent" class="btn-quiz" [ngClass]="{'active': quiz.id === selectedQuizId}" (click)="selectedPortal = quizPreviewPortal; setSelectedQuiz(quiz.id, quiz.title)">
             <mat-icon class="icon">question_answer</mat-icon>
-            <span class="name">{{ quiz['title'] }}</span>
+            <span class="name">{{ quiz.title }}</span>
           </button>
         </ng-template>
       </mat-card-content>
@@ -44,3 +40,11 @@
     </mat-card>
   </span>
 </div>
+
+<ng-template #quizPreviewContent>
+  <app-quiz-preview [selectedQuizId]="selectedQuizId" [selectedQuizTitle]="selectedQuizTitle" (previewClosed)="closePortal()"></app-quiz-preview>
+</ng-template>
+
+<ng-template #quizCreationContent>
+  <app-quiz-creation (creationClosed)="closePortal()"></app-quiz-creation>
+</ng-template>

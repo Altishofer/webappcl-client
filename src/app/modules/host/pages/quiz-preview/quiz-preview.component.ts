@@ -11,13 +11,16 @@ import {Quiz} from "@data/interfaces/quiz.model";
 })
 export class QuizPreviewComponent implements OnInit{
   allRounds: Round[] = [];
-  quiz!: Quiz;
   errorMsg : string = '';
   unexpectedErrorMsg : string = "An unexpected error occurred."
 
   @Input() quizId: number = 9;
+  @Input() selectedQuizId: number = 0;
+  @Input() selectedQuizTitle: string = '';
+
 
   @Output() previewClosed: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() startQuiz: EventEmitter<number> = new EventEmitter<number>();
 
   constructor(private quizService: QuizService, private router: Router) {
 
@@ -34,30 +37,19 @@ export class QuizPreviewComponent implements OnInit{
     });
   }
 
-  getQuiz(quizId: number): void {
-    this.quizService.getQuiz(quizId).subscribe((response: any): void => {
-      if ((response.status >= 200 && response.status < 300) || response.status == 304) {
-        this.quiz = response.body.quizDto;
-      } else {
-        this.errorMsg = this.unexpectedErrorMsg;
-      }
-    });
-  }
-
   ngOnInit(): void {
-    this.getQuiz(this.quizId);
-    this.getAllRoundsByQuiz(this.quizId);
+    this.getAllRoundsByQuiz(this.selectedQuizId);
   }
 
   roundsPresent(position: number): boolean {
     return this.allRounds[position].forbiddenWords.length > 0;
   }
 
-  start() : void{
-    this.router.navigate([`host/lobby/${this.quizId}`])
+  start() : void {
+    this.startQuiz.emit(this.selectedQuizId);
   }
 
-  closePreview() {
+  closePreview(): void {
     this.previewClosed.emit(true);
   }
 }

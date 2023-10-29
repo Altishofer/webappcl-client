@@ -31,6 +31,14 @@ export class QuizService {
     return this.http.get(`${this.baseUrl}/GetAllRoundsByQuiz?quizId=${quizId}`, {observe: 'response', headers});
   }
 
+  getAllQuizRound(): Observable<any> {
+    const headers: HttpHeaders = new HttpHeaders({
+      'Authorization': "Bearer " + this.cookieService.get("hostToken"),
+      'Content-Type': 'application/json',
+    });
+    return this.http.get(`${this.baseUrl}/GetQuizzesWithRounds`, {observe: 'response', headers});
+  }
+
   // ToDo: remove debug method
   getQuiz(quizId: number) {
     const headers = new HttpHeaders({

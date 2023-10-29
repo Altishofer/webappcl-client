@@ -1,58 +1,57 @@
-<h2 style="text-align: center">Details for Quiz "TitleShouldBeHere":</h2>
-
-<div>
-  <cdk-accordion class="example-accordion">
-    <cdk-accordion-item *ngFor="let round of allRounds; let position = index;"
-                        #accordionItem="cdkAccordionItem"
-                        class="quiz-accordion-round"
-                        role="button"
-                        tabindex="0"
-                        [attr.id]="'accordion-header-' + position"
-                        [attr.aria-expanded]="accordionItem.expanded"
-                        [attr.aria-controls]="'accordion-body-' + position">
-      <div class="quiz-accordion-round-target" (click)="accordionItem.toggle()">
-        <span class="target-numeration-element">
-          Round {{ position+1 }}:
-        </span>
-
-        <span class="target-word-tease">
-          {{ round['roundTarget'] }}
-        </span>
-      </div>
-
-      <div class="quiz-accordion-round-details"
-                        role="region"
-                        [style.display]="accordionItem.expanded ? '' : 'none'"
-                        [attr.id]="'accordion-body-' + position"
-                        [attr.aria-labelledby]="'accordion-header-' + position">
-        <div class="inter-title" style="margin-top: 0">
-          Target Word:
-        </div>
-
-        <div class="target-word-element">
-          {{ round.roundTarget }}
-        </div>
-
-        <div class="inter-title">
-          Forbidden Words:
-        </div>
-        <ng-template>
-          <div *ngFor="let forbiddenWord of round.forbiddenWords">
-            <div class="forbidden-word-element">
-              {{ forbiddenWord }}
-            </div>
-          </div>
-        </ng-template>
-      </div>
-    </cdk-accordion-item>
-  </cdk-accordion>
-</div>
-
-<div class="nav-btn-container">
+<div class="portal-grid">
+  <h2 class="h2-grid">Details for Quiz "{{selectedQuizTitle}}":</h2>
   <span class="left-btn">
-    <button mat-mini-fab color="accent" class="back-btn" (click)="closePreview()"><mat-icon>close</mat-icon></button>
+    <button mat-mini-fab color="accent" class="red-fab-btn" (click)="closePreview()"><mat-icon>close</mat-icon></button>
   </span>
   <span class="right-btn">
-    <button mat-mini-fab color="accent" class="start-btn" (click)="start()"><mat-icon>fast_forward</mat-icon></button>
+    <button mat-mini-fab color="accent" class="green-fab-btn" (click)="start()"><mat-icon>fast_forward</mat-icon></button>
+  </span>
+
+  <span class="content-grid">
+    <cdk-accordion class="preview-accordion">
+      <cdk-accordion-item *ngFor="let round of allRounds; let position = index;"
+                          #accordionItem="cdkAccordionItem"
+                          class="quiz-accordion-round"
+                          role="button"
+                          tabindex="0"
+                          [attr.id]="'accordion-header-' + position"
+                          [attr.aria-expanded]="accordionItem.expanded"
+                          [attr.aria-controls]="'accordion-body-' + position">
+        <div class="quiz-accordion-round-target" (click)="accordionItem.toggle()">
+          <span class="target-numeration-element">
+            Round {{ position+1 }}:
+          </span>
+
+          <span class="target-word-tease">
+            {{ round.roundTarget }}
+          </span>
+        </div>
+
+        <div class="quiz-accordion-round-details"
+                          role="region"
+                          [style.display]="accordionItem.expanded ? '' : 'none'"
+                          [attr.id]="'accordion-body-' + position"
+                          [attr.aria-labelledby]="'accordion-header-' + position">
+          <div class="inter-title" style="margin-top: 0">
+            Target Word:
+          </div>
+
+          <div class="target-word-element">
+            {{ round.roundTarget }}
+          </div>
+
+          <div class="inter-title">
+            Forbidden Words:
+          </div>
+          <ng-template>
+            <div *ngFor="let forbiddenWord of round.forbiddenWords">
+              <div class="forbidden-word-element">
+                {{ forbiddenWord }}
+              </div>
+            </div>
+          </ng-template>
+        </div>
+      </cdk-accordion-item>
+    </cdk-accordion>
   </span>
 </div>
