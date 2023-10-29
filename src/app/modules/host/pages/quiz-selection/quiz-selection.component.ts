@@ -1,9 +1,9 @@
-import { Component, OnInit, ViewContainerRef } from '@angular/core';
+import {AfterViewInit, Component, OnInit, TemplateRef, ViewChild, ViewContainerRef} from '@angular/core';
 import { QuizService } from "@data/services/quiz.service";
 import { Quiz } from "@data/interfaces/quiz.model";
 import { Router } from "@angular/router";
 import { Round } from "@data/interfaces/round.model";
-import { ComponentPortal } from "@angular/cdk/portal";
+import {ComponentPortal, Portal, TemplatePortal} from "@angular/cdk/portal";
 import { WelcomePortalComponent } from "@modules/host/pages/welcome-portal/welcome-portal.component";
 import { QuizCreationComponent } from "@modules/host/pages/quiz-creation/quiz-creation.component";
 import { QuizPreviewComponent } from "@modules/host/pages/quiz-preview/quiz-preview.component";
@@ -13,19 +13,33 @@ import { QuizPreviewComponent } from "@modules/host/pages/quiz-preview/quiz-prev
   templateUrl: './quiz-selection.component.html',
   styleUrls: ['./quiz-selection.component.css']
 })
-export class QuizSelectionComponent implements OnInit {
+export class QuizSelectionComponent implements OnInit,AfterViewInit {
   allQuizzes: Quiz[] = [];
   allRounds: Round[] = [];
   errorMsg : string = '';
   unexpectedErrorMsg : string = "An unexpected error occurred."
-  selectedQuizId: number = -1;
+  selectedQuizId: number;
+  selectedQuizTitle: string;
+
+  @ViewChild('quizPreviewContent') quizPreviewContent!: TemplateRef<unknown>;
 
   defaultPortal: ComponentPortal<WelcomePortalComponent> = new ComponentPortal(WelcomePortalComponent);
   quizCreationPortal: ComponentPortal<QuizCreationComponent> = new ComponentPortal(QuizCreationComponent);
-  quizPreviewPortal: ComponentPortal<QuizPreviewComponent> = new ComponentPortal(QuizPreviewComponent);
-  selectedPortal: ComponentPortal<any> = this.defaultPortal;
+  quizPreviewPortal!: TemplatePortal;
+  selectedPortal: Portal<any> = this.defaultPortal;
 
-  constructor(private _quizService: QuizService, private _router: Router) {}
+  constructor(private _quizService: QuizService, private _router: Router, private _viewContainerRef: ViewContainerRef) {
+    this.selectedQuizId = -1;
+    this.selectedQuizTitle = '';
+  }
+
+  ngOnInit() {
+    this.getHostQuizzes();
+  }
+
+  ngAfterViewInit() {
+    this.quizPreviewPortal = new TemplatePortal(this.quizPreviewContent, this._viewContainerRef)
+  }
 
   getHostQuizzes() {
     this._quizService.getAllQuizzes().subscribe((response: any): void => {
@@ -47,16 +61,12 @@ export class QuizSelectionComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-    this.getHostQuizzes();
-  }
-
   redirect(quizId: number) {
     this._router.navigate([`host/preview/${quizId}`])
   }
 
-  setSelectedQuiz(quizId: number): void {
+  setSelectedQuiz(quizId: number, quizTitle: string): void {
     this.selectedQuizId = quizId;
-    console.log(this.selectedQuizId)
+    this.selectedQuizTitle = quizTitle;
   }
 }
