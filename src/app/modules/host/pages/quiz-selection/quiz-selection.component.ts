@@ -77,7 +77,7 @@ export class QuizSelectionComponent implements OnInit,AfterViewInit {
   }
 
   redirect(quizId: number) {
-    this._router.navigate([`host/preview/${quizId}`])
+    this._router.navigate([`host/preview/${quizId}`]);
   }
 
   setSelectedQuiz(quizId: number, quizTitle: string): void {
