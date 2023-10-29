@@ -19,7 +19,6 @@ export class QuizPreviewComponent implements OnInit{
 
   @Output() previewClosed: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() startQuiz: EventEmitter<number> = new EventEmitter<number>();
-  //Todo: Make 'changesSaved' return actual changes
   @Output() changesSaved: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor(private quizService: QuizService, private router: Router) {

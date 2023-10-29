@@ -12,14 +12,14 @@
     <button mat-mini-fab routerLink="/host" routerLinkActive="active">
       <mat-icon routerLink="/host" routerLinkActive="active" fontIcon="directions_run"></mat-icon>
     </button>
-    <button mat-mini-fab (click)="getAllQuizRound()" >getAllQuizRound</button>
+    <button mat-mini-fab (click)="getQuizzesWithRounds()" >getAllQuizRound</button>
   </div>
   <span class="left-element">
     <mat-card class="card-element">
       <h2>My Quizzes</h2>
 
       <mat-card-content>
-        <button mat-raised-button color="positive" class="btn-add" (click)="selectedPortal = quizCreationPortal; setSelectedQuiz(-1, 'eee')">
+        <button mat-raised-button color="positive" class="btn-add" (click)="selectedPortal = quizCreationPortal; setSelectedQuiz(-1, '')">
           <mat-icon class="icon white">library_add</mat-icon>
           <span class="name">Create New Quiz</span>
         </button>

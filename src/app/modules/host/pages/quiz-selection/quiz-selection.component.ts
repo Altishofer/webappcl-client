@@ -13,7 +13,7 @@ import {CookieService} from "ngx-cookie-service";
   styleUrls: ['./quiz-selection.component.css']
 })
 export class QuizSelectionComponent implements OnInit,AfterViewInit {
-  allQuizzes: Quiz[] = [];
+  allQuizzes!: [{hostId: number, id: number, title: string, rounds: Round[]}];
   allRounds: Round[] = [];
   errorMsg : string = '';
   unexpectedErrorMsg : string = "An unexpected error occurred."
@@ -34,7 +34,7 @@ export class QuizSelectionComponent implements OnInit,AfterViewInit {
   }
 
   ngOnInit() {
-    this.getAllQuizzesByHost();
+    this.getQuizzesWithRounds();
   }
 
   ngAfterViewInit() {
@@ -42,20 +42,10 @@ export class QuizSelectionComponent implements OnInit,AfterViewInit {
     this.quizPreviewPortal = new TemplatePortal(this.quizPreviewContent, this._viewContainerRef);
   }
 
-  getAllRoundsByQuiz(quizId: number): void {
-    this._quizService.getAllRoundsByQuiz(quizId).subscribe((response: any): void => {
+  getQuizzesWithRounds(): void {
+    this._quizService.getQuizzesWithRounds().subscribe((response: any): void => {
       if ((response.status >= 200 && response.status < 300) || response.status == 304) {
-        this.allRounds = response.body;
-      } else {
-        this.errorMsg = this.unexpectedErrorMsg;
-      }
-    });
-  }
-
-  getAllQuizRound(): void {
-    this._quizService.getAllQuizRound().subscribe((response: any): void => {
-      if ((response.status >= 200 && response.status < 300) || response.status == 304) {
-        console.log(response.body);
+        this.allQuizzes = response.body;
       } else {
         this.errorMsg = this.unexpectedErrorMsg;
       }
@@ -63,6 +53,7 @@ export class QuizSelectionComponent implements OnInit,AfterViewInit {
   }
 
   //Todo: Change 'getAllQuizzes' to 'getAllQuizzesByHost'
+  /*
   getAllQuizzesByHost(): Round[] {
     this._quizService.getAllQuizzes().subscribe((response: any): void => {
       if ((response.status >= 200 && response.status < 300) || response.status == 304) {
@@ -72,13 +63,7 @@ export class QuizSelectionComponent implements OnInit,AfterViewInit {
       }
     });
     return this.allRounds;
-  }
-
-  preloadRelevantRounds(): void {
-    for (let pos = 0; pos < this.allQuizzes.length; pos++) {
-      this.getAllRoundsByQuiz(this.allQuizzes[pos].id);
-    }
-  }
+  }*/
 
   getHostName(): string {
     return this._cookieService.get('hostName');

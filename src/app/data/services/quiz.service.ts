@@ -39,7 +39,7 @@ export class QuizService {
     return this.http.get(`${this.baseUrl}/GetAllRoundsByQuiz?quizId=${quizId}`, {observe: 'response', headers});
   }
 
-  getAllQuizRound(): Observable<any> {
+  getQuizzesWithRounds(): Observable<any> {
     const headers: HttpHeaders = new HttpHeaders({
       'Authorization': "Bearer " + this.cookieService.get("hostToken"),
       'Content-Type': 'application/json',
