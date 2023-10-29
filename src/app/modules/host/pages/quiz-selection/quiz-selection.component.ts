@@ -63,6 +63,16 @@ export class QuizSelectionComponent implements OnInit,AfterViewInit {
     });
   }
 
+  getAllQuizRound(): void {
+    this._quizService.getAllQuizRound().subscribe((response: any): void => {
+      if ((response.status >= 200 && response.status < 300) || response.status == 304) {
+        console.log(response.body);
+      } else {
+        this.errorMsg = this.unexpectedErrorMsg;
+      }
+    });
+  }
+
   redirect(quizId: number) {
     this._router.navigate([`host/preview/${quizId}`])
   }
