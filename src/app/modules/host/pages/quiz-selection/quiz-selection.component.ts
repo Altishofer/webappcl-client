@@ -22,9 +22,10 @@ export class QuizSelectionComponent implements OnInit,AfterViewInit {
   selectedQuizTitle: string;
 
   @ViewChild('quizPreviewContent') quizPreviewContent!: TemplateRef<unknown>;
+  @ViewChild('quizCreationContent') quizCreationContent!: TemplateRef<unknown>;
 
   defaultPortal: ComponentPortal<WelcomePortalComponent> = new ComponentPortal(WelcomePortalComponent);
-  quizCreationPortal: ComponentPortal<QuizCreationComponent> = new ComponentPortal(QuizCreationComponent);
+  quizCreationPortal!: TemplatePortal;
   quizPreviewPortal!: TemplatePortal;
   selectedPortal: Portal<any> = this.defaultPortal;
 
@@ -38,7 +39,8 @@ export class QuizSelectionComponent implements OnInit,AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.quizPreviewPortal = new TemplatePortal(this.quizPreviewContent, this._viewContainerRef)
+    this.quizCreationPortal = new TemplatePortal(this.quizCreationContent, this._viewContainerRef);
+    this.quizPreviewPortal = new TemplatePortal(this.quizPreviewContent, this._viewContainerRef);
   }
 
   getHostQuizzes() {
@@ -68,5 +70,9 @@ export class QuizSelectionComponent implements OnInit,AfterViewInit {
   setSelectedQuiz(quizId: number, quizTitle: string): void {
     this.selectedQuizId = quizId;
     this.selectedQuizTitle = quizTitle;
+  }
+
+  closePortal() {
+    this.selectedPortal = this.defaultPortal;
   }
 }

@@ -1,13 +1,13 @@
-<div class="preview-grid">
+<div class="portal-grid">
   <h2 class="h2-grid">Details for Quiz "{{selectedQuizTitle}}":</h2>
   <span class="left-btn">
-    <button mat-mini-fab color="accent" class="back-btn" (click)="closePreview()"><mat-icon>close</mat-icon></button>
+    <button mat-mini-fab color="accent" class="red-fab-btn" (click)="closePreview()"><mat-icon>close</mat-icon></button>
   </span>
   <span class="right-btn">
-    <button mat-mini-fab color="accent" class="start-btn" (click)="start()"><mat-icon>fast_forward</mat-icon></button>
+    <button mat-mini-fab color="accent" class="green-fab-btn" (click)="start()"><mat-icon>fast_forward</mat-icon></button>
   </span>
 
-  <span class="accordion-grid">
+  <span class="content-grid">
     <cdk-accordion class="preview-accordion">
       <cdk-accordion-item *ngFor="let round of allRounds; let position = index;"
                           #accordionItem="cdkAccordionItem"

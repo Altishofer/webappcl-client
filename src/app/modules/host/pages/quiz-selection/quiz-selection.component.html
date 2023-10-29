@@ -17,11 +17,6 @@
       <h2>My Quizzes</h2>
 
       <mat-card-content>
-        <button mat-raised-button color="accent" class="btn-add" (click)="selectedPortal = defaultPortal; setSelectedQuiz(-1, 'eee')">
-          <mat-icon class="icon">close</mat-icon>
-          <span class="name">close all</span>
-        </button>
-
         <button mat-raised-button color="positive" class="btn-add" (click)="selectedPortal = quizCreationPortal; setSelectedQuiz(-1, 'eee')">
           <mat-icon class="icon white">library_add</mat-icon>
           <span class="name">Create New Quiz</span>
@@ -46,5 +41,9 @@
 </div>
 
 <ng-template #quizPreviewContent>
-  <app-quiz-preview [selectedQuizId]="selectedQuizId" [selectedQuizTitle]="selectedQuizTitle"></app-quiz-preview>
+  <app-quiz-preview [selectedQuizId]="selectedQuizId" [selectedQuizTitle]="selectedQuizTitle" (previewClosed)="closePortal()"></app-quiz-preview>
+</ng-template>
+
+<ng-template #quizCreationContent>
+  <app-quiz-creation (creationClosed)="closePortal()"></app-quiz-creation>
 </ng-template>
