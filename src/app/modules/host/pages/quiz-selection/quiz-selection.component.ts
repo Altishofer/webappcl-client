@@ -13,6 +13,7 @@ import { QuizPreviewComponent } from "@modules/host/pages/quiz-preview/quiz-prev
   templateUrl: './quiz-selection.component.html',
   styleUrls: ['./quiz-selection.component.css']
 })
+
 export class QuizSelectionComponent implements OnInit {
   allQuizzes: Quiz[] = [];
   allRounds: Round[] = [];
@@ -52,11 +53,11 @@ export class QuizSelectionComponent implements OnInit {
   }
 
   redirect(quizId: number) {
-    this._router.navigate([`host/preview/${quizId}`])
+    this._router.navigate([`host/preview/${quizId}`]);
   }
 
   setSelectedQuiz(quizId: number): void {
     this.selectedQuizId = quizId;
-    console.log(this.selectedQuizId)
+    console.log(this.selectedQuizId);
   }
 }
