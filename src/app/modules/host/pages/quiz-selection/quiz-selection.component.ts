@@ -4,9 +4,7 @@ import { Quiz } from "@data/interfaces/quiz.model";
 import { Router } from "@angular/router";
 import { Round } from "@data/interfaces/round.model";
 import {ComponentPortal, Portal, TemplatePortal} from "@angular/cdk/portal";
-import { WelcomePortalComponent } from "@modules/host/pages/welcome-portal/welcome-portal.component";
-import { QuizCreationComponent } from "@modules/host/pages/quiz-creation/quiz-creation.component";
-import { QuizPreviewComponent } from "@modules/host/pages/quiz-preview/quiz-preview.component";
+import { WelcomePortalComponent } from "@app/modules/host/pages/welcome-portal/welcome-portal.component";
 import {CookieService} from "ngx-cookie-service";
 
 @Component({
