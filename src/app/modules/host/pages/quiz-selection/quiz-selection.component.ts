@@ -5,6 +5,7 @@ import { Round } from "@data/interfaces/round.model";
 import {ComponentPortal, Portal, TemplatePortal} from "@angular/cdk/portal";
 import { WelcomePortalComponent } from "@app/modules/host/pages/welcome-portal/welcome-portal.component";
 import {CookieService} from "ngx-cookie-service";
+import {Quiz} from "@data/interfaces/quiz.model";
 
 @Component({
   selector: 'app-quiz-selection',
@@ -15,7 +16,7 @@ export class QuizSelectionComponent implements OnInit,AfterViewInit {
   allQuizzes!: [{hostId: number, id: number, title: string, rounds: Round[]}];
   allRoundsOfQuiz: Round[] = [];
   errorMsg : string = '';
-  unexpectedErrorMsg : string = "An unexpected error occurred."
+  unexpectedErrorMsg : string = "An unexpected error occurred.";
   selectedQuizId: number;
   selectedQuizTitle: string;
 
@@ -27,7 +28,12 @@ export class QuizSelectionComponent implements OnInit,AfterViewInit {
   quizPreviewPortal!: TemplatePortal;
   selectedPortal: Portal<any> = this.defaultPortal;
 
-  constructor(private _quizService: QuizService, private _router: Router, private _viewContainerRef: ViewContainerRef, private _cookieService: CookieService) {
+  constructor(
+      private _quizService: QuizService,
+      private _router: Router,
+      private _viewContainerRef: ViewContainerRef,
+      private _cookieService: CookieService,
+      private router: Router) {
     this.selectedQuizId = -1;
     this.selectedQuizTitle = '';
   }
@@ -79,14 +85,14 @@ export class QuizSelectionComponent implements OnInit,AfterViewInit {
   }
 
   startQuiz() {
-    console.log(`Theoretically starting quiz "${this.selectedQuizTitle}"...`)
+    this.router.navigate(['/host', 'lobby', this.selectedQuizId]);
   }
 
   saveChanges() {
-    console.log(`Theoretically saving changes to quiz "${this.selectedQuizTitle}"...`)
+    console.log(`Theoretically saving changes to quiz "${this.selectedQuizTitle}"...`);
   }
 
   saveCreation() {
-    console.log(`Theoretically saving newly created quiz...`)
+    console.log(`Theoretically saving newly created quiz...`);
   }
 }

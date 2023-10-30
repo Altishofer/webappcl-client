@@ -18,7 +18,7 @@ export class HostService {
 
   getHosts(host: Host): void {
     const headers = new HttpHeaders({
-      'Authorization': "Bearer " + this.cookieService.get("hostToken"),
+      'Authorization': "bearer " + this.cookieService.get("hostToken"),
       'Content-Type': 'application/json',
     });
 
@@ -59,12 +59,12 @@ export class HostService {
             console.log("ERROR: refreshing token was not successful");
           }
       });
-    }, 60 * 1000); // Refresh every minute
+    }, 15 * 60 * 1000); // Refresh every 15 minutes
   }
 
   getPlayers(quizId : string) : Observable<any> {
     const headers = new HttpHeaders({
-      'Authorization': "Bearer " + this.cookieService.get("playerToken"),
+      'Authorization': "Bearer " + this.cookieService.get("hostToken"),
       'Content-Type': 'application/json',
     });
     return this.http.get(`${this.quizUrl}/GetPlayers/${quizId}`, { observe:'response', headers  });
@@ -72,7 +72,7 @@ export class HostService {
 
   getWaitResult(quizId : string, roundId:string) : Observable<any> {
     const headers = new HttpHeaders({
-      'Authorization': "Bearer " + this.cookieService.get("playerToken"),
+      'Authorization': "Bearer " + this.cookieService.get("hostToken"),
       'Content-Type': 'application/json',
     });
     return this.http.get(`${this.quizUrl}/WaitResult/${quizId}/${roundId}`, { observe:'response', headers  });
@@ -89,15 +89,15 @@ export class HostService {
   pushRound(roundId : string) : Observable<any> {
     const headers = new HttpHeaders({
       'Authorization': "Bearer " + this.cookieService.get("hostToken"),
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/json'
     });
-    return this.http.put(`${this.quizUrl}/PushRound/${roundId}`, { observe:'response', headers  });
+    return this.http.get(`${this.quizUrl}/PushRound/${roundId}`, { observe:'response', headers  });
   }
 
   getRound(roundId : string) : Observable<any> {
     const headers = new HttpHeaders({
-      'Authorization': "Bearer " + this.cookieService.get("hostToken"),
-      'Content-Type': 'application/json',
+      'Authorization': "bearer " + this.cookieService.get("hostToken"),
+      'Content-Type': 'application/json'
     });
     return this.http.get(`${this.quizUrl}/GetRound/${roundId}`, { observe:'response', headers  });
   }

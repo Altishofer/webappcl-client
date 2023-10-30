@@ -101,7 +101,6 @@ export class LobbyComponent {
       roundId = roundIds.shift() as string;
       this.cookieService.set("roundIds", roundIds.join(","));
       this.pushRound(roundId);
-      this.router.navigate(['/host', 'round', this.quizId, roundId]);
     } else {
       this.router.navigate(['/host', 'results', this.quizId]);
     }

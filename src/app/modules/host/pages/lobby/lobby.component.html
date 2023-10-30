@@ -1,6 +1,7 @@
-<p>lobby works!</p>
+<p>register with players to join quiz with url http://localhost:4200/player/register/{{this.quizId}}</p>
 <!--<qrcode [qrdata]="QRvalue" [width]="256" [errorCorrectionLevel]="'H'"></qrcode>-->
 <div style="text-align: center">
+  <div>List of all joined players:</div>
   <div *ngFor="let str of players">{{str}}</div>
   <button (click)="startGame()">switch to round</button>
 </div>
