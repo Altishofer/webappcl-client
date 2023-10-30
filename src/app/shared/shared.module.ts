@@ -16,6 +16,7 @@ import { MatCardModule } from "@angular/material/card";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatDividerModule } from "@angular/material/divider";
 import { MatSlideToggleModule } from "@angular/material/slide-toggle";
+import { QRCodeModule } from 'angularx-qrcode';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { MatSlideToggleModule } from "@angular/material/slide-toggle";
     MatCardModule,
     MatFormFieldModule,
     MatDividerModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    QRCodeModule
   ],
   imports: [
     CommonModule,
@@ -53,7 +55,8 @@ import { MatSlideToggleModule } from "@angular/material/slide-toggle";
     MatCardModule,
     MatFormFieldModule,
     MatDividerModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    QRCodeModule
   ]
 })
 export class SharedModule { }

@@ -15,7 +15,7 @@ span .name {
   padding: 4px 1px;
 }
 .preview-accordion {
-  background-color: lightgray;
+  background: none;
   justify-content: center;
   display: inline-block;
   width: 100%;
@@ -24,7 +24,6 @@ span .name {
 }
 .quiz-accordion-round {
   display: block;
-  border: solid 1px grey;
 }
 .target-numeration-element {
   display: block;
@@ -43,20 +42,24 @@ span .name {
   border-top: #888888;
 }
 .quiz-accordion-round-target {
+  background-color: lightgrey;
+  border: solid 1px black;
   display: block;
+  margin-right: 30px;
   align-content: center;
   justify-content: center;
   transition: transform .2s;
 }
 .quiz-accordion-round-details {
+  background-color: lightgray;
+  border: solid 1px black;
+  border-left: solid 2px black;
   display: block;
+  margin-left: 30px;
   text-align: center;
   font-size: 16px;
-  border-top-style: dotted;
-  border-top-width: 1px;
-  border-top-color: grey;
-  border-top-left-radius: 8px;
   border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
 }
 .quiz-accordion-round-target,
 .quiz-accordion-round-details {
@@ -66,16 +69,12 @@ span .name {
   cursor: pointer;
   transform: scale(102%);
   background-color: white;
-  border-style: solid;
-  border-color: black;
-  border-width: 1px;
-  border-radius: 4px;
 }
-.quiz-accordion-round:first-child {
+.quiz-accordion-round:first-child > .quiz-accordion-round-target {
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
 }
-.quiz-accordion-round:last-child {
+.quiz-accordion-round:last-child > .quiz-accordion-round-target {
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
 }
