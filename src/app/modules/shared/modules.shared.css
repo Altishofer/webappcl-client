@@ -142,3 +142,7 @@ button:disabled {
 mat-card-content {
   padding: 0;
 }
+.mat-positive {
+  background: darkolivegreen;
+  color: white;
+}
