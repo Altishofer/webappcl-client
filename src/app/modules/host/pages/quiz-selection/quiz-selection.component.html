@@ -24,7 +24,7 @@
         </button>
 
         <ng-template ngFor let-quiz [ngForOf]="allQuizzes">
-          <button mat-raised-button color="accent" class="btn-quiz" (click)="setSelectedQuiz(quiz.id, quiz.title); selectedPortal = quizPreviewPortal">
+          <button mat-raised-button color="accent" class="btn-quiz" (click)="setSelectedQuiz(quiz.quizId, quiz.title); selectedPortal = quizPreviewPortal">
             <mat-icon class="icon">question_answer</mat-icon>
             <span class="name">{{ quiz.title }}</span>
           </button>
