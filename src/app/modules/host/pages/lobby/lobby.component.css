@@ -1,1 +1,74 @@
 @import "../../shared/host.shared.css";
+
+.lobby-grid {
+  display: grid;
+  column-gap: 8px;
+  row-gap: 8px;
+  grid-template-columns: 20% 20% 20% 20% 20%;
+  grid-template-rows: 50px auto auto auto auto auto;
+  justify-content: space-evenly;
+  align-content: center;
+  text-align: center;
+}
+.qr-grid {
+  display: block;
+  grid-column: 2 / span 3;
+  grid-row: 2;
+  text-align: center;
+  align-content: center;
+  justify-content: center;
+}
+.between-title-grid {
+  grid-column: 2 / 5;
+  grid-row: 3;
+  text-align: center;
+  align-content: end;
+  justify-content: space-around;
+}
+.players-grid {
+  grid-column: 1 / span 5;
+  grid-row: 4;
+  text-align: center;
+  align-content: center;
+  justify-content: space-around;
+  padding: 0 20px 40px 20px;
+  height: fit-content;
+}
+.btn-grid {
+  display: block;
+  grid-column: 3;
+  grid-row: 5;
+  text-align: center;
+  align-content: center;
+  padding-right: 10%;
+}
+.link-grid {
+  display: block;
+  grid-column: 2 / span 3;
+  grid-row: 6;
+  text-align: center;
+  align-content: center;
+}
+.card-element.lobby {
+  display: inline-block;
+  width: 80%;
+  padding: 10px 40px;
+}
+.qr {
+  display: inline-block;
+  text-align: center;
+  background-color: white;
+  padding: 10px;
+  width: fit-content;
+  height: fit-content;
+}
+.honey-player {
+  display: inline-block;
+  background-color: darkgoldenrod;
+  font-size: 105%;
+  font-weight: bold;
+  color: black;
+  padding: 10px 20px;
+  margin: 5px;
+  border-radius: 8px;
+}

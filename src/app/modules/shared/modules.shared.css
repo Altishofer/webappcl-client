@@ -9,7 +9,7 @@ body {
   background: #e2e2e2;
 }
 .card-element {
-  background: lightsteelblue;
+  background: rgba(90,63,27,0.78);
   padding: 5px 15px;
   text-align: center;
   width: 100%;
