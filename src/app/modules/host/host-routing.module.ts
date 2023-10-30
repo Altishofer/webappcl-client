@@ -8,6 +8,7 @@ import {LobbyComponent} from "@modules/host/pages/lobby/lobby.component";
 import {RoundMainComponent} from "@modules/host/pages/round-main/round-main.component";
 import {ResultsComponent} from "@modules/host/pages/results/results.component";
 import {QuizCreationComponent} from "@modules/host/pages/quiz-creation/quiz-creation.component";
+import {FinalResultsComponent} from "@modules/host/pages/final-results/final-results.component";
 
 const routes: Routes = [
   {
@@ -33,6 +34,9 @@ const routes: Routes = [
   },
   {
     path:'results/:quizId/:roundId', component: ResultsComponent
+  },
+  {
+    path:'results/:quizId', component: FinalResultsComponent
   },
   {
     path:'creation', component:QuizCreationComponent

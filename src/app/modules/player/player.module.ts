@@ -7,6 +7,7 @@ import { WordCalcComponent } from './pages/word-calc/word-calc.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { WaitingComponent } from './pages/waiting/waiting.component';
 import { RankingComponent } from './pages/ranking/ranking.component';
+import { FinalResultsComponent } from './pages/final-results/final-results.component';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { RankingComponent } from './pages/ranking/ranking.component';
     WordCalcComponent,
     RegisterComponent,
     WaitingComponent,
-    RankingComponent
+    RankingComponent,
+    FinalResultsComponent
   ],
   imports: [
     CommonModule,

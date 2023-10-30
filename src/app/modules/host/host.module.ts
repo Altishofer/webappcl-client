@@ -14,6 +14,7 @@ import { ResultsComponent } from './pages/results/results.component';
 import {CdkAccordionModule} from "@angular/cdk/accordion";
 import { QuizCreationComponent } from './pages/quiz-creation/quiz-creation.component';
 import { WelcomePortalComponent } from './pages/welcome-portal/welcome-portal.component';
+import { FinalResultsComponent } from './pages/final-results/final-results.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { WelcomePortalComponent } from './pages/welcome-portal/welcome-portal.co
     RoundMainComponent,
     ResultsComponent,
     QuizCreationComponent,
-    WelcomePortalComponent
+    WelcomePortalComponent,
+    FinalResultsComponent
   ],
   imports: [
     CommonModule,

@@ -4,6 +4,7 @@ import { WordCalcComponent } from "./pages/word-calc/word-calc.component";
 import {RegisterComponent} from "@modules/player/pages/register/register.component";
 import {WaitingComponent} from "@modules/player/pages/waiting/waiting.component";
 import {RankingComponent} from "@modules/player/pages/ranking/ranking.component";
+import {FinalResultsComponent} from "@modules/host/pages/final-results/final-results.component";
 
 const routes: Routes = [
   {
@@ -20,6 +21,9 @@ const routes: Routes = [
   },
   {
     path:'ranking/:quizId/:roundId/:playerName', component:RankingComponent
+  },
+  {
+    path:'results/:quizId', component: FinalResultsComponent
   }
   ];
 
