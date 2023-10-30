@@ -2,9 +2,9 @@
 
 <mat-card class="card-element">
   <div>
-    <h2 class="center">http://localhost:4200/player/register/{{this.quizId}}</h2>
+    <h2>http://localhost:4200/player/register/{{this.quizId}}</h2>
 
-    <qrcode class="center" [qrdata]="QRvalue" [width]="256" [errorCorrectionLevel]="'H'"></qrcode>
+    <qrcode [qrdata]="QRvalue" [width]="256" [errorCorrectionLevel]="'H'"></qrcode>
   </div>
 
   <div>
@@ -18,7 +18,7 @@
   </div>
 
   <div>
-    <button (click)="startGame()">
+    <button mat-raised-button color="positive" (click)="startGame()">
       switch to round
     </button>
   </div>
