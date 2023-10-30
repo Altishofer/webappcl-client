@@ -8,6 +8,12 @@ body {
   min-height: 100vh;
   background: #e2e2e2;
 }
+.card-element {
+  background: lightsteelblue;
+  padding: 5px 15px;
+  text-align: center;
+  width: 100%;
+}
 .app-header {
   justify-content: space-between;
   position: fixed;

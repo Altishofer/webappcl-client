@@ -53,12 +53,6 @@ h2 {
   grid-row: 2;
   display: inline-block;
 }
-.card-element {
-  background: lightsteelblue;
-  padding: 5px 15px;
-  text-align: center;
-  width: 100%;
-}
 .quiz-preview-portal {
   padding-right: 10px;
   grid-column: 2 / span 3;
