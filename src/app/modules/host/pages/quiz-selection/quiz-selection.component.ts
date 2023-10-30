@@ -13,7 +13,7 @@ import {Quiz} from "@data/interfaces/quiz.model";
   styleUrls: ['./quiz-selection.component.css']
 })
 export class QuizSelectionComponent implements OnInit,AfterViewInit {
-  allQuizzes!: [{hostId: number, id: number, title: string, rounds: Round[]}];
+  allQuizzes!: [{hostId: number, quizId: number, title: string, rounds: Round[]}];
   allRoundsOfQuiz: Round[] = [];
   errorMsg : string = '';
   unexpectedErrorMsg : string = "An unexpected error occurred.";
@@ -49,6 +49,7 @@ export class QuizSelectionComponent implements OnInit,AfterViewInit {
 
   getQuizzesWithRounds(): void {
     this._quizService.getQuizzesWithRounds().subscribe((response: any): void => {
+      console.log("REST quizzes: ", response.body);
       if ((response.status >= 200 && response.status < 300) || response.status == 304) {
         this.allQuizzes = response.body;
       } else {
@@ -72,7 +73,7 @@ export class QuizSelectionComponent implements OnInit,AfterViewInit {
 
   getSelectedQuizRounds(requestedQuizId: number): Round[] {
     for (let pos: number = 0; pos < this.allQuizzes.length; pos++) {
-      if (this.allQuizzes[pos].id === requestedQuizId) {
+      if (this.allQuizzes[pos].quizId === requestedQuizId) {
         this.allRoundsOfQuiz = this.allQuizzes[pos].rounds;
         return this.allRoundsOfQuiz;
       }
@@ -85,6 +86,7 @@ export class QuizSelectionComponent implements OnInit,AfterViewInit {
   }
 
   startQuiz() {
+    console.log(this.selectedQuizId);
     this.router.navigate(['/host', 'lobby', this.selectedQuizId]);
   }
 
