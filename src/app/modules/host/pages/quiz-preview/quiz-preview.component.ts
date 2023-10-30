@@ -1,8 +1,7 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {QuizService} from "@data/services/quiz.service";
-import {ActivatedRoute, Router} from "@angular/router";
+import {Router} from "@angular/router";
 import {Round} from "@data/interfaces/round.model";
-import {Quiz} from "@data/interfaces/quiz.model";
 
 @Component({
   selector: 'app-quiz-preview',
@@ -12,7 +11,6 @@ import {Quiz} from "@data/interfaces/quiz.model";
 export class QuizPreviewComponent {
   allRounds: Round[] = [];
   errorMsg : string = '';
-  unexpectedErrorMsg : string = "An unexpected error occurred."
 
   @Input() selectedQuizId: number = 0;
   @Input() selectedQuizTitle: string = '';
@@ -22,7 +20,10 @@ export class QuizPreviewComponent {
   @Output() startQuiz: EventEmitter<number> = new EventEmitter<number>();
   @Output() changesSaved: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  constructor(private quizService: QuizService, private router: Router) {
+  constructor(
+      private _quizService: QuizService,
+      private _router: Router
+  ) {
 
   }
 
