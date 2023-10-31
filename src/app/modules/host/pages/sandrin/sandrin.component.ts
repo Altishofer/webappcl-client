@@ -42,7 +42,7 @@ export class SandrinComponent {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
-    this.http.get(`${this.vectorUrl}/status`, {headers})
+    this.http.get(`api/Word2Vector/status`, {headers})
       .subscribe(
         (response: any) => {
           console.log(response);

@@ -119,4 +119,11 @@ export class HostService {
     });
     return this.http.get(`${this.quizUrl}/GetAllRoundIdsByQuiz/${quizId}`, {observe: 'response', headers});
   }
+
+  wakeUpServer() : Observable<any>{
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+    return this.http.get(`${environment.API_URL}/Word2Vector/status`, {observe: 'response', headers});
+  }
 }

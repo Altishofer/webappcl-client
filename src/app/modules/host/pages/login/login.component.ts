@@ -1,22 +1,28 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { Host } from "app/data/interfaces/host.model";
 import { HostService } from "app/data/services/host.service";
 import { CookieService } from "ngx-cookie-service";
 import { catchError, Observable } from "rxjs";
 import { Router } from '@angular/router';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { HttpErrorResponse } from "@angular/common/http";
+import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit{
   errorMsg : string = '';
   loginForm: FormGroup;
   isLogin: boolean = true;
   unexpectedErrorMsg : string = "An unexpected error occurred."
-  constructor(private hostService: HostService, private cookieService: CookieService, private router: Router, private fb: FormBuilder) {
+  constructor(
+    private hostService: HostService,
+    private cookieService: CookieService,
+    private router: Router,
+    private fb: FormBuilder,
+    private http: HttpClient) {
+
     this.loginForm = this.fb.group({
       username: ['', [Validators.required, Validators.pattern(/^(\S){1,50}$/)]],
       password: ['', [Validators.required, Validators.pattern(/^(\S){1,50}$/)]]
@@ -34,6 +40,10 @@ export class LoginComponent {
       console.log('Form status changed', status);
     });
   };
+
+  ngOnInit() {
+    this.wakeUpServer();
+  }
 
   host: Host = {
     hostName: "",
@@ -88,6 +98,12 @@ export class LoginComponent {
           this.errorMsg = this.unexpectedErrorMsg;
         }
       });
+  }
+
+  wakeUpServer() {
+    this.hostService.wakeUpServer().subscribe((response: any) => {
+      console.log("wakeUpServer response: " + response.body.length);
+    });
   }
 
 }
