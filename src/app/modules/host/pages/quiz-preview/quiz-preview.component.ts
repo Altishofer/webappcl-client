@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {QuizService} from "@data/services/quiz.service";
 import {Router} from "@angular/router";
 import {Round} from "@data/interfaces/round.model";
@@ -30,7 +30,8 @@ export class QuizPreviewComponent implements OnInit{
   constructor(
       private fb: FormBuilder,
       private _quizService: QuizService,
-      private _router: Router
+      private _router: Router,
+      private cd : ChangeDetectorRef
   ) {
     this.addFieldDisabled = true;
     this.wordCalcForm = this.fb.group({});
@@ -64,12 +65,13 @@ export class QuizPreviewComponent implements OnInit{
 
 
   addField(roundId:string, word:string = '', isSubtracted:boolean = false) : void {
-    console.log('addField for round: ', roundId);
     const formArray: FormArray<any> = this.wordCalcForm.get(roundId) as FormArray;
+    console.log('AddForbiddenWord_Before', formArray.value);
     if (formArray){
       formArray.push(this.createWordFormGroup(word, isSubtracted));
     }
     this.addFieldDisabled = true;
+    console.log('AddForbiddenWord_After', formArray.value);
   }
 
 
@@ -99,30 +101,36 @@ export class QuizPreviewComponent implements OnInit{
   removeField(roundId : string, index: number) : void {
     console.log('deleteForbiddenWord', roundId, index);
     const formArray: FormArray<any> = this.wordCalcForm.get(roundId) as FormArray;
+    console.log('deleteForbiddenWord', formArray.value);
     if (formArray){
       const control: AbstractControl<any, any> = formArray.at(index);
         if (control) {
           formArray.removeAt(index);
+          //formArray.updateValueAndValidity();
         }
       }
     this.addFieldDisabled = this.allIndexWordNonEmpty(roundId);
+    //this.cd.detectChanges();
+    console.log('RemoveForbiddenWord_After', formArray.value);
   }
 
   changeForbiddenWord(roundId: string, index: number, event: Event) : void {
-    console.log('changeForbiddenWord', roundId, index, event);
     const control = (<FormArray>this.wordCalcForm.get(roundId.toString())).at(index);
     const formArray: FormArray<any> = this.wordCalcForm.get(roundId.toString()) as FormArray;
+    console.log('changeForbiddenWord', formArray.value);
     if (formArray && event.target){
       const control: AbstractControl<any, any> = formArray.at(index);
       if (control) {
         control.get('word')?.setValue((event.target as HTMLInputElement).value);
       }
     }
+    console.log('ChangeForbiddenWord_After', formArray.value);
   }
 
   trackByFn(index: any, item: any) {
-    return index;
+    return item;
   }
+  // (input)="changeForbiddenWord(round.id, i, $event)"
 
   assignValues(){
     this.selectedQuizRounds.forEach((round: Round) => {

@@ -46,8 +46,8 @@
                 <div  *ngFor="let word of wordCalcForm.get(round.id.toString())?.value; let i = index;  trackBy: trackByFn">
                   <div [formGroupName]="i">
                     <span class="center">
-                      <input type="text" class="word-calc-input" placeholder="enter word" (input)="changeForbiddenWord(round.id, i, $event)" formControlName="word" autofocus>
-                      <button mat-icon-button class="remove" color="warn" [disabled]="position===0 && onlyOneField(round.id.toString())" (click)="removeField(round.id.toString(), i)">
+                      <input type="text" class="word-calc-input" placeholder="enter word"  formControlName="word" autofocus>
+                      <button mat-icon-button class="remove" color="warn" [disabled]="(i===0 && onlyOneField(round.id.toString())) || (!addFieldDisabled && i==0)" (click)="removeField(round.id.toString(), i)">
                         <mat-icon>remove_circle</mat-icon>
                       </button>
                     </span>
@@ -57,7 +57,7 @@
             </div>
           </ng-container>
           <div class="center">
-                <ng-template [ngIf]="allIndexWordNonEmpty(round.id.toString())">
+                <ng-template [ngIf]="allIndexWordNonEmpty(round.id.toString()) || (onlyOneField(round.id.toString()) && allIndexWordNonEmpty(round.id.toString()))">
                   <button mat-raised-button color="accent" class="marginalized" (click)="addField(round.id.toString())">Add Field</button>
                 </ng-template>
               </div>
