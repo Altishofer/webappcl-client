@@ -79,11 +79,11 @@ export class LoginComponent {
       .subscribe((response: any): void => {
         console.log("response", JSON.stringify(response.body));
         if ((response.status >= 200 && response.status < 300) || response.status == 304) {
-          this.cookieService.set('hostToken', response.body.result);
+          this.cookieService.set('hostToken', response.body.token.result);
           this.cookieService.set('hostName', this.host.hostName);
-          console.log(actionName + " was successful -> user '" + this.host.hostName + "', received token: " + response.body.result);
+          console.log(actionName + " was successful -> user '" + this.host.hostName + "', received token: " + response.body.token.result);
           this.hostService.refreshTokenPeriodically();
-          this.router.navigate(['/host/selection']);
+          this.router.navigate([`/host/selection/${response.body.id}`]);
         } else {
           this.errorMsg = this.unexpectedErrorMsg;
         }

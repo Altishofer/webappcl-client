@@ -6,6 +6,8 @@ import { environment } from "../../../environments/environment";
 import { Host } from '../interfaces/host.model'
 import {Observable} from "rxjs";
 import {VectorCalculationModel} from "@data/interfaces/VectorCalculation.model";
+import {Round} from "@data/interfaces/round.model";
+import {QuizWithRound} from "@data/interfaces/QuizWithRound";
 
 @Injectable({
   providedIn: 'root',
@@ -117,5 +119,4 @@ export class HostService {
     });
     return this.http.get(`${this.quizUrl}/GetAllRoundIdsByQuiz/${quizId}`, {observe: 'response', headers});
   }
-
 }

@@ -1,5 +1,9 @@
 <div class="portal-grid">
-  <h2 class="h2-grid">Details for Quiz "{{selectedQuizTitle}}":</h2>
+  <div class="right-2nd-btn">
+    <input type="text" [(ngModel)]="newQuizTitle" class="editable-title">
+    <button mat-icon-button class="edit-title-button" (click)="saveTitle(newQuizTitle)"><mat-icon>save</mat-icon></button>
+  </div>
+  <h2 class="h2-grid">"{{selectedQuizTitle}}":</h2>
   <span class="left-btn">
     <button mat-mini-fab color="accent" class="red-fab-btn" (click)="closePreview()"><mat-icon>arrow_back_ios</mat-icon></button>
   </span>
@@ -21,16 +25,21 @@
                           [attr.aria-expanded]="accordionItem.expanded"
                           [attr.aria-controls]="'accordion-body-' + position"
       >
-        <div class="quiz-accordion-round-target" (click)="accordionItem.toggle()">
-          <span class="target-numeration-element">
-            Round {{ position+1 }}:
-          </span>
-
-          <span class="target-word-tease">
-            {{ round.roundTarget }}
-          </span>
+        <div class="quiz-accordion-round-header">
+          <div class="quiz-accordion-round-target" (click)="accordionItem.toggle()">
+            <span class="target-numeration-element">
+              Round {{ position+1 }}:
+            </span>
+            <span class="target-word-tease">
+              {{ round.roundTarget }}
+            </span>
+            <span>
+              <button mat-icon-button class="remove" color="warn" (click)="removeRound(round.id.toString())">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </span>
+          </div>
         </div>
-
         <div class="quiz-accordion-round-details"
                           role="region"
                           [style.display]="accordionItem.expanded ? '' : 'none'"
@@ -39,25 +48,31 @@
           <div class="inter-title" style="margin-top: 0">
             Target Word:
           </div>
-
+          <div class="target-word-element">
+            {{ round.roundTarget }}
+          </div>
+          <div class="inter-title">
+            Forbidden Words:
+          </div>
           <ng-container>
             <div [formGroup]="wordCalcForm">
               <div [formArrayName]="round.id.toString()">
-                <div  *ngFor="let word of wordCalcForm.get(round.id.toString())?.value; let i = index">
+                <div  *ngFor="let control of getControls(round.id.toString()); let i = index;  trackBy: trackByFn">
                   <div [formGroupName]="i">
-                    <input class="word-calc-input" matInput placeholder="enter word" (input)="changeTargetWord(round.id, i, $event)" formControlName="word">
-                    <button mat-icon-button class="remove" color="warn" [disabled]="position===0 && onlyOneField(round.id.toString())" (click)="removeField(round.id.toString(), i.toString())">
-                      <mat-icon>remove_circle</mat-icon>
-                    </button>
+                    <span class="center">
+                      <input type="text" class="word-calc-input" placeholder="enter word"  formControlName="word" autofocus>
+                      <button mat-icon-button class="remove" color="warn" [disabled]="(i===0 && onlyOneField(round.id.toString())) || (!addFieldDisabled && i==0)" (click)="removeField(round.id.toString(), i)">
+                        <mat-icon>remove_circle</mat-icon>
+                      </button>
+                    </span>
                   </div>
                 </div>
               </div>
-
             </div>
           </ng-container>
           <div class="center">
-                <ng-template [ngIf]="allIndexWordNonEmpty()">
-                  <button mat-raised-button color="accent" class="marginalized" [disabled]="!allIndexWordNonEmpty()" (click)="addField(round.id.toString())">Add Field</button>
+                <ng-template [ngIf]="allIndexWordNonEmpty(round.id.toString()) || (onlyOneField(round.id.toString()) && allIndexWordNonEmpty(round.id.toString()))">
+                  <button mat-raised-button color="accent" class="marginalized" (click)="addField(round.id.toString())">Add Field</button>
                 </ng-template>
               </div>
               <ng-template [ngIf]="errorMsg">
@@ -65,14 +80,6 @@
                   {{ errorMsg }}
                 </p>
               </ng-template>
-
-          <div class="target-word-element">
-            {{ round.roundTarget }}
-          </div>
-
-          <div class="inter-title">
-            Forbidden Words:
-          </div>
           <div *ngFor="let forbiddenWord of round.forbiddenWords">
             <div class="forbidden-word-element">
               {{ forbiddenWord }}
@@ -81,5 +88,6 @@
         </div>
       </cdk-accordion-item>
     </cdk-accordion>
+    <button mat-raised-button color="primary" (click)="addNewRound()">Add Round</button>
   </span>
 </div>
