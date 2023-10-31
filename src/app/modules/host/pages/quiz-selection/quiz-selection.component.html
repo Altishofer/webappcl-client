@@ -18,13 +18,13 @@
       <h2>My Quizzes</h2>
 
       <mat-card-content>
-        <button mat-raised-button color="positive" class="btn-add" (click)="selectedPortal = quizCreationPortal; setSelectedQuiz(-1, '', -1)">
+        <button mat-raised-button color="positive" class="btn-add" (click)="refresh(); selectedPortal = quizPreviewPortal; setSelectedQuiz(-1, 'New Quiz', hostId)">
           <mat-icon class="icon white">library_add</mat-icon>
           <span class="name">Create New Quiz</span>
         </button>
 
         <ng-template ngFor let-quiz [ngForOf]="allQuizzes">
-          <button mat-raised-button color="accent" class="btn-quiz" (click)="setSelectedQuiz(quiz.quizId, quiz.title, quiz.hostId); selectedPortal = quizPreviewPortal">
+          <button *ngIf="quiz.quizId!=-1" mat-raised-button color="accent" class="btn-quiz" (click)="refresh(); setSelectedQuiz(quiz.quizId, quiz.title, quiz.hostId); selectedPortal = quizPreviewPortal">
             <mat-icon class="icon">question_answer</mat-icon>
             <span class="name">{{ quiz.title }}</span>
           </button>

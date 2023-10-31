@@ -21,7 +21,7 @@ const routes: Routes = [
     path:'login', component:LoginComponent
   },
   {
-    path:'selection', component:QuizSelectionComponent
+    path:'selection/:hostId', component:QuizSelectionComponent
   },
   {
     path:'preview/:quizId', component: QuizPreviewComponent

@@ -66,4 +66,13 @@ export class QuizService {
     let body : any = JSON.stringify(quizRoundDto);
     return this.http.put(`${this.baseUrl}/UpdateQuiz`, body, {observe: 'response', headers});
   }
+
+  createQuiz(quizRoundDto : QuizWithRound): Observable<any> {
+    const headers: HttpHeaders = new HttpHeaders({
+      'Authorization': "Bearer " + this.cookieService.get("hostToken"),
+      'Content-Type': 'application/json',
+    });
+    let body : any = JSON.stringify(quizRoundDto);
+    return this.http.post(`${this.baseUrl}/CreateQuizWithRounds`, body, {observe: 'response', headers});
+  }
 }

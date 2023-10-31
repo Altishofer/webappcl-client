@@ -157,3 +157,14 @@ button.remove:disabled {
   visibility: hidden;
 }
 
+.editable-title {
+  border: 1px solid #ccc;
+  padding: 5px;
+  margin-right: 10px;
+  width: auto;
+}
+
+.edit-title-button {
+  margin: 0;
+}
+

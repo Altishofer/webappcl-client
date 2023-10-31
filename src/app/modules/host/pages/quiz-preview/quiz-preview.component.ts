@@ -1,10 +1,20 @@
-import {AfterViewInit, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  HostListener,
+  Input,
+  OnInit,
+  Output
+} from '@angular/core';
 import {QuizService} from "@data/services/quiz.service";
 import {Router} from "@angular/router";
 import {Round} from "@data/interfaces/round.model";
 import {AbstractControl, FormArray, FormBuilder, FormGroup} from "@angular/forms";
 import {MatSlideToggleChange} from "@angular/material/slide-toggle";
 import {QuizWithRound} from "@data/interfaces/QuizWithRound";
+
 
 @Component({
   selector: 'app-quiz-preview',
@@ -16,6 +26,8 @@ export class QuizPreviewComponent implements OnInit{
   errorMsg : string = '';
   addFieldDisabled : boolean;
   unexpectedErrorMsg : string = "An unexpected error occurred."
+  newQuizTitle: string = '';
+  unsavedChanges: boolean = false;
 
   wordCalcForm: FormGroup;
   //wordsArray: FormArray;
@@ -47,6 +59,10 @@ export class QuizPreviewComponent implements OnInit{
   }
 
   ngOnInit() {
+    if (this.selectedQuizId == -1) {
+      this.addNewRound();
+      return;
+    }
     this.selectedQuizRounds.forEach((round: Round) => {
       let lst: AbstractControl<any, any>[] = [];
       round.forbiddenWords.forEach((forbiddenWord: string) => {
@@ -120,17 +136,8 @@ export class QuizPreviewComponent implements OnInit{
     console.log('RemoveForbiddenWord_After', formArray.value);
   }
 
-  changeForbiddenWord(roundId: string, index: number, event: Event) : void {
-    const control = (<FormArray>this.wordCalcForm.get(roundId.toString())).at(index);
-    const formArray: FormArray<any> = this.wordCalcForm.get(roundId.toString()) as FormArray;
-    console.log('changeForbiddenWord', formArray.value);
-    if (formArray && event.target){
-      const control: AbstractControl<any, any> = formArray.at(index);
-      if (control) {
-        control.get('word')?.setValue((event.target as HTMLInputElement).value);
-      }
-    }
-    console.log('ChangeForbiddenWord_After', formArray.value);
+  changes() : void {
+    this.unsavedChanges = true;
   }
 
   addNewRound(){
@@ -195,15 +202,36 @@ export class QuizPreviewComponent implements OnInit{
     //  }]
     //}
 
-  console.log(quiz);
-
-  this._quizService.updateQuiz(quiz).subscribe((response: any): void => {
-    console.log("REST quiz: ", response.body);
-    if ((response.status >= 200 && response.status < 300) || response.status == 304) {
-      this.selectedQuizRounds = response.body.rounds;
+    console.log(quiz);
+    if (this.selectedQuizId == -1) {
+      this._quizService.createQuiz(quiz).subscribe((response: any): void => {
+        console.log("REST quiz: ", response.body);
+        if ((response.status >= 200 && response.status < 300) || response.status == 304) {
+          this.selectedQuizRounds = response.body.rounds;
+          this.selectedQuizId = response.body.quizId;
+          location.reload();
+        } else {
+          this.errorMsg = this.unexpectedErrorMsg;
+        }
+      });
     } else {
-      this.errorMsg = this.unexpectedErrorMsg;
+      this._quizService.updateQuiz(quiz).subscribe((response: any): void => {
+        console.log("REST quiz: ", response.body);
+        if ((response.status >= 200 && response.status < 300) || response.status == 304) {
+          this.selectedQuizRounds = response.body.rounds;
+          this.unsavedChanges = false;
+          //this.changesSaved.emit(true);
+          //this.closePreview();
+        } else {
+          this.errorMsg = this.unexpectedErrorMsg;
+        }
+      });
     }
-  });
-  }
+    }
+
+    saveTitle(title: string) {
+      if (title){
+        this.selectedQuizTitle = title;
+      }
+    }
 }
