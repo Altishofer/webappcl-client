@@ -43,11 +43,6 @@ export class QuizPreviewComponent implements OnInit{
     }, {disabled: false, validators: []});
   }
 
-  onInputClick() {
-    console.log('Input field was clicked');
-  }
-
-
   ngOnInit() {
     this.selectedQuizRounds.forEach((round: Round) => {
       let lst: AbstractControl<any, any>[] = [];
@@ -113,15 +108,20 @@ export class QuizPreviewComponent implements OnInit{
     this.addFieldDisabled = this.allIndexWordNonEmpty(roundId);
   }
 
-  changeForbiddenWord(roundId:string, index: number, event: Event) : void {
+  changeForbiddenWord(roundId: string, index: number, event: Event) : void {
     console.log('changeForbiddenWord', roundId, index, event);
-    const formArray: FormArray<any> = this.wordCalcForm.get(roundId) as FormArray;
+    const control = (<FormArray>this.wordCalcForm.get(roundId.toString())).at(index);
+    const formArray: FormArray<any> = this.wordCalcForm.get(roundId.toString()) as FormArray;
     if (formArray && event.target){
       const control: AbstractControl<any, any> = formArray.at(index);
       if (control) {
         control.get('word')?.setValue((event.target as HTMLInputElement).value);
       }
     }
+  }
+
+  trackByFn(index: any, item: any) {
+    return index;
   }
 
   assignValues(){

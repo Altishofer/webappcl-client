@@ -43,10 +43,10 @@
           <ng-container>
             <div [formGroup]="wordCalcForm">
               <div [formArrayName]="round.id.toString()">
-                <div  *ngFor="let word of wordCalcForm.get(round.id.toString())?.value; let i = index">
+                <div  *ngFor="let word of wordCalcForm.get(round.id.toString())?.value; let i = index;  trackBy: trackByFn">
                   <div [formGroupName]="i">
                     <span class="center">
-                      <input type="text" class="word-calc-input" matInput placeholder="enter word" (input)="changeForbiddenWord(round.id, i, $event)" (click)="onInputClick()" formControlName="word">
+                      <input type="text" class="word-calc-input" placeholder="enter word" (input)="changeForbiddenWord(round.id, i, $event)" formControlName="word" autofocus>
                       <button mat-icon-button class="remove" color="warn" [disabled]="position===0 && onlyOneField(round.id.toString())" (click)="removeField(round.id.toString(), i)">
                         <mat-icon>remove_circle</mat-icon>
                       </button>
