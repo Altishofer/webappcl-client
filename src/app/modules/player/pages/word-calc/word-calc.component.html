@@ -17,7 +17,11 @@
       </div>
       <div class="center">
         <ng-template [ngIf]="allIndexWordNonEmpty()">
-          <button mat-raised-button color="accent" class="marginalized" [disabled]="!allIndexWordNonEmpty()" (click)="addField()">Add Field</button>
+          <button mat-mini-fab color="positive" class="marginalized" [disabled]="!allIndexWordNonEmpty()" (click)="addField()">
+            <mat-icon>
+              add
+            </mat-icon>
+          </button>
         </ng-template>
       </div>
     </div>

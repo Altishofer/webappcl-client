@@ -43,19 +43,20 @@ span .name {
 }
 .quiz-accordion-round-target {
   background-color: lightgrey;
-  border: solid 1px black;
+  border: solid 1px darkgrey;
+  border-left-width: 2px;
+  border-right-width: 2px;
   display: block;
-  margin-right: 30px;
+  margin: 0 30px;
   align-content: center;
   justify-content: center;
   transition: transform .2s;
 }
 .quiz-accordion-round-details {
   background-color: lightgray;
-  border: solid 1px black;
-  border-left: solid 2px black;
+  border: solid 1px grey;
   display: block;
-  margin-left: 30px;
+  margin-left: 60px;
   text-align: center;
   font-size: 16px;
   border-top-right-radius: 8px;
@@ -73,10 +74,12 @@ span .name {
 .quiz-accordion-round:first-child > .quiz-accordion-round-target {
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
+  border-top-width: 2px;
 }
 .quiz-accordion-round:last-child > .quiz-accordion-round-target {
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
+  border-bottom-width: 2px;
 }
 .inter-title {
   font-size: 16px;
