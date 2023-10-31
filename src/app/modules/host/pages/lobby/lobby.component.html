@@ -1,25 +1,33 @@
+<div class="center">
+  <mat-card class="card-element lobby">
+    <div class="lobby-grid">
+      <h2 class="h2-grid">Scan the QR code to join:</h2>
 
+      <p class="link-grid">http://localhost:4200/player/register/{{this.quizId}}</p>
 
-<mat-card class="card-element">
-  <div>
-    <h2>http://localhost:4200/player/register/{{this.quizId}}</h2>
+      <div class="qr-grid">
+        <mat-card class="qr">
+          <qrcode [qrdata]="QRvalue" [width]="256" [errorCorrectionLevel]="'H'"></qrcode>
+        </mat-card>
+      </div>
 
-    <qrcode [qrdata]="QRvalue" [width]="256" [errorCorrectionLevel]="'H'"></qrcode>
-  </div>
+      <h2 class="between-title-grid">
+        List of all joined players:
+      </h2>
 
-  <div>
-    <h2>
-      List of all joined players:
-    </h2>
+      <div class="players-grid">
+        <ng-template ngFor let-str [ngForOf]="players">
+          <span class="honey-player">
+            {{str}}
+          </span>
+        </ng-template>
+      </div>
 
-    <div *ngFor="let str of players">
-      {{str}}
+      <div class="btn-grid">
+        <button mat-raised-button color="positive" (click)="startGame()">
+          Start
+        </button>
+      </div>
     </div>
-  </div>
-
-  <div>
-    <button mat-raised-button color="positive" (click)="startGame()">
-      switch to round
-    </button>
-  </div>
-</mat-card>
+  </mat-card>
+</div>
