@@ -21,16 +21,21 @@
                           [attr.aria-expanded]="accordionItem.expanded"
                           [attr.aria-controls]="'accordion-body-' + position"
       >
-        <div class="quiz-accordion-round-target" (click)="accordionItem.toggle()">
-          <span class="target-numeration-element">
-            Round {{ position+1 }}:
-          </span>
-
-          <span class="target-word-tease">
-            {{ round.roundTarget }}
-          </span>
+        <div class="quiz-accordion-round-header">
+          <div class="quiz-accordion-round-target" (click)="accordionItem.toggle()">
+            <span class="target-numeration-element">
+              Round {{ position+1 }}:
+            </span>
+            <span class="target-word-tease">
+              {{ round.roundTarget }}
+            </span>
+            <span>
+              <button mat-icon-button class="remove" color="warn" (click)="removeRound(round.id.toString())">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </span>
+          </div>
         </div>
-
         <div class="quiz-accordion-round-details"
                           role="region"
                           [style.display]="accordionItem.expanded ? '' : 'none'"
@@ -39,7 +44,12 @@
           <div class="inter-title" style="margin-top: 0">
             Target Word:
           </div>
-
+          <div class="target-word-element">
+            {{ round.roundTarget }}
+          </div>
+          <div class="inter-title">
+            Forbidden Words:
+          </div>
           <ng-container>
             <div [formGroup]="wordCalcForm">
               <div [formArrayName]="round.id.toString()">
@@ -66,14 +76,6 @@
                   {{ errorMsg }}
                 </p>
               </ng-template>
-
-          <div class="target-word-element">
-            {{ round.roundTarget }}
-          </div>
-
-          <div class="inter-title">
-            Forbidden Words:
-          </div>
           <div *ngFor="let forbiddenWord of round.forbiddenWords">
             <div class="forbidden-word-element">
               {{ forbiddenWord }}
@@ -82,5 +84,6 @@
         </div>
       </cdk-accordion-item>
     </cdk-accordion>
+    <button mat-raised-button color="primary" (click)="addNewRound()">Add Round</button>
   </span>
 </div>

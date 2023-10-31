@@ -133,6 +133,26 @@ export class QuizPreviewComponent implements OnInit{
     console.log('ChangeForbiddenWord_After', formArray.value);
   }
 
+  addNewRound(){
+    let lst: AbstractControl<any, any>[] = [];
+    lst.push(this.createWordFormGroup('', false));
+
+    let maxId: number = 0;
+    this.selectedQuizRounds.forEach((round: Round) => {
+      if (Number(round.id) > maxId) {
+        maxId = Number(round.id);
+      }
+    });
+    this.wordCalcForm.addControl(String(maxId+1), this.fb.array(lst));
+    let round : Round = {id : String(maxId+1), quizId : String(this.selectedQuizId), roundTarget : 'word', forbiddenWords : ['']};
+    this.selectedQuizRounds.push(round);
+  }
+
+  removeRound(roundId: string) {
+    this.wordCalcForm.removeControl(roundId);
+    this.selectedQuizRounds.splice(this.selectedQuizRounds.findIndex((round: Round) => round.id === roundId), 1);
+  }
+
   trackByFn(index: any, item: any) {
     return item;
   }
