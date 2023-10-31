@@ -43,7 +43,7 @@
           <ng-container>
             <div [formGroup]="wordCalcForm">
               <div [formArrayName]="round.id.toString()">
-                <div  *ngFor="let word of wordCalcForm.get(round.id.toString())?.value; let i = index;  trackBy: trackByFn">
+                <div  *ngFor="let control of getControls(round.id.toString()); let i = index;  trackBy: trackByFn">
                   <div [formGroupName]="i">
                     <span class="center">
                       <input type="text" class="word-calc-input" placeholder="enter word"  formControlName="word" autofocus>

@@ -98,6 +98,10 @@ export class QuizPreviewComponent implements OnInit{
     return this.wordCalcForm.get(quizId)?.value.length === 1;
   }
 
+  getControls(roundId: string) {
+    return (<FormArray>this.wordCalcForm.get(roundId)).controls;
+  }
+
   removeField(roundId : string, index: number) : void {
     console.log('deleteForbiddenWord', roundId, index);
     const formArray: FormArray<any> = this.wordCalcForm.get(roundId) as FormArray;
@@ -130,7 +134,6 @@ export class QuizPreviewComponent implements OnInit{
   trackByFn(index: any, item: any) {
     return item;
   }
-  // (input)="changeForbiddenWord(round.id, i, $event)"
 
   assignValues(){
     this.selectedQuizRounds.forEach((round: Round) => {
