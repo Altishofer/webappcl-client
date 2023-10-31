@@ -4,6 +4,7 @@ import {Router} from "@angular/router";
 import {Round} from "@data/interfaces/round.model";
 import {AbstractControl, FormArray, FormBuilder, FormGroup} from "@angular/forms";
 import {MatSlideToggleChange} from "@angular/material/slide-toggle";
+import {QuizWithRound} from "@data/interfaces/QuizWithRound";
 
 @Component({
   selector: 'app-quiz-preview',
@@ -22,6 +23,7 @@ export class QuizPreviewComponent implements OnInit{
   @Input() selectedQuizId: number = 0;
   @Input() selectedQuizTitle: string = '';
   @Input() selectedQuizRounds: Round[] = [];
+  @Input() selectedHostId: number = 0;
 
   @Output() previewClosed: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() startQuiz: EventEmitter<number> = new EventEmitter<number>();
@@ -135,16 +137,6 @@ export class QuizPreviewComponent implements OnInit{
     return item;
   }
 
-  assignValues(){
-    this.selectedQuizRounds.forEach((round: Round) => {
-      round.forbiddenWords = this.wordCalcForm.get(round.id)?.value.map((wordGroup: AbstractControl<any, any>) => {
-        return wordGroup.get('word')?.value;
-      });
-    });
-    // this.selectedQuizRounds.find(r => r.quizId = quizId)?.forbiddenWords.splice(index);
-    // this.selectedQuizRounds.find(r => r.quizId = quizId)?.forbiddenWords.splice(index);
-  }
-
   start() : void {
     this.startQuiz.emit(this.selectedQuizId);
   }
@@ -154,6 +146,44 @@ export class QuizPreviewComponent implements OnInit{
   }
 
   saveChanges(): void {
-    this.changesSaved.emit(true);
+    this.selectedQuizRounds.forEach((round: Round) => {
+      let formArray = this.wordCalcForm.get(round.id.toString()) as FormArray;
+      round.forbiddenWords = formArray.controls.map(control => control.value.word);
+    });
+    console.log('Updated selectedQuizRounds', this.selectedQuizRounds);
+
+    let quiz: QuizWithRound = {
+      quizId : this.selectedQuizId,
+      hostId : this.selectedHostId,
+      title : this.selectedQuizTitle,
+      rounds : this.selectedQuizRounds
+    }
+
+    //quiz = {
+    //  quizId : 11,
+    //  hostId : 5,
+    //  title : 'honolulu',
+    //  rounds : [{
+    //    "id": "7",
+    //    "quizId": "11",
+    //    "roundTarget": "dog",
+    //    "forbiddenWords": [
+    //      "cat",
+    //      "mouse",
+    //      "bottle"
+    //    ]
+    //  }]
+    //}
+
+  console.log(quiz);
+
+  this._quizService.updateQuiz(quiz).subscribe((response: any): void => {
+    console.log("REST quiz: ", response.body);
+    if ((response.status >= 200 && response.status < 300) || response.status == 304) {
+      this.selectedQuizRounds = response.body.rounds;
+    } else {
+      this.errorMsg = this.unexpectedErrorMsg;
+    }
+  });
   }
 }

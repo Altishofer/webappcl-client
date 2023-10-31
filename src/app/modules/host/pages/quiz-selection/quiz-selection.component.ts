@@ -19,6 +19,7 @@ export class QuizSelectionComponent implements OnInit,AfterViewInit {
   unexpectedErrorMsg : string = "An unexpected error occurred.";
   selectedQuizId: number;
   selectedQuizTitle: string;
+  selectedQuizHostId: number;
 
   @ViewChild('quizPreviewContent') quizPreviewContent!: TemplateRef<unknown>;
   @ViewChild('quizCreationContent') quizCreationContent!: TemplateRef<unknown>;
@@ -36,6 +37,7 @@ export class QuizSelectionComponent implements OnInit,AfterViewInit {
       private router: Router) {
     this.selectedQuizId = -1;
     this.selectedQuizTitle = '';
+    this.selectedQuizHostId = -1;
   }
 
   ngOnInit() {
@@ -66,9 +68,10 @@ export class QuizSelectionComponent implements OnInit,AfterViewInit {
     this._router.navigate([`host/preview/${quizId}`]);
   }
 
-  setSelectedQuiz(quizId: number, quizTitle: string): void {
+  setSelectedQuiz(quizId: number, quizTitle: string, hostId : number): void {
     this.selectedQuizId = quizId;
     this.selectedQuizTitle = quizTitle;
+    this.selectedQuizHostId = hostId;
   }
 
   getSelectedQuizRounds(requestedQuizId: number): Round[] {

@@ -18,13 +18,13 @@
       <h2>My Quizzes</h2>
 
       <mat-card-content>
-        <button mat-raised-button color="positive" class="btn-add" (click)="selectedPortal = quizCreationPortal; setSelectedQuiz(-1, '')">
+        <button mat-raised-button color="positive" class="btn-add" (click)="selectedPortal = quizCreationPortal; setSelectedQuiz(-1, '', -1)">
           <mat-icon class="icon white">library_add</mat-icon>
           <span class="name">Create New Quiz</span>
         </button>
 
         <ng-template ngFor let-quiz [ngForOf]="allQuizzes">
-          <button mat-raised-button color="accent" class="btn-quiz" (click)="setSelectedQuiz(quiz.quizId, quiz.title); selectedPortal = quizPreviewPortal">
+          <button mat-raised-button color="accent" class="btn-quiz" (click)="setSelectedQuiz(quiz.quizId, quiz.title, quiz.hostId); selectedPortal = quizPreviewPortal">
             <mat-icon class="icon">question_answer</mat-icon>
             <span class="name">{{ quiz.title }}</span>
           </button>
@@ -42,7 +42,7 @@
 </div>
 
 <ng-template #quizPreviewContent>
-  <app-quiz-preview [selectedQuizId]="selectedQuizId" [selectedQuizTitle]="selectedQuizTitle" [selectedQuizRounds]="getSelectedQuizRounds(selectedQuizId)" (previewClosed)="closePortal()" (changesSaved)="saveChanges()" (startQuiz)="startQuiz()"></app-quiz-preview>
+  <app-quiz-preview [selectedQuizId]="selectedQuizId" [selectedQuizTitle]="selectedQuizTitle" [selectedQuizRounds]="getSelectedQuizRounds(selectedQuizId)" [selectedHostId]="selectedQuizHostId" (previewClosed)="closePortal()" (changesSaved)="saveChanges()" (startQuiz)="startQuiz()"></app-quiz-preview>
 </ng-template>
 
 <ng-template #quizCreationContent>

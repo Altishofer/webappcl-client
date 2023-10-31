@@ -5,6 +5,7 @@ import {CookieService} from "ngx-cookie-service";
 import {Quiz} from "@data/interfaces/quiz.model";
 import {Host} from "@data/interfaces/host.model";
 import {Observable} from "rxjs";
+import {QuizWithRound} from "@data/interfaces/QuizWithRound";
 
 @Injectable({
   providedIn: 'root'
@@ -55,5 +56,14 @@ export class QuizService {
     });
 
     return this.http.get(`${this.baseUrl}/GetQuiz/${quizId}`, { observe: 'response', headers });
+  }
+
+  updateQuiz(quizRoundDto : QuizWithRound): Observable<any> {
+    const headers: HttpHeaders = new HttpHeaders({
+      'Authorization': "Bearer " + this.cookieService.get("hostToken"),
+      'Content-Type': 'application/json',
+    });
+    let body : any = JSON.stringify(quizRoundDto);
+    return this.http.put(`${this.baseUrl}/UpdateQuiz`, body, {observe: 'response', headers});
   }
 }
