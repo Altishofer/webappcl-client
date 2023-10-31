@@ -45,19 +45,20 @@
               <div [formArrayName]="round.id.toString()">
                 <div  *ngFor="let word of wordCalcForm.get(round.id.toString())?.value; let i = index">
                   <div [formGroupName]="i">
-                    <input class="word-calc-input" matInput placeholder="enter word" (input)="changeTargetWord(round.id, i, $event)" formControlName="word">
-                    <button mat-icon-button class="remove" color="warn" [disabled]="position===0 && onlyOneField(round.id.toString())" (click)="removeField(round.id.toString(), i.toString())">
-                      <mat-icon>remove_circle</mat-icon>
-                    </button>
+                    <span class="center">
+                      <input type="text" class="word-calc-input" matInput placeholder="enter word" (input)="changeForbiddenWord(round.id, i, $event)" (click)="onInputClick()" formControlName="word">
+                      <button mat-icon-button class="remove" color="warn" [disabled]="position===0 && onlyOneField(round.id.toString())" (click)="removeField(round.id.toString(), i)">
+                        <mat-icon>remove_circle</mat-icon>
+                      </button>
+                    </span>
                   </div>
                 </div>
               </div>
-
             </div>
           </ng-container>
           <div class="center">
-                <ng-template [ngIf]="allIndexWordNonEmpty()">
-                  <button mat-raised-button color="accent" class="marginalized" [disabled]="!allIndexWordNonEmpty()" (click)="addField(round.id.toString())">Add Field</button>
+                <ng-template [ngIf]="allIndexWordNonEmpty(round.id.toString())">
+                  <button mat-raised-button color="accent" class="marginalized" (click)="addField(round.id.toString())">Add Field</button>
                 </ng-template>
               </div>
               <ng-template [ngIf]="errorMsg">

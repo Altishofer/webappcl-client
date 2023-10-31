@@ -40,8 +40,13 @@ export class QuizPreviewComponent implements OnInit{
     return this.fb.group({
       word: word,
       isSubtracted: isSubtracted
-    });
+    }, {disabled: false, validators: []});
   }
+
+  onInputClick() {
+    console.log('Input field was clicked');
+  }
+
 
   ngOnInit() {
     this.selectedQuizRounds.forEach((round: Round) => {
@@ -51,54 +56,82 @@ export class QuizPreviewComponent implements OnInit{
       });
       this.wordCalcForm.addControl(round.id, this.fb.array(lst));
     });
-
     console.log('wordCalcForm', this.wordCalcForm.value);
   }
 
-  addField(quizId:string, word:string = '', isSubtracted:boolean = false) : void {
-    this.wordCalcForm.get(quizId)?.value.push(this.createWordFormGroup(word, isSubtracted))
-    this.selectedQuizRounds.find(r => r.quizId = quizId)?.forbiddenWords.push(word);
+  selectText(event: any) {
+    console.log("clicked field");
+    if (event.target.tagName.toLowerCase() === 'input') {
+      const inputElement = event.target as HTMLInputElement;
+      inputElement.select();
+    }
+  }
+
+
+  addField(roundId:string, word:string = '', isSubtracted:boolean = false) : void {
+    console.log('addField for round: ', roundId);
+    const formArray: FormArray<any> = this.wordCalcForm.get(roundId) as FormArray;
+    if (formArray){
+      formArray.push(this.createWordFormGroup(word, isSubtracted));
+    }
     this.addFieldDisabled = true;
   }
 
-  allIndexWordNonEmpty():boolean{
-    //for (let i : number = 0; i < this.wordsArray.length; i++) {
-    //  if (!this.wordsArray.at(i).get('word')?.value) {return false;}
-    //}
-    return true;
+
+  allIndexWordNonEmpty(roundId: string): boolean {
+    const formArray: FormArray<any> = this.wordCalcForm.get(roundId) as FormArray;
+    if (formArray) {
+      for (let i: number = 0; i < formArray.value.length; i++) {
+        let word: string = 'test';
+        const control : AbstractControl<any, any> = formArray.at(i);
+        if (control) {
+          word = control.get('word')?.value;
+        }
+        if (!word) {
+          return false;
+        }
+      }
+      return true;
+    }
+    return false;
   }
+
 
   onlyOneField(quizId : string):boolean{
     return this.wordCalcForm.get(quizId)?.value.length === 1;
   }
 
-
-
-  removeField(roundId : string, index: string) : void {
-    this.wordCalcForm.get(roundId)?.value.splice(index);
-    //this.addFieldDisabled = this.allIndexWordNonEmpty();
+  removeField(roundId : string, index: number) : void {
+    console.log('deleteForbiddenWord', roundId, index);
+    const formArray: FormArray<any> = this.wordCalcForm.get(roundId) as FormArray;
+    if (formArray){
+      const control: AbstractControl<any, any> = formArray.at(index);
+        if (control) {
+          formArray.removeAt(index);
+        }
+      }
+    this.addFieldDisabled = this.allIndexWordNonEmpty(roundId);
   }
 
-  changeSubtract(index: number, event: MatSlideToggleChange) : void {
-    //this.wordsArray.at(index).get('isSubtracted')?.setValue(event.checked);
+  changeForbiddenWord(roundId:string, index: number, event: Event) : void {
+    console.log('changeForbiddenWord', roundId, index, event);
+    const formArray: FormArray<any> = this.wordCalcForm.get(roundId) as FormArray;
+    if (formArray && event.target){
+      const control: AbstractControl<any, any> = formArray.at(index);
+      if (control) {
+        control.get('word')?.setValue((event.target as HTMLInputElement).value);
+      }
+    }
   }
 
-  changeTargetWord(quizId : string ,index: number, event: Event) : void {
-    console.log('changeTargetWord', quizId, index, event);
-    this.wordCalcForm.get(quizId)?.value.at(index).get('word')?.setValue((event.target as HTMLInputElement).value);
-    this.selectedQuizRounds.find(r => r.quizId = quizId)?.forbiddenWords.splice(index);
-    //this.addFieldDisabled = this.allIndexWordNonEmpty();
-  }
-
-  changeForbiddenWord(quizId:string, index: number, event: Event) : void {
-    this.wordCalcForm.get(quizId)?.value.at(index).get('word')?.setValue((event.target as HTMLInputElement).value);
-    this.selectedQuizRounds.find(r => r.quizId = quizId)?.forbiddenWords.splice(index);
-    //this.addFieldDisabled = this.allIndexWordNonEmpty();
-  }
-
-
-  roundsPresent(position: number): boolean {
-    return this.allRounds[position].forbiddenWords.length > 0;
+  assignValues(){
+    this.selectedQuizRounds.forEach((round: Round) => {
+      round.forbiddenWords = this.wordCalcForm.get(round.id)?.value.map((wordGroup: AbstractControl<any, any>) => {
+        return wordGroup.get('word')?.value;
+      });
+    });
+    // this.selectedQuizRounds.find(r => r.quizId = quizId)?.forbiddenWords.splice(index);
+    // this.selectedQuizRounds.find(r => r.quizId = quizId)?.forbiddenWords.splice(index);
   }
 
   start() : void {
