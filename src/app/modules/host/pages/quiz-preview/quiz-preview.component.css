@@ -95,6 +95,7 @@ span .name {
 }
 .target-word-element {
   background-color: darkgreen;
+  margin: 10px 0 5px 0;
 }
 .forbidden-word-element {
   background-color: darkred;

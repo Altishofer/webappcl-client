@@ -9,7 +9,7 @@ body {
   background: #e2e2e2;
 }
 .card-element {
-  background: rgba(90,63,27,0.78);
+  background: khaki;
   padding: 5px 15px;
   text-align: center;
   width: 100%;
@@ -145,4 +145,12 @@ mat-card-content {
 .mat-positive {
   background: darkolivegreen;
   color: white;
+}
+.quiz-creation-input {
+  background: none;
+  color: white;
+  text-align: center;
+  font-size: 16px;
+  border: none;
+  padding: 10px 5px;
 }

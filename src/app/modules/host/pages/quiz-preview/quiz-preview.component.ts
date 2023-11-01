@@ -11,7 +11,7 @@ import {
 import {QuizService} from "@data/services/quiz.service";
 import {Router} from "@angular/router";
 import {Round} from "@data/interfaces/round.model";
-import {AbstractControl, FormArray, FormBuilder, FormGroup} from "@angular/forms";
+import {AbstractControl, FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MatSlideToggleChange} from "@angular/material/slide-toggle";
 import {QuizWithRound} from "@data/interfaces/QuizWithRound";
 
@@ -55,7 +55,7 @@ export class QuizPreviewComponent implements OnInit{
     return this.fb.group({
       word: word,
       isSubtracted: isSubtracted
-    }, {disabled: false, validators: []});
+    }, {disabled: false, validators: [Validators.minLength(1)]});
   }
 
   ngOnInit() {

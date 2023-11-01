@@ -50,18 +50,15 @@
           </div>
 
           <ng-container>
-            <div [formGroup]="targetWordForm">
+            <div class="target-word-element" [formGroup]="targetWordForm">
               <div [formGroupName]="round.id.toString()">
-                <span class="center">
-                  <input type="text" class="word-calc-input" placeholder="enter target word"  formControlName="word" autofocus>
+                <span>
+                  <input type="text" class="quiz-creation-input" placeholder="enter target word"  formControlName="word" autofocus>
                 </span>
               </div>
             </div>
           </ng-container>
 
-          <div class="target-word-element">
-            {{ round.roundTarget }}
-          </div>
           <div class="inter-title">
             Forbidden Words:
           </div>
@@ -69,36 +66,46 @@
             <div [formGroup]="forbiddenWordsForm">
               <div [formArrayName]="round.id.toString()">
                 <div  *ngFor="let control of getControls(round.id.toString()); let i = index;  trackBy: trackByFn">
-                  <div [formGroupName]="i">
-                    <span class="center">
-                      <input type="text" class="word-calc-input" placeholder="enter word"  formControlName="word" autofocus>
-                      <button mat-icon-button class="remove" color="warn" [disabled]="(i===0 && onlyOneField(round.id.toString())) || (!addFieldDisabled && i==0)" (click)="removeField(round.id.toString(), i)">
-                        <mat-icon>remove_circle</mat-icon>
-                      </button>
-                    </span>
-                  </div>
+                  <span [formGroupName]="i" class="forbidden-word-element">
+                    <input type="text" class="quiz-creation-input" placeholder="enter word"  formControlName="word" autofocus>
+                  </span>
+
+                  <span>
+                    <button mat-icon-button class="remove" color="warn" [disabled]="(i===0 && onlyOneField(round.id.toString())) || (!addFieldDisabled && i==0)" (click)="removeField(round.id.toString(), i)">
+                      <mat-icon>remove_circle</mat-icon>
+                    </button>
+                  </span>
                 </div>
               </div>
             </div>
           </ng-container>
+
           <div class="center">
-                <ng-template [ngIf]="allIndexWordNonEmpty(round.id.toString()) || (onlyOneField(round.id.toString()) && allIndexWordNonEmpty(round.id.toString()))">
-                  <button mat-raised-button color="accent" class="marginalized" (click)="addField(round.id.toString())">Add Field</button>
-                </ng-template>
-              </div>
-              <ng-template [ngIf]="errorMsg">
-                <p class="error-message">
-                  {{ errorMsg }}
-                </p>
-              </ng-template>
-          <div *ngFor="let forbiddenWord of round.forbiddenWords">
-            <div class="forbidden-word-element">
-              {{ forbiddenWord }}
-            </div>
+            <ng-template [ngIf]="allIndexWordNonEmpty(round.id.toString()) || (onlyOneField(round.id.toString()) && allIndexWordNonEmpty(round.id.toString()))">
+              <button mat-mini-fab color="positive" class="marginalized" (click)="addField(round.id.toString())">
+                <mat-icon>
+                  add
+                </mat-icon>
+              </button>
+            </ng-template>
           </div>
+
+          <ng-template [ngIf]="errorMsg">
+            <p class="error-message">
+              {{ errorMsg }}
+            </p>
+          </ng-template>
         </div>
       </cdk-accordion-item>
     </cdk-accordion>
-    <button mat-raised-button color="primary" (click)="addNewRound()">Add Round</button>
+  </span>
+
+  <span class="footer-grid">
+    <button mat-raised-button color="positive" (click)="addNewRound()">
+      <mat-icon>
+        add
+      </mat-icon>
+      Add Round
+    </button>
   </span>
 </div>
