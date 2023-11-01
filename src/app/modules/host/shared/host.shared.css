@@ -57,8 +57,10 @@
   padding-top: 30px;
 }
 .footer-grid {
+  display: block;
   grid-column: 2 / span 3;
   grid-row: 4;
   text-align: center;
   justify-content: center;
+  align-content: end;
 }
