@@ -11,7 +11,7 @@ import {
 import {QuizService} from "@data/services/quiz.service";
 import {Router} from "@angular/router";
 import {Round} from "@data/interfaces/round.model";
-import {AbstractControl, FormArray, FormBuilder, FormGroup} from "@angular/forms";
+import {AbstractControl, FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MatSlideToggleChange} from "@angular/material/slide-toggle";
 import {QuizWithRound} from "@data/interfaces/QuizWithRound";
 
@@ -22,14 +22,14 @@ import {QuizWithRound} from "@data/interfaces/QuizWithRound";
   styleUrls: ['./quiz-preview.component.css']
 })
 export class QuizPreviewComponent implements OnInit{
-  allRounds: Round[] = [];
   errorMsg : string = '';
   addFieldDisabled : boolean;
   unexpectedErrorMsg : string = "An unexpected error occurred."
   newQuizTitle: string = '';
   unsavedChanges: boolean = false;
 
-  wordCalcForm: FormGroup;
+  forbiddenWordsForm: FormGroup;
+  targetWordForm: FormGroup;
   //wordsArray: FormArray;
 
   @Input() selectedQuizId: number = 0;
@@ -39,7 +39,6 @@ export class QuizPreviewComponent implements OnInit{
 
   @Output() previewClosed: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() startQuiz: EventEmitter<number> = new EventEmitter<number>();
-  @Output() changesSaved: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor(
       private fb: FormBuilder,
@@ -48,14 +47,15 @@ export class QuizPreviewComponent implements OnInit{
       private cd : ChangeDetectorRef
   ) {
     this.addFieldDisabled = true;
-    this.wordCalcForm = this.fb.group({});
+    this.forbiddenWordsForm = this.fb.group({});
+    this.targetWordForm = this.fb.group({});
   }
 
   createWordFormGroup(word:string='', isSubtracted:boolean=false): FormGroup {
     return this.fb.group({
       word: word,
       isSubtracted: isSubtracted
-    }, {disabled: false, validators: []});
+    }, {disabled: false, validators: [Validators.minLength(1)]});
   }
 
   ngOnInit() {
@@ -68,9 +68,11 @@ export class QuizPreviewComponent implements OnInit{
       round.forbiddenWords.forEach((forbiddenWord: string) => {
         lst.push(this.createWordFormGroup(forbiddenWord, false));
       });
-      this.wordCalcForm.addControl(round.id, this.fb.array(lst));
+      this.forbiddenWordsForm.addControl(round.id, this.fb.array(lst));
+      this.targetWordForm.addControl(round.id, this.createWordFormGroup(round.roundTarget, false));
     });
-    console.log('wordCalcForm', this.wordCalcForm.value);
+    console.log('forbiddenWordsForm: ', this.forbiddenWordsForm.value);
+    console.log('targetWordForm: ', this.targetWordForm.value);
   }
 
   selectText(event: any) {
@@ -81,9 +83,8 @@ export class QuizPreviewComponent implements OnInit{
     }
   }
 
-
   addField(roundId:string, word:string = '', isSubtracted:boolean = false) : void {
-    const formArray: FormArray<any> = this.wordCalcForm.get(roundId) as FormArray;
+    const formArray: FormArray<any> = this.forbiddenWordsForm.get(roundId) as FormArray;
     console.log('AddForbiddenWord_Before', formArray.value);
     if (formArray){
       formArray.push(this.createWordFormGroup(word, isSubtracted));
@@ -94,7 +95,7 @@ export class QuizPreviewComponent implements OnInit{
 
 
   allIndexWordNonEmpty(roundId: string): boolean {
-    const formArray: FormArray<any> = this.wordCalcForm.get(roundId) as FormArray;
+    const formArray: FormArray<any> = this.forbiddenWordsForm.get(roundId) as FormArray;
     if (formArray) {
       for (let i: number = 0; i < formArray.value.length; i++) {
         let word: string = 'test';
@@ -113,16 +114,16 @@ export class QuizPreviewComponent implements OnInit{
 
 
   onlyOneField(quizId : string):boolean{
-    return this.wordCalcForm.get(quizId)?.value.length === 1;
+    return this.forbiddenWordsForm.get(quizId)?.value.length === 1;
   }
 
   getControls(roundId: string) {
-    return (<FormArray>this.wordCalcForm.get(roundId)).controls;
+    return (<FormArray>this.forbiddenWordsForm.get(roundId)).controls;
   }
 
   removeField(roundId : string, index: number) : void {
     console.log('deleteForbiddenWord', roundId, index);
-    const formArray: FormArray<any> = this.wordCalcForm.get(roundId) as FormArray;
+    const formArray: FormArray<any> = this.forbiddenWordsForm.get(roundId) as FormArray;
     console.log('deleteForbiddenWord', formArray.value);
     if (formArray){
       const control: AbstractControl<any, any> = formArray.at(index);
@@ -150,13 +151,13 @@ export class QuizPreviewComponent implements OnInit{
         maxId = Number(round.id);
       }
     });
-    this.wordCalcForm.addControl(String(maxId+1), this.fb.array(lst));
+    this.forbiddenWordsForm.addControl(String(maxId+1), this.fb.array(lst));
     let round : Round = {id : String(maxId+1), quizId : String(this.selectedQuizId), roundTarget : 'word', forbiddenWords : ['']};
     this.selectedQuizRounds.push(round);
   }
 
   removeRound(roundId: string) {
-    this.wordCalcForm.removeControl(roundId);
+    this.forbiddenWordsForm.removeControl(roundId);
     this.selectedQuizRounds.splice(this.selectedQuizRounds.findIndex((round: Round) => round.id === roundId), 1);
   }
 
@@ -174,8 +175,10 @@ export class QuizPreviewComponent implements OnInit{
 
   saveChanges(): void {
     this.selectedQuizRounds.forEach((round: Round) => {
-      let formArray = this.wordCalcForm.get(round.id.toString()) as FormArray;
+      let formArray = this.forbiddenWordsForm.get(round.id.toString()) as FormArray;
       round.forbiddenWords = formArray.controls.map(control => control.value.word);
+      formArray = this.targetWordForm.get(round.id.toString()) as FormArray;
+      round.roundTarget = formArray.value.word;
     });
     console.log('Updated selectedQuizRounds', this.selectedQuizRounds);
 
@@ -230,7 +233,7 @@ export class QuizPreviewComponent implements OnInit{
     }
 
     saveTitle(title: string) {
-      if (title){
+      if (title) {
         this.selectedQuizTitle = title;
       }
     }
