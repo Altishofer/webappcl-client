@@ -33,6 +33,12 @@
   text-align: center;
   justify-content: end;
 }
+.right-2nd-btn {
+  grid-column: 5;
+  grid-row: 2;
+  text-align: center;
+  justify-content: start;
+}
 .green-fab-btn,
 .red-fab-btn {
   color: white;

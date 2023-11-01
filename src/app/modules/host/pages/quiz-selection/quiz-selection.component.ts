@@ -106,10 +106,6 @@ export class QuizSelectionComponent implements OnInit,AfterViewInit {
     this.router.navigate(['/host', 'lobby', this.selectedQuizId]);
   }
 
-  saveChanges() {
-    this.refresh();
-  }
-
   saveCreation() {
     console.log(`Theoretically saving newly created quiz...`);
   }

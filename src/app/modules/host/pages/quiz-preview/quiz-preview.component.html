@@ -48,6 +48,17 @@
           <div class="inter-title" style="margin-top: 0">
             Target Word:
           </div>
+
+          <ng-container>
+            <div [formGroup]="targetWordForm">
+              <div [formGroupName]="round.id.toString()">
+                <span class="center">
+                  <input type="text" class="word-calc-input" placeholder="enter target word"  formControlName="word" autofocus>
+                </span>
+              </div>
+            </div>
+          </ng-container>
+
           <div class="target-word-element">
             {{ round.roundTarget }}
           </div>
@@ -55,7 +66,7 @@
             Forbidden Words:
           </div>
           <ng-container>
-            <div [formGroup]="wordCalcForm">
+            <div [formGroup]="forbiddenWordsForm">
               <div [formArrayName]="round.id.toString()">
                 <div  *ngFor="let control of getControls(round.id.toString()); let i = index;  trackBy: trackByFn">
                   <div [formGroupName]="i">
