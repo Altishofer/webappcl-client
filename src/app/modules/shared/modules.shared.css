@@ -8,7 +8,7 @@ body {
   min-height: 100vh;
 }
 .card-element {
-  background: #F4DFB6;
+  background-image: linear-gradient(to bottom right, #F4DFB6, #DE8F5F);
   padding: 5px 15px;
   text-align: center;
   width: 100%;
@@ -51,7 +51,7 @@ body {
   -webkit-transform: scale(.95);
   -ms-transform: scale(.95);
   top: -20px;
-  opacity: .8;
+  opacity: 1;
   z-index: -1;
 }
 .box:before {
