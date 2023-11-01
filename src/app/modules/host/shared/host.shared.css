@@ -39,16 +39,6 @@
   text-align: center;
   justify-content: start;
 }
-.green-fab-btn,
-.red-fab-btn {
-  color: white;
-}
-.red-fab-btn {
-  background-color: darkred;
-}
-.green-fab-btn {
-  background-color: darkgreen;
-}
 .content-grid {
   grid-column: 2 / 5;
   grid-row: 2 / span 2;
@@ -63,4 +53,82 @@
   text-align: center;
   justify-content: center;
   align-content: end;
+}
+
+
+
+.game-grid {
+  display: grid;
+  column-gap: 8px;
+  row-gap: 4px;
+  grid-template-columns: 8% 28% 28% 28% 8%;
+  grid-template-rows: auto auto auto auto;
+  justify-content: space-evenly;
+  align-content: start;
+  text-align: center;
+}
+.card-element {
+  display: block;
+  grid-column: 2 / span 3;
+  grid-row: 1;
+}
+.target-word-title,
+.forbidden-word-title {
+  font-size: 16px;
+  font-weight: bold;
+  padding-left: 15px;
+}
+.target-word-title {
+  text-align: left;
+  padding-top: 15px;
+}
+.forbidden-word-title {
+  display: block;
+  text-align: left;
+}
+.target-word-element,
+.forbidden-word-element {
+  overflow-wrap: break-word;
+  display: block;
+  text-align: center;
+  margin: 10px 0;
+  padding: 12px 30px;
+  border-radius: 12px;
+  color: white;
+}
+.target-word-element {
+  background-color: darkolivegreen;
+  margin: 10px 0 5px 0;
+}
+.forbidden-word-element {
+  background-color: #9A4444;
+  margin: 10px 0 5px 0;
+}
+.forbidden-word-element + .forbidden-word-element {
+  margin: 5px 0;
+}
+.honey-player {
+  display: inline-block;
+  background-color: #D6D46D;
+  font-size: 105%;
+  font-weight: bold;
+  color: black;
+  padding: 10px 20px;
+  margin: 5px;
+  border-radius: 8px;;
+  animation-duration: 1s;
+  animation-name: lightWiggle;
+  animation-iteration-count: infinite;
+}
+
+@keyframes lightWiggle {
+  0% {
+    rotate: -2deg;
+  }
+  50% {
+    rotate: 2deg;
+  }
+  100% {
+    rotate: -2deg;
+  }
 }

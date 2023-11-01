@@ -1,5 +1,66 @@
 @import "../../shared/host.shared.css";
 
+.card-element {
+  display: grid;
+  grid-template-columns: 48% 4% 48%;
+  grid-template-rows: auto auto auto;
+  row-gap: 4px;
+  column-gap: 0;
+  width: 84%;
+  margin-left: 8%;
+  margin-right: 8%;
+  padding: 5px 5% 20px;
+}
+.game-main {
+  grid-column: 1 / span 3;
+  grid-row: 1;
+  display: grid;
+  grid-template-columns: 80%;
+  grid-template-rows: auto auto auto auto;
+  padding: 0;
+  row-gap: 10px;
+  column-gap: 4px;
+  justify-content: space-evenly;
+  align-content: start;
+  text-align: center;
+}
+.target-word-title,
+.forbidden-word-title {
+  width: 100%;
+  grid-column: 1;
+  text-align: center;
+  padding-left: 0;
+  font-size: 24px;
+}
+.target-word-title {
+  grid-row: 1;
+}
+.forbidden-word-title {
+  grid-row: 3;
+  margin-top: 20px;
+}
+.target-word-element,
+.forbidden-word-element {
+  font-size: 24px;
+}
+.target-word-element {
+  grid-column: 1;
+  grid-row: 2;
+}
+.forbidden-word-container {
+  grid-column: 1;
+  grid-row: 4;
+  margin-bottom: 40px;
+}
+.player-list-container {
+  display: flex;
+  grid-column: 1 / span 3;
+  grid-row: 2;
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 40px;
+}
+
 .player-status {
   display: flex;
   align-items: center;
@@ -8,32 +69,22 @@
   margin: 20px;
 }
 
-
-.player-list-container {
-  display: flex;
-  justify-content: space-around;
-  width: 100%;
-  margin-top: 20px;
+.btn-grid-container {
+  grid-column: 1 / span 3;
+  grid-row: 3;
 }
-
 .player-list {
   flex: 1;
   text-align: center;
 }
-
 .list-title {
+  font-size: 16px;
   font-weight: bold;
   margin-bottom: 10px;
 }
-
-.player-name {
-  margin: 2px;
-}
-
 .answered-list {
   border-right: 2px solid #ccc;
 }
-
 .unanswered-list {
   padding-left: 20px;
 }

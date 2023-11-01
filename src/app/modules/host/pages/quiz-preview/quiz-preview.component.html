@@ -1,21 +1,21 @@
 <div class="portal-grid">
   <div class="right-2nd-btn">
     <input type="text" [(ngModel)]="newQuizTitle" class="editable-title">
-    <button mat-icon-button class="edit-title-button" (click)="saveTitle(newQuizTitle)"><mat-icon>save</mat-icon></button>
+    <button mat-mini-fab color="positive" class="edit-title-button" (click)="saveTitle(newQuizTitle)"><mat-icon>save</mat-icon></button>
   </div>
 
   <h2 class="h2-grid">"{{selectedQuizTitle}}":</h2>
 
   <span class="left-btn">
-    <button mat-mini-fab color="accent" class="red-fab-btn" (click)="closePreview()"><mat-icon>arrow_back_ios</mat-icon></button>
+    <button mat-mini-fab color="negative" (click)="closePreview()"><mat-icon>arrow_back_ios</mat-icon></button>
   </span>
 
   <span class="left-2nd-btn">
-    <button mat-mini-fab color="accent" class="green-fab-btn" (click)="saveChanges()"><mat-icon>save</mat-icon></button>
+    <button mat-mini-fab color="positive" (click)="saveChanges()"><mat-icon>save</mat-icon></button>
   </span>
 
   <span class="right-btn">
-    <button mat-mini-fab color="accent" class="green-fab-btn" (click)="start()"><mat-icon>fast_forward</mat-icon></button>
+    <button mat-mini-fab color="positive" (click)="start()"><mat-icon>fast_forward</mat-icon></button>
   </span>
 
   <span class="content-grid">
@@ -39,7 +39,7 @@
           </span>
 
           <span class="delete-btn-grid">
-            <button mat-icon-button class="remove" color="warn" (click)="removeRound(round.id.toString())">
+            <button mat-mini-fab color="negative" style="scale: 80%;" class="remove" (click)="removeRound(round.id.toString())">
               <mat-icon>delete</mat-icon>
             </button>
           </span>
@@ -76,7 +76,7 @@
                   </span>
 
                   <span class="forgotten-grid-btn">
-                    <button mat-icon-button class="remove" color="warn" [disabled]="(i===0 && onlyOneField(round.id.toString())) || (!addFieldDisabled && i==0)" (click)="removeField(round.id.toString(), i)">
+                    <button mat-mini-fab class="remove" color="negative" [disabled]="(i===0 && onlyOneField(round.id.toString())) || (!addFieldDisabled && i==0)" (click)="removeField(round.id.toString(), i)">
                       <mat-icon>remove_circle</mat-icon>
                     </button>
                   </span>
@@ -87,7 +87,7 @@
 
           <div class="add-btn-grid">
             <ng-template [ngIf]="allIndexWordNonEmpty(round.id.toString()) || (onlyOneField(round.id.toString()) && allIndexWordNonEmpty(round.id.toString()))">
-              <button mat-mini-fab color="positive" class="marginalized" (click)="addField(round.id.toString())">
+              <button mat-mini-fab color="negative" class="marginalized" (click)="addField(round.id.toString())">
                 <mat-icon>
                   add
                 </mat-icon>

@@ -1,38 +1,22 @@
 @import "../../shared/host.shared.css";
-.player-status {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  font-family: Arial, sans-serif;
-  margin: 20px;
+
+.card-element {
+  padding: 20px 10%;
 }
-
-
-.player-list-container {
-  display: flex;
-  justify-content: space-around;
+.full-width {
+  padding-top: 20px;
+  padding-bottom: 20px;
   width: 100%;
-  margin-top: 20px;
 }
-
-.player-list {
-  flex: 1;
-  text-align: center;
+.table-title {
+  font-size: 16px;
 }
-
-.list-title {
-  font-weight: bold;
-  margin-bottom: 10px;
+.table-title.wide {
+  width: 40%;
 }
-
-.player-name {
-  margin: 2px;
+.table-title.narrow {
+  width: 20%;
 }
-
-.answered-list {
-  border-right: 2px solid #ccc;
-}
-
-.unanswered-list {
-  padding-left: 20px;
+.honey-player {
+  animation-iteration-count: 0;
 }

@@ -6,10 +6,9 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
   min-height: 100vh;
-  background: #e2e2e2;
 }
 .card-element {
-  background: khaki;
+  background: #F4DFB6;
   padding: 5px 15px;
   text-align: center;
   width: 100%;
@@ -39,7 +38,7 @@ body {
   float: left;
   padding: 20px 50px 40px 50px;
   width: 100%;
-  background: #fff;
+  background: #F4DFB6;
   border-radius: 10px;
   transform: scale(1);
   -webkit-transform: scale(1);
@@ -144,6 +143,10 @@ mat-card-content {
 }
 .mat-positive {
   background: darkolivegreen;
+  color: white;
+}
+.mat-negative {
+  background: #9A4444;
   color: white;
 }
 .quiz-creation-input {

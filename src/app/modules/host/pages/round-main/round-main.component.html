@@ -1,31 +1,48 @@
-<span class="common-wrapper" fxLayout="row" fxLayoutAlign="center center">
-  <mat-card class="box">
-    <div class="rules-container">
-      <div mat-card-title class="inner-title">Target Word</div>
-      <div class="target-container">
-      <div class="target-word">{{round.roundTarget }}</div>
+<mat-card class="card-element">
+  <div class="game-main">
+    <div class="target-word-title">
+      Target Word:
     </div>
-    <div mat-card-title class="inner-title">Forbidden Words</div>
-    <div class="forbidden-container">
+
+    <div class="target-word-element">
+      {{round.roundTarget }}
+    </div>
+
+    <div class="forbidden-word-title">
+      Forbidden Words:
+    </div>
+
+    <div class="forbidden-word-container">
       <ng-template ngFor let-word [ngForOf]="round.forbiddenWords">
-        <div class="forbidden-word">{{word}}</div>
+        <span class="forbidden-word-element">
+          {{word}}
+        </span>
       </ng-template>
     </div>
-    </div>
-  </mat-card>
-</span>
-<div class="player-list-container">
-  <div class="player-list answered-list">
-    <div class="list-title">Answered Players: {{answeredPercentage}}%</div>
-    <div *ngFor="let ansPl of waitResult.answeredPlayerName" class="player-name">{{ansPl}}</div>
   </div>
-  <div class="player-list unanswered-list">
-    <div class="list-title">Unanswered Players: {{unansweredPercentage}}%</div>
-    <div *ngFor="let notPl of waitResult.notAnsweredPlayerName" class="player-name">{{notPl}}</div>
-  </div>
-</div>
-<div fxLayoutAlign="center center">
-  <button (click)="switchToResults()">switch to results</button>
-</div>
 
+  <div class="player-list-container">
+    <div class="player-list answered-list">
+      <div class="list-title">
+        Answered Players: {{answeredPercentage}}%
+      </div>
+
+      <div *ngFor="let ansPl of waitResult.answeredPlayerName" class="honey-player">
+        {{ansPl}}
+      </div>
+    </div>
+    <div class="player-list unanswered-list">
+      <div class="list-title">
+        Unanswered Players: {{unansweredPercentage}}%
+      </div>
+      <div *ngFor="let notPl of waitResult.notAnsweredPlayerName" class="honey-player">
+        {{notPl}}
+      </div>
+    </div>
+  </div>
+
+  <div class="btn-grid-container">
+    <button mat-raised-button color="positive" (click)="switchToResults()">switch to results</button>
+  </div>
+</mat-card>
 

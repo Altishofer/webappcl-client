@@ -1,14 +1,21 @@
-<table>
-  <tr>
-    <th>Player</th>
-    <th>Result</th>
-    <th>Points</th>
-  </tr>
-  <tr *ngFor="let result of intermediateResult">
-    <td>{{result.playerName}}</td>
-    <td>{{result.answerTarget}}</td>
-    <td>{{result.points}}</td>
-  </tr>
-  <button (click)="startGame()">switch to round</button>
-</table>
-
+<div class="game-grid">
+  <mat-card class="card-element">
+    <div class="center">
+      <table class="full-width">
+        <tr>
+          <th class="table-title wide">Player</th>
+          <th class="table-title wide">Result</th>
+          <th class="table-title narrow">Points</th>
+        </tr>
+        <tr *ngFor="let result of intermediateResult">
+          <td class="honey-player">{{result.playerName}}</td>
+          <td class="honey-player">{{result.answerTarget}}</td>
+          <td class="honey-player">{{result.points}}</td>
+        </tr>
+      </table>
+    </div>
+    <button mat-raised-button color="positive" (click)="startGame()">
+      Next Round
+    </button>
+  </mat-card>
+</div>

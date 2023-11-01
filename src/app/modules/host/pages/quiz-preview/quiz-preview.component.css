@@ -24,6 +24,7 @@ span .name {
 }
 .quiz-accordion-round {
   display: block;
+  border: black;
 }
 .target-numeration-element,
 .target-word-tease {
@@ -34,9 +35,10 @@ span .name {
   grid-column: 1 / span 2;
   grid-row: 1;
   text-align: center;
-  color: darkred;
+  color: #9A4444;
   font-weight: bold;
   min-width: 50px;
+  text-shadow: 1px 1px 1px lightgrey;
 }
 .target-word-tease {
   display: block;
@@ -47,9 +49,6 @@ span .name {
   overflow: hidden;
   font-weight: bold;
 }
-.quiz-accordion-round + .quiz-accordion-round {
-  border-top: #888888;
-}
 .quiz-accordion-round-target {
   display: grid;
   column-gap: 8px;
@@ -58,11 +57,9 @@ span .name {
   grid-template-rows: auto auto;
   justify-content: space-evenly;
   align-content: center;
-  background-color: lightgrey;
-  border: solid 1px darkgrey;
-  border-left-width: 2px;
-  border-right-width: 2px;
-  margin: 0 30px;
+  background-color: #DE8F5F;
+  border: solid 1px black;
+  margin: -1px 30px 0;
   transition: transform .2s;
 }
 .quiz-accordion-round-details {
@@ -73,14 +70,15 @@ span .name {
   grid-template-rows: auto auto auto auto auto;
   justify-content: space-evenly;
   align-content: center;
-  background-color: lightgray;
-  border: solid 1px grey;
-  margin-left: 60px;
+  background-color: #DE8F5F;
+  border: solid 1px black;
+  margin: -1px 0 15px 60px;
   padding-bottom: 0;
   text-align: center;
   font-size: 16px;
   border-top-right-radius: 8px;
   border-bottom-right-radius: 8px;
+  border-bottom-left-radius: 8px;
 }
 .quiz-accordion-round-target,
 .quiz-accordion-round-details {
@@ -88,18 +86,15 @@ span .name {
 }
 .quiz-accordion-round-target:hover {
   cursor: pointer;
-  transform: scale(101%);
-  background-color: white;
+  transform: translateX(15px);
 }
 .quiz-accordion-round:first-child > .quiz-accordion-round-target {
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
-  border-top-width: 2px;
 }
 .quiz-accordion-round:last-child > .quiz-accordion-round-target {
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
-  border-bottom-width: 2px;
 }
 .target-word-title,
 .forbidden-word-title {
@@ -110,29 +105,14 @@ span .name {
 .target-word-title {
   grid-column: 2;
   grid-row: 1;
-  text-align: left;
 }
 .forbidden-word-title {
-  display: block;
   grid-column: 2;
   grid-row: 3;
-  text-align: left;
-}
-.target-word-element,
-.forbidden-word-element {
-  overflow-wrap: break-word;
-  display: inline-block;
-  text-align: center;
-  margin: 10px 0;
-  padding: 12px 30px;
-  border-radius: 12px;
-  color: white;
 }
 .target-word-element {
   grid-column: 2;
   grid-row: 2;
-  background-color: darkgreen;
-  margin: 10px 0 5px 0;
 }
 .forbidden-word-container {
   grid-column: 2;
@@ -141,11 +121,6 @@ span .name {
 .forbidden-word-element {
   grid-column: 1 / span 2;
   grid-row: 1;
-  background-color: darkred;
-  margin: 10px 0 5px 0;
-}
-.forbidden-word-element + .forbidden-word-element {
-  margin: 5px 0;
 }
 .forbidden-word-inline {
   display: grid;
@@ -159,7 +134,7 @@ span .name {
   grid-column: 2;
   grid-row: 1;
   display: block;
-  padding-top: 18px;
+  padding-top: 20px;
 }
 .nav-btn-container {
   margin-top: 40px;
@@ -224,18 +199,23 @@ span .name {
   visibility: visible !important;
   opacity: 1 !important;
 }
+button.remove {
+  color: white;
+  scale: 80%;
+}
 button.remove:disabled {
   visibility: hidden;
 }
 
 .editable-title {
-  border: 1px solid #ccc;
+  border: 1px solid #D6D46D;
   padding: 5px;
   margin-right: 10px;
   width: auto;
 }
 
 .edit-title-button {
+  scale: 80%;
   margin: 0;
 }
 

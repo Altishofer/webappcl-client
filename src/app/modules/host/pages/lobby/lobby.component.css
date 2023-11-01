@@ -17,6 +17,9 @@
   text-align: center;
   align-content: center;
   justify-content: center;
+  animation-duration: 2s;
+  animation-name: madWiggle;
+  animation-iteration-count: infinite;
 }
 .between-title-grid {
   grid-column: 2 / 5;
@@ -62,13 +65,27 @@
   width: fit-content;
   height: fit-content;
 }
-.honey-player {
-  display: inline-block;
-  background-color: darkgoldenrod;
-  font-size: 105%;
-  font-weight: bold;
-  color: black;
-  padding: 10px 20px;
-  margin: 5px;
-  border-radius: 8px;
+
+
+@keyframes madWiggle {
+  0% {
+    rotate: 0deg;
+    scale: 100%;
+  }
+  25% {
+    rotate: 270deg;
+    scale: 70%;
+  }
+  50% {
+    rotate: 0deg;
+    scale: 20%;
+  }
+  75% {
+    rotate: -270deg;
+    scale: 50%;
+  }
+  100% {
+    rotate: 0deg;
+    scale: 100%;
+  }
 }
