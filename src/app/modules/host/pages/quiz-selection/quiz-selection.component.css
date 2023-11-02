@@ -1,16 +1,14 @@
 @import "../../shared/host.shared.css";
 
 h1 {
-  font-size: 50px;
-  animation-duration: 3s;
-  animation-name: wiggleTitle;
-  animation-iteration-count: infinite;
+  font-size: 70px;
+  font-weight: 600;
+  background-image: repeating-conic-gradient(#a87d5b, #e3b885, #773e37, #7b624c, #e4b076);
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
 }
-h2 {
-  animation-duration: 2s;
-  animation-name: pulsating;
-  animation-iteration-count: infinite;
-}
+
 .h1-replacer {
 
 }
@@ -61,17 +59,17 @@ h2 {
 }
 .btn-quiz,
 .btn-add {
-  font-size: 120%;
+  font-size: 100%;
   justify-content: left;
   text-align: left;
   height: fit-content;
   width: 100%;
   margin-bottom: 8px;
-  padding-top: 16px;
-  padding-bottom: 16px;
+  padding-top: 5px;
+  padding-bottom: 5px;
   text-overflow: ellipsis;
   overflow: hidden;
-  text-wrap: nowrap;
+  text-wrap: avoid;
   white-space: nowrap;
   word-break: break-all;
 }

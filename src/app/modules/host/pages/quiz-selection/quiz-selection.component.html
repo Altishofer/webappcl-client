@@ -1,12 +1,8 @@
 <div class="grid-container">
   <div class="grid-message">
-    <h3 class="double-center-content">
-      Good to see you,<br>
-      {{getHostName()}}!
-    </h3>
   </div>
   <div class="grid-header">
-    <h1>Game Title</h1>
+    <h1>{{getHostName()}}</h1>
   </div>
   <div class="buttons-top-right">
     <button mat-mini-fab routerLink="/host" routerLinkActive="active">
@@ -20,7 +16,7 @@
       <mat-card-content>
         <button mat-raised-button color="positive" class="btn-add" (click)="refresh(); selectedPortal = quizPreviewPortal; setSelectedQuiz(-1, 'New Quiz', hostId)">
           <mat-icon class="icon white">library_add</mat-icon>
-          <span class="name">Create New Quiz</span>
+          <span class="name">New</span>
         </button>
 
         <ng-template ngFor let-quiz [ngForOf]="allQuizzes">
