@@ -171,7 +171,7 @@ export class QuizPreviewComponent implements OnInit{
       }
     });
     this.forbiddenWordsForm.addControl(String(maxId+1), this.fb.array(lst));
-    let round : Round = {id : String(maxId+1), quizId : String(this.selectedQuizId), roundTarget : 'word', forbiddenWords : ['']};
+    let round : Round = {id : String(maxId+1), quizId : String(this.selectedQuizId), roundTarget : 'ChangeThisWord', forbiddenWords : ['']};
     this.selectedQuizRounds.push(round);
   }
 

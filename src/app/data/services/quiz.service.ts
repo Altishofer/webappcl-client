@@ -41,11 +41,12 @@ export class QuizService {
     });
 
     try {
-      const response = await this.http.get(`${this.vectorUrl}/validate?word=${word}`, { observe: 'response', headers }).toPromise();
+      const response = await this.http.get(`${this.vectorUrl}/validate/${word}`, { observe: 'response', headers }).toPromise();
       if (response == undefined){
         return false
       }
       if (response.status === 200) {
+        console.log(`check for ${word} -> ${response.body}`)
         if (response?.body == null) {
           return false;
         }
