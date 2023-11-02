@@ -11,9 +11,10 @@ import {
 import {QuizService} from "@data/services/quiz.service";
 import {Router} from "@angular/router";
 import {Round} from "@data/interfaces/round.model";
-import {AbstractControl, FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {MatSlideToggleChange} from "@angular/material/slide-toggle";
 import {QuizWithRound} from "@data/interfaces/QuizWithRound";
+import {debounceTime, distinctUntilChanged, of, switchMap, tap} from "rxjs";
 
 
 @Component({
@@ -51,12 +52,30 @@ export class QuizPreviewComponent implements OnInit{
     this.targetWordForm = this.fb.group({});
   }
 
-  createWordFormGroup(word:string='', isSubtracted:boolean=false): FormGroup {
+  createWordFormGroup(word: string = '', isValidated: boolean = false): FormGroup {
+    const wordControl = new FormControl(word, [Validators.minLength(1), Validators.pattern(/^(\S){1,50}$/)]);
+
+    wordControl.valueChanges.pipe(
+      debounceTime(500),
+      distinctUntilChanged(),
+      switchMap((newWord) => {
+        if (!newWord) {
+          return of(false);
+        }
+        return this._quizService.Check(newWord);
+      }),
+      tap((isValid) => {
+        wordControl.setErrors(null);
+        isValidated = isValid;
+      })
+    ).subscribe();
+
     return this.fb.group({
-      word: word,
-      isSubtracted: isSubtracted
-    }, {disabled: false, validators: [Validators.minLength(1)]});
+      word: wordControl,
+      isValidated: isValidated
+    });
   }
+
 
   ngOnInit() {
     if (this.selectedQuizId == -1) {
