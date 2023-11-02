@@ -132,3 +132,65 @@
     rotate: -2deg;
   }
 }
+
+
+.mat-card {
+  border-radius: 20px;
+  backdrop-filter: blur(15px);
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+
+.mat-form-field {
+  width: 100%;
+}
+
+.mat-form-field-underline {
+  background-color: transparent;
+}
+
+.mat-input-element {
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 1em;
+  padding: 0 35px 0 5px;
+  color: #fff;
+}
+
+.mat-raised-button {
+  width: 100%;
+  height: 40px;
+  border-radius: 40px;
+  background: #fff;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: 600;
+}
+
+.error-message {
+  font-size: 0.9em;
+  color: #000000;
+  text-align: center;
+}
+
+.login-message {
+  font-size: 0.9em;
+  color: #000000;
+  text-align: center;
+  margin: 25px 0 10px;
+}
+
+.btn-block {
+  display: block;
+  margin: 10px auto;
+}
+
+.box .mat-card {
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 20px;
+  backdrop-filter: blur(15px);
+}
