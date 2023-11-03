@@ -185,3 +185,8 @@ mat-card-content {
   border: none;
   padding: 10px 5px;
 }
+
+.icon-button {
+  color: #ba2828;
+  width: 30px;
+}

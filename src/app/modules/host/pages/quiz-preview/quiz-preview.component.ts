@@ -154,22 +154,31 @@ export class QuizPreviewComponent implements OnInit{
   addNewRound(){
     let lstForbWordControl: AbstractControl<any, any>[] = [];
     lstForbWordControl.push(this.createWordFormGroup('ChangeThisWOrd', false));
+    let maxId :number = Math.max.apply(null, Object.keys(this.targetWordForm.controls).map(x => parseInt(x)));
 
-    let maxId: number = 0;
-    this.selectedQuizRounds.forEach((round: Round) => {
-      if (Number(round.id) > maxId) {
-        maxId = Number(round.id);
-      }
-    });
     this.forbiddenWordsForm.addControl(String(maxId+1), this.fb.array(lstForbWordControl));
-    this.targetWordForm.addControl(String(maxId+1), this.createWordFormGroup('ChangeThisWord', false));
-    // let round : Round = {id : String(maxId+1), quizId : String(this.selectedQuizId), roundTarget : 'ChangeThisWord', forbiddenWords : ['']};
-    // this.selectedQuizRounds.push(round);
+    this.targetWordForm.addControl(String(maxId+1), this.createWordFormGroup('target', false));
+
+    let round : Round = {id : String(maxId+1), quizId : String(this.selectedQuizId), roundTarget : 'target', forbiddenWords : ['']};
+    this.selectedQuizRounds.push(round);
+    console.log("selectedQuizRounds", this.selectedQuizRounds);
+    console.log("forbiddenWordsForm", this.forbiddenWordsForm.controls);
+    console.log("targetWordForm", this.targetWordForm.controls);
   }
 
   removeRound(roundId: string) {
+    console.log("before delete");
+    console.log("selectedQuizRounds", this.selectedQuizRounds);
+    console.log("forbiddenWordsForm", this.forbiddenWordsForm.controls);
+    console.log("targetWordForm", this.targetWordForm.controls);
     this.forbiddenWordsForm.removeControl(roundId);
-    // this.selectedQuizRounds.splice(this.selectedQuizRounds.findIndex((round: Round) => round.id === roundId), 1);
+    this.targetWordForm.removeControl(roundId);
+    console.log("found index", this.selectedQuizRounds.findIndex((round: Round) => round.id == roundId));
+    this.selectedQuizRounds.splice(this.selectedQuizRounds.findIndex((round: Round) => round.id == roundId), 1);
+    console.log("after delete");
+    console.log("selectedQuizRounds", this.selectedQuizRounds);
+    console.log("forbiddenWordsForm", this.forbiddenWordsForm.controls);
+    console.log("targetWordForm", this.targetWordForm.controls);
   }
 
   trackByFn(index: any, item: any) {
@@ -188,6 +197,7 @@ export class QuizPreviewComponent implements OnInit{
     this.selectedQuizRounds.forEach((round: Round) => {
       let formArray = this.forbiddenWordsForm.get(round.id.toString()) as FormArray;
       round.forbiddenWords = formArray.controls.map(control => control.value.word);
+
       formArray = this.targetWordForm.get(round.id.toString()) as FormArray;
       round.roundTarget = formArray.value.word;
     });
@@ -199,6 +209,7 @@ export class QuizPreviewComponent implements OnInit{
       title : this.selectedQuizTitle,
       rounds : this.selectedQuizRounds
     }
+    console.log('Updated quiz', quiz)
 
     if (this.selectedQuizId == -1) {
       this._quizService.createQuiz(quiz).subscribe((response: any): void => {
@@ -217,13 +228,14 @@ export class QuizPreviewComponent implements OnInit{
         if ((response.status >= 200 && response.status < 300) || response.status == 304) {
           this.selectedQuizRounds = response.body.rounds;
           this.unsavedChanges = false;
-          //this.changesSaved.emit(true);
-          //this.closePreview();
+          //this.closePreview.emit(true);
+          this.closePreview();
         } else {
           this.errorMsg = this.unexpectedErrorMsg;
         }
       });
     }
+    console.log('Updated quiz', this.selectedQuizRounds);
     }
 
     saveTitle(title: string) {

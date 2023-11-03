@@ -4,7 +4,7 @@
     <button mat-mini-fab color="positive" class="edit-title-button" (click)="saveTitle(newQuizTitle)"><mat-icon>save</mat-icon></button>
   </div>
 
-  <h2 class="h2-grid">"{{selectedQuizTitle}}":</h2>
+  <h2 class="h2-grid">{{selectedQuizTitle}}</h2>
 
   <span class="left-btn">
     <button mat-mini-fab color="negative" (click)="closePreview()"><mat-icon>arrow_back_ios</mat-icon></button>
@@ -31,7 +31,7 @@
       >
         <div class="quiz-accordion-round-target" (click)="accordionItem.toggle()">
           <span class="target-numeration-element">
-            Round {{ position+1 }}:
+            Round {{ position+1 }}
           </span>
 
           <span class="target-word-tease">
@@ -86,13 +86,11 @@
           </ng-container>
 
           <div class="add-btn-grid">
-            <ng-template [ngIf]="allIndexWordNonEmpty(round.id.toString()) || (onlyOneField(round.id.toString()) && allIndexWordNonEmpty(round.id.toString()))">
-              <button mat-mini-fab color="negative" class="marginalized" (click)="addField(round.id.toString())">
+              <button mat-mini-fab color="negative" [disabled]="!allIndexWordNonEmpty(round.id.toString())" class="marginalized" (click)="addField(round.id.toString())">
                 <mat-icon>
                   add
                 </mat-icon>
               </button>
-            </ng-template>
           </div>
 
           <ng-template [ngIf]="errorMsg">
