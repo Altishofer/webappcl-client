@@ -11,9 +11,10 @@ import {
 import {QuizService} from "@data/services/quiz.service";
 import {Router} from "@angular/router";
 import {Round} from "@data/interfaces/round.model";
-import {AbstractControl, FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {MatSlideToggleChange} from "@angular/material/slide-toggle";
 import {QuizWithRound} from "@data/interfaces/QuizWithRound";
+import {debounceTime, distinctUntilChanged, of, switchMap, tap} from "rxjs";
 
 
 @Component({
@@ -51,12 +52,30 @@ export class QuizPreviewComponent implements OnInit{
     this.targetWordForm = this.fb.group({});
   }
 
-  createWordFormGroup(word:string='', isSubtracted:boolean=false): FormGroup {
+  createWordFormGroup(word: string = '', isValidated: boolean = false): FormGroup {
+    const wordControl = new FormControl(word, [Validators.minLength(1), Validators.pattern(/^(\S){1,50}$/)]);
+
+    wordControl.valueChanges.pipe(
+      debounceTime(500),
+      distinctUntilChanged(),
+      switchMap((newWord) => {
+        if (!newWord) {
+          return of(false);
+        }
+        return this._quizService.Check(newWord);
+      }),
+      tap((isValid) => {
+        wordControl.setErrors(null);
+        isValidated = isValid;
+      })
+    ).subscribe();
+
     return this.fb.group({
-      word: word,
-      isSubtracted: isSubtracted
-    }, {disabled: false, validators: [Validators.minLength(1)]});
+      word: wordControl,
+      isValidated: isValidated
+    });
   }
+
 
   ngOnInit() {
     if (this.selectedQuizId == -1) {
@@ -71,8 +90,6 @@ export class QuizPreviewComponent implements OnInit{
       this.forbiddenWordsForm.addControl(round.id, this.fb.array(lst));
       this.targetWordForm.addControl(round.id, this.createWordFormGroup(round.roundTarget, false));
     });
-    console.log('forbiddenWordsForm: ', this.forbiddenWordsForm.value);
-    console.log('targetWordForm: ', this.targetWordForm.value);
   }
 
   selectText(event: any) {
@@ -85,12 +102,10 @@ export class QuizPreviewComponent implements OnInit{
 
   addField(roundId:string, word:string = '', isSubtracted:boolean = false) : void {
     const formArray: FormArray<any> = this.forbiddenWordsForm.get(roundId) as FormArray;
-    console.log('AddForbiddenWord_Before', formArray.value);
     if (formArray){
       formArray.push(this.createWordFormGroup(word, isSubtracted));
     }
     this.addFieldDisabled = true;
-    console.log('AddForbiddenWord_After', formArray.value);
   }
 
 
@@ -122,19 +137,14 @@ export class QuizPreviewComponent implements OnInit{
   }
 
   removeField(roundId : string, index: number) : void {
-    console.log('deleteForbiddenWord', roundId, index);
     const formArray: FormArray<any> = this.forbiddenWordsForm.get(roundId) as FormArray;
-    console.log('deleteForbiddenWord', formArray.value);
     if (formArray){
       const control: AbstractControl<any, any> = formArray.at(index);
         if (control) {
           formArray.removeAt(index);
-          //formArray.updateValueAndValidity();
         }
       }
     this.addFieldDisabled = this.allIndexWordNonEmpty(roundId);
-    //this.cd.detectChanges();
-    console.log('RemoveForbiddenWord_After', formArray.value);
   }
 
   changes() : void {
@@ -142,8 +152,8 @@ export class QuizPreviewComponent implements OnInit{
   }
 
   addNewRound(){
-    let lst: AbstractControl<any, any>[] = [];
-    lst.push(this.createWordFormGroup('', false));
+    let lstForbWordControl: AbstractControl<any, any>[] = [];
+    lstForbWordControl.push(this.createWordFormGroup('ChangeThisWOrd', false));
 
     let maxId: number = 0;
     this.selectedQuizRounds.forEach((round: Round) => {
@@ -151,14 +161,15 @@ export class QuizPreviewComponent implements OnInit{
         maxId = Number(round.id);
       }
     });
-    this.forbiddenWordsForm.addControl(String(maxId+1), this.fb.array(lst));
-    let round : Round = {id : String(maxId+1), quizId : String(this.selectedQuizId), roundTarget : 'word', forbiddenWords : ['']};
-    this.selectedQuizRounds.push(round);
+    this.forbiddenWordsForm.addControl(String(maxId+1), this.fb.array(lstForbWordControl));
+    this.targetWordForm.addControl(String(maxId+1), this.createWordFormGroup('ChangeThisWord', false));
+    // let round : Round = {id : String(maxId+1), quizId : String(this.selectedQuizId), roundTarget : 'ChangeThisWord', forbiddenWords : ['']};
+    // this.selectedQuizRounds.push(round);
   }
 
   removeRound(roundId: string) {
     this.forbiddenWordsForm.removeControl(roundId);
-    this.selectedQuizRounds.splice(this.selectedQuizRounds.findIndex((round: Round) => round.id === roundId), 1);
+    // this.selectedQuizRounds.splice(this.selectedQuizRounds.findIndex((round: Round) => round.id === roundId), 1);
   }
 
   trackByFn(index: any, item: any) {
@@ -189,23 +200,6 @@ export class QuizPreviewComponent implements OnInit{
       rounds : this.selectedQuizRounds
     }
 
-    //quiz = {
-    //  quizId : 11,
-    //  hostId : 5,
-    //  title : 'honolulu',
-    //  rounds : [{
-    //    "id": "7",
-    //    "quizId": "11",
-    //    "roundTarget": "dog",
-    //    "forbiddenWords": [
-    //      "cat",
-    //      "mouse",
-    //      "bottle"
-    //    ]
-    //  }]
-    //}
-
-    console.log(quiz);
     if (this.selectedQuizId == -1) {
       this._quizService.createQuiz(quiz).subscribe((response: any): void => {
         console.log("REST quiz: ", response.body);

@@ -55,8 +55,6 @@
   align-content: end;
 }
 
-
-
 .game-grid {
   display: grid;
   column-gap: 8px;
@@ -91,22 +89,18 @@
   overflow-wrap: break-word;
   display: block;
   text-align: center;
-  margin: 10px 0;
-  padding: 12px 30px;
   border-radius: 12px;
   color: white;
 }
 .target-word-element {
-  background-color: darkolivegreen;
-  margin: 10px 0 5px 0;
+  background-color: #e4b076;
+  margin: 5px 0 10px 0;
 }
 .forbidden-word-element {
   background-color: #9A4444;
-  margin: 10px 0 5px 0;
+  margin: 5px 0 5px 0;
 }
-.forbidden-word-element + .forbidden-word-element {
-  margin: 5px 0;
-}
+
 .honey-player {
   display: inline-block;
   background-color: #D6D46D;
@@ -132,3 +126,71 @@
     rotate: -2deg;
   }
 }
+
+
+.mat-card {
+  border-radius: 20px;
+  backdrop-filter: blur(15px);
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+
+.mat-form-field {
+  width: 100%;
+}
+
+.mat-form-field-underline {
+  background-color: transparent;
+}
+
+.mat-input-element {
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 1em;
+  padding: 0 35px 0 5px;
+  color: #fff;
+}
+
+.button .mat-raised-button {
+  width: 100%;
+  min-width: 16px;
+  border-radius: 40px;
+  background: #fff;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 100%;
+  justify-content: left;
+  text-align: left;
+  height: fit-content;
+  margin-bottom: 8px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  text-wrap: avoid;
+  white-space: nowrap;
+  word-break: break-all;
+}
+
+.error-message {
+  font-size: 0.9em;
+  color: #000000;
+  text-align: center;
+}
+
+.login-message {
+  font-size: 0.9em;
+  color: #000000;
+  text-align: center;
+  margin: 25px 0 10px;
+}
+
+.btn-block {
+  display: block;
+  margin: 10px auto;
+}
+
+

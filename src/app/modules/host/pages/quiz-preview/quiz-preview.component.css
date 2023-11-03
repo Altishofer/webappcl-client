@@ -57,25 +57,26 @@ span .name {
   grid-template-rows: auto auto;
   justify-content: space-evenly;
   align-content: center;
-  background-color: #DE8F5F;
-  border: solid 1px black;
+  background-color: rgba(255, 255, 255, 0.5);
+  border: 2px solid rgba(255,255,255,0.5);
   margin: -1px 30px 0;
   transition: transform .2s;
 }
 .quiz-accordion-round-details {
   display: grid;
-  column-gap: 8px;
+  column-gap: 4px;
   row-gap: 4px;
-  grid-template-columns: 10% 80% 10%;
+  grid-template-columns: 5% 90% 5%;
   grid-template-rows: auto auto auto auto auto;
   justify-content: space-evenly;
   align-content: center;
-  background-color: #DE8F5F;
-  border: solid 1px black;
-  margin: -1px 0 15px 60px;
+  background-color: rgba(255, 255, 255, 0.7);
+  border: 2px solid rgba(255,255,255,0.5);
+  margin: 5px 0 5px 0;
   padding-bottom: 0;
   text-align: center;
   font-size: 16px;
+  border-top-left-radius: 8px;
   border-top-right-radius: 8px;
   border-bottom-right-radius: 8px;
   border-bottom-left-radius: 8px;
@@ -100,7 +101,7 @@ span .name {
 .forbidden-word-title {
   font-size: 16px;
   font-weight: bold;
-  padding-left: 15px;
+  padding-left: 5px;
 }
 .target-word-title {
   grid-column: 2;
@@ -117,24 +118,24 @@ span .name {
 .forbidden-word-container {
   grid-column: 2;
   grid-row: 4;
+  align-items: center;
 }
 .forbidden-word-element {
-  grid-column: 1 / span 2;
+  grid-column: 1 / span 1;
   grid-row: 1;
 }
 .forbidden-word-inline {
   display: grid;
-  grid: auto / 80% 20%;
+  grid: auto / 90% 10%;
   column-gap: 4px;
   justify-content: space-evenly;
-  align-content: center;
-  text-align: center;
+  align-content: start;
+  text-align: start;
 }
 .forgotten-grid-btn {
   grid-column: 2;
   grid-row: 1;
   display: block;
-  padding-top: 20px;
 }
 .nav-btn-container {
   margin-top: 40px;
@@ -142,7 +143,7 @@ span .name {
 }
 .delete-btn-grid {
   grid-column: 2;
-  grid-row: 1 / span 2;
+  grid-row: 1 / span 3;
   text-align: center;
 }
 .add-btn-grid {
@@ -160,7 +161,7 @@ span .name {
 .rules-container {
   font-size: 100%;
   text-align: center;
-  margin-bottom: 10px;
+  margin-bottom: 100px;
   padding: 5px;
 }
 .target-word {
@@ -173,10 +174,10 @@ span .name {
 }
 .forbidden-word {
   margin-bottom: 5px;
-  background-color: darkred;
+  background-color: rgba(0, 0, 0, 0.6);
   color: white;
-  padding: 12px;
-  border-radius: 12px;
+  padding: 5px;
+  border-radius: 5px;
 }
 .word-calc-container {
   margin-top: 10px;
@@ -200,11 +201,14 @@ span .name {
   opacity: 1 !important;
 }
 button.remove {
-  color: white;
+  color: #515565;
+  background: transparent;
   scale: 80%;
+  vertical-align: auto;
 }
 button.remove:disabled {
-  visibility: hidden;
+  color: #8c8c9c;
+  background: transparent;
 }
 
 .editable-title {

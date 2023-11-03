@@ -8,10 +8,19 @@ body {
   min-height: 100vh;
 }
 .card-element {
-  background-image: linear-gradient(to bottom right, #F4DFB6, #DE8F5F);
-  padding: 5px 15px;
   text-align: center;
   width: 100%;
+  min-width: 20vw;
+  position: relative;
+  top: 0;
+  float: left;
+  padding: 20px 20px 20px 20px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.5);
+  border: 2px solid rgba(255,255,255,0.5);
+  backdrop-filter: blur(30px);
+  justify-content: center;
+  align-items: start;
 }
 .app-header {
   justify-content: space-between;
@@ -36,15 +45,19 @@ body {
   top: 0;
   opacity: 1;
   float: left;
-  padding: 20px 50px 40px 50px;
+  padding: 20px 0px 20px 0px;
   width: 100%;
-  background: #F4DFB6;
   border-radius: 10px;
   transform: scale(1);
   -webkit-transform: scale(1);
   -ms-transform: scale(1);
   z-index: 5;
   max-width: 330px;
+  background: rgba(255, 255, 255, 0.5);
+  border: 2px solid rgba(255,255,255,0.5);
+  backdrop-filter: blur(30px);
+  justify-content: center;
+  align-items: center;
 }
 .box.back {
   transform: scale(.95);
@@ -115,6 +128,17 @@ body {
   color: black;
   background-color: #888888;
 }
+button{
+  height: 40px;
+  border-radius: 40px;
+  background: #fff;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: 600;
+  width: fit-content;
+}
 button:disabled {
   background-color: #888888;
   color: white;
@@ -142,11 +166,15 @@ mat-card-content {
   padding: 0;
 }
 .mat-positive {
-  background: darkolivegreen;
+  background-color: #a87d5b;
+  color: white;
+}
+.mat-transparent {
+  background-color: transparent;
   color: white;
 }
 .mat-negative {
-  background: #9A4444;
+  background: #773e37;
   color: white;
 }
 .quiz-creation-input {

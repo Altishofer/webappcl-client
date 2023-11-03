@@ -12,7 +12,7 @@ import {FinalResultsComponent} from "@modules/host/pages/final-results/final-res
 
 const routes: Routes = [
   {
-    path:'', redirectTo: 'login', pathMatch: "full"
+    path:'', redirectTo: 'login', pathMatch: "prefix"
   },
   {
     path:'sandrin', component:SandrinComponent

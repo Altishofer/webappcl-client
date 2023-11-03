@@ -12,6 +12,8 @@ import {QuizWithRound} from "@data/interfaces/QuizWithRound";
 })
 export class QuizService {
   private baseUrl = environment.API_URL + "/Quiz"
+  private vectorUrl = environment.API_URL + "/Word2Vector"
+
 
   constructor(private http: HttpClient, private cookieService: CookieService) {}
 
@@ -30,6 +32,31 @@ export class QuizService {
       'Content-Type': 'application/json',
     });
     return this.http.get(`${this.baseUrl}/GetAllQuizzesByHost`, { observe:'response', headers });
+  }
+
+  async Check(word: string): Promise<boolean> {
+    const headers: HttpHeaders = new HttpHeaders({
+      'Authorization': 'Bearer ' + this.cookieService.get('hostToken'),
+      'Content-Type': 'application/json'
+    });
+
+    try {
+      const response = await this.http.get(`${this.vectorUrl}/validate/${word}`, { observe: 'response', headers }).toPromise();
+      if (response == undefined){
+        return false
+      }
+      if (response.status === 200) {
+        console.log(`check for ${word} -> ${response.body}`)
+        if (response?.body == null) {
+          return false;
+        }
+        return response.body == true;
+      }
+      return false;
+    } catch (error) {
+      console.error('Error checking word:', error);
+      return false;
+    }
   }
 
   getAllRoundsByQuiz(quizId: number): Observable<any> {
