@@ -12,7 +12,7 @@ h1 {
   padding-left: 8%;
   padding-right: 8%;
   display: grid;
-  column-gap: 20px;
+  column-gap: 2%;
   row-gap: 8px;
   grid-template-columns: 25% 25% 25% 25%;
   grid-template-rows: auto auto;

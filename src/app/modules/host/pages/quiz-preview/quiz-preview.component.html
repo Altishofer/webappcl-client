@@ -1,6 +1,6 @@
 <div class="portal-grid">
   <div class="h2-grid">
-    <input type="text" [(ngModel)]="newQuizTitle" class="editable-title" value="{{selectedQuizTitle}}">
+    <input type="text" [(ngModel)]="newQuizTitle" class="editable-title" value="{{selectedQuizTitle}}" autofocus>
     <button mat-mini-fab color="positive" class="edit-title-button" (click)="saveTitle(newQuizTitle)"><mat-icon>save</mat-icon></button>
   </div>
 
@@ -102,7 +102,7 @@
   </span>
 
   <span class="footer-grid">
-    <button mat-raised-button color="positive" (click)="addNewRound()">
+    <button mat-raised-button color="negative" (click)="addNewRound()">
       <mat-icon>
         add
       </mat-icon>
