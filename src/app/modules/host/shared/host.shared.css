@@ -26,18 +26,24 @@
   grid-row: 2;
   text-align: center;
   justify-content: start;
+  width: 25px;
+  height: 25px;
 }
 .right-btn {
   grid-column: 5;
   grid-row: 1;
   text-align: center;
   justify-content: end;
+  width: 25px;
+  height: 25px;
 }
 .right-2nd-btn {
   grid-column: 5;
   grid-row: 2;
   text-align: center;
   justify-content: start;
+  width: 25px;
+  height: 25px;
 }
 .content-grid {
   grid-column: 2 / 5;
@@ -103,16 +109,13 @@
 
 .honey-player {
   display: inline-block;
-  background-color: #D6D46D;
+  background-color: #636c74ab;
   font-size: 105%;
   font-weight: bold;
   color: black;
   padding: 10px 20px;
   margin: 5px;
   border-radius: 8px;;
-  animation-duration: 1s;
-  animation-name: lightWiggle;
-  animation-iteration-count: infinite;
 }
 
 @keyframes lightWiggle {
