@@ -8,10 +8,6 @@ h1 {
   background-clip: text;
   -webkit-background-clip: text;
 }
-
-.h1-replacer {
-
-}
 .grid-container {
   padding-left: 15px;
   display: grid;
