@@ -74,4 +74,8 @@ export class SignalRService {
   setReceiveIntermediateResultListener(listener: (intermediateResults: IntermediateResult[]) => void) {
     this.hubConnection.on('ReceiveIntermediateResult', listener);
   }
+
+  setReceiveFinalResultListener(listener: (intermediateResults: IntermediateResult[]) => void) {
+    this.hubConnection.on('ReceiveFinalResult', listener);
+  }
 }

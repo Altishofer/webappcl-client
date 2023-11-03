@@ -17,11 +17,12 @@ import {Round} from "@data/interfaces/round.model";
 export class LobbyComponent {
   QRvalue = 'https:///';
 
-  quizId!: string;
+  quizId: string = '';
   players: string[] = [];
   unexpectedErrorMsg : string = "An unexpected error occurred."
   errorMsg : string = '';
   roundIds : string[] = [];
+  hostId : string = '';
 
   constructor(
     private signalRService: SignalRService,
@@ -32,6 +33,7 @@ export class LobbyComponent {
   ) {
     this.route.params.subscribe(params => {
       this.quizId = params['quizId'];
+      this.hostId = params['hostId'];
     });
     this.QRvalue = 'https://localhost:4200/player/' + this.quizId;
   }
@@ -89,7 +91,7 @@ export class LobbyComponent {
 
     this.signalRService.setReceiveRoundListener((round: string) => {
       console.log("SOCKET round: ", round);
-      this.router.navigate(['/host', 'round', this.quizId, round]);
+      this.router.navigate(['/host', this.hostId, 'round', this.quizId, round]);
     });
   }
 
@@ -102,7 +104,7 @@ export class LobbyComponent {
       this.cookieService.set("roundIds", roundIds.join(","));
       this.pushRound(roundId);
     } else {
-      this.router.navigate(['/host', 'results', this.quizId]);
+      this.router.navigate(['/host', this.hostId, 'results', this.quizId]);
     }
   }
 

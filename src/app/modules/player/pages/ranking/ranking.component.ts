@@ -60,6 +60,12 @@ export class RankingComponent implements OnInit{
       console.log("SOCKET: intermediateResults")
     });
 
+    this.signalRService.setReceiveFinalResultListener((results: IntermediateResult[]) => {
+      console.log("SOCKET round: ", results);
+      this.intermediateResult = results;
+      console.log("SOCKET: finalResults")
+    });
+
     this.signalRService.setReceiveRoundListener((round: string) => {
       console.log("SOCKET round: ", round);
       this.router.navigate(['/player', 'game', this.quizId, round, this.playerName]);

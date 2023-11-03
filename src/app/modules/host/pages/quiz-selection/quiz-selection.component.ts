@@ -69,7 +69,7 @@ export class QuizSelectionComponent implements OnInit,AfterViewInit {
   }
 
   redirect(quizId: number) {
-    this._router.navigate([`host/preview/${quizId}`]);
+    this._router.navigate(["host", this.hostId, "preview",  quizId]);
   }
 
   setSelectedQuiz(quizId: number, quizTitle: string, hostId : number): void {
@@ -103,7 +103,7 @@ export class QuizSelectionComponent implements OnInit,AfterViewInit {
   }
 
   startQuiz() {
-    this.router.navigate(['/host', 'lobby', this.selectedQuizId]);
+    this.router.navigate(['/host', this.hostId, 'lobby', this.selectedQuizId]);
   }
 
   saveCreation() {

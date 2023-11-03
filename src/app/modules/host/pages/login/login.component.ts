@@ -93,7 +93,7 @@ export class LoginComponent implements OnInit{
           this.cookieService.set('hostName', this.host.hostName);
           console.log(actionName + " was successful -> user '" + this.host.hostName + "', received token: " + response.body.token.result);
           this.hostService.refreshTokenPeriodically();
-          this.router.navigate([`/host/selection/${response.body.id}`]);
+          this.router.navigate(["host", response.body.id, "selection"]);
         } else {
           this.errorMsg = this.unexpectedErrorMsg;
         }
