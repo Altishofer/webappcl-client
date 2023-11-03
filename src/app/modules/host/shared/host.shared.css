@@ -26,16 +26,12 @@
   grid-row: 2;
   text-align: center;
   justify-content: start;
-  width: 25px;
-  height: 25px;
 }
 .right-btn {
   grid-column: 5;
   grid-row: 1;
   text-align: center;
   justify-content: end;
-  width: 25px;
-  height: 25px;
 }
 .right-2nd-btn {
   grid-column: 5;

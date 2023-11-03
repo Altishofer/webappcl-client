@@ -1,10 +1,8 @@
 <div class="portal-grid">
-  <div class="right-2nd-btn">
-    <input type="text" [(ngModel)]="newQuizTitle" class="editable-title">
+  <div class="h2-grid">
+    <input type="text" [(ngModel)]="newQuizTitle" class="editable-title" value="{{selectedQuizTitle}}">
     <button mat-mini-fab color="positive" class="edit-title-button" (click)="saveTitle(newQuizTitle)"><mat-icon>save</mat-icon></button>
   </div>
-
-  <h2 class="h2-grid">{{selectedQuizTitle}}</h2>
 
   <span class="left-btn">
     <button mat-mini-fab color="negative" (click)="closePreview()"><mat-icon>arrow_back_ios</mat-icon></button>

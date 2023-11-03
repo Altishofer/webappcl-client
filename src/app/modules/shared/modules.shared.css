@@ -109,7 +109,7 @@ body {
   color: black;
   background-color: #888888;
 }
-button{
+mat-raised-button {
   height: 40px;
   border-radius: 40px;
   background: #fff;
@@ -119,6 +119,28 @@ button{
   font-size: 1em;
   font-weight: 600;
   width: fit-content;
+}
+.btn-quiz,
+.btn-add {
+  border-radius: 40px;
+  background: #fff;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: 600;
+  justify-content: left;
+  text-align: left;
+  height: fit-content;
+  width: 100%;
+  margin-bottom: 8px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  text-wrap: avoid;
+  white-space: nowrap;
+  word-break: break-all;
 }
 button:disabled {
   background-color: #888888;
