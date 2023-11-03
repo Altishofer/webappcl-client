@@ -45,8 +45,8 @@ export class LobbyComponent {
     }).catch(error => {
       console.error("SignalR connection error:", error);
     });
-    this.getPlayers();
     this.getRounds();
+    this.getPlayers();
   }
 
   getPlayers(): void {
