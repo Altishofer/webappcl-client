@@ -87,10 +87,6 @@ export class RoundMainComponent {
     });
   }
 
-  switchToRanking(): void {
-    this.router.navigate(['/host', 'result', this.quizId, this.roundId]);
-  }
-
   registerToGroup() {
     console.log("SOCKET: registerToGroup", this.quizId);
     this.signalRService.joinGroup(this.quizId);
