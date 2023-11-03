@@ -155,7 +155,7 @@ export class QuizPreviewComponent implements OnInit{
     let lstForbWordControl: AbstractControl<any, any>[] = [];
     lstForbWordControl.push(this.createWordFormGroup('ChangeThisWOrd', false));
     let maxId :number = Math.max.apply(null, Object.keys(this.targetWordForm.controls).map(x => parseInt(x)));
-
+    maxId = Number.isFinite(maxId) ? maxId : -1;
     this.forbiddenWordsForm.addControl(String(maxId+1), this.fb.array(lstForbWordControl));
     this.targetWordForm.addControl(String(maxId+1), this.createWordFormGroup('target', false));
 
@@ -212,12 +212,13 @@ export class QuizPreviewComponent implements OnInit{
     console.log('Updated quiz', quiz)
 
     if (this.selectedQuizId == -1) {
+      this.selectedQuizId = -1;
       this._quizService.createQuiz(quiz).subscribe((response: any): void => {
         console.log("REST quiz: ", response.body);
         if ((response.status >= 200 && response.status < 300) || response.status == 304) {
           this.selectedQuizRounds = response.body.rounds;
           this.selectedQuizId = response.body.quizId;
-          location.reload();
+          this.closePreview();
         } else {
           this.errorMsg = this.unexpectedErrorMsg;
         }
