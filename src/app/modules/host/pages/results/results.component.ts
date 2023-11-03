@@ -88,16 +88,16 @@ export class ResultsComponent {
 
 
   startGame() {
-    let roundId : string = "";
     let rounds : string = this.cookieService.get("roundIds");
-    let roundIds : string[] = rounds.split(",");
-    if (roundIds.length != 0){
+    if (!rounds || rounds.length == 0){
+      this.router.navigate(['/host', 'results', this.quizId]);
+    } else {
+      let roundId : string = "";
+      let roundIds : string[] = rounds.split(",");
       roundId = roundIds.shift() as string;
       this.cookieService.set("roundIds", roundIds.join(","));
       this.pushRound(roundId);
       this.router.navigate(['/host', 'round', this.quizId, roundId]);
-    } else {
-      this.router.navigate(['/host', 'results', this.quizId]);
     }
   }
 
