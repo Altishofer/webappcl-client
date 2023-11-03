@@ -88,6 +88,14 @@ export class HostService {
     return this.http.get(`${this.quizUrl}/IntermediateResult/${quizId}/${roundId}`, { observe:'response', headers  });
   }
 
+  getFinalResult(quizId : string) : Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': "Bearer " + this.cookieService.get("hostToken"),
+      'Content-Type': 'application/json',
+    });
+    return this.http.get(`${this.quizUrl}/FinalResult/${quizId}`, { observe:'response', headers  });
+  }
+
   pushRound(roundId : string) : Observable<any> {
     const headers = new HttpHeaders({
       'Authorization': "Bearer " + this.cookieService.get("hostToken"),

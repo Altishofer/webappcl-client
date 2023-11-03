@@ -22,6 +22,7 @@ export class RoundMainComponent {
   playerName : string = '';
   unexpectedErrorMsg : string = "An unexpected error occurred."
   errorMsg : string = '';
+  hostId : string = '';
 
   waitResult : WaitResult = {
     notAnsweredPlayerName : [],
@@ -47,6 +48,7 @@ export class RoundMainComponent {
     this.route.params.subscribe(params => {
       this.quizId = params['quizId'];
       this.roundId = params['roundId'];
+      this.hostId = params['hostId'];
     });
   }
 
@@ -100,7 +102,7 @@ export class RoundMainComponent {
   }
 
   switchToResults(): void {
-    this.router.navigate(['/host', 'results', this.quizId, this.roundId]);
+    this.router.navigate(['/host', this.hostId, 'results', this.quizId, this.roundId]);
   }
 
 

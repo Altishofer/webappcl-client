@@ -1,1 +1,20 @@
-<p>final-results works!</p>
+<div class="game-grid">
+  <mat-card class="card-element">
+    <div class="center">
+      <table class="full-width">
+        <tr>
+          <th class="table-title wide">Player</th>
+          <th class="table-title narrow">Points</th>
+        </tr>
+        <tr *ngFor="let result of finalResult">
+          <td class="honey-player">{{result.playerName}}</td>
+          <td class="honey-player">{{result.points}}</td>
+        </tr>
+      </table>
+    </div>
+    <button mat-raised-button color="positive" (click)="returnToHome()">
+      Back to home
+    </button>
+  </mat-card>
+</div>
+

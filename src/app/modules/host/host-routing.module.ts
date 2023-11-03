@@ -21,22 +21,22 @@ const routes: Routes = [
     path:'login', component:LoginComponent
   },
   {
-    path:'selection/:hostId', component:QuizSelectionComponent
+    path:':hostId/selection', component:QuizSelectionComponent
   },
   {
-    path:'preview/:quizId', component: QuizPreviewComponent
+    path:':hostId/preview/:quizId', component: QuizPreviewComponent
   },
   {
-    path:'lobby/:quizId', component: LobbyComponent
+    path:':hostId/lobby/:quizId', component: LobbyComponent
   },
   {
-    path:'round/:quizId/:roundId', component: RoundMainComponent
+    path:':hostId/round/:quizId/:roundId', component: RoundMainComponent
   },
   {
-    path:'results/:quizId/:roundId', component: ResultsComponent
+    path:':hostId/results/:quizId/:roundId', component: ResultsComponent
   },
   {
-    path:'results/:quizId', component: FinalResultsComponent
+    path:':hostId/results/:quizId', component: FinalResultsComponent
   },
   {
     path:'creation', component:QuizCreationComponent
