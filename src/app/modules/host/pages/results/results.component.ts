@@ -63,7 +63,6 @@ export class ResultsComponent {
     this.signalRService.joinGroup(this.quizId);
   }
 
-
   getIntermediateResult(): void {
     console.log("REST: getFullResult", this.quizId);
     this.hostService.getFullResult(this.quizId).pipe(
@@ -112,5 +111,9 @@ export class ResultsComponent {
           console.log("ERROR: updating rounds via REST");
         }
       });
+  }
+
+  returnToHome() {
+    this.router.navigate(['/host', this.hostId, 'selection']);
   }
 }
