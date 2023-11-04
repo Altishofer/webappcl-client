@@ -1,5 +1,7 @@
 @import "../../shared/host.shared.css";
-
+ .card-element {
+   margin-top: 30px;
+ }
 .lobby-grid {
   display: grid;
   column-gap: 8px;

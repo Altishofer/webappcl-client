@@ -7,6 +7,14 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
   min-height: 100vh;
 }
+h1 {
+  font-size: 70px;
+  font-weight: 600;
+  background-image: repeating-conic-gradient(#a87d5b, #e3b885, #773e37, #7b624c, #e4b076);
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+}
 .card-element {
   text-align: center;
   width: 100%;
@@ -16,6 +24,7 @@ body {
   backdrop-filter: blur(30px);
   justify-content: center;
   align-items: start;
+  box-shadow: 0 0 20px 1px rgba(227, 184, 133, 0.4);
 }
 .app-header {
   justify-content: space-between;
@@ -112,7 +121,6 @@ body {
 mat-raised-button {
   height: 40px;
   border-radius: 40px;
-  background: #fff;
   border: none;
   outline: none;
   cursor: pointer;
@@ -187,6 +195,9 @@ mat-card-content {
   font-size: 16px;
   border: none;
   padding: 10px 5px;
+}
+.quiz-creation-input.target {
+  color: #333
 }
 
 .icon-button {

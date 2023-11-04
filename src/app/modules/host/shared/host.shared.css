@@ -96,6 +96,7 @@
 }
 .target-word-element {
   background-color: #e4b076;
+  color: #333;
   margin: 5px 0 10px 0;
 }
 .forbidden-word-element {
@@ -105,7 +106,7 @@
 
 .honey-player {
   display: inline-block;
-  background-color: #636c74ab;
+  background-color: #e4b076;
   font-size: 105%;
   font-weight: bold;
   color: black;

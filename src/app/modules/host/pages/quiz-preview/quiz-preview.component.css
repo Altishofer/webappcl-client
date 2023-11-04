@@ -199,12 +199,14 @@ span .name {
 .marginalized {
   margin-top: 2px;
   margin-bottom: 14px;
-  width: 30%;
-  border-radius: 12px;
+  width: 25%;
+  border-radius: 9px;
   height: 25px;
   scale: 80%;
+  padding-left: 28px;
+  text-align: center;
 }
-.marginalized .disabled {
+.marginalized:disabled {
   background-color: #888888;
 }
 .mdi-close {

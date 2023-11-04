@@ -55,7 +55,7 @@
             <div class="target-word-element" [formGroup]="targetWordForm">
               <div [formGroupName]="round.id.toString()">
                 <span>
-                  <input type="text" class="quiz-creation-input" placeholder="enter target word"  formControlName="word" autofocus>
+                  <input type="text" class="quiz-creation-input target" placeholder="enter target word"  formControlName="word" autofocus>
                 </span>
               </div>
             </div>
@@ -83,8 +83,8 @@
           </ng-container>
 
           <div class="add-btn-grid">
-              <button mat-mini-fab color="negative" [disabled]="!allIndexWordNonEmpty(round.id.toString())" class="marginalized" (click)="addField(round.id.toString())">
-                <mat-icon>
+              <button mat-raised-button color="negative" [disabled]="!allIndexWordNonEmpty(round.id.toString())" class="marginalized" (click)="addField(round.id.toString())">
+                <mat-icon style="scale: 100%">
                   add
                 </mat-icon>
               </button>

@@ -7,7 +7,18 @@
     font-family: Arial, sans-serif;
     margin: 20px;
 }
-
+.card-element {
+  display: inline-block;
+  width: 100%;
+  max-width: 500px;
+  height: 100%;
+  text-align: center;
+}
+.player-text {
+  display: block;
+  font-size: large;
+  text-align: center;
+}
 
 .player-list-container {
     display: flex;

@@ -1,7 +1,6 @@
-import {Component} from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { SharedModule } from "@shared/shared.module";
 import { OverlayModule } from "@angular/cdk/overlay";
-import {RegexTesterComponent} from "@layout/regex-tester/regex-tester.component";
 
 @Component({
   selector: 'app-header',
@@ -10,10 +9,9 @@ import {RegexTesterComponent} from "@layout/regex-tester/regex-tester.component"
   standalone: true,
   imports: [
     SharedModule,
-    OverlayModule,
-    RegexTesterComponent
+    OverlayModule
   ]
 })
 export class HeaderComponent {
-  isTesterOpen: boolean = false;
+  @Input() currentPlayerName: string = '';
 }

@@ -1,32 +1,3 @@
-<p>
-  <mat-toolbar class="toolbar-main">
-    <!--
-    <button mat-raised-button class="header-button" (click)="isTesterOpen = !isTesterOpen" cdkOverlayOrigin #trigger="cdkOverlayOrigin">
-      {{isTesterOpen ? "Close" : "Regex Tester"}}
-    </button>
-    -->
-    <span>
-      <button mat-mini-fab routerLink="/host" routerLinkActive="active">
-        <mat-icon routerLink="/host" routerLinkActive="active" fontIcon="directions_run"></mat-icon>
-      </button>
-    </span>
-  </mat-toolbar>
-</p>
-
-<!--
-<ng-template class="overlay-window"
-  cdkConnectedOverlay
-  [cdkConnectedOverlayOrigin]="trigger"
-  [cdkConnectedOverlayOpen]="isTesterOpen">
-  <div class="overlay-content">
-    <app-regex-tester></app-regex-tester>
-  </div>
-  <mat-list class="overlay-list">
-    <mat-list-item class="overlay-list item">At least this content is showed now.</mat-list-item>
-    <mat-list-item>But how can this window be closed again by clicking outside of it???</mat-list-item>
-    <mat-list-item>And how can line breaks be added?</mat-list-item>
-    <mat-list-item>This sucks.</mat-list-item>
-    <mat-list-item>How does do?</mat-list-item>
-  </mat-list>
-</ng-template>
--->
+<div class="player-header">
+  <h1>{{ currentPlayerName }}</h1>
+</div>

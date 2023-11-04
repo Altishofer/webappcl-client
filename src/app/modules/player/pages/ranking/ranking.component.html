@@ -1,8 +1,9 @@
-<span class="common-wrapper" fxLayout="row" fxLayoutAlign="center center">
-  <mat-card class="box">
+<app-header [currentPlayerName]="playerName"></app-header>
+<div class="center">
+  <mat-card class="card-element">
     <h3 *ngIf="fullResults.length>0">Your Results</h3>
     <div style="text-align: center" *ngIf="fullResults.length <=0">
-      <h4>Answer submitted successfully.</h4>
+      <h4>Answer submitted!</h4>
     </div>
       <table class="full-width" *ngIf="fullResults.length>0">
         <tr>
@@ -23,4 +24,4 @@
         </tr>
       </table>
   </mat-card>
-</span>
+</div>

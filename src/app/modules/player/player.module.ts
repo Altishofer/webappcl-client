@@ -7,6 +7,7 @@ import { WordCalcComponent } from './pages/word-calc/word-calc.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { WaitingComponent } from './pages/waiting/waiting.component';
 import { RankingComponent } from './pages/ranking/ranking.component';
+import {HeaderComponent} from "@layout/header/header.component";
 
 
 @NgModule({
@@ -16,10 +17,11 @@ import { RankingComponent } from './pages/ranking/ranking.component';
     WaitingComponent,
     RankingComponent
   ],
-  imports: [
-    CommonModule,
-    SharedModule,
-    PlayerRoutingModule,
-  ]
+    imports: [
+        CommonModule,
+        SharedModule,
+        PlayerRoutingModule,
+        HeaderComponent,
+    ]
 })
 export class PlayerModule { }
