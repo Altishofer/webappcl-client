@@ -1,5 +1,4 @@
 import {ChangeDetectorRef, Component} from '@angular/core';
-import {IntermediateResult} from "@data/interfaces/IntermediateResult.model";
 import {Answer} from "@data/interfaces/answer.model";
 import {WaitResult} from "@data/interfaces/WaitResult.model";
 import {SignalRService} from "@data/services/SignalRService";
@@ -9,6 +8,7 @@ import {PlayerService} from "@data/services/player.service";
 import {HostService} from "@data/services/host.service";
 import {catchError} from "rxjs";
 import {HttpErrorResponse} from "@angular/common/http";
+import {FullResult} from "@data/interfaces/FullResult";
 
 @Component({
   selector: 'app-results',
@@ -22,7 +22,7 @@ export class ResultsComponent {
   unexpectedErrorMsg : string = "An unexpected error occurred."
   errorMsg : string = '';
   hostId : string = '';
-  intermediateResult : IntermediateResult[] = [];
+  fullResults : FullResult[] = [];
 
   constructor(
     private cdr: ChangeDetectorRef,
@@ -65,8 +65,8 @@ export class ResultsComponent {
 
 
   getIntermediateResult(): void {
-    console.log("REST: getIntermediateResult", this.quizId, this.roundId);
-    this.hostService.getIntermediateResult(this.quizId, this.roundId).pipe(
+    console.log("REST: getFullResult", this.quizId);
+    this.hostService.getFullResult(this.quizId).pipe(
       catchError((error: HttpErrorResponse) => {
         console.log(JSON.stringify(error.error));
         if (error.status != 500) {
@@ -80,7 +80,7 @@ export class ResultsComponent {
       if ((response.status >= 200 && response.status < 300) || response.status == 304) {
         console.log(response.body);
         this.errorMsg = '';
-        this.intermediateResult = response.body;
+        this.fullResults = response.body;
       } else {
         this.errorMsg = this.unexpectedErrorMsg;
       }
@@ -90,6 +90,7 @@ export class ResultsComponent {
 
   startGame() {
     let rounds : string = this.cookieService.get("roundIds");
+    console.log("rounds: ", rounds);
     if (!rounds || rounds.length == 0){
       this.router.navigate(['/host', this.hostId, 'results', this.quizId]);
     } else {

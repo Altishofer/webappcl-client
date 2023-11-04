@@ -1,5 +1,8 @@
 <span class="common-wrapper" fxLayout="row" fxLayoutAlign="center center">
   <mat-card class="box">
+      <div class="time-bar">
+    <div class="timer-progress" [style.width.%]="remainingTime / 25 * 100"></div>
+  </div>
     <div [formGroup]="wordCalcForm">
       <div formArrayName="wordsArray">
         <ng-template ngFor let-word [ngForOf]="wordsArray.controls"

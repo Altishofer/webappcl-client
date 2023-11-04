@@ -1,5 +1,4 @@
 import {ChangeDetectorRef, Component} from '@angular/core';
-import {IntermediateResult} from "@data/interfaces/IntermediateResult.model";
 import {SignalRService} from "@data/services/SignalRService";
 import {ActivatedRoute, Router} from "@angular/router";
 import {CookieService} from "ngx-cookie-service";
@@ -7,6 +6,7 @@ import {PlayerService} from "@data/services/player.service";
 import {HostService} from "@data/services/host.service";
 import {catchError} from "rxjs";
 import {HttpErrorResponse} from "@angular/common/http";
+import {FullResult} from "@data/interfaces/FullResult";
 
 @Component({
   selector: 'app-final-results',
@@ -19,15 +19,13 @@ export class FinalResultsComponent {
   unexpectedErrorMsg: string = "An unexpected error occurred."
   errorMsg: string = '';
 
-  finalResult: IntermediateResult[] = [];
+  fullResults: FullResult[] = [];
 
   constructor(
       private cdr: ChangeDetectorRef,
       private signalRService: SignalRService,
       private router: Router,
       private route: ActivatedRoute,
-      private cookieService: CookieService,
-      private playerService: PlayerService,
       private hostService: HostService
   ) {
     this.route.params.subscribe(params => {
@@ -42,18 +40,16 @@ export class FinalResultsComponent {
     }).catch(error => {
       console.error("SignalR connection error:", error);
     });
-    this.getFinalResult();
+    this.getFullResult();
   }
 
   registerToGroup() {
-    console.log("SOCKET: registerToGroup", this.quizId);
     this.signalRService.joinGroup(this.quizId);
   }
 
 
-  getFinalResult(): void {
-    console.log("REST: getFinalResult", this.quizId);
-    this.hostService.getFinalResult(this.quizId).pipe(
+  getFullResult(): void {
+    this.hostService.getFullResult(this.quizId).pipe(
         catchError((error: HttpErrorResponse) => {
           console.log(JSON.stringify(error.error));
           if (error.status != 500) {
@@ -67,7 +63,7 @@ export class FinalResultsComponent {
       if ((response.status >= 200 && response.status < 300) || response.status == 304) {
         console.log(response.body);
         this.errorMsg = '';
-        this.finalResult = response.body;
+        this.fullResults = response.body;
       } else {
         this.errorMsg = this.unexpectedErrorMsg;
       }

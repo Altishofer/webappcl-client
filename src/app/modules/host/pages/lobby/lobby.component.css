@@ -17,9 +17,6 @@
   text-align: center;
   align-content: center;
   justify-content: center;
-  animation-duration: 2s;
-  animation-name: madWiggle;
-  animation-iteration-count: infinite;
 }
 .between-title-grid {
   grid-column: 2 / 5;

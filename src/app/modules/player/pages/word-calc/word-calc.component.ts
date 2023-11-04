@@ -27,6 +27,9 @@ export class WordCalcComponent{
   playerName : string = '';
   unexpectedErrorMsg : string = "An unexpected error occurred."
   errorMsg : string = '';
+  remainingTime = 25;
+  submitted : boolean = false;
+
 
   cal: VectorCalculationModel = {
     Additions: [],
@@ -61,7 +64,41 @@ export class WordCalcComponent{
       this.roundId = params['roundId'];
       this.playerName = params['playerName'];
     });
+    this.signalRService.startConnection().then(() => {
+      this.registerToGroup();
+      this.registerListeners();
+    }).catch(error => {
+      console.error("SignalR connection error:", error);
+    });
   }
+
+  ngOnInit(): void {
+    this.startTimer();
+  }
+
+  registerListeners(): void {
+    this.signalRService.setReceiveNavigateListener((round: string) => {
+      this.submit();
+    });
+  }
+
+  registerToGroup() {
+    console.log("SOCKET: registerToGroup", this.quizId);
+    this.signalRService.joinGroup(this.quizId);
+  }
+
+  startTimer() {
+    if (this.remainingTime > 0) {
+      setTimeout(() => {
+        this.remainingTime -= 1;
+        this.cdr.detectChanges();
+        this.startTimer();
+      }, 1000);
+    } else if (!this.submitted) {
+      this.submit();
+    }
+  }
+
 
   createWordFormGroup(word:string='', isSubtracted:boolean=false): FormGroup {
     return this.fb.group({
@@ -150,13 +187,14 @@ export class WordCalcComponent{
     ).subscribe((response: any): void => {
     if ((response.status >= 200 && response.status < 300) || response.status == 304) {
       console.log(response.body);
-      this.switchToRanking();
+      this.submitted = true;
     } else {
       console.log(response);
       console.log("error", response.error);
       this.errorMsg = response.error;
     }
   });
+    this.switchToRanking();
   }
 
   assignValues(){

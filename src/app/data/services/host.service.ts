@@ -18,17 +18,6 @@ export class HostService {
 
   constructor(private http: HttpClient, private cookieService: CookieService) {}
 
-  getHosts(host: Host): void {
-    const headers = new HttpHeaders({
-      'Authorization': "bearer " + this.cookieService.get("hostToken"),
-      'Content-Type': 'application/json',
-    });
-
-    this.http.get(`${this.baseUrl}/GetHosts`, { headers }).subscribe((response: any) => {
-      console.log("got hostName from request: " + response.hostName);
-    });
-  }
-
   register(host: Host): Observable<any> {
     const headers : HttpHeaders = new HttpHeaders ({
       'Content-Type': 'application/json',
@@ -80,20 +69,12 @@ export class HostService {
     return this.http.get(`${this.quizUrl}/WaitResult/${quizId}/${roundId}`, { observe:'response', headers  });
   }
 
-  getIntermediateResult(quizId : string, roundId:string) : Observable<any> {
+  getFullResult(quizId : string) : Observable<any> {
     const headers = new HttpHeaders({
       'Authorization': "Bearer " + this.cookieService.get("hostToken"),
       'Content-Type': 'application/json',
     });
-    return this.http.get(`${this.quizUrl}/IntermediateResult/${quizId}/${roundId}`, { observe:'response', headers  });
-  }
-
-  getFinalResult(quizId : string) : Observable<any> {
-    const headers = new HttpHeaders({
-      'Authorization': "Bearer " + this.cookieService.get("hostToken"),
-      'Content-Type': 'application/json',
-    });
-    return this.http.get(`${this.quizUrl}/FinalResult/${quizId}`, { observe:'response', headers  });
+    return this.http.get(`${this.quizUrl}/FullResult/${quizId}`, { observe:'response', headers  });
   }
 
   pushRound(roundId : string) : Observable<any> {
@@ -110,14 +91,6 @@ export class HostService {
       'Content-Type': 'application/json'
     });
     return this.http.get(`${this.quizUrl}/GetRound/${roundId}`, { observe:'response', headers  });
-  }
-
-  getAllRoundsByQuiz(quizId: string): Observable<any> {
-    const headers: HttpHeaders = new HttpHeaders({
-      'Authorization': "Bearer " + this.cookieService.get("hostToken"),
-      'Content-Type': 'application/json',
-    });
-    return this.http.get(`${this.baseUrl}/GetAllRoundsByQuiz?quizId=${quizId}`, {observe: 'response', headers});
   }
 
   getAllRoundIdsByQuiz(quizId: string): Observable<any> {

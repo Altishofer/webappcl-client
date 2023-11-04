@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import * as signalR from '@microsoft/signalr';
 import { environment } from '../../../environments/environment';
 import {WaitResult} from "@data/interfaces/WaitResult.model";
-import {IntermediateResult} from "@data/interfaces/IntermediateResult.model";
+import {FullResult} from "@data/interfaces/FullResult";
 
 @Injectable({
   providedIn: 'root',
@@ -26,7 +26,6 @@ export class SignalRService {
   }
 
   joinGroup(groupName: string) {
-    console.log("joinGroup", groupName);
     this.hubConnection
       .invoke('JoinGroup', groupName)
       .catch((err) => console.error('Error joining group: ' + err));
@@ -39,7 +38,6 @@ export class SignalRService {
   }
 
   sendMessageToGroup(groupName: string, message: string) {
-    console.log("sendMessageToGroup", groupName, message);
     this.hubConnection
       .invoke('SendMessageToGroup', groupName, message)
       .catch((err) => {
@@ -71,11 +69,11 @@ export class SignalRService {
     this.hubConnection.on('ReceiveWaitResult', listener);
   }
 
-  setReceiveIntermediateResultListener(listener: (intermediateResults: IntermediateResult[]) => void) {
-    this.hubConnection.on('ReceiveIntermediateResult', listener);
+  setReceiveFullResultListener(listener: (fullResults: FullResult[]) => void) {
+    this.hubConnection.on('ReceiveFullResult', listener);
   }
 
-  setReceiveFinalResultListener(listener: (intermediateResults: IntermediateResult[]) => void) {
-    this.hubConnection.on('ReceiveFinalResult', listener);
+  setReceiveNavigateListener(listener: (round: string) => void) {
+    this.hubConnection.on('ReceiveNavigate', listener);
   }
 }

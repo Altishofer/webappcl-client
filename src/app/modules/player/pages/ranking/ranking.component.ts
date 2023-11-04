@@ -7,8 +7,8 @@ import {CookieService} from "ngx-cookie-service";
 import {PlayerService} from "@data/services/player.service";
 import {catchError} from "rxjs";
 import {HttpErrorResponse} from "@angular/common/http";
-import {IntermediateResult} from "@data/interfaces/IntermediateResult.model";
 import {HostService} from "@data/services/host.service";
+import {FullResult} from "@data/interfaces/FullResult";
 
 @Component({
   selector: 'app-ranking',
@@ -19,7 +19,8 @@ export class RankingComponent implements OnInit{
   quizId!: string;
   nextRound: string = "";
   playerName: string = "";
-  intermediateResult : IntermediateResult[] = [];
+  fullResults : FullResult[] = [];
+  roundId : string = '';
 
   constructor(
     private signalRService: SignalRService,
@@ -31,6 +32,8 @@ export class RankingComponent implements OnInit{
     this.route.params.subscribe(params => {
       this.quizId = params['quizId'];
       this.playerName = params['playerName'];
+      this.roundId = params['roundId'];
+
     });
   }
 
@@ -54,16 +57,9 @@ export class RankingComponent implements OnInit{
   }
 
   registerListeners(): void {
-    this.signalRService.setReceiveIntermediateResultListener((results: IntermediateResult[]) => {
-      console.log("SOCKET round: ", results);
-      this.intermediateResult = results;
-      console.log("SOCKET: intermediateResults")
-    });
 
-    this.signalRService.setReceiveFinalResultListener((results: IntermediateResult[]) => {
-      console.log("SOCKET round: ", results);
-      this.intermediateResult = results;
-      console.log("SOCKET: finalResults")
+    this.signalRService.setReceiveFullResultListener((results: FullResult[]) => {
+      this.fullResults = results;
     });
 
     this.signalRService.setReceiveRoundListener((round: string) => {

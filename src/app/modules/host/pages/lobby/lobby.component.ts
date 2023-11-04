@@ -46,7 +46,6 @@ export class LobbyComponent {
       console.error("SignalR connection error:", error);
     });
     this.getRounds();
-    this.getPlayers();
   }
 
   getPlayers(): void {
@@ -54,7 +53,11 @@ export class LobbyComponent {
       (response: any): void => {
         if ((response.status >= 200 && response.status < 300) || response.status == 304) {
           console.log("REST player: ", response.body);
-          this.players = response.body.message.split(" ");
+          if (response.body.message == ""){
+            this.players = [];
+          } else {
+            this.players = response.body.message.split(" ");
+          }
         } else {
           console.log("ERROR: updating players via REST");
         }
@@ -65,8 +68,10 @@ export class LobbyComponent {
     this.hostService.getAllRoundIdsByQuiz(this.quizId).subscribe(
       (response: any): void => {
         if ((response.status >= 200 && response.status < 300) || response.status == 304) {
+          console.log("REST roundIds: ", response.body);
           this.roundIds = response.body;
           this.cookieService.set("roundIds", this.roundIds.join(","));
+          this.getPlayers();
         } else {
           console.log("ERROR: updating roundIds via REST");
         }

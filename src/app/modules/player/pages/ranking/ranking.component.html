@@ -1,15 +1,25 @@
-<div *ngIf="intermediateResult.length ==0">Result Submitted, wait until the host releases the results</div>
-<table>
-  <tr *ngIf="intermediateResult.length >0">
-    <th>Player</th>
-    <th>Result</th>
-    <th>Points</th>
-  </tr>
-  <tr *ngFor="let result of intermediateResult">
-    <ng-container  *ngIf="result.playerName == playerName">
-      <td>{{result.playerName}}</td>
-      <td>{{result.answerTarget}}</td>
-      <td>{{result.points}}</td>
-    </ng-container>
-  </tr>
-</table>
+<span class="common-wrapper" fxLayout="row" fxLayoutAlign="center center">
+  <mat-card class="box">
+    <h3 *ngIf="fullResults.length>0">Your Results</h3>
+    <div style="text-align: center" *ngIf="fullResults.length <=0">
+      <h4>Answer submitted successfully.</h4>
+    </div>
+      <table class="full-width" *ngIf="fullResults.length>0">
+        <tr>
+          <th class="table-title narrow">Rank</th>
+          <th class="table-title wide">Player</th>
+          <th class="table-title narrow">Round Points</th>
+          <th class="table-title wide">Round Result</th>
+          <th class="table-title narrow">Total Points</th>
+        </tr>
+        <tr *ngFor="let result of fullResults">
+          <td class="honey-player">{{result.rank}}</td>
+          <td class="honey-player">{{result.playerName}}</td>
+          <td class="honey-player">{{result.lastRoundPoints}}</td>
+          <td class="honey-player">{{result.lastRoundAnswerTarget}}</td>
+          <td class="honey-player">{{result.totalPoints}}</td>
+        </tr>
+      </table>
+  </mat-card>
+
+</span>

@@ -8,7 +8,7 @@ const routes: Routes = [
   {
     path: '',
     redirectTo: 'host',
-    pathMatch: 'full'
+    pathMatch: 'prefix'
   },
   {
     path: 'host',
