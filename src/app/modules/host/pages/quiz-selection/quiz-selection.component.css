@@ -59,6 +59,8 @@ h1 {
 }
 .btn-add {
   height: fit-content;
+  background-color: #a87d5b;
+  color: white;
 }
 .icon {
   display: inline-block;
