@@ -23,6 +23,8 @@ export class RoundMainComponent {
   unexpectedErrorMsg : string = "An unexpected error occurred."
   errorMsg : string = '';
   hostId : string = '';
+  remainingTime = 25;
+
 
   waitResult : WaitResult = {
     notAnsweredPlayerName : [],
@@ -37,13 +39,11 @@ export class RoundMainComponent {
   };
 
   constructor(
-    private fb: FormBuilder,
-    private cdr: ChangeDetectorRef,
     private signalRService: SignalRService,
     private router: Router,
     private route: ActivatedRoute,
-    private cookieService: CookieService,
-    private hostService: HostService
+    private hostService: HostService,
+    private cdr: ChangeDetectorRef,
   ) {
     this.route.params.subscribe(params => {
       this.quizId = params['quizId'];
@@ -66,6 +66,17 @@ export class RoundMainComponent {
       console.error("SignalR connection error:", error);
     });
     this.getWaitResult();
+    this.startTimer();
+  }
+
+  startTimer() {
+    if (this.remainingTime > 0) {
+      setTimeout(() => {
+        this.remainingTime -= 1;
+        this.cdr.detectChanges();
+        this.startTimer();
+      }, 1000);
+    }
   }
 
   getRound(): void {
@@ -102,6 +113,25 @@ export class RoundMainComponent {
   }
 
   switchToResults(): void {
+    this.hostService.SendNavigate(this.roundId).pipe(
+        catchError((error: HttpErrorResponse) => {
+          console.log(JSON.stringify(error.error));
+          if (error.status != 500) {
+            this.errorMsg = error.error;
+          } else {
+            this.errorMsg = this.unexpectedErrorMsg;
+          }
+          return[];
+        })
+    ).subscribe((response: any): void => {
+      if ((response.status >= 200 && response.status < 300) || response.status == 304) {
+        console.log(response.body)
+        this.errorMsg = '';
+      } else {
+        this.errorMsg = this.unexpectedErrorMsg;
+      }
+    });
+
     this.router.navigate(['/host', this.hostId, 'results', this.quizId, this.roundId]);
   }
 

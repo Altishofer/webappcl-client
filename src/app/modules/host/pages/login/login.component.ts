@@ -37,7 +37,6 @@ export class LoginComponent implements OnInit{
         this.host.hostName = this.loginForm.value.username;
         this.host.hostPassword = this.loginForm.value.password;
       }
-      console.log('Form status changed', status);
     });
   };
 
@@ -87,11 +86,9 @@ export class LoginComponent implements OnInit{
         })
       )
       .subscribe((response: any): void => {
-        console.log("response", JSON.stringify(response.body));
         if ((response.status >= 200 && response.status < 300) || response.status == 304) {
           this.cookieService.set('hostToken', response.body.token.result);
           this.cookieService.set('hostName', this.host.hostName);
-          console.log(actionName + " was successful -> user '" + this.host.hostName + "', received token: " + response.body.token.result);
           this.hostService.refreshTokenPeriodically();
           this.router.navigate(["host", response.body.id, "selection"]);
         } else {
@@ -102,7 +99,7 @@ export class LoginComponent implements OnInit{
 
   wakeUpServer() {
     this.hostService.wakeUpServer().subscribe((response: any) => {
-      console.log("wakeUpServer response: " + response.body.length);
+      console.log("Server started successfuly");
     });
   }
 

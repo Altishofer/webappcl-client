@@ -1,7 +1,6 @@
 <div class="portal-grid">
   <div class="h2-grid">
-    <input type="text" [(ngModel)]="newQuizTitle" class="editable-title" value="{{selectedQuizTitle}}" autofocus>
-    <button mat-mini-fab color="positive" class="edit-title-button" (click)="saveTitle(newQuizTitle)"><mat-icon>save</mat-icon></button>
+    <h2 class="editable-title"  contenteditable="true" (blur)="saveTitle($event)">{{selectedQuizTitle}}</h2>
   </div>
 
   <span class="left-btn">

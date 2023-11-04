@@ -49,35 +49,4 @@
 button.remove:disabled {
   visibility: hidden;
 }
-.time-banner {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 18px;
-  color: darkred;
-  transition: color 1s;
-}
 
-.time-bar {
-  height: 10px;
-  width: 100%;
-  background-image: linear-gradient(to right, #7b624c, #773e37);
-  position: relative;
-  margin-bottom: 15px;
-}
-
-.timer-progress {
-  height: 100%;
-  width: 0;
-  background-image: linear-gradient(to right, #e4b076, #a87d5b);
-  animation: timer-animation 25s linear;
-}
-
-@keyframes timer-animation {
-  0% {
-    width: 100%;
-  }
-  100% {
-    width: 0;
-  }
-}

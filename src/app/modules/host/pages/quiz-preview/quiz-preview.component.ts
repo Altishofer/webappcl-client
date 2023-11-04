@@ -239,9 +239,13 @@ export class QuizPreviewComponent implements OnInit{
     console.log('Updated quiz', this.selectedQuizRounds);
     }
 
-    saveTitle(title: string) {
-      if (title) {
-        this.selectedQuizTitle = title;
-      }
+  saveTitle(event: any) {
+    const title = event.target?.textContent;
+    if (title && !/\s/.test(title)) {
+      this.selectedQuizTitle = title;
+    } else {
+      this.selectedQuizTitle = 'Edit Title';
+      event.target.textContent = this.selectedQuizTitle;
     }
+  }
 }

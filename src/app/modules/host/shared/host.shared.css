@@ -13,7 +13,7 @@
   grid-column: 2 / span 3;
   grid-row: 1;
   text-align: center;
-  align-content: start;
+  align-content: center;
 }
 .left-btn {
   grid-column: 1;

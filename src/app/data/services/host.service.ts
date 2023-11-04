@@ -85,6 +85,14 @@ export class HostService {
     return this.http.get(`${this.quizUrl}/PushRound/${roundId}`, { observe:'response', headers  });
   }
 
+  SendNavigate(roundId : string) : Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': "Bearer " + this.cookieService.get("hostToken"),
+      'Content-Type': 'application/json'
+    });
+    return this.http.get(`${this.quizUrl}/SendNavigate/${roundId}`, { observe:'response', headers  });
+  }
+
   getRound(roundId : string) : Observable<any> {
     const headers = new HttpHeaders({
       'Authorization': "bearer " + this.cookieService.get("hostToken"),

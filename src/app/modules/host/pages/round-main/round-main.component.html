@@ -1,4 +1,7 @@
 <mat-card class="card-element">
+  <div class="time-bar">
+    <div class="timer-progress" [style.width.%]="remainingTime / 25 * 100"></div>
+  </div>
   <div class="game-main">
     <div class="target-word-title">
       Target Word:

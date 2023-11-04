@@ -225,19 +225,12 @@ button.remove:disabled {
 }
 
 .editable-title {
-  background: rgba(255, 255, 255, 0.5);
-  border: 2px solid rgba(255,255,255,0.5);
-  backdrop-filter: blur(30px);
+  background: transparent;
   padding: 5px;
   margin-right: 10px;
   width: fit-content;
   height: fit-content;
-}
+  min-width: 30px;
 
-.edit-title-button {
-  scale: 80%;
-  margin: 0;
-  width: 30px;
-  height: 30px;
 }
 
