@@ -13,11 +13,13 @@
           <th class="table-title narrow">Total Points</th>
         </tr>
         <tr *ngFor="let result of fullResults">
-          <td class="honey-player">{{result.rank}}</td>
-          <td class="honey-player">{{result.playerName}}</td>
-          <td class="honey-player">{{result.lastRoundPoints}}</td>
-          <td class="honey-player">{{result.lastRoundAnswerTarget}}</td>
-          <td class="honey-player">{{result.totalPoints}}</td>
+          <ng-template [ngIf]="result.playerName == playerName">
+            <td class="honey-player highlight">{{result.rank}}</td>
+            <td class="honey-player highlight">{{result.playerName}}</td>
+            <td class="honey-player highlight">{{result.lastRoundPoints}}</td>
+            <td class="honey-player highlight">{{result.lastRoundAnswerTarget}}</td>
+            <td class="honey-player highlight">{{result.totalPoints}}</td>
+          </ng-template>
         </tr>
       </table>
   </mat-card>

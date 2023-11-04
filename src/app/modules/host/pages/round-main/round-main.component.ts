@@ -76,8 +76,11 @@ export class RoundMainComponent {
         this.cdr.detectChanges();
         this.startTimer();
       }, 1000);
+    } else {
+      this.enforceNavigation();
     }
   }
+
 
   getRound(): void {
     this.hostService.getRound(this.roundId).pipe(
@@ -101,18 +104,16 @@ export class RoundMainComponent {
   }
 
   registerToGroup() {
-    console.log("SOCKET: registerToGroup", this.quizId);
     this.signalRService.joinGroup(this.quizId);
   }
 
   registerListeners(): void {
     this.signalRService.setReceiveWaitResultListener((waitResult: WaitResult) => {
-      console.log("SOCKET waitResult: ", waitResult)
       this.waitResult = waitResult;
     });
   }
 
-  switchToResults(): void {
+  enforceNavigation(): void{
     this.hostService.SendNavigate(this.roundId).pipe(
         catchError((error: HttpErrorResponse) => {
           console.log(JSON.stringify(error.error));
@@ -131,7 +132,9 @@ export class RoundMainComponent {
         this.errorMsg = this.unexpectedErrorMsg;
       }
     });
+  }
 
+  switchToResults(): void {
     this.router.navigate(['/host', this.hostId, 'results', this.quizId, this.roundId]);
   }
 
