@@ -200,6 +200,8 @@ mat-card-content {
   background-image: linear-gradient(to right, #7b624c, #773e37);
   position: relative;
   margin-bottom: 15px;
+  margin-top: 15px;
+  align-self: center;
 }
 
 .timer-progress {

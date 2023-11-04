@@ -1,7 +1,5 @@
 <mat-card class="card-element">
-  <div class="time-bar">
-    <div class="timer-progress" [style.width.%]="remainingTime / 25 * 100"></div>
-  </div>
+
   <div class="game-main">
     <div class="target-word-title">
       Target Word:
@@ -43,7 +41,9 @@
       </div>
     </div>
   </div>
-
+  <div class="time-bar">
+    <div class="timer-progress" [style.width.%]="remainingTime / 25 * 100"></div>
+  </div>
   <div class="btn-grid-container">
     <button mat-raised-button color="positive" (click)="switchToResults()">switch to results</button>
   </div>
