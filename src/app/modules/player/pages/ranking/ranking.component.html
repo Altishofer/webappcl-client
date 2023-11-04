@@ -5,23 +5,20 @@
     <div style="text-align: center" *ngIf="fullResults.length <=0">
       <h4>Answer submitted!</h4>
     </div>
-      <table class="full-width" *ngIf="fullResults.length>0">
-        <tr>
-          <th class="table-title narrow">Rank</th>
-          <th class="table-title wide">Player</th>
-          <th class="table-title narrow">Round Points</th>
-          <th class="table-title wide">Round Result</th>
-          <th class="table-title narrow">Total Points</th>
-        </tr>
-        <tr *ngFor="let result of fullResults">
-          <ng-template [ngIf]="result.playerName == playerName">
-            <td class="honey-player highlight">{{result.rank}}</td>
-            <td class="honey-player highlight">{{result.playerName}}</td>
-            <td class="honey-player highlight">{{result.lastRoundPoints}}</td>
-            <td class="honey-player highlight">{{result.lastRoundAnswerTarget}}</td>
-            <td class="honey-player highlight">{{result.totalPoints}}</td>
-          </ng-template>
-        </tr>
-      </table>
+    <div class="podium" *ngIf="fullResults.length > 0">
+      <div class="podium-step" *ngFor="let result of fullResults; let i = index">
+        <ng-container *ngIf="i <= 2">
+          <div class="podium-info">
+            <div class="podium-rank" *ngIf="result.playerName == playerName">{{i+1}}</div>
+            <div class="podium-player">{{result.playerName}}</div>
+            <div class="podium-total-points">{{result.totalPoints - result.lastRoundPoints}} (+ {{result.lastRoundPoints}})</div>
+            <div class="podium-round-result">
+              <span *ngFor="let char of result.lastRoundAnswerTarget">{{char}}</span>
+            </div>
+          </div>
+          <div class="podium-base" [ngClass]="{'first': i === 1, 'second': i === 0, 'third': i === 2, 'higher' : i >= 3 }"></div>
+        </ng-container>
+      </div>
+    </div>
   </mat-card>
 </div>

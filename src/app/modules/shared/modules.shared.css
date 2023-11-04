@@ -231,3 +231,77 @@ mat-card-content {
   }
 }
 
+
+.podium {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  margin: 20px;
+}
+
+.podium-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.podium-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f0f0f0;
+  border: 1px solid #cccccc;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.podium-rank {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.podium-player {
+  font-size: 18px;
+}
+
+.podium-round-points,
+.podium-round-result,
+.podium-total-points {
+  font-size: 14px;
+}
+
+.podium-base {
+  width: 100px;
+}
+
+.timer-progress {
+  height: 100%;
+  width: 0;
+  background-image: linear-gradient(to right, #e4b076, #a87d5b);
+  animation: timer-animation 25s linear;
+}
+
+.first {
+  height: 150px;
+  background-image: linear-gradient(to bottom,#773e37, #7b624c);
+}
+
+.second {
+  height: 100px;
+  background-image: linear-gradient(to bottom, #b08e73, #7b624c);
+}
+
+.third {
+  height: 50px;
+  background-image: linear-gradient(to bottom, #e3d3c3, #a87d5b);
+}
+
+.higher {
+  height: 50px;
+  background-image: linear-gradient(to bottom, #e3d3c3, #ad9582);
+}
+
+.podium-round-result span {
+  display: block;
+  font-style: italic;
+}
