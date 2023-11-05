@@ -162,8 +162,10 @@ export class WordCalcComponent{
 
   submit() : void {
     try{
-      this.assignValues();
-      this.sendAnswer();
+      if (!this.submitted){
+        this.assignValues();
+        this.sendAnswer();
+      }
     } catch {
       this.errorMsg = this.unexpectedErrorMsg;
     } finally {
@@ -172,6 +174,7 @@ export class WordCalcComponent{
   }
 
   sendAnswer(): void{
+    console.log("token", this.cookieService.get("playerToken"));
     this.errorMsg = '';
     this.playerService.sendAnswer(this.answer).pipe(
       catchError((error: HttpErrorResponse) => {

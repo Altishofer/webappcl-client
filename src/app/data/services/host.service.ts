@@ -44,7 +44,7 @@ export class HostService {
       return this.http.get(`${this.baseUrl}/RefreshToken`, { observe:'response', headers })
         .subscribe((response: any) => {
           if ((response.status >= 200 && response.status < 300) || response.status == 304) {
-            this.cookieService.set('hostToken', response.body.result);
+            this.cookieService.set('hostToken', response.body.result, 1);
           } else {
             console.log("ERROR: refreshing token was not successful");
           }
@@ -68,12 +68,12 @@ export class HostService {
     return this.http.get(`${this.quizUrl}/WaitResult/${quizId}/${roundId}`, { observe:'response', headers  });
   }
 
-  getFullResult(quizId : string) : Observable<any> {
+  getFullResult(quizId : string, roundId : string) : Observable<any> {
     const headers = new HttpHeaders({
       'Authorization': "Bearer " + this.cookieService.get("hostToken"),
       'Content-Type': 'application/json',
     });
-    return this.http.get(`${this.quizUrl}/FullResult/${quizId}`, { observe:'response', headers  });
+    return this.http.get(`${this.quizUrl}/FullResult/${quizId}/${roundId}`, { observe:'response', headers  });
   }
 
   pushRound(roundId : string) : Observable<any> {

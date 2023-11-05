@@ -23,6 +23,7 @@ export class ResultsComponent {
   errorMsg : string = '';
   hostId : string = '';
   fullResults : FullResult[] = [];
+  anotherRound : boolean = false;
 
   constructor(
     private cdr: ChangeDetectorRef,
@@ -38,6 +39,7 @@ export class ResultsComponent {
       this.roundId = params['roundId'];
       this.hostId = params['hostId']
     });
+    this.anotherRound = this.cookieService.get("roundIds").length > 0;
   }
 
   ngOnInit(): void {
@@ -62,7 +64,7 @@ export class ResultsComponent {
   }
 
   getIntermediateResult(): void {
-    this.hostService.getFullResult(this.quizId).pipe(
+    this.hostService.getFullResult(this.quizId, this.roundId).pipe(
       catchError((error: HttpErrorResponse) => {
         console.log(JSON.stringify(error.error));
         if (error.status != 500) {
@@ -86,12 +88,12 @@ export class ResultsComponent {
   startGame() {
     let rounds : string = this.cookieService.get("roundIds");
     if (!rounds || rounds.length == 0){
-      this.router.navigate(['/host', this.hostId, 'results', this.quizId]);
+      this.router.navigate(['/host', this.hostId, 'results', this.quizId, -1]);
     } else {
       let roundId : string = "";
       let roundIds : string[] = rounds.split(",");
       roundId = roundIds.shift() as string;
-      this.cookieService.set("roundIds", roundIds.join(","));
+      this.cookieService.set("roundIds", roundIds.join(","), new Date().setHours(new Date().getHours() + 1));
       this.pushRound(roundId);
       this.router.navigate(['/host', this.hostId, 'round', this.quizId, roundId]);
     }

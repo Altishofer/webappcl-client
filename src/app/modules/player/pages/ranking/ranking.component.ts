@@ -33,7 +33,6 @@ export class RankingComponent implements OnInit{
       this.quizId = params['quizId'];
       this.playerName = params['playerName'];
       this.roundId = params['roundId'];
-
     });
   }
 

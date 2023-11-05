@@ -66,8 +66,8 @@ export class RegisterComponent {
       )
       .subscribe((response: any): void => {
         if ((response.status >= 200 && response.status < 300) || response.status == 304) {
-          this.cookieService.set('playerToken', response.body.result);
-          console.log(actionName + " was successful -> user '" + this.player.PlayerName + "', received token: " + response.body.result);
+          this.cookieService.set('playerToken', response.body.result, new Date().setHours(new Date().getHours() + 1));
+          console.log(actionName + " was successful -> user '" + this.player.PlayerName + "', received token: " + this.cookieService.get('playerToken'));
           this.router.navigate(['/player', 'waiting', this.quizId, this.player.PlayerName]);
         } else {
           this.errorMsg = this.unexpectedErrorMsg;

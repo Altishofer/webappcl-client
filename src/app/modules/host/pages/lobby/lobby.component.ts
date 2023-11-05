@@ -68,7 +68,7 @@ export class LobbyComponent {
       (response: any): void => {
         if ((response.status >= 200 && response.status < 300) || response.status == 304) {
           this.roundIds = response.body;
-          this.cookieService.set("roundIds", this.roundIds.join(","));
+          this.cookieService.set("roundIds", this.roundIds.join(","), new Date().setHours(new Date().getHours() + 1));
           this.getPlayers();
         } else {
           console.log("ERROR: updating roundIds via REST");
@@ -100,10 +100,10 @@ export class LobbyComponent {
     let roundIds : string[] = rounds.split(",");
     if (roundIds.length != 0){
       roundId = roundIds.shift() as string;
-      this.cookieService.set("roundIds", roundIds.join(","));
+      this.cookieService.set("roundIds", roundIds.join(","), new Date().setHours(new Date().getHours() + 1));
       this.pushRound(roundId);
     } else {
-      this.router.navigate(['/host', this.hostId, 'results', this.quizId]);
+      this.router.navigate(['/host', this.hostId, 'results', this.quizId, -1]);
     }
   }
 

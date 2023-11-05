@@ -87,8 +87,8 @@ export class LoginComponent implements OnInit{
       )
       .subscribe((response: any): void => {
         if ((response.status >= 200 && response.status < 300) || response.status == 304) {
-          this.cookieService.set('hostToken', response.body.token.result);
-          this.cookieService.set('hostName', this.host.hostName);
+          this.cookieService.set('hostToken', response.body.token.result, new Date().setHours(new Date().getHours() + 1));
+          //this.cookieService.set('hostName', this.host.hostName);
           this.hostService.refreshTokenPeriodically();
           this.router.navigate(["host", response.body.id, "selection"]);
         } else {
