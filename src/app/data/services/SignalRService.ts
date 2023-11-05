@@ -17,7 +17,7 @@ export class SignalRService {
 
   private createHubConnection(url: string) {
     this.hubConnection = new signalR.HubConnectionBuilder()
-      .configureLogging(signalR.LogLevel.Debug)
+      .configureLogging(signalR.LogLevel.Information)
       .withUrl(url, {
         skipNegotiation: true,
         transport: signalR.HttpTransportType.WebSockets,

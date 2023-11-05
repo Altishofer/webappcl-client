@@ -83,7 +83,6 @@ export class WordCalcComponent{
   }
 
   registerToGroup() {
-    console.log("SOCKET: registerToGroup", this.quizId);
     this.signalRService.joinGroup(this.quizId);
   }
 
@@ -108,9 +107,7 @@ export class WordCalcComponent{
   }
 
   addField(word:string = '', isSubtracted:boolean = false) : void {
-    console.log('Before adding field:', this.wordsArray.value);
     this.wordsArray.push(this.createWordFormGroup(word, isSubtracted));
-    console.log('After adding field:', this.wordsArray.value);
     this.addFieldDisabled = true;
   }
 
@@ -126,9 +123,7 @@ export class WordCalcComponent{
   }
 
   removeField(index: number) : void {
-    console.log('Before removing field:', this.wordsArray.value);
     this.wordsArray.removeAt(index);
-    console.log('After removing field:', this.wordsArray.value);
     this.addFieldDisabled = this.allIndexWordNonEmpty();
   }
 
@@ -163,20 +158,23 @@ export class WordCalcComponent{
         this.cal.Additions.push(word.word);
       }
     });
-    console.log('Printed array:', this.cal);
   }
 
   submit() : void {
-    this.assignValues();
-    this.sendAnswer();
+    try{
+      this.assignValues();
+      this.sendAnswer();
+    } catch {
+      this.errorMsg = this.unexpectedErrorMsg;
+    } finally {
+      this.switchToRanking();
+    }
   }
 
   sendAnswer(): void{
     this.errorMsg = '';
-    console.log('Printed array:', this.answer);
     this.playerService.sendAnswer(this.answer).pipe(
       catchError((error: HttpErrorResponse) => {
-        console.log(JSON.stringify(error.error));
         if (error.status != 500) {
           this.errorMsg = error.error;
         } else {
@@ -186,15 +184,11 @@ export class WordCalcComponent{
       })
     ).subscribe((response: any): void => {
     if ((response.status >= 200 && response.status < 300) || response.status == 304) {
-      console.log(response.body);
       this.submitted = true;
     } else {
-      console.log(response);
-      console.log("error", response.error);
       this.errorMsg = response.error;
     }
   });
-    this.switchToRanking();
   }
 
   assignValues(){

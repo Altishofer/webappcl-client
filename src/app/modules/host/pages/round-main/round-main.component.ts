@@ -95,7 +95,6 @@ export class RoundMainComponent {
       })
     ).subscribe((response: any): void => {
       if ((response.status >= 200 && response.status < 300) || response.status == 304) {
-        console.log(response.body)
         this.round = response.body;
       } else {
         this.errorMsg = this.unexpectedErrorMsg;
@@ -126,7 +125,6 @@ export class RoundMainComponent {
         })
     ).subscribe((response: any): void => {
       if ((response.status >= 200 && response.status < 300) || response.status == 304) {
-        console.log(response.body)
         this.errorMsg = '';
       } else {
         this.errorMsg = this.unexpectedErrorMsg;
@@ -148,7 +146,6 @@ export class RoundMainComponent {
   }
 
   getWaitResult(): void {
-    console.log("REST: getWaitResult", this.quizId, this.roundId);
     this.hostService.getWaitResult(this.quizId, this.roundId).pipe(
       catchError((error: HttpErrorResponse) => {
         console.log(JSON.stringify(error.error));
@@ -161,7 +158,6 @@ export class RoundMainComponent {
       })
     ).subscribe((response: any): void => {
       if ((response.status >= 200 && response.status < 300) || response.status == 304) {
-        console.log(response.body)
         this.errorMsg = '';
         this.waitResult = response.body;
       } else {

@@ -40,28 +40,23 @@ export class WaitingComponent implements OnInit {
   }
 
   registerToGroup() {
-    console.log("SOCKET: registerToGroup", this.quizId);
     this.signalRService.joinGroup(this.quizId);
   }
 
   unregisterFromGroup() {
-    console.log("SOCKET: unregister from group", this.quizId);
     this.signalRService.leaveGroup(this.quizId);
   }
 
   registerListeners(): void {
     this.signalRService.setReceiveMessageListener((message: string) => {
-      console.log("SOCKET message:", message);
       this.messages.push(message);
     });
 
     this.signalRService.setReceivePlayerListener((player: string) => {
-      console.log("SOCKET player: ", player);
       this.players = player.split(" ");
     });
 
     this.signalRService.setReceiveRoundListener((round: string) => {
-      console.log("SOCKET round: ", round);
       this.router.navigate(['/player', 'game', this.quizId, round, this.playerName]);
     });
   }

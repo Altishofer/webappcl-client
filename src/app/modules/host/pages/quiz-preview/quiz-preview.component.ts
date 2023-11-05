@@ -92,14 +92,6 @@ export class QuizPreviewComponent implements OnInit{
     });
   }
 
-  selectText(event: any) {
-    console.log("clicked field");
-    if (event.target.tagName.toLowerCase() === 'input') {
-      const inputElement = event.target as HTMLInputElement;
-      inputElement.select();
-    }
-  }
-
   addField(roundId:string, word:string = '', isSubtracted:boolean = false) : void {
     const formArray: FormArray<any> = this.forbiddenWordsForm.get(roundId) as FormArray;
     if (formArray){
@@ -161,24 +153,12 @@ export class QuizPreviewComponent implements OnInit{
 
     let round : Round = {id : String(maxId+1), quizId : String(this.selectedQuizId), roundTarget : 'target', forbiddenWords : ['']};
     this.selectedQuizRounds.push(round);
-    console.log("selectedQuizRounds", this.selectedQuizRounds);
-    console.log("forbiddenWordsForm", this.forbiddenWordsForm.controls);
-    console.log("targetWordForm", this.targetWordForm.controls);
   }
 
   removeRound(roundId: string) {
-    console.log("before delete");
-    console.log("selectedQuizRounds", this.selectedQuizRounds);
-    console.log("forbiddenWordsForm", this.forbiddenWordsForm.controls);
-    console.log("targetWordForm", this.targetWordForm.controls);
     this.forbiddenWordsForm.removeControl(roundId);
     this.targetWordForm.removeControl(roundId);
-    console.log("found index", this.selectedQuizRounds.findIndex((round: Round) => round.id == roundId));
     this.selectedQuizRounds.splice(this.selectedQuizRounds.findIndex((round: Round) => round.id == roundId), 1);
-    console.log("after delete");
-    console.log("selectedQuizRounds", this.selectedQuizRounds);
-    console.log("forbiddenWordsForm", this.forbiddenWordsForm.controls);
-    console.log("targetWordForm", this.targetWordForm.controls);
   }
 
   trackByFn(index: any, item: any) {
@@ -201,7 +181,6 @@ export class QuizPreviewComponent implements OnInit{
       formArray = this.targetWordForm.get(round.id.toString()) as FormArray;
       round.roundTarget = formArray.value.word;
     });
-    console.log('Updated selectedQuizRounds', this.selectedQuizRounds);
 
     let quiz: QuizWithRound = {
       quizId : this.selectedQuizId,
@@ -209,12 +188,10 @@ export class QuizPreviewComponent implements OnInit{
       title : this.selectedQuizTitle,
       rounds : this.selectedQuizRounds
     }
-    console.log('Updated quiz', quiz)
 
     if (this.selectedQuizId == -1) {
       this.selectedQuizId = -1;
       this._quizService.createQuiz(quiz).subscribe((response: any): void => {
-        console.log("REST quiz: ", response.body);
         if ((response.status >= 200 && response.status < 300) || response.status == 304) {
           this.selectedQuizRounds = response.body.rounds;
           this.selectedQuizId = response.body.quizId;
@@ -225,7 +202,6 @@ export class QuizPreviewComponent implements OnInit{
       });
     } else {
       this._quizService.updateQuiz(quiz).subscribe((response: any): void => {
-        console.log("REST quiz: ", response.body);
         if ((response.status >= 200 && response.status < 300) || response.status == 304) {
           this.selectedQuizRounds = response.body.rounds;
           this.unsavedChanges = false;
@@ -236,7 +212,6 @@ export class QuizPreviewComponent implements OnInit{
         }
       });
     }
-    console.log('Updated quiz', this.selectedQuizRounds);
     }
 
   saveTitle(event: any) {

@@ -54,7 +54,6 @@ export class QuizSelectionComponent implements OnInit,AfterViewInit {
 
   getQuizzesWithRounds(): void {
     this._quizService.getQuizzesWithRounds().subscribe((response: any): void => {
-      console.log("REST quizzes: ", response.body);
       if ((response.status >= 200 && response.status < 300) || response.status == 304) {
         this.allQuizzes = response.body;
         this.allQuizzes.push({hostId: this.hostId, quizId: -1, title: "New quiz", rounds: []});

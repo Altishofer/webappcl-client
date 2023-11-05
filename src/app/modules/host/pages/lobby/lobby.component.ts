@@ -52,7 +52,6 @@ export class LobbyComponent {
     this.hostService.getPlayers(this.quizId).subscribe(
       (response: any): void => {
         if ((response.status >= 200 && response.status < 300) || response.status == 304) {
-          console.log("REST player: ", response.body);
           if (response.body.message == ""){
             this.players = [];
           } else {
@@ -68,7 +67,6 @@ export class LobbyComponent {
     this.hostService.getAllRoundIdsByQuiz(this.quizId).subscribe(
       (response: any): void => {
         if ((response.status >= 200 && response.status < 300) || response.status == 304) {
-          console.log("REST roundIds: ", response.body);
           this.roundIds = response.body;
           this.cookieService.set("roundIds", this.roundIds.join(","));
           this.getPlayers();
@@ -79,23 +77,19 @@ export class LobbyComponent {
   }
 
   registerToGroup() {
-    console.log("SOCKET: registerToGroup", this.quizId);
     this.signalRService.joinGroup(this.quizId);
   }
 
   unregisterFromGroup() {
-    console.log("SOCKET: unregister from group", this.quizId);
     this.signalRService.leaveGroup(this.quizId);
   }
 
   registerListeners(): void {
     this.signalRService.setReceivePlayerListener((player: string) => {
-      console.log("SOCKET player: ", player);
       this.players = player.split(" ");
     });
 
     this.signalRService.setReceiveRoundListener((round: string) => {
-      console.log("SOCKET round: ", round);
       this.router.navigate(['/host', this.hostId, 'round', this.quizId, round]);
     });
   }
@@ -117,7 +111,6 @@ export class LobbyComponent {
     this.hostService.pushRound(roundId).subscribe(
       (response: any): void => {
         if ((response.status >= 200 && response.status < 300) || response.status == 304) {
-          console.log("REST pushRound: ", response.body);
         } else {
           console.log("ERROR: updating rounds via REST");
         }

@@ -53,18 +53,15 @@ export class ResultsComponent {
 
   registerListeners(): void {
     this.signalRService.setReceiveRoundListener((round: string) => {
-      console.log("SOCKET round: ", round);
       this.router.navigate(['/host', this.hostId, 'round', this.quizId, round]);
     });
   }
 
   registerToGroup() {
-    console.log("SOCKET: registerToGroup", this.quizId);
     this.signalRService.joinGroup(this.quizId);
   }
 
   getIntermediateResult(): void {
-    console.log("REST: getFullResult", this.quizId);
     this.hostService.getFullResult(this.quizId).pipe(
       catchError((error: HttpErrorResponse) => {
         console.log(JSON.stringify(error.error));
@@ -77,7 +74,6 @@ export class ResultsComponent {
       })
     ).subscribe((response: any): void => {
       if ((response.status >= 200 && response.status < 300) || response.status == 304) {
-        console.log(response.body);
         this.errorMsg = '';
         this.fullResults = response.body;
       } else {
@@ -89,7 +85,6 @@ export class ResultsComponent {
 
   startGame() {
     let rounds : string = this.cookieService.get("roundIds");
-    console.log("rounds: ", rounds);
     if (!rounds || rounds.length == 0){
       this.router.navigate(['/host', this.hostId, 'results', this.quizId]);
     } else {

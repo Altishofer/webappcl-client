@@ -45,7 +45,6 @@ export class HostService {
         .subscribe((response: any) => {
           if ((response.status >= 200 && response.status < 300) || response.status == 304) {
             this.cookieService.set('hostToken', response.body.result);
-            console.log("TokenRefresh was successful: "+this.cookieService.get("hostName")+", received token: "+response.body.result);
           } else {
             console.log("ERROR: refreshing token was not successful");
           }

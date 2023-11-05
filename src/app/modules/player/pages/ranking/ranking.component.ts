@@ -47,12 +47,10 @@ export class RankingComponent implements OnInit{
   }
 
   registerToGroup() {
-    console.log("SOCKET: registerToGroup", this.quizId);
     this.signalRService.joinGroup(this.quizId);
   }
 
   unregisterFromGroup() {
-    console.log("SOCKET: unregister from group", this.quizId);
     this.signalRService.leaveGroup(this.quizId);
   }
 
