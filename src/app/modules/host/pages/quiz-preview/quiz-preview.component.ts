@@ -53,7 +53,7 @@ export class QuizPreviewComponent implements OnInit{
   }
 
   createWordFormGroup(word: string = '', isValidated: boolean = false): FormGroup {
-    const wordControl = new FormControl(word, [Validators.minLength(1), Validators.pattern(/^(\S){1,50}$/)]);
+    const wordControl = new FormControl(word, [Validators.minLength(1), Validators.pattern(/^(\S){1,20}$/)]);
 
     wordControl.valueChanges.pipe(
       debounceTime(500),
