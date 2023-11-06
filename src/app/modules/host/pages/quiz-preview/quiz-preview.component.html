@@ -71,7 +71,7 @@
                   <span [formGroupName]="i" class="forbidden-word-element">
                     <input type="text" class="quiz-creation-input" placeholder="enter word"  formControlName="word" autofocus>
                   </span>
-                  <span class="feedback-icon" matTooltip="This word was not found in our dictionary" matTooltipPosition="right">
+                  <span class="feedback-icon" matTooltip="This word is not valid, please enter a different one." matTooltipPosition="right">
                     <mat-icon *ngIf="getControls(round.id.toString()).at(i)?.get('isValidated')?.value == false" class="warning-icon">error</mat-icon>
                   </span>
                   <span class="forgotten-grid-btn">
