@@ -110,19 +110,19 @@ span .name {
   grid-column: 1;
   grid-row: 3;
 }
-.target-word-element {
-  display: inline-block;
+.target-word-container {
   grid-column: 1;
   grid-row: 2;
-  margin-left: 15%;
-  margin-right: 15%;
+}
+.target-word-element {
+  display: inline-block;
 }
 .forbidden-word-container {
   grid-column: 1;
   grid-row: 4;
   align-items: center;
 }
-.forbidden-word-inline {
+.word-inline-grid {
   display: grid;
   grid: auto / 85% 15%;
   padding-left: 15%;
@@ -234,11 +234,19 @@ button.remove:disabled {
   min-width: 30px;
 
 }
-.feedback-icon {
+.target-feedback-icon,
+.forbidden-feedback-icon {
+  display: inline-block;
   text-align: right;
   margin-top: 11px;
   grid-row: 1;
   grid-column: 2;
+}
+.target-feedback-icon {
+  display: block;
+  grid-column: 2;
+  grid-row: 1;
+  padding-right: 20px;
 }
 .quiz-creation-input {
   display: inline-block;
