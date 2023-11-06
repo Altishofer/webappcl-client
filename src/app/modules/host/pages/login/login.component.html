@@ -1,29 +1,37 @@
 <!-- src/app/login/login.component.html -->
-<span class="common-wrapper" fxLayout="row" fxLayoutAlign="center center">
-  <mat-card class="box">
-    <mat-card-header>
-      <mat-card-title>{{ isLogin ? 'Login' : 'Register' }}</mat-card-title>
+<div class="center">
+  <mat-card class="card-element">
+    <mat-card-header class="login-header">
+      <mat-card-title style="font-size: xx-large">{{ isLogin ? 'Login' : 'Register' }}</mat-card-title>
     </mat-card-header>
     <form [formGroup]="loginForm">
       <mat-card-content>
-        <mat-form-field class="example-full-width">
-          <input matInput placeholder="Username" formControlName="username">
-        </mat-form-field>
-        <mat-form-field class="example-full-width">
-          <input matInput placeholder="Password" type="password" formControlName="password">
-        </mat-form-field>
-        <p *ngIf="errorMsg" class="error-message">
-          {{ errorMsg }}
-        </p>
+        <div>
+          <mat-form-field class="login-input">
+            <input matInput placeholder="Username" formControlName="username">
+          </mat-form-field>
+        </div>
+
+        <div>
+          <mat-form-field class="login-input">
+            <input matInput placeholder="Password" type="password" formControlName="password">
+          </mat-form-field>
+        </div>
+
+        <div>
+          <p *ngIf="errorMsg" class="error-message">
+            {{ errorMsg }}
+          </p>
+        </div>
       </mat-card-content>
-      <button mat-raised-button color="accent" class="btn-block" routerLinkActive="active" [disabled]="loginForm.invalid" (click)="doAction()">
+      <button mat-raised-button color="positive" class="btn-block" routerLinkActive="active" [disabled]="loginForm.invalid" (click)="doAction()">
         {{ isLogin ? 'Sign In' : 'Register' }}
       </button>
       <mat-divider class="common-divider"></mat-divider>
       <p class="login-message">{{ isLogin ? 'No account yet?' : 'Already have an account?' }}</p>
-      <button mat-raised-button color="accent" class="btn-block" (click)="toggleForm()">
+      <button mat-raised-button color="positive" class="btn-block" (click)="toggleForm()">
         {{ isLogin ? 'Register' : 'Sign In' }}
       </button>
     </form>
   </mat-card>
-</span>
+</div>

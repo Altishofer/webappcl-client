@@ -4,13 +4,33 @@
   text-align: center;
   padding-top: 20px;
 }
-
-h2{
+.card-element {
+  display: inline-block;
+  width: 100%;
+  max-width: 500px;
+  height: 100%;
+  text-align: center;
+  margin-top: 30px;
+}
+.login-header {
+  text-align: center;
+  display: block;
+  margin-bottom: 20px;
+}
+.login-input,
+.btn-block {
+  width: 70%;
+}
+.btn-block {
+  background-color: #a87d5b;
+  color: white;
+}
+h2 {
   font-size: 2em;
   color: #fff;
   text-align: center;
 }
-.inputbox{
+.inputbox {
   position: relative;
   margin: 30px 0;
   width: 310px;
@@ -55,29 +75,29 @@ input:valid ~ label{
   justify-content: space-between;
 }
 
-.forget label input{
+.forget label input {
   margin-right: 3px;
 
 }
-.forget label a{
+.forget label a {
   color: #fff;
   text-decoration: none;
 }
-.forget label a:hover{
+.forget label a:hover {
   text-decoration: underline;
 }
 
-.register{
+.register {
   font-size: .9em;
   color: #fff;
   text-align: center;
   margin: 25px 0 10px;
 }
-.register p a{
+.register p a {
   text-decoration: none;
   color: #fff;
   font-weight: 600;
 }
-.register p a:hover{
+.register p a:hover {
   text-decoration: underline;
 }

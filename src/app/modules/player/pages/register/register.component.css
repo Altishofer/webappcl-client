@@ -3,3 +3,13 @@
 mat-card-content {
   padding: 0;
 }
+.card-element {
+  margin-top: 20px;
+}
+.player-reg,
+.btn-block {
+  width: 80%;
+}
+.btn-block {
+  margin-bottom: 20px;
+}
