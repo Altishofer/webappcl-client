@@ -236,3 +236,7 @@ button.remove:disabled {
 
 }
 
+.feedback-icon {
+  float: right;
+}
+
