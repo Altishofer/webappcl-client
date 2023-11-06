@@ -129,6 +129,10 @@ export class QuizPreviewComponent implements OnInit{
     return (<FormArray>this.forbiddenWordsForm.get(roundId)).controls;
   }
 
+  getTargetControls(roundId: string) {
+    return (<FormGroup>this.targetWordForm.get(roundId)).controls;
+  }
+
   removeField(roundId : string, index: number) : void {
     const formArray: FormArray<any> = this.forbiddenWordsForm.get(roundId) as FormArray;
     if (formArray){

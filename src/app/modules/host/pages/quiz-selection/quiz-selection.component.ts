@@ -22,6 +22,7 @@ export class QuizSelectionComponent implements OnInit,AfterViewInit {
   selectedQuizTitle: string = "";
   selectedQuizHostId: number = -1;
   hostId!: number;
+  tooltipMessage: string = "This word is not valid, please enter a different one."
 
   @ViewChild('quizPreviewContent') quizPreviewContent!: TemplateRef<unknown>;
   @ViewChild('quizCreationContent') quizCreationContent!: TemplateRef<unknown>;
