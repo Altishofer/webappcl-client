@@ -32,6 +32,7 @@ export class QuizPreviewComponent implements OnInit{
   forbiddenWordsForm: FormGroup;
   targetWordForm: FormGroup;
   //wordsArray: FormArray;
+  tooltipMessage: string = "This word is not valid, please enter a different one."
 
   @Input() selectedQuizId: number = 0;
   @Input() selectedQuizTitle: string = '';
