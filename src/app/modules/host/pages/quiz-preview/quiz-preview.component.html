@@ -58,7 +58,7 @@
                   <input type="text" class="quiz-creation-input target" placeholder="enter target word"  formControlName="word" autofocus>
                 </span>
                 <span class="feedback-icon" matTooltip="This word is not valid, please enter a different one." matTooltipPosition="right">
-                  <mat-icon *ngIf="getTargetControls(round.id.toString())?.value != true" class="warning-icon">error</mat-icon>
+                  <mat-icon *ngIf="allInputValidTarget(round.id.toString()) != true" class="warning-icon">error</mat-icon>
                 </span>
               </div>
             </div>
