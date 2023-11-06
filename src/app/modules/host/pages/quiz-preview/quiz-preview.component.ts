@@ -102,7 +102,7 @@ export class QuizPreviewComponent implements OnInit{
 
 
   allIndexWordNonEmpty(roundId: string): boolean {
-    console.log(this.forbiddenWordsForm.controls);
+    console.log(this.forbiddenWordsForm.get(roundId)?.value);
     const formArray: FormArray<any> = this.forbiddenWordsForm.get(roundId) as FormArray;
     if (formArray) {
       for (let i: number = 0; i < formArray.value.length; i++) {
