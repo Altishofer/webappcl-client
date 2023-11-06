@@ -54,6 +54,7 @@ export class QuizPreviewComponent implements OnInit{
 
   createWordFormGroup(word: string = '', isValidated: boolean = false): FormGroup {
     const wordControl = new FormControl(word, [Validators.minLength(1), Validators.pattern(/^(\S){1,20}$/)]);
+    const isValidatedControl = new FormControl(isValidated);
 
     wordControl.valueChanges.pipe(
       debounceTime(500),
@@ -66,16 +67,16 @@ export class QuizPreviewComponent implements OnInit{
       }),
       tap((isValid) => {
         wordControl.setErrors(null);
-        isValidated = isValid;
+        console.log("valid", isValid);
+        isValidatedControl.setValue(isValid);
       })
     ).subscribe();
 
     return this.fb.group({
       word: wordControl,
-      isValidated: isValidated
+      isValidated: isValidatedControl
     });
   }
-
 
   ngOnInit() {
     if (this.selectedQuizId == -1) {
