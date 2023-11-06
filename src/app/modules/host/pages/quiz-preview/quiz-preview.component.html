@@ -71,10 +71,10 @@
                   <span [formGroupName]="i" class="forbidden-word-element">
                     <input type="text" class="quiz-creation-input" placeholder="enter word"  formControlName="word" autofocus>
                   </span>
-                  <div class="feedback-icon">
-                    <mat-icon *ngIf="getControls(round.id.toString()).at(i)?.get('!isValidated')">check_circle</mat-icon>
-                    <mat-icon *ngIf="getControls(round.id.toString()).at(i)?.get('isValidated')" class="warning-icon">error</mat-icon>
-                  </div>
+                  <span class="feedback-icon">
+                    <mat-icon *ngIf="getControls(round.id.toString()).at(i)?.get('isValidated')?.value == true">check_circle</mat-icon>
+                    <mat-icon *ngIf="getControls(round.id.toString()).at(i)?.get('isValidated')?.value == false" class="warning-icon">error</mat-icon>
+                  </span>
                   <span class="forgotten-grid-btn">
                     <button mat-mini-fab class="remove" color="negative" [disabled]="(i===0 && onlyOneField(round.id.toString())) || (!addFieldDisabled && i==0)" (click)="removeField(round.id.toString(), i)">
                       <mat-icon>remove_circle</mat-icon>
