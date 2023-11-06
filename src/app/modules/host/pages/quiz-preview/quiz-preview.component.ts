@@ -70,7 +70,7 @@ export class QuizPreviewComponent implements OnInit{
         isValidatedControl.setValue(isValid);
       })
     ).subscribe();
-
+    wordControl.updateValueAndValidity();
     return this.fb.group({
       word: wordControl,
       isValidated: isValidatedControl
