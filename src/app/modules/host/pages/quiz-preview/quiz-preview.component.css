@@ -225,7 +225,6 @@ button.remove:disabled {
   color: #8c8c9c;
   background-color: rgba(255, 255, 255, 0.4);
 }
-
 .editable-title {
   background: transparent;
   padding: 5px;
@@ -235,8 +234,18 @@ button.remove:disabled {
   min-width: 30px;
 
 }
-
 .feedback-icon {
-  float: right;
+  text-align: right;
+  margin-top: 11px;
+  grid-row: 1;
+  grid-column: 2;
 }
-
+.quiz-creation-input {
+  display: inline-block;
+  grid-row: 1;
+  grid-column: 1 / span 2;
+}
+.warning-icon {
+  color: darkorange;
+  scale: 140%;
+}
