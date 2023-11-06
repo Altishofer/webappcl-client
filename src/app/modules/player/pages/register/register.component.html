@@ -7,7 +7,8 @@
     <form [formGroup]="playerRegForm">
       <mat-card-content>
         <mat-form-field class="player-reg">
-          <input matInput placeholder="Username" formControlName="username">
+          <mat-label>Username</mat-label>
+          <input matInput formControlName="username">
         </mat-form-field>
 
         <ng-template [ngIf]="errorMsg">
