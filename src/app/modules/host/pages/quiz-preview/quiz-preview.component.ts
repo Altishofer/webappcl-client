@@ -131,7 +131,7 @@ export class QuizPreviewComponent implements OnInit{
   }
 
   getTargetControls(roundId: string) {
-    return (<FormGroup>this.targetWordForm.get(roundId)).controls;
+    return this.targetWordForm.get(roundId)?.get('isValidated')?.value || this.targetWordForm.get(roundId)?.get('word')?.value;
   }
 
   removeField(roundId : string, index: number) : void {
