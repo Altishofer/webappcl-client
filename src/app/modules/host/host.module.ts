@@ -11,7 +11,6 @@ import { LobbyComponent } from './pages/lobby/lobby.component';
 import { RoundMainComponent } from './pages/round-main/round-main.component';
 import { ResultsComponent } from './pages/results/results.component';
 import { CdkAccordionModule } from "@angular/cdk/accordion";
-import { QuizCreationComponent } from './pages/quiz-creation/quiz-creation.component';
 import { WelcomePortalComponent } from './pages/welcome-portal/welcome-portal.component';
 
 @NgModule({
@@ -22,7 +21,6 @@ import { WelcomePortalComponent } from './pages/welcome-portal/welcome-portal.co
     LobbyComponent,
     RoundMainComponent,
     ResultsComponent,
-    QuizCreationComponent,
     WelcomePortalComponent
   ],
   imports: [

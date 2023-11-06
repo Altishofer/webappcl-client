@@ -31,7 +31,6 @@ export class QuizPreviewComponent implements OnInit{
 
   forbiddenWordsForm: FormGroup;
   targetWordForm: FormGroup;
-  //wordsArray: FormArray;
   tooltipMessage: string = "This word is not valid, please enter a different one."
 
   @Input() selectedQuizId: number = 0;
@@ -79,10 +78,10 @@ export class QuizPreviewComponent implements OnInit{
   }
 
   ngOnInit() {
-    if (this.selectedQuizId == -1) {
-      this.addNewRound();
-      return;
-    }
+    // if (this.selectedQuizId == -1) {
+    //   this.addNewRound();
+    //   return;
+    // }
     this.selectedQuizRounds.forEach((round: Round) => {
       let lst: AbstractControl<any, any>[] = [];
       round.forbiddenWords.forEach((forbiddenWord: string) => {
@@ -120,6 +119,9 @@ export class QuizPreviewComponent implements OnInit{
     return false;
   }
 
+  onlyOneRound():boolean{
+    return this.selectedQuizRounds.length === 1;
+  }
 
   onlyOneField(quizId : string):boolean{
     return this.forbiddenWordsForm.get(quizId)?.value.length === 1;
@@ -154,9 +156,9 @@ export class QuizPreviewComponent implements OnInit{
     let maxId :number = Math.max.apply(null, Object.keys(this.targetWordForm.controls).map(x => parseInt(x)));
     maxId = Number.isFinite(maxId) ? maxId : -1;
     this.forbiddenWordsForm.addControl(String(maxId+1), this.fb.array(lstForbWordControl));
-    this.targetWordForm.addControl(String(maxId+1), this.createWordFormGroup('target', false));
+    this.targetWordForm.addControl(String(maxId+1), this.createWordFormGroup());
 
-    let round : Round = {id : String(maxId+1), quizId : String(this.selectedQuizId), roundTarget : 'target', forbiddenWords : ['']};
+    let round : Round = {id : String(maxId+1), quizId : String(this.selectedQuizId), roundTarget : '', forbiddenWords : ['']};
     this.selectedQuizRounds.push(round);
   }
 

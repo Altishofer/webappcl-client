@@ -36,7 +36,7 @@
           </span>
 
           <span class="delete-btn-grid">
-            <button mat-mini-fab color="negative" style="scale: 80%;" class="remove" (click)="removeRound(round.id.toString())">
+            <button mat-mini-fab color="negative" style="scale: 80%;" class="remove" *ngIf="!onlyOneRound()" (click)="removeRound(round.id.toString())">
               <mat-icon>delete</mat-icon>
             </button>
           </span>

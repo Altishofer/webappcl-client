@@ -25,10 +25,8 @@ export class QuizSelectionComponent implements OnInit,AfterViewInit {
   tooltipMessage: string = "This word is not valid, please enter a different one."
 
   @ViewChild('quizPreviewContent') quizPreviewContent!: TemplateRef<unknown>;
-  @ViewChild('quizCreationContent') quizCreationContent!: TemplateRef<unknown>;
 
   defaultPortal: ComponentPortal<WelcomePortalComponent> = new ComponentPortal(WelcomePortalComponent);
-  quizCreationPortal!: TemplatePortal;
   quizPreviewPortal!: TemplatePortal;
   selectedPortal: Portal<any> = this.defaultPortal;
 
@@ -49,7 +47,6 @@ export class QuizSelectionComponent implements OnInit,AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.quizCreationPortal = new TemplatePortal(this.quizCreationContent, this._viewContainerRef);
     this.quizPreviewPortal = new TemplatePortal(this.quizPreviewContent, this._viewContainerRef);
   }
 
@@ -57,7 +54,7 @@ export class QuizSelectionComponent implements OnInit,AfterViewInit {
     this._quizService.getQuizzesWithRounds().subscribe((response: any): void => {
       if ((response.status >= 200 && response.status < 300) || response.status == 304) {
         this.allQuizzes = response.body;
-        this.allQuizzes.push({hostId: this.hostId, quizId: -1, title: "New quiz", rounds: []});
+        this.allQuizzes.push({hostId: this.hostId, quizId: -1, title: "New quiz", rounds: [{id:"-1", roundTarget:"", quizId: "-1", forbiddenWords:[""]}]});
       } else {
         this.errorMsg = this.unexpectedErrorMsg;
       }

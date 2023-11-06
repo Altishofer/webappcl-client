@@ -14,7 +14,7 @@
       <h2>My Quizzes</h2>
 
       <mat-card-content>
-        <button mat-raised-button color="positive" class="btn-add" (click)="refresh(); selectedPortal = quizPreviewPortal; setSelectedQuiz(-1, 'New Quiz', hostId)">
+        <button mat-raised-button color="positive" class="btn-add" (click)="refresh(); setSelectedQuiz(-1, 'New Quiz', hostId); selectedPortal = quizPreviewPortal;">
           <mat-icon class="icon" style="color: white;">add_box</mat-icon>
           <span class="name" style="color: white;">New</span>
         </button>
@@ -39,8 +39,4 @@
 
 <ng-template #quizPreviewContent>
   <app-quiz-preview [selectedQuizId]="selectedQuizId" [selectedQuizTitle]="selectedQuizTitle" [selectedQuizRounds]="getSelectedQuizRounds(selectedQuizId)" [selectedHostId]="selectedQuizHostId" (previewClosed)="refresh()" (startQuiz)="startQuiz()"></app-quiz-preview>
-</ng-template>
-
-<ng-template #quizCreationContent>
-  <app-quiz-creation (creationClosed)="closePortal()" (creationSaved)="saveCreation()"></app-quiz-creation>
 </ng-template>
