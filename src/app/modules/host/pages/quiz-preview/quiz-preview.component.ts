@@ -28,6 +28,7 @@ export class QuizPreviewComponent implements OnInit{
   unexpectedErrorMsg : string = "An unexpected error occurred."
   newQuizTitle: string = '';
   unsavedChanges: boolean = false;
+  tooltipMessage: string = "This word is not valid, please enter a different one."
 
   forbiddenWordsForm: FormGroup;
   targetWordForm: FormGroup;
