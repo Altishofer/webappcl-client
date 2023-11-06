@@ -128,13 +128,8 @@ export class QuizPreviewComponent implements OnInit{
     return (<FormArray>this.forbiddenWordsForm.get(roundId)).controls;
   }
 
-  allInputValidForbidden(roundId: string, index : number) : boolean {
-    return (<FormArray>this.forbiddenWordsForm.get(roundId)).controls?.at(index)?.get('isValidated')?.value ||
-      (<FormArray>this.forbiddenWordsForm.get(roundId)).controls?.at(index)?.get(roundId)?.value?.at(index).get('word')?.value;
-  }
-
-  allInputValidTarget(roundId: string) : boolean {
-    return this.targetWordForm.get(roundId)?.get('isValidated')?.value || this.targetWordForm.get(roundId)?.get('word')?.value;
+  getTargetControls(roundId: string) {
+    return (this.targetWordForm.get(roundId))?.get('isValidated');
   }
 
   removeField(roundId : string, index: number) : void {
@@ -154,7 +149,7 @@ export class QuizPreviewComponent implements OnInit{
 
   addNewRound(){
     let lstForbWordControl: AbstractControl<any, any>[] = [];
-    lstForbWordControl.push(this.createWordFormGroup('', false));
+    lstForbWordControl.push(this.createWordFormGroup('ChangeThisWOrd', false));
     let maxId :number = Math.max.apply(null, Object.keys(this.targetWordForm.controls).map(x => parseInt(x)));
     maxId = Number.isFinite(maxId) ? maxId : -1;
     this.forbiddenWordsForm.addControl(String(maxId+1), this.fb.array(lstForbWordControl));

@@ -52,13 +52,17 @@
           </div>
 
           <ng-container>
-            <div class="target-word-element" [formGroup]="targetWordForm">
-              <div [formGroupName]="round.id.toString()">
-                <span>
-                  <input type="text" class="quiz-creation-input target" placeholder="enter target word"  formControlName="word" autofocus>
-                </span>
-                <span class="feedback-icon" matTooltip="This word is not valid, please enter a different one." matTooltipPosition="right">
-                  <mat-icon *ngIf="allInputValidTarget(round.id.toString()) != true" class="warning-icon">error</mat-icon>
+            <div class="target-word-container">
+              <div class="word-inline-grid">
+                <div class="target-word-element" [formGroup]="targetWordForm">
+                  <div [formGroupName]="round.id.toString()">
+                    <span>
+                      <input type="text" class="quiz-creation-input target" placeholder="enter target word"  formControlName="word" autofocus>
+                    </span>
+                  </div>
+                </div>
+                <span class="target-feedback-icon" [matTooltip]=tooltipMessage matTooltipPosition="right">
+                  <mat-icon *ngIf="getTargetControls(round.id.toString())?.value != true" class="warning-icon">error</mat-icon>
                 </span>
               </div>
             </div>
@@ -70,11 +74,11 @@
           <ng-container>
             <div [formGroup]="forbiddenWordsForm" class="forbidden-word-container">
               <div [formArrayName]="round.id.toString()">
-                <div  *ngFor="let control of getControls(round.id.toString()); let i = index;  trackBy: trackByFn" class="forbidden-word-inline">
+                <div  *ngFor="let control of getControls(round.id.toString()); let i = index;  trackBy: trackByFn" class="word-inline-grid">
                   <span [formGroupName]="i" class="forbidden-word-element">
                     <input type="text" class="quiz-creation-input" placeholder="enter word"  formControlName="word" autofocus>
                   </span>
-                  <span class="feedback-icon" matTooltip="This word is not valid, please enter a different one." matTooltipPosition="right">
+                  <span class="forbidden-feedback-icon" matTooltip="This word is not valid, please enter a different one." matTooltipPosition="right">
                     <mat-icon *ngIf="getControls(round.id.toString()).at(i)?.get('isValidated')?.value == false" class="warning-icon">error</mat-icon>
                   </span>
                   <span class="forgotten-grid-btn">
