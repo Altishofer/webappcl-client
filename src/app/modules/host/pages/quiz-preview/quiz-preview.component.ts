@@ -60,8 +60,8 @@ export class QuizPreviewComponent implements OnInit{
       debounceTime(500),
       distinctUntilChanged(),
       switchMap((newWord) => {
-        if (!newWord) {
-          return of(false);
+        if (!(newWord && newWord.length > 0)) {
+          return of(true);
         }
         return this._quizService.Check(newWord);
       }),
@@ -78,10 +78,6 @@ export class QuizPreviewComponent implements OnInit{
   }
 
   ngOnInit() {
-    // if (this.selectedQuizId == -1) {
-    //   this.addNewRound();
-    //   return;
-    // }
     this.selectedQuizRounds.forEach((round: Round) => {
       let lst: AbstractControl<any, any>[] = [];
       round.forbiddenWords.forEach((forbiddenWord: string) => {
@@ -131,9 +127,14 @@ export class QuizPreviewComponent implements OnInit{
     return (<FormArray>this.forbiddenWordsForm.get(roundId)).controls;
   }
 
-  getTargetControls(roundId: string) {
-    return (this.targetWordForm.get(roundId))?.get('isValidated');
+  invalidForbiddenWordInput(roundId: string, index : number) : boolean {
+    return (<FormArray>this.forbiddenWordsForm.get(roundId)).controls?.at(index)?.get('isValidated')?.value == false;
   }
+
+  invalidTargetInput(roundId: string) : boolean {
+    return this.targetWordForm.get(roundId)?.get('isValidated')?.value == false;
+  }
+
 
   removeField(roundId : string, index: number) : void {
     const formArray: FormArray<any> = this.forbiddenWordsForm.get(roundId) as FormArray;
@@ -152,7 +153,7 @@ export class QuizPreviewComponent implements OnInit{
 
   addNewRound(){
     let lstForbWordControl: AbstractControl<any, any>[] = [];
-    lstForbWordControl.push(this.createWordFormGroup('ChangeThisWOrd', false));
+    lstForbWordControl.push(this.createWordFormGroup('', false));
     let maxId :number = Math.max.apply(null, Object.keys(this.targetWordForm.controls).map(x => parseInt(x)));
     maxId = Number.isFinite(maxId) ? maxId : -1;
     this.forbiddenWordsForm.addControl(String(maxId+1), this.fb.array(lstForbWordControl));

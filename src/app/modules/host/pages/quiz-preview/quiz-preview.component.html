@@ -62,7 +62,7 @@
                   </div>
                 </div>
                 <span class="target-feedback-icon" [matTooltip]=tooltipMessage matTooltipPosition="right">
-                  <mat-icon *ngIf="getTargetControls(round.id.toString())?.value != true" class="warning-icon">error</mat-icon>
+                  <mat-icon *ngIf="invalidTargetInput(round.id.toString())" class="warning-icon">error</mat-icon>
                 </span>
               </div>
             </div>
@@ -79,7 +79,7 @@
                     <input type="text" class="quiz-creation-input" placeholder="enter word"  formControlName="word" autofocus>
                   </span>
                   <span class="forbidden-feedback-icon" matTooltip="This word is not valid, please enter a different one." matTooltipPosition="right">
-                    <mat-icon *ngIf="getControls(round.id.toString()).at(i)?.get('isValidated')?.value == false" class="warning-icon">error</mat-icon>
+                    <mat-icon *ngIf="invalidForbiddenWordInput(round.id.toString(), i)" class="warning-icon">error</mat-icon>
                   </span>
                   <span class="forgotten-grid-btn">
                     <button mat-mini-fab class="remove" color="negative" [disabled]="(i===0 && onlyOneField(round.id.toString())) || (!addFieldDisabled && i==0)" (click)="removeField(round.id.toString(), i)">
