@@ -67,7 +67,6 @@ export class QuizPreviewComponent implements OnInit{
       }),
       tap((isValid) => {
         wordControl.setErrors(null);
-        console.log("valid", isValid);
         isValidatedControl.setValue(isValid);
       })
     ).subscribe();
