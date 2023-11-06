@@ -9,9 +9,11 @@
         <ng-template ngFor let-word [ngForOf]="wordsArray.controls"
                      let-position = "index">
           <div class="word-calc-field" [formGroupName]="position">
-            <span style="display: flex; align-items: center;">
-            <mat-slide-toggle class="word-calc-switch" color="primary" (change)="changeSubtract(position, $event)" formControlName="isSubtracted"></mat-slide-toggle>
+            <span style="display: block; align-items: center;">
+              <mat-slide-toggle class="word-calc-switch" color="accent" (change)="changeSubtract(position, $event)" formControlName="isSubtracted"></mat-slide-toggle>
+
               <input class="word-calc-input" matInput placeholder="enter word" (input)="changeWord(position, $event)" formControlName="word">
+
               <button mat-icon-button class="remove" color="warn" [disabled]="position===0 && onlyOneField()" (click)="removeField(position)">
                 <mat-icon>remove_circle</mat-icon>
               </button>

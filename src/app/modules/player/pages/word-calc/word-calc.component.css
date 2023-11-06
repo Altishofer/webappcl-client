@@ -34,9 +34,11 @@
 }
 .word-calc-switch {
   margin-right: 5px;
+  width: 10%;
 }
 .word-calc-input {
   padding: 10px 5px;
+  width: 60%;
 }
 .marginalized {
   margin-top: 2px;
@@ -45,6 +47,9 @@
 .mdi-close {
   visibility: visible !important;
   opacity: 1 !important;
+}
+.remove {
+  width: 10%;
 }
 button.remove:disabled {
   visibility: hidden;

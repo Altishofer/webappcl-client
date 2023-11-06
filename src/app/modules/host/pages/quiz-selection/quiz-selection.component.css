@@ -39,8 +39,8 @@ h1 {
   align-content: end;
   justify-content: end;
   text-align: right;
-  margin-right: 15px;
-  margin-top: 20px;
+  margin: 20px 5px;
+
 }
 .left-element {
   grid-column: 1;

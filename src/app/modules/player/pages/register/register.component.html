@@ -1,13 +1,14 @@
-<span class="common-wrapper" fxLayout="row" fxLayoutAlign="center center">
-  <mat-card class="box">
-    <mat-card-header>
-      <mat-card-title>Register</mat-card-title>
+<div class="center">
+  <mat-card class="card-element">
+    <mat-card-header style="display: block">
+      <mat-card-title style="font-size: xx-large; margin-bottom: 20px;">Register</mat-card-title>
     </mat-card-header>
 
     <form [formGroup]="playerRegForm">
       <mat-card-content>
-        <mat-form-field class="example-full-width" style="width: 100%">
-          <input matInput placeholder="Username" formControlName="username">
+        <mat-form-field class="player-reg">
+          <mat-label>Username</mat-label>
+          <input matInput formControlName="username">
         </mat-form-field>
 
         <ng-template [ngIf]="errorMsg">
@@ -17,8 +18,8 @@
         </ng-template>
       </mat-card-content>
     </form>
-    <button mat-raised-button color="accent" class="btn-block" routerLinkActive="active" (click)="doRegister()" [disabled]="playerRegForm.invalid">
+    <button mat-raised-button color="positive" class="btn-block" routerLinkActive="active" (click)="doRegister()" [disabled]="playerRegForm.invalid">
       Register
     </button>
   </mat-card>
-</span>
+</div>

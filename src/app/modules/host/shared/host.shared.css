@@ -156,7 +156,6 @@
   width: 100%;
   min-width: 16px;
   border-radius: 40px;
-  background: #fff;
   border: none;
   outline: none;
   cursor: pointer;
@@ -191,6 +190,8 @@
 .btn-block {
   display: block;
   margin: 10px auto;
+  background-color: #a87d5b;
+  color: white;
 }
 
 

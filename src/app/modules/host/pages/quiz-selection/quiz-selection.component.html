@@ -5,7 +5,7 @@
     <h1>{{getHostName()}}</h1>
   </div>
   <div class="buttons-top-right">
-    <button mat-mini-fab routerLink="/host" routerLinkActive="active">
+    <button mat-mini-fab color="positive" routerLink="/host" routerLinkActive="active">
       <mat-icon>directions_run</mat-icon>
     </button>
   </div>
@@ -15,8 +15,8 @@
 
       <mat-card-content>
         <button mat-raised-button color="positive" class="btn-add" (click)="refresh(); selectedPortal = quizPreviewPortal; setSelectedQuiz(-1, 'New Quiz', hostId)">
-          <mat-icon class="icon">add_box</mat-icon>
-          <span class="name">New</span>
+          <mat-icon class="icon" style="color: white;">add_box</mat-icon>
+          <span class="name" style="color: white;">New</span>
         </button>
 
         <ng-template ngFor let-quiz [ngForOf]="allQuizzes">

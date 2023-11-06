@@ -1,7 +1,7 @@
 <div class="center">
   <mat-card class="card-element lobby">
     <div class="lobby-grid">
-      <h2 class="h2-grid">Scan the QR code to join:</h2>
+      <h2 class="h2-grid">Scan the QR code to join!</h2>
 
       <p class="link-grid">http://localhost:4200/player/register/{{this.quizId}}</p>
 
@@ -12,7 +12,7 @@
       </div>
 
       <h2 class="between-title-grid">
-        List of all joined players:
+        List of not your friends:
       </h2>
 
       <div class="players-grid">
@@ -24,7 +24,7 @@
       </div>
 
       <div class="btn-grid">
-        <button mat-raised-button color="positive" style="background-color: #a87d5b;" (click)="startGame()">
+        <button mat-raised-button color="positive" style="background-color: #a87d5b; color: white" (click)="startGame()">
           Start
         </button>
       </div>
