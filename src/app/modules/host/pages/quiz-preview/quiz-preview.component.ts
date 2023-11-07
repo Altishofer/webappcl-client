@@ -202,7 +202,6 @@ export class QuizPreviewComponent implements OnInit{
       if (targetArray.get('isValidated')?.value == false || targetArray.get('word')?.value.length == 0) {
         allGood = false;
       }
-      console.log(round.id, allGood);
     });
     return allGood;
   }

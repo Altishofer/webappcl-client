@@ -7,13 +7,17 @@
     <button mat-mini-fab color="negative" (click)="closePreview()"><mat-icon>arrow_back_ios</mat-icon></button>
   </span>
 
-  <span class="left-2nd-btn">
-    <button mat-mini-fab color="positive" [disabled]="!canSaveOrStart()" (click)="saveChanges()"><mat-icon>save</mat-icon></button>
-  </span>
+  <div [matTooltip]="!canSaveOrStart() ? 'Some of the rounds have invalid input, please check.' : ''" matTooltipPosition="below">  <span class="left-2nd-btn">
+    <button mat-mini-fab color="positive" [disabled]="!canSaveOrStart()" (click)="saveChanges()">
+      <mat-icon>save</mat-icon></button>
+    </span>
+  </div>
 
-  <span class="right-btn">
-    <button mat-mini-fab color="positive" [disabled]="!canSaveOrStart()" (click)="start()"><mat-icon>fast_forward</mat-icon></button>
-  </span>
+  <div [matTooltip]="!canSaveOrStart() ? 'Some of the rounds have invalid input, please check.' : ''" matTooltipPosition="below">
+    <button mat-mini-fab color="positive" [disabled]="!canSaveOrStart()" (click)="start()">
+      <mat-icon>fast_forward</mat-icon>
+    </button>
+  </div>
 
   <span class="content-grid">
     <cdk-accordion class="preview-accordion">
@@ -38,7 +42,7 @@
             <button mat-mini-fab color="negative" style="scale: 80%;" class="remove" *ngIf="!onlyOneRound()" (click)="removeRound(round.id.toString())">
               <mat-icon>delete</mat-icon>
             </button>
-            <mat-icon *ngIf="!roundAllOk(round.id.toString())" class="warning-icon">error</mat-icon>
+            <mat-icon *ngIf="!roundAllOk(round.id.toString())" class="warning-icon" matTooltip="Some of the inputs are not valid, please check again." matTooltipPosition="right">error</mat-icon>
           </span>
         </div>
 
@@ -61,8 +65,8 @@
                     </span>
                   </div>
                 </div>
-                <span class="target-feedback-icon" [matTooltip]=tooltipMessage matTooltipPosition="right">
-                  <mat-icon *ngIf="invalidTargetInput(round.id.toString())" class="warning-icon">error</mat-icon>
+                <span class="target-feedback-icon">
+                  <mat-icon *ngIf="invalidTargetInput(round.id.toString())" class="warning-icon" [matTooltip]=tooltipMessage matTooltipPosition="right">error</mat-icon>
                 </span>
               </div>
             </div>
@@ -78,8 +82,8 @@
                   <span [formGroupName]="i" class="forbidden-word-element">
                     <input type="text" class="quiz-creation-input" placeholder="enter word"  formControlName="word" autofocus>
                   </span>
-                  <span class="forbidden-feedback-icon" matTooltip="This word is not valid, please enter a different one." matTooltipPosition="right">
-                    <mat-icon *ngIf="invalidForbiddenWordInput(round.id.toString(), i)" class="warning-icon">error</mat-icon>
+                  <span class="forbidden-feedback-icon">
+                    <mat-icon *ngIf="invalidForbiddenWordInput(round.id.toString(), i)" class="warning-icon" [matTooltip]="tooltipMessage" matTooltipPosition="right">error</mat-icon>
                   </span>
                   <span class="forgotten-grid-btn">
                     <button mat-mini-fab class="remove" color="negative" [disabled]="(i===0 && onlyOneField(round.id.toString())) || (!addFieldDisabled && i==0)" (click)="removeField(round.id.toString(), i)">
