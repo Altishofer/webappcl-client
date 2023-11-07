@@ -1,9 +1,7 @@
 import {
-  AfterViewInit,
   ChangeDetectorRef,
   Component,
   EventEmitter,
-  HostListener,
   Input,
   OnInit,
   Output
@@ -11,8 +9,7 @@ import {
 import {QuizService} from "@data/services/quiz.service";
 import {Router} from "@angular/router";
 import {Round} from "@data/interfaces/round.model";
-import {AbstractControl, Form, FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {MatSlideToggleChange} from "@angular/material/slide-toggle";
+import {AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {QuizWithRound} from "@data/interfaces/QuizWithRound";
 import {debounceTime, distinctUntilChanged, of, switchMap, tap} from "rxjs";
 
