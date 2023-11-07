@@ -88,10 +88,10 @@ export class QuizPreviewComponent implements OnInit{
     });
   }
 
-  addField(roundId:string, word:string = '', isSubtracted:boolean = false) : void {
+  addField(roundId:string, word:string = '', isValidated:boolean = true) : void {
     const formArray: FormArray<any> = this.forbiddenWordsForm.get(roundId) as FormArray;
     if (formArray){
-      formArray.push(this.createWordFormGroup(word, isSubtracted));
+      formArray.push(this.createWordFormGroup(word, isValidated));
     }
     this.addFieldDisabled = true;
   }
@@ -101,7 +101,7 @@ export class QuizPreviewComponent implements OnInit{
     const formArray: FormArray<any> = this.forbiddenWordsForm.get(roundId) as FormArray;
     if (formArray) {
       for (let i: number = 0; i < formArray.value.length; i++) {
-        let word: string = 'test';
+        let word: string = '';
         const control : AbstractControl<any, any> = formArray.at(i);
         if (control) {
           word = control.get('word')?.value;
@@ -179,32 +179,35 @@ export class QuizPreviewComponent implements OnInit{
   }
 
   roundAllOk(roundId : string): boolean {
+    let allGood : boolean = true;
     let formArray : FormArray = this.forbiddenWordsForm.get(roundId) as FormArray;
     formArray.controls.forEach((control: AbstractControl<any, any>): void | boolean => {
       if (control.get('isValidated')?.value == false || control.get('word')?.value.length == 0) {
-        return false;
+        allGood = false;
       }
       });
     let targetArray: FormArray<any> = this.targetWordForm.get(roundId) as FormArray;
-    return !(targetArray.get('isValidated')?.value == false || targetArray.get('word')?.value.length == 0);
+    return allGood && !(targetArray.get('isValidated')?.value == false || targetArray.get('word')?.value.length == 0);
   }
 
   canSaveOrStart() : boolean {
+    let allGood : boolean = true;
     this.selectedQuizRounds.forEach((round: Round) : boolean | void => {
 
       let formArray: FormArray<any> = this.forbiddenWordsForm.get(round.id.toString()) as FormArray;
       formArray.controls.forEach((control: AbstractControl<any, any>): void | boolean => {
         if (control.get('isValidated')?.value == false || control.get('word')?.value.length == 0) {
-          return false;
+          allGood = false;
         }
       });
 
       let targetArray: FormArray<any> = this.targetWordForm.get(round.id.toString()) as FormArray;
       if (targetArray.get('isValidated')?.value == false || targetArray.get('word')?.value.length == 0) {
-        return false;
+        allGood = false;
       }
+      console.log(round.id, allGood);
     });
-    return true;
+    return allGood;
   }
 
   closePreview(): void {
