@@ -11,9 +11,4 @@ COPY . .
 RUN npm install
 RUN ng build --configuration=production
 
-WORKDIR /app/src/assets
-RUN ls -ls
-
-WORKDIR /app
-
 CMD ["ng", "serve", "--host", "0.0.0.0", "--port", "5000", "--configuration", "production"]
