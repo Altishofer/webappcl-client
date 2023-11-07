@@ -115,14 +115,15 @@ span .name {
   grid-row: 2;
 }
 .target-word-element {
-  display: inline-block;
+  grid-column: 2 / span 2;
+  grid-row: 1;
 }
 .forbidden-word-container {
   grid-column: 1;
   grid-row: 4;
   align-items: center;
 }
-.word-inline-grid {
+.forgotten-word-grid {
   display: grid;
   grid: auto / 85% 15%;
   padding-left: 15%;
@@ -130,6 +131,14 @@ span .name {
   justify-content: space-evenly;
   align-content: start;
   text-align: start;
+}
+.target-word-grid {
+  display: grid;
+  grid: auto / 15% 60% 10% 15%;
+  padding: 0;
+  justify-content: space-evenly;
+  align-content: center;
+  text-align: center;
 }
 .forbidden-word-element {
   grid-column: 1;
@@ -244,17 +253,23 @@ button.remove:disabled {
   grid-column: 2;
 }
 .target-feedback-icon {
-  display: block;
-  grid-column: 2;
+  display: inline-block;
+  grid-column: 3;
   grid-row: 1;
-  padding-right: 20px;
+  padding-right: 6px;
+  padding-top: 5px;
+  margin-top: 7px;
 }
 .quiz-creation-input {
   display: inline-block;
   grid-row: 1;
   grid-column: 1 / span 2;
 }
+.quiz-creation-input.target {
+
+}
 .warning-icon {
-  color: darkorange;
-  scale: 140%;
+  color: #9A4444;
+  scale: 100%;
+  border-radius: 20px;
 }
