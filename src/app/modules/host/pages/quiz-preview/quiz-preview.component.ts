@@ -61,7 +61,7 @@ export class QuizPreviewComponent implements OnInit{
       distinctUntilChanged(),
       switchMap((newWord) => {
         if (!(newWord && newWord.length > 0)) {
-          return of(true);
+          return of(false);
         }
         return this._quizService.Check(newWord);
       }),
@@ -174,7 +174,12 @@ export class QuizPreviewComponent implements OnInit{
   }
 
   start() : void {
+    this.saveChanges();
     this.startQuiz.emit(this.selectedQuizId);
+  }
+
+  canSaveOrStart(){
+    return true;
   }
 
   closePreview(): void {
@@ -185,7 +190,6 @@ export class QuizPreviewComponent implements OnInit{
     this.selectedQuizRounds.forEach((round: Round) => {
       let formArray = this.forbiddenWordsForm.get(round.id.toString()) as FormArray;
       round.forbiddenWords = formArray.controls.map(control => control.value.word);
-
       formArray = this.targetWordForm.get(round.id.toString()) as FormArray;
       round.roundTarget = formArray.value.word;
     });

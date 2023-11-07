@@ -8,11 +8,11 @@
   </span>
 
   <span class="left-2nd-btn">
-    <button mat-mini-fab color="positive" (click)="saveChanges()"><mat-icon>save</mat-icon></button>
+    <button mat-mini-fab color="positive" [disabled]="!canSaveOrStart()" (click)="saveChanges()"><mat-icon>save</mat-icon></button>
   </span>
 
   <span class="right-btn">
-    <button mat-mini-fab color="positive" (click)="start()"><mat-icon>fast_forward</mat-icon></button>
+    <button mat-mini-fab color="positive" [disabled]="!canSaveOrStart()" (click)="start()"><mat-icon>fast_forward</mat-icon></button>
   </span>
 
   <span class="content-grid">
