@@ -11,7 +11,7 @@ import {
 import {QuizService} from "@data/services/quiz.service";
 import {Router} from "@angular/router";
 import {Round} from "@data/interfaces/round.model";
-import {AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {AbstractControl, Form, FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {MatSlideToggleChange} from "@angular/material/slide-toggle";
 import {QuizWithRound} from "@data/interfaces/QuizWithRound";
 import {debounceTime, distinctUntilChanged, of, switchMap, tap} from "rxjs";
@@ -178,7 +178,21 @@ export class QuizPreviewComponent implements OnInit{
     this.startQuiz.emit(this.selectedQuizId);
   }
 
-  canSaveOrStart(){
+  canSaveOrStart() : boolean {
+    this.selectedQuizRounds.forEach((round: Round) => {
+      let formArray: FormArray<any> = this.forbiddenWordsForm.get(round.id.toString()) as FormArray;
+      formArray.controls.forEach((control: AbstractControl<any, any>): void | boolean => {
+        if (control.get('isValidated')?.value == false || control.get('word')?.value.length == 0) {
+          return false;
+        }
+      });
+      let targetArray: FormArray<any> = this.targetWordForm.get(round.id.toString()) as FormArray;
+      targetArray.controls.forEach((control: AbstractControl<any, any>): void | boolean => {
+        if (control.get('isValidated')?.value == false || control.get('word')?.value.length == 0) {
+          return false;
+        }
+      });
+    })
     return true;
   }
 
