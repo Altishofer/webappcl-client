@@ -149,6 +149,11 @@ mat-raised-button {
   white-space: nowrap;
   word-break: break-all;
 }
+.btn-block:enabled,
+.btn-add:enabled {
+  background-color: #a87d5b;
+  color: white;
+}
 button:disabled {
   background-color: #888888;
   color: white;
