@@ -4,16 +4,15 @@
   </div>
 
   <span class="left-btn">
-    <button mat-mini-fab color="negative" (click)="closePreview()"><mat-icon>arrow_back_ios</mat-icon></button>
+    <button mat-mini-fab color="negative" (click)="closePreview()"><mat-icon>home</mat-icon></button>
   </span>
 
-  <div [matTooltip]="!canSaveOrStart() ? 'Some of the rounds have invalid input, please check.' : ''" matTooltipPosition="below">  <span class="left-2nd-btn">
+  <div [matTooltip]="!canSaveOrStart() ? 'Some of the rounds have invalid input, please check.' : ''" matTooltipPosition="below" class="left-2nd-btn">
     <button mat-mini-fab color="positive" [disabled]="!canSaveOrStart()" (click)="saveChanges()">
       <mat-icon>save</mat-icon></button>
-    </span>
   </div>
 
-  <div [matTooltip]="!canSaveOrStart() ? 'Some of the rounds have invalid input, please check.' : ''" matTooltipPosition="below">
+  <div [matTooltip]="!canSaveOrStart() ? 'Some of the rounds have invalid input, please check.' : ''" matTooltipPosition="below" class="right-btn">
     <button mat-mini-fab color="positive" [disabled]="!canSaveOrStart()" (click)="start()">
       <mat-icon>fast_forward</mat-icon>
     </button>
