@@ -229,7 +229,7 @@ mat-card-content {
   height: 100%;
   width: 0;
   background-image: linear-gradient(to right, #e4b076, #a87d5b);
-  animation: timer-animation 25s linear;
+  animation: timer-animation 60s linear;
 }
 
 @keyframes timer-animation {
@@ -276,12 +276,7 @@ mat-card-content {
 .podium-base {
   width: 100px;
 }
-.timer-progress {
-  height: 100%;
-  width: 0;
-  background-image: linear-gradient(to right, #e4b076, #a87d5b);
-  animation: timer-animation 25s linear;
-}
+
 .first {
   height: 150px;
   background-image: linear-gradient(to bottom,#773e37, #7b624c);

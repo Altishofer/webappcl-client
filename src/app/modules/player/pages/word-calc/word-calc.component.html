@@ -2,7 +2,7 @@
 <div class="center">
   <mat-card class="card-element">
     <div class="time-bar">
-      <div class="timer-progress" [style.width.%]="remainingTime / 25 * 100"></div>
+      <div class="timer-progress" [style.width.%]="remainingTime / 60 * 100"></div>
     </div>
     <div [formGroup]="wordCalcForm">
       <div formArrayName="wordsArray">

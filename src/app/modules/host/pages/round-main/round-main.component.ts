@@ -23,8 +23,7 @@ export class RoundMainComponent {
   unexpectedErrorMsg : string = "An unexpected error occurred."
   errorMsg : string = '';
   hostId : string = '';
-  remainingTime = 25;
-
+  remainingTime : number = 60;
 
   waitResult : WaitResult = {
     notAnsweredPlayerName : [],
@@ -138,7 +137,11 @@ export class RoundMainComponent {
 
 
   get answeredPercentage() {
-    return Math.round(this.waitResult.answeredPlayerName.length / (this.waitResult.notAnsweredPlayerName.length + this.waitResult.answeredPlayerName.length) * 100);
+    let perc : number = Math.round(this.waitResult.answeredPlayerName.length / (this.waitResult.notAnsweredPlayerName.length + this.waitResult.answeredPlayerName.length) * 100);
+    if (!perc || perc <= 0.0) {
+      return 0;
+    }
+    return perc;
   }
 
   get unansweredPercentage() {

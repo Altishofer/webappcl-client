@@ -37,7 +37,7 @@ export class WordCalcComponent{
   playerName : string = '';
   unexpectedErrorMsg : string = "An unexpected error occurred."
   errorMsg : string = '';
-  remainingTime = 25;
+  remainingTime = 60;
   submitted : boolean = false;
 
 
