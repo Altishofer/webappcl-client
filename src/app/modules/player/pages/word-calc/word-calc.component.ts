@@ -1,5 +1,5 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, FormArray, AbstractControl} from '@angular/forms';
+import {FormBuilder, FormGroup, FormArray, AbstractControl, FormControl, Validators} from '@angular/forms';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { VectorCalculationModel } from '@data/interfaces/VectorCalculation.model';
 import {ActivatedRoute, Router} from "@angular/router";
@@ -7,10 +7,20 @@ import {SignalRService} from "@data/services/SignalRService";
 import {CookieService} from "ngx-cookie-service";
 import {PlayerService} from "@data/services/player.service";
 import {Round} from "@data/interfaces/round.model";
-import {BehaviorSubject, catchError, map, Observable, window} from "rxjs";
+import {
+  BehaviorSubject,
+  catchError,
+  debounceTime,
+  distinctUntilChanged,
+  map,
+  Observable, of,
+  switchMap, tap,
+  window
+} from "rxjs";
 import {Answer} from "@data/interfaces/answer.model";
 import {HttpErrorResponse} from "@angular/common/http";
 import {HostService} from "@data/services/host.service";
+import {QuizService} from "@data/services/quiz.service";
 
 @Component({
   selector: 'app-word-calc',
@@ -52,7 +62,8 @@ export class WordCalcComponent{
       private router: Router,
       private route: ActivatedRoute,
       private cookieService: CookieService,
-      private playerService: PlayerService
+      private playerService: PlayerService,
+      private _quizService : QuizService
   ) {
     this.addFieldDisabled = true;
     this.wordCalcForm = this.fb.group({
@@ -99,16 +110,41 @@ export class WordCalcComponent{
   }
 
 
-  createWordFormGroup(word:string='', isSubtracted:boolean=false): FormGroup {
+  createWordFormGroup(word:string='', isSubtracted:boolean=false, isValidated:boolean=true): FormGroup {
+
+    const wordControl = new FormControl(word, [Validators.minLength(1), Validators.pattern(/^(\S){1,20}$/)]);
+    const isValidatedControl = new FormControl(isValidated);
+    const isSubtractedControl : FormControl<boolean | null> = new FormControl(isSubtracted);
+
+    wordControl.valueChanges.pipe(
+      debounceTime(500),
+      distinctUntilChanged(),
+      switchMap((newWord) => {
+        if (!(newWord && newWord.length > 0)) {
+          return of(false);
+        }
+        return this._quizService.Check(newWord);
+      }),
+      tap((isValid) => {
+        wordControl.setErrors(null);
+        isValidatedControl.setValue(isValid);
+      })
+    ).subscribe();
+    wordControl.updateValueAndValidity();
     return this.fb.group({
-      word: word,
-      isSubtracted: isSubtracted
+      word: wordControl,
+      isValidated: isValidatedControl,
+      isSubtracted: isSubtractedControl
     });
   }
 
-  addField(word:string = '', isSubtracted:boolean = false) : void {
-    this.wordsArray.push(this.createWordFormGroup(word, isSubtracted));
+  addField(word:string = '', isSubtracted:boolean = false, isValidated:boolean = true) : void {
+    this.wordsArray.push(this.createWordFormGroup(word, isSubtracted, isValidated));
     this.addFieldDisabled = true;
+  }
+
+  invalidInput(index : number) : boolean{
+    return this.wordsArray.at(index).get('isValidated')?.value == false;
   }
 
   allIndexWordNonEmpty():boolean{

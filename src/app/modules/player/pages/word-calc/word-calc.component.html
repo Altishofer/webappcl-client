@@ -18,6 +18,9 @@
                 <mat-icon>remove_circle</mat-icon>
               </button>
             </span>
+            <span class="target-feedback-icon">
+              <mat-icon *ngIf="invalidInput(position)" class="warning-icon" matTooltip="This word is not valid, please enter a different one." matTooltipPosition="right">error</mat-icon>
+            </span>
           </div>
         </ng-template>
       </div>
