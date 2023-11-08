@@ -39,7 +39,7 @@
           </span>
           <span class="delete-btn-grid">
             <button mat-mini-fab color="negative" style="scale: 80%;" class="remove" *ngIf="!onlyOneRound()" (click)="removeRound(round.id.toString())">
-              <mat-icon>delete</mat-icon>
+              <mat-icon>remove_circle</mat-icon>
             </button>
             <mat-icon *ngIf="!roundAllOk(round.id.toString())" class="warning-icon" matTooltip="Some of the inputs are not valid, please check again." matTooltipPosition="right">error</mat-icon>
           </span>
@@ -56,13 +56,11 @@
 
           <ng-container>
             <div class="target-word-container">
-              <div class="word-inline-grid">
+              <div class="target-word-grid">
                 <div class="target-word-element" [formGroup]="targetWordForm">
-                  <div [formGroupName]="round.id.toString()">
-                    <span>
-                      <input type="text" class="quiz-creation-input target" placeholder="enter target word"  formControlName="word" autofocus>
-                    </span>
-                  </div>
+                  <span [formGroupName]="round.id.toString()">
+                    <input type="text" class="quiz-creation-input target" placeholder="enter target word"  formControlName="word" autofocus>
+                  </span>
                 </div>
                 <span class="target-feedback-icon">
                   <mat-icon *ngIf="invalidTargetInput(round.id.toString())" class="warning-icon" [matTooltip]=tooltipMessage matTooltipPosition="right">error</mat-icon>
@@ -77,7 +75,7 @@
           <ng-container>
             <div [formGroup]="forbiddenWordsForm" class="forbidden-word-container">
               <div [formArrayName]="round.id.toString()">
-                <div  *ngFor="let control of getControls(round.id.toString()); let i = index;  trackBy: trackByFn" class="word-inline-grid">
+                <div  *ngFor="let control of getControls(round.id.toString()); let i = index;  trackBy: trackByFn" class="forgotten-word-grid">
                   <span [formGroupName]="i" class="forbidden-word-element">
                     <input type="text" class="quiz-creation-input" placeholder="enter word"  formControlName="word" autofocus>
                   </span>

@@ -17,7 +17,7 @@
         </div>
       </div>
     </div>
-    <button mat-raised-button color="positive" *ngIf="anotherRound" (click)="startGame()">Next Round</button>
-    <button mat-raised-button color="positive" *ngIf="!anotherRound" (click)="returnToHome()">Return Home</button>
+    <button mat-raised-button color="positive" class="btn-block" *ngIf="anotherRound" (click)="startGame()">Next Round</button>
+    <button mat-raised-button color="positive" class="btn-block" *ngIf="!anotherRound" (click)="returnToHome()">Return Home</button>
   </mat-card>
 </div>

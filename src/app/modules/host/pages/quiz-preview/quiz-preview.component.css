@@ -115,28 +115,38 @@ span .name {
   grid-row: 2;
 }
 .target-word-element {
-  display: inline-block;
+  grid-column: 1 / span 2;
+  grid-row: 1;
 }
 .forbidden-word-container {
   grid-column: 1;
   grid-row: 4;
   align-items: center;
 }
-.word-inline-grid {
+.forgotten-word-grid {
   display: grid;
-  grid: auto / 85% 15%;
+  grid: auto / 75% 10% 15%;
   padding-left: 15%;
   column-gap: 6px;
   justify-content: space-evenly;
   align-content: start;
   text-align: start;
 }
+.target-word-grid {
+  display: grid;
+  grid: auto / 75% 10% 15%;
+  padding-left: 15%;
+  column-gap: 6px;
+  justify-content: space-evenly;
+  align-content: center;
+  text-align: center;
+}
 .forbidden-word-element {
-  grid-column: 1;
+  grid-column: 1 / span 2;
   grid-row: 1;
 }
 .forgotten-grid-btn {
-  grid-column: 2;
+  grid-column: 3;
   grid-row: 1;
   padding-top: 8px;
   display: block;
@@ -226,6 +236,7 @@ button.remove:disabled {
   background-color: rgba(255, 255, 255, 0.4);
 }
 .editable-title {
+  display: inline-block;
   background: transparent;
   padding: 5px;
   margin-right: 10px;
@@ -243,10 +254,10 @@ button.remove:disabled {
   grid-column: 2;
 }
 .target-feedback-icon {
-  display: block;
-  grid-column: 2;
-  grid-row: 1;
-  padding-right: 20px;
+  display: inline-block;
+  padding-right: 6px;
+  padding-top: 5px;
+  margin-top: 7px;
 }
 .quiz-creation-input {
   display: inline-block;
@@ -254,6 +265,10 @@ button.remove:disabled {
   grid-column: 1 / span 2;
 }
 .warning-icon {
-  color: darkorange;
-  scale: 140%;
+  color: #9A4444;
+  border-radius: 20px;
+}
+.forbidden-feedback-icon > .warning-icon {
+  color: #e4b076;
+  margin-right: 6px;
 }
