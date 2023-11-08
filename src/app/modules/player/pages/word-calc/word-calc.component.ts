@@ -120,7 +120,7 @@ export class WordCalcComponent{
       debounceTime(500),
       distinctUntilChanged(),
       switchMap((newWord) => {
-        if (!(newWord && newWord.length > 0)) {
+        if (!(newWord && newWord.length > 0) || newWord.includes(" ")) {
           return of(false);
         }
         return this._quizService.Check(newWord);
