@@ -51,7 +51,7 @@
                           [attr.id]="'accordion-body-' + position"
                           [attr.aria-labelledby]="'accordion-header-' + position">
           <div class="target-word-title" style="margin-top: 0">
-            Target Word:
+            Target Word
           </div>
 
           <ng-container>
@@ -59,7 +59,7 @@
               <div class="target-word-grid">
                 <div class="target-word-element" [formGroup]="targetWordForm">
                   <span [formGroupName]="round.id.toString()">
-                    <input type="text" class="quiz-creation-input target" placeholder="enter target word"  formControlName="word" autofocus>
+                    <input type="text" class="quiz-creation-input target" placeholder="enter word"  formControlName="word" autofocus>
                   </span>
                 </div>
                 <span class="target-feedback-icon">
@@ -70,7 +70,7 @@
           </ng-container>
 
           <div class="forbidden-word-title">
-            Forbidden Words:
+            Forbidden Subwords
           </div>
           <ng-container>
             <div [formGroup]="forbiddenWordsForm" class="forbidden-word-container">

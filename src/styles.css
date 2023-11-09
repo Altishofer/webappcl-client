@@ -11,4 +11,5 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   background-color: #131723;
+  overflow-x: hidden;
 }

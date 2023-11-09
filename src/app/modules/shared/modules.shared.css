@@ -7,20 +7,18 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
   min-height: 100vh;
 }
-h1 {
-  font-size: 70px;
+h1 { font-size: 70px;
   font-weight: 600;
-  background-image: repeating-conic-gradient(#a87d5b, #e3b885, #773e37, #7b624c, #e4b076);
-  color: transparent;
-  background-clip: text;
-  -webkit-background-clip: text;
+  /*background-image: repeating-conic-gradient(#a87d5b, #e3b885, #773e37, #7b624c, #e4b076);*/
+  color: rgba(255, 255, 255, 0.8);
+  filter: drop-shadow(1px 1px 1px #888888) drop-shadow(1px 1px 0px #888);
 }
 .card-element {
   text-align: center;
   width: 100%;
   padding: 20px;
   border-radius: 10px;
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(30px);
   justify-content: center;
   align-items: start;
@@ -204,8 +202,12 @@ mat-card-content {
   outline: none;
 }
 
+.quiz-creation-input.target::placeholder {
+  color: #4f4f4f;
+}
+
 .quiz-creation-input::placeholder {
-  color: #cccccc;
+  color: #c9c9c9;
 }
 
 .quiz-creation-input.target {

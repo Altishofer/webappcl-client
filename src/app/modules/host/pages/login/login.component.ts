@@ -6,6 +6,7 @@ import { catchError, Observable } from "rxjs";
 import { Router } from '@angular/router';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
+import {Md5} from "ts-md5";
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -35,7 +36,7 @@ export class LoginComponent implements OnInit{
     this.loginForm.statusChanges.subscribe(status => {
       if (status == "VALID"){
         this.host.hostName = this.loginForm.value.username;
-        this.host.hostPassword = this.loginForm.value.password;
+        this.host.hostPassword = Md5.hashStr(this.loginForm.value.password);
       }
     });
   };
