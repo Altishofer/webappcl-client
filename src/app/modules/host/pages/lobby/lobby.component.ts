@@ -8,6 +8,7 @@ import {HttpErrorResponse} from "@angular/common/http";
 import {HostService} from "@data/services/host.service";
 import {FormArray, FormGroup} from "@angular/forms";
 import {Round} from "@data/interfaces/round.model";
+import { Options } from 'ngx-qrcode-styling';
 
 @Component({
   selector: 'app-lobby',
@@ -15,6 +16,15 @@ import {Round} from "@data/interfaces/round.model";
   styleUrls: ['./lobby.component.css']
 })
 export class LobbyComponent {
+  public config: Options = {
+    template: 'ocean',
+    data : 'test',
+    frameOptions: {
+      style: 'F_036',
+      width: 300,
+      height: 300
+    }
+  };
   QRvalue = '';
 
   quizId: string = '';
@@ -35,6 +45,7 @@ export class LobbyComponent {
       this.quizId = params['quizId'];
       this.hostId = params['hostId'];
     });
+    this.config.data = this.hostService.hubUrl + '/player/' + this.quizId;
     this.QRvalue = this.hostService.hubUrl + '/player/' + this.quizId;
   }
 
@@ -116,4 +127,6 @@ export class LobbyComponent {
         }
       });
   }
+
+  protected readonly URL = URL;
 }

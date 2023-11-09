@@ -3,11 +3,10 @@
     <div class="lobby-grid">
       <h2 class="h2-grid">Scan the QR code to join!</h2>
 
-      <h3 class="link-grid">{{QRvalue}}</h3>
-
+      <h3 class="link-grid">{{config.data}}</h3>
       <div class="qr-grid">
         <mat-card class="qr">
-          <qrcode [qrdata]="QRvalue" [width]="256" [errorCorrectionLevel]="'H'"></qrcode>
+          <ngx-qrcode-styling [template]="'grape'" [image]="'assets/ZurichUniLogo.svg'" [width]="256" [height]="256" [data]="QRvalue"></ngx-qrcode-styling>
         </mat-card>
       </div>
 

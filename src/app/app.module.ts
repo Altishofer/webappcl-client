@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreModule } from '@core/core.module';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { NgxQrcodeStylingModule } from 'ngx-qrcode-styling';
 
 import { MainpageComponent } from '@layout/mainpage/mainpage.component';
 import { HeaderComponent } from '@layout/header/header.component';
@@ -31,7 +32,8 @@ import { CommonModule } from '@angular/common';
     CoreModule,
     SharedModule,
     HeaderComponent,
-    FormsModule
+    FormsModule,
+    NgxQrcodeStylingModule
   ],
   providers: [{
     provide: LocationStrategy,
