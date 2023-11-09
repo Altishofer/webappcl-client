@@ -13,8 +13,10 @@ import {QuizWithRound} from "@data/interfaces/QuizWithRound";
   providedIn: 'root',
 })
 export class HostService {
-  private baseUrl : string = environment.API_URL + "/Host";
-  private quizUrl : string = environment.API_URL + "/Quiz";
+  public hubUrl : string = environment.HUB_URL;
+  public baseUrl : string = environment.API_URL;
+  public hostUrl : string = environment.API_URL + "/Host";
+  public quizUrl : string = environment.API_URL + "/Quiz";
 
   constructor(private http: HttpClient, private cookieService: CookieService) {}
 
@@ -23,7 +25,7 @@ export class HostService {
       'Content-Type': 'application/json',
     });
     const body : string = JSON.stringify(host);
-    return this.http.post(`${this.baseUrl}/Register`, body, { observe:'response', headers });
+    return this.http.post(`${this.hostUrl}/Register`, body, { observe:'response', headers });
   }
 
   login(host: Host): Observable<any> {
@@ -31,7 +33,7 @@ export class HostService {
       'Content-Type': 'application/json',
     });
     const body : string = JSON.stringify(host);
-    return this.http.post(`${this.baseUrl}/Login`, body, { observe:'response', headers });
+    return this.http.post(`${this.hostUrl}/Login`, body, { observe:'response', headers });
   }
 
   refreshTokenPeriodically() {
@@ -41,7 +43,7 @@ export class HostService {
         'Bearer-Token':  this.cookieService.get("hostToken"),
         'Authorization': `bearer ${this.cookieService.get("hostToken")}`
       });
-      return this.http.get(`${this.baseUrl}/RefreshToken`, { observe:'response', headers })
+      return this.http.get(`${this.hostUrl}/RefreshToken`, { observe:'response', headers })
         .subscribe((response: any) => {
           if ((response.status >= 200 && response.status < 300) || response.status == 304) {
             this.cookieService.set('hostToken', response.body.result, 1);

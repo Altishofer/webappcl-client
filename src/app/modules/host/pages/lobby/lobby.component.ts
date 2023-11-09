@@ -15,7 +15,7 @@ import {Round} from "@data/interfaces/round.model";
   styleUrls: ['./lobby.component.css']
 })
 export class LobbyComponent {
-  QRvalue = 'https:///';
+  QRvalue = '';
 
   quizId: string = '';
   players: string[] = [];
@@ -35,7 +35,7 @@ export class LobbyComponent {
       this.quizId = params['quizId'];
       this.hostId = params['hostId'];
     });
-    this.QRvalue = 'https://localhost:4200/player/' + this.quizId;
+    this.QRvalue = this.hostService.hubUrl + '/player/' + this.quizId;
   }
 
   ngOnInit(): void {
