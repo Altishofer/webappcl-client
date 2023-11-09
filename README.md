@@ -20,6 +20,7 @@ This project aims to create a dynamic and engaging learning experience for parti
 - Responsive and intuitive user interface crafted using Angular implemented in TypeScript while always trying to use best practices
 - Encrypted password submission and Bearer token rotation using JWT for each request to increase security
 - Real time communication between Players and Hosts with Websockets and RESTful APIs
+- Docker for containerization for local development and stable deployment to Dokku
 
 ---
 
@@ -29,6 +30,7 @@ Before getting started, make sure you have the following prerequisites:
 
 - [Node.js](https://nodejs.org/en)
 - [Angular](https://angular.io/)
+- [Docker](https://www.docker.com/)
 
 You can install Anular globally by running the following command in your shell:
 
@@ -69,3 +71,16 @@ Follow these steps to set up the project:
    ```shell
    http://localhost:4200/
    ```
+
+### Simulate remote deployment on Dokku
+1. Make sure Docker Desktop is running
+2. Build the docker image
+```shell
+  docker build -t webappcl-client:latest .
+  ```
+
+3. Deploy the docker image
+   
+```shell
+   docker run -it -p 5000:5000 webappcl-client:latest 
+```
