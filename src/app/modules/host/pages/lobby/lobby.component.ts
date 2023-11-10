@@ -18,7 +18,7 @@ import { Options } from 'ngx-qrcode-styling';
 export class LobbyComponent {
   public config: Options = {
     template: 'ocean',
-    data : 'test',
+    data : 'default',
     frameOptions: {
       style: 'F_036',
       width: 300,
@@ -26,7 +26,6 @@ export class LobbyComponent {
     }
   };
   QRvalue = '';
-
   quizId: string = '';
   players: string[] = [];
   unexpectedErrorMsg : string = "An unexpected error occurred."
@@ -45,7 +44,8 @@ export class LobbyComponent {
       this.quizId = params['quizId'];
       this.hostId = params['hostId'];
     });
-    this.config.data = this.hostService.ngUrl + 'player/regist}
+    this.QRvalue = this.hostService.ngUrl + 'player/register/' + this.quizId;
+  }
 
   ngOnInit(): void {
     this.signalRService.startConnection().then(() => {
