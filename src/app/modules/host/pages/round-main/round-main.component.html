@@ -2,7 +2,7 @@
 
   <div class="game-main">
     <div class="target-word-title">
-      Target Word
+      Target
     </div>
 
     <div class="target-word-element">
@@ -10,7 +10,7 @@
     </div>
 
     <div class="forbidden-word-title">
-      Forbidden Subwords
+      Forbidden
     </div>
 
     <div class="forbidden-word-container">
@@ -41,8 +41,10 @@
       </div>
     </div>
   </div>
-  <div class="time-bar">
-    <div class="timer-progress" [style.width.%]="remainingTime / 60 * 100"></div>
+  <div class="timer-bar-grid">
+    <div class="time-bar">
+      <div class="timer-progress" [style.width.%]="remainingTime / 60 * 100"></div>
+    </div>
   </div>
   <div class="btn-grid-container">
     <button mat-raised-button color="positive" class="btn-block" (click)="switchToResults()">End Round</button>
