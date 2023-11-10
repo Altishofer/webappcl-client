@@ -32,7 +32,7 @@
 .word-calc-field {
   display: grid;
   grid-template: auto / 15% 70% 15%;
-  margin-bottom: 7px;
+  margin-bottom: 10px;
 }
 .word-calc-switch {
   display: inline-block;
@@ -62,7 +62,8 @@
   grid-column: 3;
   grid-row: 1;
   padding: 0;
-  margin-top: -5px;
+  margin-top: 3px;
+  margin-left: 20px;
 }
 .marginalized {
   margin-top: 2px;
@@ -73,9 +74,13 @@
   opacity: 1 !important;
 }
 .remove {
-  scale: 80%;
+  scale: 90%;
+  color: #9A4444;
+  background: transparent;
+  vertical-align: center;
+  width: 30px;
+  height: 30px;
 }
 button.remove:disabled {
   visibility: hidden;
 }
-

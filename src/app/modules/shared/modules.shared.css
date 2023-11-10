@@ -183,6 +183,9 @@ button:disabled {
 .center {
   text-align: center;
 }
+.full-width {
+  width: 100%;
+}
 .spacer {
   margin-bottom: 100px;
 }

@@ -1,5 +1,5 @@
 <app-header [currentPlayerName]="playerName"></app-header>
-<div class="center">
+<div class="center full-width">
   <mat-card class="card-element">
     <div class="time-bar">
       <div class="timer-progress" [style.width.%]="remainingTime / 60 * 100"></div>
@@ -21,7 +21,7 @@
             </div>
 
             <div class="word-calc-remove">
-              <button mat-icon-button class="remove" color="warn" [disabled]="position===0 && onlyOneField()" (click)="removeField(position)">
+              <button mat-mini-fab class="remove" color="negative" [disabled]="position===0 && onlyOneField()" (click)="removeField(position)">
                 <mat-icon>remove_circle</mat-icon>
               </button>
             </div>
