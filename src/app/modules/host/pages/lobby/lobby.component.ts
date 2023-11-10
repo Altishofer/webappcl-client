@@ -45,9 +45,7 @@ export class LobbyComponent {
       this.quizId = params['quizId'];
       this.hostId = params['hostId'];
     });
-    this.config.data = this.hostService.hubUrl + '/player/' + this.quizId;
-    this.QRvalue = this.hostService.hubUrl + '/player/' + this.quizId;
-  }
+    this.config.data = this.hostService.ngUrl + 'player/regist}
 
   ngOnInit(): void {
     this.signalRService.startConnection().then(() => {

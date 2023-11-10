@@ -13,6 +13,7 @@ import {QuizWithRound} from "@data/interfaces/QuizWithRound";
   providedIn: 'root',
 })
 export class HostService {
+  public ngUrl : string = environment.NG_URL;
   public hubUrl : string = environment.HUB_URL;
   public baseUrl : string = environment.API_URL;
   public hostUrl : string = environment.API_URL + "/Host";
