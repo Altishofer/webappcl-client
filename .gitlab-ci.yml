@@ -6,6 +6,8 @@ stages:
 
 build:
   stage: build
+  only:
+    - master
   script:
     - apt-get update -qy
     - npm install -g @angular/cli
