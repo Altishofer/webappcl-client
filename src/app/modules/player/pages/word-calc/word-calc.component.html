@@ -1,5 +1,5 @@
 <app-header [currentPlayerName]="playerName"></app-header>
-<div class="center">
+<div class="center full-width">
   <mat-card class="card-element">
     <div class="time-bar">
       <div class="timer-progress" [style.width.%]="remainingTime / 60 * 100"></div>
@@ -9,18 +9,22 @@
         <ng-template ngFor let-word [ngForOf]="wordsArray.controls"
                      let-position = "index">
           <div class="word-calc-field" [formGroupName]="position">
-            <span style="display: block; align-items: center;">
-              <mat-slide-toggle class="word-calc-switch" color="accent" (change)="changeSubtract(position, $event)" formControlName="isSubtracted"></mat-slide-toggle>
+            <div class="word-calc-switch" style="display: block; align-items: center;">
+              <mat-slide-toggle color="accent" (change)="changeSubtract(position, $event)" formControlName="isSubtracted"></mat-slide-toggle>
+            </div>
 
+            <div class="word-calc-input-field">
               <input class="word-calc-input" matInput placeholder="enter word" (input)="changeWord(position, $event)" formControlName="word">
+            </div>
+            <div class="target-feedback-icon">
+              <mat-icon *ngIf="invalidInput(position)" class="warning-icon" matTooltip="This word is not valid, please enter a different one." matTooltipPosition="right">error</mat-icon>
+            </div>
 
-              <button mat-icon-button class="remove" color="warn" [disabled]="position===0 && onlyOneField()" (click)="removeField(position)">
+            <div class="word-calc-remove">
+              <button mat-mini-fab class="remove" color="negative" [disabled]="position===0 && onlyOneField()" (click)="removeField(position)">
                 <mat-icon>remove_circle</mat-icon>
               </button>
-            </span>
-            <span class="target-feedback-icon">
-              <mat-icon *ngIf="invalidInput(position)" class="warning-icon" matTooltip="This word is not valid, please enter a different one." matTooltipPosition="right">error</mat-icon>
-            </span>
+            </div>
           </div>
         </ng-template>
       </div>
