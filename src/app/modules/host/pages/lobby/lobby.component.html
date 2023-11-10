@@ -1,9 +1,19 @@
 <div class="center">
   <mat-card class="card-element lobby">
     <div class="lobby-grid">
-      <h2 class="h2-grid">Scan the QR code to join!</h2>
+      <h2 class="center-top-grid">Pleeeeeeeeeeease join :(</h2>
 
-      <h3 class="link-grid">{{QRvalue}}</h3>
+      <!--<h3 class="link-grid">{{QRvalue}}</h3>-->
+      <div class="link-grid">
+        <div class="link-element">
+          https://localhost:4200/join
+        </div>
+        <h2>Lobby Code:</h2>
+        <div class="lobby-code">
+          {{quizId}}
+        </div>
+      </div>
+
       <div class="qr-grid">
         <mat-card class="qr">
           <ngx-qrcode-styling [template]="'grape'" [image]="'assets/ZurichUniLogo.svg'" [width]="256" [height]="256" [data]="QRvalue"></ngx-qrcode-styling>
