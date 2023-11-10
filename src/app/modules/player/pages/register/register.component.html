@@ -1,7 +1,11 @@
 <div class="center">
   <mat-card class="card-element">
     <mat-card-header style="display: block">
-      <mat-card-title style="font-size: xx-large; margin-bottom: 20px;">Register</mat-card-title>
+      <mat-card-title style="font-size: xx-large; margin-bottom: 20px;">Enter a name:</mat-card-title>
+      <p>
+        Your nickname will be displayed on the main screen,<br>
+        choose wisely...
+      </p>
     </mat-card-header>
 
     <form [formGroup]="playerRegForm">
@@ -18,8 +22,10 @@
         </ng-template>
       </mat-card-content>
     </form>
-    <button mat-raised-button color="positive" class="btn-block" routerLinkActive="active" (click)="doRegister()" [disabled]="playerRegForm.invalid">
-      Register
+    <button mat-fab color="positive" class="btn-block" routerLinkActive="active" (click)="doRegister()" [disabled]="playerRegForm.invalid">
+      <mat-icon>
+        done_outline
+      </mat-icon>
     </button>
   </mat-card>
 </div>

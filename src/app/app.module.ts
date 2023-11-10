@@ -8,7 +8,7 @@ import { CoreModule } from '@core/core.module';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { NgxQrcodeStylingModule } from 'ngx-qrcode-styling';
 
-import { MainpageComponent } from '@layout/mainpage/mainpage.component';
+import { JoinComponent } from '@layout/join/join.component';
 import { HeaderComponent } from '@layout/header/header.component';
 import { FooterComponent } from '@layout/footer/footer.component';
 
@@ -20,7 +20,7 @@ import { CommonModule } from '@angular/common';
 @NgModule({
   declarations: [
     AppComponent,
-    MainpageComponent,
+    JoinComponent,
     FooterComponent
   ],
   imports: [

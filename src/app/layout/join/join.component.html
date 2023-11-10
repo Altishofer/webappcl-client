@@ -1,0 +1,27 @@
+<div class="center">
+  <mat-card class="card-element">
+    <mat-card-header style="display: block">
+      <mat-card-title style="font-size: xx-large; margin-bottom: 20px;">Join</mat-card-title>
+    </mat-card-header>
+
+    <form [formGroup]="playerJoinForm">
+      <mat-card-content>
+        <mat-form-field class="player-join">
+          <mat-label>Lobby ID</mat-label>
+          <input matInput formControlName="quizId">
+        </mat-form-field>
+
+        <ng-template [ngIf]="errorMsg">
+          <p class="error-message">
+            {{ errorMsg }}
+          </p>
+        </ng-template>
+      </mat-card-content>
+    </form>
+    <button mat-fab color="positive" class="btn-block" routerLinkActive="active" (click)="doRedirect()" [disabled]="playerJoinForm.invalid">
+      <mat-icon>
+        attach_file
+      </mat-icon>
+    </button>
+  </mat-card>
+</div>

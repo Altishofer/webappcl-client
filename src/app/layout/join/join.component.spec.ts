@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MainpageComponent } from './mainpage.component';
+import { JoinComponent } from './join.component';
 
 describe('MainpageComponent', () => {
-  let component: MainpageComponent;
-  let fixture: ComponentFixture<MainpageComponent>;
+  let component: JoinComponent;
+  let fixture: ComponentFixture<JoinComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [MainpageComponent]
+      declarations: [JoinComponent]
     });
-    fixture = TestBed.createComponent(MainpageComponent);
+    fixture = TestBed.createComponent(JoinComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

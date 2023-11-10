@@ -37,12 +37,12 @@
   height: fit-content;
 }
 .btn-grid {
-  display: block;
+  display: inline-block;
   grid-column: 3;
   grid-row: 5;
   text-align: center;
   align-content: center;
-  padding-right: 10%;
+  justify-content: center;
 }
 .btn-block {
   width: 100%;

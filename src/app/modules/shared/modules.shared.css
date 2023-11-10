@@ -1,3 +1,18 @@
+:root {
+  --steelblue: #8c8c9c;
+  --greengrey: #585c5b;
+  --bluegrey: #515565;
+  --lightgrey: #939598;
+  --redchocolate: #9c6c53;
+  --darkchocolate: #51443b;
+  --brown: #725947;
+  --brownbeige: #bf936a;
+  --darkblue: #1d1c27;
+
+  --positive: #a87d5b;
+  --negative: #773e37;
+}
+
 html,
 body {
   height: 100%;
@@ -187,7 +202,7 @@ mat-card-content {
   color: white;
 }
 .mat-negative {
-  background: #773e37;
+  background: #9A4444;
   color: white;
 }
 .quiz-creation-input {

@@ -60,7 +60,7 @@ h1 {
 }
 .btn-add {
   height: fit-content;
-  background-color: #a87d5b;
+  background-color: var(--positive);
   color: white;
 }
 .icon {
