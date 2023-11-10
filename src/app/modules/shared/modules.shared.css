@@ -314,3 +314,24 @@ mat-card-content {
   display: block;
   font-style: italic;
 }
+.target-feedback-icon,
+.forbidden-feedback-icon {
+  display: inline-block;
+  text-align: right;
+  margin-top: 11px;
+  grid-row: 1;
+  grid-column: 2;
+}
+.target-feedback-icon {
+  padding-right: 6px;
+  padding-top: 5px;
+  margin-top: 7px;
+}
+.warning-icon {
+  color: #9A4444;
+  border-radius: 20px;
+}
+.forbidden-feedback-icon > .warning-icon {
+  color: #e4b076;
+  margin-right: 6px;
+}
