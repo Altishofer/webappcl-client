@@ -55,7 +55,7 @@
 .btn-grid {
   display: inline-block;
   grid-column: 3 / span 2;
-  grid-row: 5;
+  grid-row: 6;
   text-align: center;
   align-content: center;
   justify-content: center;
