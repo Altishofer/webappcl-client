@@ -32,6 +32,7 @@ export class LobbyComponent {
   errorMsg : string = '';
   roundIds : string[] = [];
   hostId : string = '';
+  joinUrl : string = '';
 
   constructor(
     private signalRService: SignalRService,
@@ -45,6 +46,7 @@ export class LobbyComponent {
       this.hostId = params['hostId'];
     });
     this.QRvalue = this.hostService.ngUrl + 'player/register/' + this.quizId;
+    this.joinUrl = this.hostService.ngUrl + 'join/';
   }
 
   ngOnInit(): void {
