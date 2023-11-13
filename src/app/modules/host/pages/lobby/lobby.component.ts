@@ -46,7 +46,7 @@ export class LobbyComponent {
       this.hostId = params['hostId'];
     });
     this.QRvalue = this.hostService.ngUrl + 'player/register/' + this.quizId;
-    this.joinUrl = this.hostService.ngUrl + 'join/';
+    this.joinUrl = this.hostService.ngUrl ? this.hostService.ngUrl.replace('http://', '') + 'join/' : "";
   }
 
   ngOnInit(): void {
