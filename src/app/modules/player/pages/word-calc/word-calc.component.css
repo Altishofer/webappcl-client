@@ -36,13 +36,16 @@
 }
 .word-calc-switch {
   display: inline-block;
-  margin-top: 7px;
+  margin-top: 8px;
   grid-column: 1;
   grid-row: 1;
 }
 .word-calc-input {
+  font-size: large;
   padding: 10px 5px;
   width: 100%;
+  border-radius: 10px;
+  border: none;
 }
 .word-calc-input-field {
   grid-column: 2;
@@ -57,12 +60,13 @@
   justify-content: right;
   float: right;
   padding: 0;
+  margin-top: 8px;
 }
 .word-calc-remove {
   grid-column: 3;
   grid-row: 1;
   padding: 0;
-  margin-top: 3px;
+  margin-top: 4px;
   margin-left: 20px;
 }
 .marginalized {

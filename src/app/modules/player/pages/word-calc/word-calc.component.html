@@ -14,7 +14,7 @@
             </div>
 
             <div class="word-calc-input-field">
-              <input class="word-calc-input" matInput placeholder="enter word" (input)="changeWord(position, $event)" formControlName="word">
+              <input class="word-calc-input" matInput placeholder="enter new word" (input)="changeWord(position, $event)" formControlName="word">
             </div>
             <div class="target-feedback-icon">
               <mat-icon *ngIf="invalidInput(position)" class="warning-icon" matTooltip="This word is not valid, please enter a different one." matTooltipPosition="right">error</mat-icon>
