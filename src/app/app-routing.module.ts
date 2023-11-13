@@ -12,8 +12,8 @@ const routes: Routes = [
     pathMatch: 'prefix'
   },
   {
-    path: 'join',
-    component: JoinComponent
+    path: 'join/:quizId',
+    redirectTo: 'player/register/:quizId'
   },
   {
     path: 'host',
