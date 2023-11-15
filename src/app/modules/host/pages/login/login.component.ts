@@ -5,8 +5,8 @@ import { CookieService } from "ngx-cookie-service";
 import { catchError, Observable } from "rxjs";
 import { Router } from '@angular/router';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import {HttpClient, HttpErrorResponse} from "@angular/common/http";
-import {Md5} from "ts-md5";
+import { HttpErrorResponse } from "@angular/common/http";
+import { Md5 } from "ts-md5";
 
 @Component({
   selector: 'app-login',
