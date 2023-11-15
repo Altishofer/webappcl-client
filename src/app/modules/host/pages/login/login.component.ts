@@ -5,8 +5,9 @@ import { CookieService } from "ngx-cookie-service";
 import { catchError, Observable } from "rxjs";
 import { Router } from '@angular/router';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
+import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {Md5} from "ts-md5";
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -21,8 +22,8 @@ export class LoginComponent implements OnInit{
     private hostService: HostService,
     private cookieService: CookieService,
     private router: Router,
-    private fb: FormBuilder,
-    private http: HttpClient) {
+    private fb: FormBuilder
+    ) {
 
     this.loginForm = this.fb.group({
       username: ['', [Validators.required, Validators.pattern(/^(\S){1,10}$/)]],

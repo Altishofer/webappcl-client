@@ -5,8 +5,6 @@ import { Round } from "@data/interfaces/round.model";
 import {ComponentPortal, Portal, TemplatePortal} from "@angular/cdk/portal";
 import { WelcomePortalComponent } from "@app/modules/host/pages/welcome-portal/welcome-portal.component";
 import {CookieService} from "ngx-cookie-service";
-import {Quiz} from "@data/interfaces/quiz.model";
-import {QuizWithRound} from "@data/interfaces/QuizWithRound";
 
 @Component({
   selector: 'app-quiz-selection',

@@ -13,7 +13,6 @@ import {AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validat
 import {QuizWithRound} from "@data/interfaces/QuizWithRound";
 import {debounceTime, distinctUntilChanged, of, switchMap, tap} from "rxjs";
 
-
 @Component({
   selector: 'app-quiz-preview',
   templateUrl: './quiz-preview.component.html',
@@ -23,7 +22,6 @@ export class QuizPreviewComponent implements OnInit{
   errorMsg : string = '';
   addFieldDisabled : boolean;
   unexpectedErrorMsg : string = "An unexpected error occurred."
-  newQuizTitle: string = '';
   unsavedChanges: boolean = false;
 
   forbiddenWordsForm: FormGroup;
@@ -41,8 +39,6 @@ export class QuizPreviewComponent implements OnInit{
   constructor(
       private fb: FormBuilder,
       private _quizService: QuizService,
-      private _router: Router,
-      private cd : ChangeDetectorRef
   ) {
     this.addFieldDisabled = true;
     this.forbiddenWordsForm = this.fb.group({});

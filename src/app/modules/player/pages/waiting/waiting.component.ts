@@ -19,10 +19,8 @@ export class WaitingComponent implements OnInit {
   constructor(
     private signalRService: SignalRService,
     private router: Router,
-    private route: ActivatedRoute,
-    private cookieService: CookieService,
-    private playerService: PlayerService
-  ) {
+    private route: ActivatedRoute
+    ) {
     this.route.params.subscribe(params => {
       this.quizId = params['quizId'];
       this.playerName = params['playerName'];

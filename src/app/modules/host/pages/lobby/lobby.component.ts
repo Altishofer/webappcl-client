@@ -2,12 +2,7 @@ import { Component } from '@angular/core';
 import {SignalRService} from "@data/services/SignalRService";
 import {ActivatedRoute, Router} from "@angular/router";
 import {CookieService} from "ngx-cookie-service";
-import {PlayerService} from "@data/services/player.service";
-import {catchError} from "rxjs";
-import {HttpErrorResponse} from "@angular/common/http";
 import {HostService} from "@data/services/host.service";
-import {FormArray, FormGroup} from "@angular/forms";
-import {Round} from "@data/interfaces/round.model";
 import { Options } from 'ngx-qrcode-styling';
 
 @Component({

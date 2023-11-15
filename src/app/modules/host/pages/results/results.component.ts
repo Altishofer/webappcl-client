@@ -1,6 +1,4 @@
 import {ChangeDetectorRef, Component} from '@angular/core';
-import {Answer} from "@data/interfaces/answer.model";
-import {WaitResult} from "@data/interfaces/WaitResult.model";
 import {SignalRService} from "@data/services/SignalRService";
 import {ActivatedRoute, Router} from "@angular/router";
 import {CookieService} from "ngx-cookie-service";
