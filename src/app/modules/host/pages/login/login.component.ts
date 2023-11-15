@@ -100,7 +100,19 @@ export class LoginComponent implements OnInit{
   }
 
   wakeUpServer() {
-    this.hostService.wakeUpServer().subscribe((response: any) => {
+    this.hostService.wakeUpServer()
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          console.log(JSON.stringify(error.error));
+          if (error.status != 500) {
+            this.errorMsg = error.error;
+          } else {
+            this.errorMsg = this.unexpectedErrorMsg;
+          }
+          return[];
+        })
+      )
+      .subscribe((response: any) => {
       console.log("Server started successfuly");
     });
   }

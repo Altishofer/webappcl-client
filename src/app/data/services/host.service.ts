@@ -1,13 +1,10 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParamsOptions} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParamsOptions} from '@angular/common/http';
 import { CookieService } from "ngx-cookie-service";
 import { environment } from "../../../environments/environment";
 
 import { Host } from '../interfaces/host.model'
-import {Observable} from "rxjs";
-import {VectorCalculationModel} from "@data/interfaces/VectorCalculation.model";
-import {Round} from "@data/interfaces/round.model";
-import {QuizWithRound} from "@data/interfaces/QuizWithRound";
+import {catchError, Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root',
@@ -45,6 +42,12 @@ export class HostService {
         'Authorization': `bearer ${this.cookieService.get("hostToken")}`
       });
       return this.http.get(`${this.hostUrl}/RefreshToken`, { observe:'response', headers })
+        .pipe(
+          catchError((error: HttpErrorResponse) => {
+            console.log(JSON.stringify(error.error));
+            return[];
+          })
+        )
         .subscribe((response: any) => {
           if ((response.status >= 200 && response.status < 300) || response.status == 304) {
             this.cookieService.set('hostToken', response.body.result, 1);

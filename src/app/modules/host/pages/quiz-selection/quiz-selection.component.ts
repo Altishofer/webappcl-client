@@ -5,6 +5,8 @@ import { Round } from "@data/interfaces/round.model";
 import {ComponentPortal, Portal, TemplatePortal} from "@angular/cdk/portal";
 import { WelcomePortalComponent } from "@app/modules/host/pages/welcome-portal/welcome-portal.component";
 import {CookieService} from "ngx-cookie-service";
+import {catchError} from "rxjs";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-quiz-selection',
@@ -49,7 +51,19 @@ export class QuizSelectionComponent implements OnInit,AfterViewInit {
   }
 
   getQuizzesWithRounds(): void {
-    this._quizService.getQuizzesWithRounds().subscribe((response: any): void => {
+    this._quizService.getQuizzesWithRounds()
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          console.log(JSON.stringify(error.error));
+          if (error.status != 500) {
+            this.errorMsg = error.error;
+          } else {
+            this.errorMsg = this.unexpectedErrorMsg;
+          }
+          return[];
+        })
+      )
+      .subscribe((response: any): void => {
       if ((response.status >= 200 && response.status < 300) || response.status == 304) {
         this.allQuizzes = response.body;
         this.allQuizzes.push({hostId: this.hostId, quizId: -1, title: "New quiz", rounds: [{id:"-1", roundTarget:"", quizId: "-1", forbiddenWords:[""]}]});

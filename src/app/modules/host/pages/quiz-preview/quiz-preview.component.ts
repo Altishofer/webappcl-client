@@ -11,7 +11,8 @@ import {Router} from "@angular/router";
 import {Round} from "@data/interfaces/round.model";
 import {AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {QuizWithRound} from "@data/interfaces/QuizWithRound";
-import {debounceTime, distinctUntilChanged, of, switchMap, tap} from "rxjs";
+import {catchError, debounceTime, distinctUntilChanged, of, switchMap, tap} from "rxjs";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-quiz-preview',
@@ -223,7 +224,19 @@ export class QuizPreviewComponent implements OnInit{
 
     if (this.selectedQuizId == -1) {
       this.selectedQuizId = -1;
-      this._quizService.createQuiz(quiz).subscribe((response: any): void => {
+      this._quizService.createQuiz(quiz)
+        .pipe(
+          catchError((error: HttpErrorResponse) => {
+            console.log(JSON.stringify(error.error));
+            if (error.status != 500) {
+              this.errorMsg = error.error;
+            } else {
+              this.errorMsg = this.unexpectedErrorMsg;
+            }
+            return[];
+          })
+        )
+        .subscribe((response: any): void => {
         if ((response.status >= 200 && response.status < 300) || response.status == 304) {
           this.selectedQuizRounds = response.body.rounds;
           this.selectedQuizId = response.body.quizId;
@@ -233,7 +246,19 @@ export class QuizPreviewComponent implements OnInit{
         }
       });
     } else {
-      this._quizService.updateQuiz(quiz).subscribe((response: any): void => {
+      this._quizService.updateQuiz(quiz)
+        .pipe(
+          catchError((error: HttpErrorResponse) => {
+            console.log(JSON.stringify(error.error));
+            if (error.status != 500) {
+              this.errorMsg = error.error;
+            } else {
+              this.errorMsg = this.unexpectedErrorMsg;
+            }
+            return[];
+          })
+        )
+        .subscribe((response: any): void => {
         if ((response.status >= 200 && response.status < 300) || response.status == 304) {
           this.selectedQuizRounds = response.body.rounds;
           this.unsavedChanges = false;

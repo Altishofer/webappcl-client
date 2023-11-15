@@ -4,6 +4,8 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {CookieService} from "ngx-cookie-service";
 import {HostService} from "@data/services/host.service";
 import { Options } from 'ngx-qrcode-styling';
+import {catchError} from "rxjs";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-lobby',
@@ -55,8 +57,19 @@ export class LobbyComponent {
   }
 
   getPlayers(): void {
-    this.hostService.getPlayers(this.quizId).subscribe(
-      (response: any): void => {
+    this.hostService.getPlayers(this.quizId)
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          console.log(JSON.stringify(error.error));
+          if (error.status != 500) {
+            this.errorMsg = error.error;
+          } else {
+            this.errorMsg = this.unexpectedErrorMsg;
+          }
+          return[];
+        })
+      )
+      .subscribe((response: any): void => {
         if ((response.status >= 200 && response.status < 300) || response.status == 304) {
           if (response.body.message == ""){
             this.players = [];
@@ -70,7 +83,19 @@ export class LobbyComponent {
   }
 
   getRounds(): void {
-    this.hostService.getAllRoundIdsByQuiz(this.quizId).subscribe(
+    this.hostService.getAllRoundIdsByQuiz(this.quizId)
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          console.log(JSON.stringify(error.error));
+          if (error.status != 500) {
+            this.errorMsg = error.error;
+          } else {
+            this.errorMsg = this.unexpectedErrorMsg;
+          }
+          return[];
+        })
+      )
+      .subscribe(
       (response: any): void => {
         if ((response.status >= 200 && response.status < 300) || response.status == 304) {
           this.roundIds = response.body;
@@ -114,7 +139,19 @@ export class LobbyComponent {
   }
 
   pushRound(roundId : string) {
-    this.hostService.pushRound(roundId).subscribe(
+    this.hostService.pushRound(roundId)
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          console.log(JSON.stringify(error.error));
+          if (error.status != 500) {
+            this.errorMsg = error.error;
+          } else {
+            this.errorMsg = this.unexpectedErrorMsg;
+          }
+          return[];
+        })
+      )
+      .subscribe(
       (response: any): void => {
         if ((response.status >= 200 && response.status < 300) || response.status == 304) {
         } else {
