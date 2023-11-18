@@ -5,8 +5,9 @@ import { CookieService } from "ngx-cookie-service";
 import { catchError, Observable } from "rxjs";
 import { Router } from '@angular/router';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
-import {Md5} from "ts-md5";
+import { HttpErrorResponse } from "@angular/common/http";
+import { Md5 } from "ts-md5";
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -21,8 +22,8 @@ export class LoginComponent implements OnInit{
     private hostService: HostService,
     private cookieService: CookieService,
     private router: Router,
-    private fb: FormBuilder,
-    private http: HttpClient) {
+    private fb: FormBuilder
+    ) {
 
     this.loginForm = this.fb.group({
       username: ['', [Validators.required, Validators.pattern(/^(\S){1,10}$/)]],
@@ -99,9 +100,20 @@ export class LoginComponent implements OnInit{
   }
 
   wakeUpServer() {
-    this.hostService.wakeUpServer().subscribe((response: any) => {
+    this.hostService.wakeUpServer()
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          console.log(JSON.stringify(error.error));
+          if (error.status != 500) {
+            this.errorMsg = error.error;
+          } else {
+            this.errorMsg = this.unexpectedErrorMsg;
+          }
+          return[];
+        })
+      )
+      .subscribe((response: any) => {
       console.log("Server started successfuly");
     });
   }
-
 }

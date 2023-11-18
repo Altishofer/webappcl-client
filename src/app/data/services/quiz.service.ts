@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import {environment} from "../../../environments/environment";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {CookieService} from "ngx-cookie-service";
-import {Quiz} from "@data/interfaces/quiz.model";
-import {Host} from "@data/interfaces/host.model";
 import {Observable} from "rxjs";
 import {QuizWithRound} from "@data/interfaces/QuizWithRound";
 

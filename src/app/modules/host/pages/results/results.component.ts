@@ -1,6 +1,4 @@
 import {ChangeDetectorRef, Component} from '@angular/core';
-import {Answer} from "@data/interfaces/answer.model";
-import {WaitResult} from "@data/interfaces/WaitResult.model";
 import {SignalRService} from "@data/services/SignalRService";
 import {ActivatedRoute, Router} from "@angular/router";
 import {CookieService} from "ngx-cookie-service";
@@ -100,7 +98,19 @@ export class ResultsComponent {
   }
 
   pushRound(roundId : string) {
-    this.hostService.pushRound(roundId).subscribe(
+    this.hostService.pushRound(roundId)
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          console.log(JSON.stringify(error.error));
+          if (error.status != 500) {
+            this.errorMsg = error.error;
+          } else {
+            this.errorMsg = this.unexpectedErrorMsg;
+          }
+          return[];
+        })
+      )
+      .subscribe(
       (response: any): void => {
         if ((response.status >= 200 && response.status < 300) || response.status == 304) {
           console.log("REST pushRound: ", response.body);

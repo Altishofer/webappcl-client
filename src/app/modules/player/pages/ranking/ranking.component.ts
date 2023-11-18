@@ -1,13 +1,8 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
-import {WaitResult} from "@data/interfaces/WaitResult.model";
-import {Answer} from "@data/interfaces/answer.model";
+import {Component, OnInit} from '@angular/core';
 import {SignalRService} from "@data/services/SignalRService";
-import {ActivatedRoute, CanActivate, CanActivateFn, Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {CookieService} from "ngx-cookie-service";
 import {PlayerService} from "@data/services/player.service";
-import {catchError} from "rxjs";
-import {HttpErrorResponse} from "@angular/common/http";
-import {HostService} from "@data/services/host.service";
 import {FullResult} from "@data/interfaces/FullResult";
 
 @Component({
@@ -17,7 +12,6 @@ import {FullResult} from "@data/interfaces/FullResult";
 })
 export class RankingComponent implements OnInit{
   quizId!: string;
-  nextRound: string = "";
   playerName: string = "";
   fullResults : FullResult[] = [];
   roundId : string = '';
@@ -26,8 +20,6 @@ export class RankingComponent implements OnInit{
     private signalRService: SignalRService,
     private router: Router,
     private route: ActivatedRoute,
-    private cookieService: CookieService,
-    private playerService: PlayerService
   ) {
     this.route.params.subscribe(params => {
       this.quizId = params['quizId'];

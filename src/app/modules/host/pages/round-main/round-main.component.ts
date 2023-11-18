@@ -1,13 +1,9 @@
 import {ChangeDetectorRef, Component} from '@angular/core';
 import {catchError} from "rxjs";
 import {HttpErrorResponse} from "@angular/common/http";
-import {FormArray, FormBuilder, FormGroup} from "@angular/forms";
 import {Round} from "@data/interfaces/round.model";
-import {VectorCalculationModel} from "@data/interfaces/VectorCalculation.model";
-import {Answer} from "@data/interfaces/answer.model";
 import {SignalRService} from "@data/services/SignalRService";
 import {ActivatedRoute, Router} from "@angular/router";
-import {CookieService} from "ngx-cookie-service";
 import {HostService} from "@data/services/host.service";
 import {WaitResult} from "@data/interfaces/WaitResult.model";
 

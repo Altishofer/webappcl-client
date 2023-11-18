@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 
 import {HostModule} from "@modules/host/host.module";
 import {PlayerModule} from "@modules/player/player.module";
-import {JoinComponent} from "@layout/join/join.component";
 
 const routes: Routes = [
   {
