@@ -1,0 +1,20 @@
+@import "../../shared/host.shared.css";
+
+.welcome-links {
+  color: #725947;
+  font-weight: bold;
+  text-decoration: none;
+  display: inline-block;
+  transition: color 0.5s;
+}
+
+.welcome-links:hover {
+  color: #9A4444;
+}
+
+.welcome-hr {
+  width: 400px;
+  border: none;
+  height: 3px;
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0), #4f4f4f, #51443b, #773e37, #51443b, #7b624c, #9c6c53, rgba(255, 255, 255, 0));
+}
