@@ -22,14 +22,13 @@ export class ResultsComponent {
   hostId : string = '';
   fullResults : FullResult[] = [];
   anotherRound : boolean = false;
+  podium : FullResult[] = [];
 
   constructor(
-    private cdr: ChangeDetectorRef,
     private signalRService: SignalRService,
     private router: Router,
     private route: ActivatedRoute,
     private cookieService: CookieService,
-    private playerService: PlayerService,
     private hostService : HostService
   ) {
     this.route.params.subscribe(params => {
@@ -76,10 +75,30 @@ export class ResultsComponent {
       if ((response.status >= 200 && response.status < 300) || response.status == 304) {
         this.errorMsg = '';
         this.fullResults = response.body;
+        this.constructPodium();
       } else {
         this.errorMsg = this.unexpectedErrorMsg;
       }
     });
+  }
+
+  constructPodium(){
+    this.podium = [];
+    let toPush : number[] = []
+    if(this.fullResults.length >= 3){
+      toPush = [1, 0, 2];
+    } else if (this.fullResults.length === 2){
+      toPush = [1, 0]
+    } else if (this.fullResults.length === 1){
+      toPush = [0]
+    }
+    console.log(toPush)
+    toPush.forEach((index => {
+      let checkResult : FullResult | undefined = this.fullResults.at(index);
+      if (checkResult){
+        this.podium.push(checkResult);
+      }
+    }))
   }
 
 

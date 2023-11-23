@@ -15,7 +15,7 @@
               <span *ngFor="let char of result.lastRoundAnswerTarget">{{char}}</span>
             </div>
           </div>
-          <div class="podium-base" [ngClass]="{'first': i === 1, 'second': i === 0, 'third': i === 2, 'higher' : i >= 3 }"></div>
+          <div class="podium-base" [ngClass]="{'first': i === 0, 'second': i === 1, 'third': i === 2, 'higher' : i >= 3 }"></div>
         </ng-container>
       </div>
     </div>
