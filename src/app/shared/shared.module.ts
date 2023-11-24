@@ -17,6 +17,7 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatDividerModule } from "@angular/material/divider";
 import { MatSlideToggleModule } from "@angular/material/slide-toggle";
 import { QRCodeModule } from 'angularx-qrcode';
+import { NgParticlesModule } from "ng-particles";
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { QRCodeModule } from 'angularx-qrcode';
     MatFormFieldModule,
     MatDividerModule,
     MatSlideToggleModule,
-    QRCodeModule
+    QRCodeModule,
+    NgParticlesModule
   ],
   imports: [
     CommonModule,
@@ -56,7 +58,8 @@ import { QRCodeModule } from 'angularx-qrcode';
     MatFormFieldModule,
     MatDividerModule,
     MatSlideToggleModule,
-    QRCodeModule
+    QRCodeModule,
+    NgParticlesModule
   ]
 })
 export class SharedModule { }
