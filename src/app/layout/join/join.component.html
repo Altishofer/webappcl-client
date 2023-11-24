@@ -1,5 +1,18 @@
 <div class="center">
-  <mat-card class="card-element">
+
+  <ng-particles class="fireworks" [id]="id" [options]="particlesOptions" [particlesInit]="particlesInit"></ng-particles>
+
+  <!--
+  <ng-particles
+    [id]="id"
+    [options]="particlesOptions"
+    [particlesInit]="particlesInit"
+    (particlesLoaded)="particlesLoaded($event)"
+  >
+  </ng-particles>-->
+
+
+  <!--<mat-card class="card-element">
     <mat-card-header style="display: block">
       <mat-card-title style="font-size: xx-large; margin-bottom: 20px;">Join</mat-card-title>
     </mat-card-header>
@@ -24,4 +37,5 @@
       </mat-icon>
     </button>
   </mat-card>
+  -->
 </div>

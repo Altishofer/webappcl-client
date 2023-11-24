@@ -1,5 +1,8 @@
 @import "../../modules/player/shared/player.shared.css";
 
+.center {
+  height: 500px;
+}
 mat-card-content {
   padding: 0;
 }
