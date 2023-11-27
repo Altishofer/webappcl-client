@@ -14,6 +14,9 @@ span .name {
   margin-right: 10px;
   padding: 4px 1px;
 }
+.inline {
+  display: inline-block;
+}
 .preview-accordion {
   background: none;
   justify-content: center;

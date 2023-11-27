@@ -7,13 +7,17 @@
     <button mat-mini-fab color="negative" (click)="closePreview()"><mat-icon>home</mat-icon></button>
   </div>
 
-  <div [matTooltip]="!canSaveOrStart() ? 'Some of the rounds have invalid input, please check.' : ''" matTooltipPosition="below" class="left-2nd-btn">
-    <button mat-mini-fab color="negative" style="margin-right: 10px;" (click)="openDialog()">
-      <mat-icon>remove_circle</mat-icon>
-    </button>
-    <button mat-mini-fab color="positive" [disabled]="!canSaveOrStart()" (click)="saveChanges()">
-      <mat-icon>save</mat-icon>
-    </button>
+  <div class="left-2nd-btn">
+    <div class="inline">
+      <button mat-mini-fab color="negative" style="margin-right: 10px;" (click)="openDialog()">
+        <mat-icon>remove_circle</mat-icon>
+      </button>
+    </div>
+    <div class="inline" [matTooltip]="!canSaveOrStart() ? 'Some of the rounds have invalid input, please check.' : ''" matTooltipPosition="below">
+      <button mat-mini-fab color="positive" [disabled]="!canSaveOrStart()" (click)="saveChanges()">
+        <mat-icon>save</mat-icon>
+      </button>
+    </div>
   </div>
 
   <div [matTooltip]="!canSaveOrStart() ? 'Some of the rounds have invalid input, please check.' : ''" matTooltipPosition="below" class="right-btn">

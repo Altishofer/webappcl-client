@@ -2,6 +2,9 @@
 
 .card-element {
   margin-top: 8%;
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
   padding: 20px 10%;
   background-color: transparent; /* Todo: maybe remove this, maybe keep this... */
 }

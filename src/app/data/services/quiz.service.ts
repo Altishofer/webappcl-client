@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import {environment} from "../../../environments/environment";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {CookieService} from "ngx-cookie-service";
-import {Observable} from "rxjs";
-import {QuizWithRound} from "@data/interfaces/QuizWithRound";
+import { environment} from "../../../environments/environment";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { CookieService } from "ngx-cookie-service";
+import { Observable } from "rxjs";
+import { QuizWithRound } from "@data/interfaces/QuizWithRound";
+import { Quiz } from "@data/interfaces/quiz.model";
 
 @Injectable({
   providedIn: 'root'
@@ -99,5 +100,13 @@ export class QuizService {
     });
     let body : any = JSON.stringify(quizRoundDto);
     return this.http.post(`${this.baseUrl}/CreateQuizWithRounds`, body, {observe: 'response', headers});
+  }
+
+  deleteQuiz(quiz: Quiz) {
+    const headers: HttpHeaders = new HttpHeaders({
+    'Authorization': "Bearer " + this.cookieService.get("hostToken"),
+    'Content-Type': 'application/json',
+  });
+    return this.http.delete(`${this.baseUrl}/DeleteCompleteQuiz/${quiz.id}`, {observe: 'response', headers});
   }
 }

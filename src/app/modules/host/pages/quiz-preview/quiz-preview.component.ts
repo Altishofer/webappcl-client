@@ -291,8 +291,10 @@ export class QuizPreviewComponent implements OnInit{
       }
     });
 
-    dialogRef.afterClosed().subscribe(() => {
-      console.log('The dialog was closed');
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.closePreview();
+      }
     });
   }
 }
