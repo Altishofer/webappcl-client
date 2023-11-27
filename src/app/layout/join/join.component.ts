@@ -3,8 +3,8 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { CookieService } from "ngx-cookie-service";
 import { Router } from "@angular/router";
 import { MoveDirection, ClickMode, HoverMode, OutMode, Container, Engine, tsParticles } from "tsparticles-engine";
-import { loadSlim } from "tsparticles-slim";
-import {loadFireworksPreset} from "tsparticles-preset-fireworks";
+import { loadFull } from "tsparticles";
+import { loadFireworksPreset } from "tsparticles-preset-fireworks";
 
 @Component({
   selector: 'app-join',
