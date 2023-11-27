@@ -13,6 +13,8 @@ import {AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validat
 import {QuizWithRound} from "@data/interfaces/QuizWithRound";
 import {catchError, debounceTime, distinctUntilChanged, of, switchMap, tap} from "rxjs";
 import {HttpErrorResponse} from "@angular/common/http";
+import {MatDialog} from "@angular/material/dialog";
+import {DeleteDialogComponent} from "@layout/delete-dialog/delete-dialog.component";
 
 @Component({
   selector: 'app-quiz-preview',
@@ -40,6 +42,7 @@ export class QuizPreviewComponent implements OnInit{
   constructor(
       private fb: FormBuilder,
       private _quizService: QuizService,
+      private _dialog: MatDialog
   ) {
     this.addFieldDisabled = true;
     this.forbiddenWordsForm = this.fb.group({});
@@ -90,7 +93,6 @@ export class QuizPreviewComponent implements OnInit{
     this.addFieldDisabled = true;
   }
 
-
   allIndexWordNonEmpty(roundId: string): boolean {
     const formArray: FormArray<any> = this.forbiddenWordsForm.get(roundId) as FormArray;
     if (formArray) {
@@ -128,7 +130,6 @@ export class QuizPreviewComponent implements OnInit{
   invalidTargetInput(roundId: string) : boolean {
     return this.targetWordForm.get(roundId)?.get('isValidated')?.value == false;
   }
-
 
   removeField(roundId : string, index: number) : void {
     const formArray: FormArray<any> = this.forbiddenWordsForm.get(roundId) as FormArray;
@@ -279,5 +280,19 @@ export class QuizPreviewComponent implements OnInit{
       this.selectedQuizTitle = 'Edit Title';
       event.target.textContent = this.selectedQuizTitle;
     }
+  }
+
+  openDialog(): void {
+    const dialogRef = this._dialog.open(DeleteDialogComponent, {
+      data: {
+        id : this.selectedQuizId,
+        hostId : this.selectedHostId,
+        title : this.selectedQuizTitle
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      console.log('The dialog was closed');
+    });
   }
 }

@@ -1,0 +1,18 @@
+<div class="dialog-grid">
+  <h2 mat-dialog-title class="header-grid" cdkFocusInitial>{{data.title}}</h2>
+  <div mat-dialog-content class="text-grid">
+    <p class="custom-paragraph">Delete this quiz?</p>
+  </div>
+  <div mat-dialog-actions class="nested-btn-grid">
+    <div class="btn-left-grid">
+      <button mat-mini-fab color="negative" (click)="onNoClick()">
+        <mat-icon>keyboard_backspace</mat-icon>
+      </button>
+    </div>
+    <div class="btn-right-grid">
+      <button mat-mini-fab color="positive" (click)="onYesClick()">
+        <mat-icon>check</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>

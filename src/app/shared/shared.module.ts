@@ -14,6 +14,7 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 import { FlexModule } from "@angular/flex-layout";
 import { MatCardModule } from "@angular/material/card";
 import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatDialogModule } from "@angular/material/dialog";
 import { MatDividerModule } from "@angular/material/divider";
 import { MatSlideToggleModule } from "@angular/material/slide-toggle";
 import { QRCodeModule } from 'angularx-qrcode';
@@ -35,6 +36,7 @@ import { NgParticlesModule } from "ng-particles";
     FlexLayoutModule,
     MatInputModule,
     MatCardModule,
+    MatDialogModule,
     MatFormFieldModule,
     MatDividerModule,
     MatSlideToggleModule,
@@ -55,6 +57,7 @@ import { NgParticlesModule } from "ng-particles";
     FlexModule,
     MatInputModule,
     MatCardModule,
+    MatDialogModule,
     MatFormFieldModule,
     MatDividerModule,
     MatSlideToggleModule,

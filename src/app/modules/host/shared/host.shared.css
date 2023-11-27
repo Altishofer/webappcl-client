@@ -22,6 +22,7 @@
   justify-content: end;
 }
 .left-2nd-btn {
+  display: inline-block;
   grid-column: 1;
   grid-row: 2;
   text-align: center;

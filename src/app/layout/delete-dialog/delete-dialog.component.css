@@ -1,0 +1,53 @@
+@import "../../modules/shared/modules.shared.css";
+
+/* OVERRIDE */
+.mat-positive {
+  background-color: darkolivegreen;
+  color: white;
+}
+.custom-paragraph {
+  font-size: large;
+  color: var(--mdc-dialog-subhead-color);
+}
+.dialog-grid {
+  display: grid;
+  grid-template: auto auto auto / 100%;
+  grid-gap: 0;
+  justify-content: center;
+  text-align: center;
+  align-content: center;
+  padding: 10px 20px 20px 20px;
+}
+.header-grid {
+  display: inline-block;
+  grid-row: 1;
+  grid-column: 1;
+  text-align: center;
+  margin-bottom: 10px;
+}
+.text-grid {
+  display: inline-block;
+  grid-row: 2;
+  grid-column: 1;
+  text-align: center;
+}
+.nested-btn-grid {
+  grid-row: 3;
+  grid-column: 1;
+  display: grid;
+  grid-template: auto / 50% 50%;
+  grid-gap: 0;
+  justify-content: center;
+  text-align: center;
+  align-content: center;
+}
+.btn-left-grid {
+  display: inline-block;
+  grid-row: 1;
+  grid-column: 1;
+}
+.btn-right-grid {
+  display: inline-block;
+  grid-row: 1;
+  grid-column: 2;
+}
