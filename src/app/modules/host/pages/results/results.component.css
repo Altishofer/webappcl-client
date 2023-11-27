@@ -1,7 +1,9 @@
 @import "../../shared/host.shared.css";
 
 .card-element {
+  margin-top: 8%;
   padding: 20px 10%;
+  background-color: transparent; /* Todo: maybe remove this, maybe keep this... */
 }
 .btn-block {
   width: 20%;

@@ -7,6 +7,8 @@ import {HostService} from "@data/services/host.service";
 import {catchError} from "rxjs";
 import {HttpErrorResponse} from "@angular/common/http";
 import {FullResult} from "@data/interfaces/FullResult";
+import {Engine} from "tsparticles-engine";
+import {loadFireworksPreset} from "tsparticles-preset-fireworks";
 
 @Component({
   selector: 'app-results',
@@ -49,6 +51,25 @@ export class ResultsComponent {
     this.getIntermediateResult();
   }
 
+  id: string = "firework-stuff";
+
+  particlesOptions = {
+    preset: "fireworks",
+    background: {
+      opacity: 0
+    },
+    particles: {
+      move: {
+        trail: {
+          enable: false
+        }
+      }
+    }
+  };
+
+  async particlesInit(engine: Engine): Promise<void> {
+    await loadFireworksPreset(engine);
+  }
 
   registerListeners(): void {
     this.signalRService.setReceiveRoundListener((round: string) => {

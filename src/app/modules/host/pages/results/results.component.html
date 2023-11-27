@@ -21,3 +21,9 @@
     <button mat-raised-button color="positive" class="btn-block" *ngIf="!anotherRound" (click)="returnToHome()">Return Home</button>
   </mat-card>
 </div>
+<ng-particles *ngIf="!anotherRound"
+              [id]="id"
+              [options]="particlesOptions"
+              [particlesInit]="particlesInit"
+>
+</ng-particles>

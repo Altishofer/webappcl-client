@@ -17,6 +17,16 @@ export class JoinComponent {
 
   particlesOptions = {
     preset: "fireworks",
+    background: {
+      opacity: 0
+    },
+    particles: {
+      move: {
+        trail: {
+          enable: false
+        }
+      }
+    }
   };
 
   async particlesInit(engine: Engine): Promise<void> {

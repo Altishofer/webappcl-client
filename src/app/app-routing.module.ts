@@ -16,6 +16,9 @@ const routes: Routes = [
     component: JoinComponent
   },
   {
+    path: 'join/:quizId', redirectTo: 'player/register/:quizId'
+  },
+  {
     path: 'host',
     loadChildren: () => import('@modules/host/host.module').then((m):typeof HostModule => m.HostModule)
   },
