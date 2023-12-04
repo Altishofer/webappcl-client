@@ -1,4 +1,11 @@
 <!-- src/app/login/login.component.html -->
+<ng-particles
+  [id]="id"
+  [options]="particlesOptions"
+  [particlesInit]="particlesInit"
+  (particlesLoaded)="particlesLoaded($event)"
+></ng-particles>
+
 <div class="center">
   <mat-card class="card-element">
     <mat-card-header class="login-header">

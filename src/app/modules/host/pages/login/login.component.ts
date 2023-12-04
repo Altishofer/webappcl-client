@@ -7,6 +7,8 @@ import { Router } from '@angular/router';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { HttpErrorResponse } from "@angular/common/http";
 import { Md5 } from "ts-md5";
+import {ClickMode, Container, Engine, HoverMode, MoveDirection, OutMode} from "tsparticles-engine";
+import {loadSlim} from "tsparticles-slim";
 
 @Component({
   selector: 'app-login',
@@ -115,5 +117,86 @@ export class LoginComponent implements OnInit{
       .subscribe((response: any) => {
       console.log("Server started successfuly");
     });
+  }
+
+
+  //tsParticles definition
+  id = "tsparticles-overlay";
+
+  particlesOptions = {
+    background: {
+      opacity: 0
+    },
+    fpsLimit: 60,
+    interactivity: {
+      events: {
+        onClick: {
+          enable: false,
+          mode: ClickMode.push,
+        },
+        onHover: {
+          enable: true,
+          mode: HoverMode.repulse,
+        },
+        resize: true,
+      },
+      modes: {
+        push: {
+          quantity: 4,
+        },
+        repulse: {
+          distance: 200,
+          duration: 0.4,
+        },
+      },
+    },
+    particles: {
+      color: {
+        value: "#ffffff"
+      },
+      links: {
+        color: "#ffffff",
+        distance: 150,
+        enable: true,
+        opacity: 0.3,
+        width: 1,
+      },
+      move: {
+        direction: MoveDirection.none,
+        enable: true,
+        outModes: {
+          default: OutMode.bounce,
+        },
+        random: true,
+        speed: {min: 1, max: 6},
+        straight: false,
+      },
+      number: {
+        density: {
+          enable: true,
+          area: 800,
+        },
+        value: 50,
+      },
+      opacity: {
+        value: 0.4,
+      },
+      shape: {
+        type: "circle",
+      },
+      size: {
+        value: { min: 1, max: 5 },
+      },
+    },
+    detectRetina: true,
+  };
+
+  particlesLoaded(container: Container): void {
+    console.log(container);
+  }
+
+  async particlesInit(engine: Engine): Promise<void> {
+    console.log(engine);
+    await loadSlim(engine);
   }
 }
