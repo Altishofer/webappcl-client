@@ -274,7 +274,7 @@ export class QuizPreviewComponent implements OnInit{
 
   saveTitle(event: any) {
     const title = event.target?.textContent;
-    if (title && !/\s/.test(title)) {
+    if (title) {
       this.selectedQuizTitle = title;
     } else {
       this.selectedQuizTitle = 'Edit Title';

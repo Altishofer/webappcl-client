@@ -1,6 +1,13 @@
 <div class="portal-grid">
   <div class="h2-grid">
-    <h2 class="editable-title"  contenteditable="true" (blur)="saveTitle($event)">{{selectedQuizTitle}}</h2>
+    <h2 class="editable-title"
+        contenteditable="true"
+        (blur)="saveTitle($event)"
+        matTooltip="👈 click in title to personalize it!"
+        matTooltipPosition="right"
+        [matTooltipDisabled]="selectedQuizId !== -1"
+    >
+      {{selectedQuizTitle}}</h2>
   </div>
 
   <div class="left-btn">
