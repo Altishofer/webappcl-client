@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit{
     ) {
 
     this.loginForm = this.fb.group({
-      username: ['', [Validators.required, Validators.pattern(/^(\S){1,10}$/)]],
+      username: ['', [Validators.required, Validators.pattern(/^(\S){1,10}$/), Validators.maxLength(10)]],
       password: ['', [Validators.required, Validators.pattern(/^(\S){1,50}$/)]]
     });
 

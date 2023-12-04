@@ -17,6 +17,7 @@
           <mat-form-field class="login-input">
             <mat-label>Username</mat-label>
             <input matInput formControlName="username">
+            <mat-hint *ngIf='loginForm.get("username")?.hasError("maxlength")' style="color: red">Username is over 10 characters long!</mat-hint>
           </mat-form-field>
         </div>
 

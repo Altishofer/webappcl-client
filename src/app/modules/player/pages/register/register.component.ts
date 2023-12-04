@@ -25,7 +25,7 @@ export class RegisterComponent {
       private fb: FormBuilder,
       private route: ActivatedRoute) {
       this.playerRegForm = this.fb.group({
-      username: ['', [Validators.required, Validators.pattern(/^(\S){1,50}$/)]]});
+      username: ['', [Validators.required, Validators.pattern(/^(\S){1,50}$/), Validators.maxLength(10)]]});
     this.route.params.subscribe(params => {
       this.quizId = params['quizId'];
       this.player.QuizId = this.quizId;
