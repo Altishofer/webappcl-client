@@ -63,8 +63,48 @@ export class ResultsComponent {
         trail: {
           enable: false
         }
+      },
+      number: {
+        value: 0
       }
-    }
+    },
+    pauseOnOutsideViewport: true,
+    emitters: [{
+      life: {
+        count: 0,
+        duration: {
+          min: 0.1,
+          max: 0.2
+        },
+        delay: {
+          min: 0.9,
+          max: 1.3
+        }
+      },
+      position: {
+        x: 25,
+        y: 100
+      },
+      direction: "top"
+    },
+    {
+      life: {
+        count: 0,
+        duration: {
+          min: 0.1,
+          max: 0.2
+        },
+        delay: {
+          min: 1,
+          max: 1.5
+        }
+      },
+      position: {
+        x: 75,
+        y: 100
+      },
+      direction: "top"
+    }]
   };
 
   async particlesInit(engine: Engine): Promise<void> {
