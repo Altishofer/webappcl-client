@@ -17,6 +17,7 @@ export class RegisterComponent {
   errorMsg : string = '';
   playerRegForm: FormGroup;
   unexpectedErrorMsg : string = "An unexpected error occurred."
+  statusCodeZero: string = "The server cannot be reached, please try again later."
   quizId: string = '';
   constructor(
       private playerService: PlayerService,
@@ -56,9 +57,12 @@ export class RegisterComponent {
       .pipe(
         catchError((error: HttpErrorResponse) => {
           console.log(JSON.stringify(error.error));
-          if (error.status != 500) {
-            this.errorMsg = error.error;
-          } else {
+          if (error.status === 0 && error.error instanceof ProgressEvent) {
+            this.errorMsg = this.statusCodeZero;
+          } else if (error.status != 500) {
+            this.errorMsg = JSON.stringify(error.error).replaceAll('"', '');
+          }
+          else {
             this.errorMsg = this.unexpectedErrorMsg;
           }
           return[];

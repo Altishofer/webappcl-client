@@ -1,6 +1,8 @@
 @import "../../shared/host.shared.css";
 
 .login-message {
+  font-size: large;
+  color: #333333;
   text-align: center;
   padding-top: 20px;
 }

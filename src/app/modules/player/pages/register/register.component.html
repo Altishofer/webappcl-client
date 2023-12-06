@@ -15,11 +15,11 @@
           <mat-hint *ngIf='playerRegForm.get("username")?.hasError("maxlength")' style="color: red">Username is over 10 characters long!</mat-hint>
         </mat-form-field>
 
-        <ng-template [ngIf]="errorMsg">
-          <p class="error-message">
-            {{ errorMsg }}
-          </p>
-        </ng-template>
+
+        <mat-error *ngIf="errorMsg" class="error-message">
+          <b>Registration failed</b><br>
+          {{ errorMsg }}
+        </mat-error>
       </mat-card-content>
     </form>
     <button mat-fab color="positive" class="btn-block" routerLinkActive="active" (click)="doRegister()" [disabled]="playerRegForm.invalid">

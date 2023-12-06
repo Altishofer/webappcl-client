@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit{
   loginForm: FormGroup;
   isLogin: boolean = true;
   unexpectedErrorMsg : string = "An unexpected error occurred."
+  statusCodeZero: string = "The server cannot be reached, please try again later."
   constructor(
     private hostService: HostService,
     private cookieService: CookieService,
@@ -80,10 +81,13 @@ export class LoginComponent implements OnInit{
     serviceMethod(this.host)
       .pipe(
         catchError((error: HttpErrorResponse) => {
-          console.log(JSON.stringify(error.error));
-          if (error.status != 500) {
-            this.errorMsg = error.error;
-          } else {
+          if (error.status === 0 && error.error instanceof ProgressEvent) {
+            this.errorMsg = this.statusCodeZero;
+          } else if (error.status === 401) {
+            this.errorMsg = JSON.stringify(error.error).replaceAll('"', '') + ".";
+          }
+          else {
+            console.log(error.status)
             this.errorMsg = this.unexpectedErrorMsg;
           }
           return[];
@@ -105,9 +109,8 @@ export class LoginComponent implements OnInit{
     this.hostService.wakeUpServer()
       .pipe(
         catchError((error: HttpErrorResponse) => {
-          console.log(JSON.stringify(error.error));
-          if (error.status != 500) {
-            this.errorMsg = error.error;
+          if (error.status === 0 && error.error instanceof ProgressEvent) {
+            this.errorMsg = this.statusCodeZero;
           } else {
             this.errorMsg = this.unexpectedErrorMsg;
           }
@@ -115,7 +118,7 @@ export class LoginComponent implements OnInit{
         })
       )
       .subscribe((response: any) => {
-      console.log("Server started successfuly");
+      console.log("Server started");
     });
   }
 
@@ -191,12 +194,9 @@ export class LoginComponent implements OnInit{
     detectRetina: true,
   };
 
-  particlesLoaded(container: Container): void {
-    console.log(container);
-  }
+  particlesLoaded(container: Container): void {}
 
   async particlesInit(engine: Engine): Promise<void> {
-    console.log(engine);
     await loadSlim(engine);
   }
 }

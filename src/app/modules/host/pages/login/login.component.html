@@ -29,16 +29,22 @@
         </div>
 
         <div>
-          <p *ngIf="errorMsg" class="error-message">
+          <mat-error *ngIf="errorMsg" class="error-message">
+            <b>{{ isLogin ? 'Login' : 'Registration' }} failed</b><br>
             {{ errorMsg }}
-          </p>
+          </mat-error>
         </div>
       </mat-card-content>
       <button mat-raised-button color="positive" class="btn-block" routerLinkActive="active" [disabled]="loginForm.invalid" (click)="doAction()">
         {{ isLogin ? 'Sign In' : 'Register' }}
       </button>
+
       <mat-divider class="common-divider"></mat-divider>
-      <p class="login-message">{{ isLogin ? 'No account yet?' : 'Already have an account?' }}</p>
+
+      <p class="login-message">
+        {{ isLogin ? 'No account yet?' : 'Already have an account?' }}
+      </p>
+
       <button mat-raised-button color="positive" class="btn-block" (click)="toggleForm();">
         {{ isLogin ? 'Register' : 'Sign In' }}
       </button>
