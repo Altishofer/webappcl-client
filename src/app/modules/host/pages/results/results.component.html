@@ -9,13 +9,13 @@
             <div class="podium-base" [ngClass]="this.podium.length === 3 ? (i == 0 ? 'second' : (i == 1 ? 'first' : 'third')) : this.podium.length === 2 ? (i == 0 ? 'second' : 'first') : 'first'">
               <div class="rank-label" [ngClass]="this.podium.length === 3 ? (i == 0 ? 'second' : (i == 1 ? 'first' : 'third')) : this.podium.length === 2 ? (i == 0 ? 'second' : 'first') : 'first'">
                 <div class="podium-rank">
-                  {{this.podium.length === 3 ? (i == 0 ? 2 : (i == 1 ? 1 : 2)) : this.podium.length === 2 ? (i == 0 ? 2 : 1) : 1}}
+                  {{this.podium.length === 3 ? (i == 0 ? 2 : (i == 1 ? 1 : 3)) : this.podium.length === 2 ? (i == 0 ? 2 : 1) : 1}}
                 </div>
               </div>
             </div>
 
             <div class="podium-info">
-              <div class="podium-total-points">{{result.totalPoints - result.lastRoundPoints}} (+ {{result.lastRoundPoints}})</div>
+              <div class="podium-total-points"><b>{{result.totalPoints}}</b> (+{{result.lastRoundPoints}})</div>
               <div class="podium-round-result">
                 <span *ngFor="let char of result.lastRoundAnswerTarget">{{char}}</span>
               </div>
