@@ -9,5 +9,21 @@
   background-color: transparent; /* Todo: maybe remove this, maybe keep this... */
 }
 .btn-block {
-  width: 20%;
+  width: fit-content;
 }
+.rank-label {
+  margin: 8px auto 0;
+  width: fit-content;
+  padding: 0 10px 2px 10px;
+  border-radius: 20px;
+}
+.rank-label.first {
+  background: gold;
+}
+.rank-label.second {
+  background: silver;
+}
+.rank-label.third {
+  background: #CD7F32;
+}
+

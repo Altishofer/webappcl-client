@@ -282,6 +282,7 @@ mat-card-content {
   border: 1px solid #cccccc;
   padding: 10px;
   margin-bottom: 10px;
+  margin-top: 10px;
 }
 .podium-rank {
   font-size: 24px;
@@ -299,15 +300,15 @@ mat-card-content {
   width: 100px;
 }
 
-.first {
+.podium-base.first {
   height: 150px;
-  background-image: linear-gradient(to bottom,#773e37, #7b624c);
+  background-image: linear-gradient(to bottom, #773e37, #7b624c);
 }
-.second {
+.podium-base.second {
   height: 100px;
   background-image: linear-gradient(to bottom, #b08e73, #7b624c);
 }
-.third {
+.podium-base.third {
   height: 50px;
   background-image: linear-gradient(to bottom, #e3d3c3, #a87d5b);
 }
