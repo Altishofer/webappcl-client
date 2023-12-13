@@ -14,12 +14,12 @@
               </div>
             </div>
 
-            <div class="podium-info">
+            <mat-card class="podium-info">
               <div class="podium-total-points"><b>{{result.totalPoints}}</b> (+{{result.lastRoundPoints}})</div>
               <div class="podium-round-result">
                 <span *ngFor="let char of result.lastRoundAnswerTarget">{{char}}</span>
               </div>
-            </div>
+            </mat-card>
           </ng-container>
         </div>
       </div>
