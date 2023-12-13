@@ -20,32 +20,26 @@
   font-size: large;
   text-align: center;
 }
-
 .player-list-container {
     display: flex;
     justify-content: space-around;
     width: 100%;
     margin-top: 20px;
 }
-
 .player-list {
     flex: 1;
     text-align: center;
 }
-
 .list-title {
     font-weight: bold;
     margin-bottom: 10px;
 }
-
 .player-name {
     margin: 2px;
 }
-
 .answered-list {
     border-right: 2px solid #ccc;
 }
-
 .unanswered-list {
     padding-left: 20px;
 }

@@ -105,17 +105,6 @@
   margin: 5px 0 5px 0;
 }
 
-.honey-player {
-  display: inline-block;
-  background-color: rgb(228, 176, 118);
-  font-size: 105%;
-  font-weight: bold;
-  color: black;
-  padding: 10px 20px;
-  margin: 5px;
-  border-radius: 8px;
-}
-
 @keyframes lightWiggle {
   0% {
     rotate: -2deg;

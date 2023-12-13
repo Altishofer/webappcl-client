@@ -7,15 +7,23 @@
     <div class="podium" *ngIf="fullResults.length > 0">
       <div class="podium-step" *ngFor="let result of fullResults; let i = index">
         <ng-container *ngIf="result.playerName == playerName">
+          <div class="podium-player honey-player">{{result.playerName}}</div>
+
+          <div class="podium-base" [ngClass]="{'first': i === 0, 'second': i === 1, 'third': i === 2, 'higher' : i >= 3 }">
+            <div class="rank-label" [ngClass]="{'first': i === 0, 'second': i === 1, 'third': i === 2, 'higher' : i >= 3 }">
+              <div class="podium-rank">
+                {{i+1}}
+              </div>
+            </div>
+          </div>
+
           <div class="podium-info">
-            <div class="podium-rank">{{i+1}}</div>
-            <div class="podium-player">{{result.playerName}}</div>
-            <div class="podium-total-points">{{result.totalPoints - result.lastRoundPoints}} (+ {{result.lastRoundPoints}})</div>
+            <div class="podium-total-points"><b>{{result.totalPoints}}</b> (+ {{result.lastRoundPoints}})</div>
             <div class="podium-round-result">
               <span *ngFor="let char of result.lastRoundAnswerTarget">{{char}}</span>
             </div>
           </div>
-          <div class="podium-base" [ngClass]="{'first': i === 0, 'second': i === 1, 'third': i === 2, 'higher' : i >= 3 }"></div>
+
         </ng-container>
       </div>
     </div>
