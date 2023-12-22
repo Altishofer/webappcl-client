@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 import { VectorCalculationModel } from '@data/interfaces/VectorCalculation.model';
 import { ActivatedRoute, Router } from "@angular/router";
@@ -16,7 +16,7 @@ import { QuizService } from "@data/services/quiz.service";
   styleUrls: ['./word-calc.component.css']
 })
 
-export class WordCalcComponent{
+export class WordCalcComponent implements OnInit {
   wordCalcForm: FormGroup;
   wordsArray: FormArray;
   addFieldDisabled : boolean;
