@@ -39,7 +39,8 @@
   margin-top: 8px;
   grid-column: 1;
   grid-row: 1;
-  text-align: center;
+  text-align: left;
+  margin-left: 1%;
 }
 .word-calc-input {
   font-size: large;
@@ -57,8 +58,9 @@
   grid-column: 2;
   grid-row: 1;
   width: fit-content;
-  margin: 8px 2px 0 95%;
+  margin: 8px auto 0 94%;
   justify-content: right;
+  text-align: right;
   float: right;
   padding: 0;
 }
