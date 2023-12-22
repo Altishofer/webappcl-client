@@ -4,7 +4,7 @@
       <div class="podium" *ngIf="podium.length > 0">
         <div class="podium-step" *ngFor="let result of podium; let i = index">
           <ng-container *ngIf="i<=2">
-            <div class="podium-player honey-player">{{result.playerName}}</div>
+            <div class="podium-player podest-player">{{result.playerName}}</div>
 
             <div class="podium-base" [ngClass]="this.podium.length === 3 ? (i == 0 ? 'second' : (i == 1 ? 'first' : 'third')) : this.podium.length === 2 ? (i == 0 ? 'second' : 'first') : 'first'">
               <div class="rank-label" [ngClass]="this.podium.length === 3 ? (i == 0 ? 'second' : (i == 1 ? 'first' : 'third')) : this.podium.length === 2 ? (i == 0 ? 'second' : 'first') : 'first'">
