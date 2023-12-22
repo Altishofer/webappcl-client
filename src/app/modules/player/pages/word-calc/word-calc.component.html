@@ -9,8 +9,13 @@
         <ng-template ngFor let-word [ngForOf]="wordsArray.controls"
                      let-position = "index">
           <div class="word-calc-field" [formGroupName]="position">
-            <div class="word-calc-switch" style="display: block; align-items: center;">
-              <mat-slide-toggle color="accent" (change)="changeSubtract(position, $event)" formControlName="isSubtracted"></mat-slide-toggle>
+            <div class="word-calc-switch">
+              <ng-toggle formControlName="isSubtracted"
+                         [value]="false"
+                         [labels]="{checked: '-', unchecked: '+'}"
+                         [color]="{unchecked: 'darkolivegreen', checked: '#9A4444'}"
+                         (change)="changeSubtract(position, $event)"
+              ></ng-toggle>
             </div>
 
             <div class="word-calc-input-field">

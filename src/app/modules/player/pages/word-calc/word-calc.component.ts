@@ -163,8 +163,8 @@ export class WordCalcComponent{
     this.addFieldDisabled = this.allIndexWordNonEmpty();
   }
 
-  changeSubtract(index: number, event: MatSlideToggleChange) : void {
-    this.wordsArray.at(index).get('isSubtracted')?.setValue(event.checked);
+  changeSubtract(index: number, event: Event) : void {
+    this.wordsArray.at(index).get('isSubtracted')?.setValue((event.target as HTMLInputElement).value);
 
     //const wordGroup : AbstractControl<any, any> = this.wordsArray.at(index);
     //if (wordGroup) {

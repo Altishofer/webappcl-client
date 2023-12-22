@@ -194,11 +194,11 @@ export class QuizSelectionComponent implements OnInit,AfterViewInit {
   };
 
   particlesLoaded(container: Container): void {
-    console.log(container);
+    console.log("particle container loaded.");
   }
 
   async particlesInit(engine: Engine): Promise<void> {
-    console.log(engine);
+    console.log("particle engine loaded.");
     await loadSlim(engine);
   }
 }

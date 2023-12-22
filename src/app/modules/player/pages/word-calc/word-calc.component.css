@@ -39,6 +39,7 @@
   margin-top: 8px;
   grid-column: 1;
   grid-row: 1;
+  text-align: center;
 }
 .word-calc-input {
   font-size: large;
