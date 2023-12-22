@@ -81,7 +81,7 @@
   border-radius: 12px;
   margin-bottom: 20px;
   padding: 5px;
-  background-color: #e4b076;
+  background-color: white;
 }
 .link-element {
   border-top-right-radius: 0;
@@ -91,6 +91,7 @@
 }
 .lobby-code {
   color: #9A4444;
+  font-weight: bold;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
   padding-left: 0;

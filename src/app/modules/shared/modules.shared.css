@@ -298,16 +298,16 @@ mat-card-content {
   border-radius: 20px;
 }
 .rank-label.first {
-  background: gold;
+  background: rgba(255, 255, 255, 0.6);;
 }
 .rank-label.second {
-  background: silver;
+  background: rgba(255, 255, 255, 0.6);;
 }
 .rank-label.third {
-  background: #CD7F32;
+  background: rgba(255, 255, 255, 0.6);;
 }
 .rank-label.higher {
-  background: #333333;
+  background: rgba(255, 255, 255, 0.6);;
   color: whitesmoke;
   height: fit-content;
 }
@@ -367,13 +367,19 @@ mat-card-content {
 .para-big {
   font-size: x-large;
 }
-.honey-player {
+
+.honey-player, .podest-player {
   display: inline-block;
-  background-color: rgb(228, 176, 118);
-  font-size: 105%;
+  background-color: #47526f;
+  color:white;
+  font-size: 120%;
   font-weight: bold;
-  color: black;
   padding: 10px 20px;
   margin: 5px;
   border-radius: 8px;
 }
+
+.podest-player {
+  background-color: transparent;
+}
+

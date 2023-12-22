@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {catchError} from "rxjs";
 import {HttpErrorResponse} from "@angular/common/http";
 import {Round} from "@data/interfaces/round.model";
@@ -12,7 +12,7 @@ import {WaitResult} from "@data/interfaces/WaitResult.model";
   templateUrl: './round-main.component.html',
   styleUrls: ['./round-main.component.css']
 })
-export class RoundMainComponent {
+export class RoundMainComponent implements OnInit{
   quizId : string = '';
   roundId : string = '';
   playerName : string = '';
@@ -57,11 +57,13 @@ export class RoundMainComponent {
     this.signalRService.startConnection().then(() => {
       this.registerToGroup();
       this.registerListeners();
+      if (this.remainingTime === 60) {
+        this.startTimer();
+      }
     }).catch(error => {
       console.error("SignalR connection error:", error);
     });
     this.getWaitResult();
-    this.startTimer();
   }
 
   startTimer() {
