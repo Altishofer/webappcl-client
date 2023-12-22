@@ -16,7 +16,6 @@ import { MatCardModule } from "@angular/material/card";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatDialogModule } from "@angular/material/dialog";
 import { MatDividerModule } from "@angular/material/divider";
-import { MatSlideToggleModule } from "@angular/material/slide-toggle";
 import { QRCodeModule } from 'angularx-qrcode';
 import { NgParticlesModule } from "ng-particles";
 import { NgToggleModule } from "ng-toggle-button";
@@ -40,7 +39,6 @@ import { NgToggleModule } from "ng-toggle-button";
     MatDialogModule,
     MatFormFieldModule,
     MatDividerModule,
-    MatSlideToggleModule,
     QRCodeModule,
     NgParticlesModule,
     NgToggleModule
@@ -62,7 +60,6 @@ import { NgToggleModule } from "ng-toggle-button";
     MatDialogModule,
     MatFormFieldModule,
     MatDividerModule,
-    MatSlideToggleModule,
     QRCodeModule,
     NgParticlesModule,
     NgToggleModule

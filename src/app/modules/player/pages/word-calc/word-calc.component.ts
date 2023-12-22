@@ -1,26 +1,14 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, FormArray, AbstractControl, FormControl, Validators} from '@angular/forms';
-import { MatSlideToggleChange } from '@angular/material/slide-toggle';
+import { ChangeDetectorRef, Component } from '@angular/core';
+import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 import { VectorCalculationModel } from '@data/interfaces/VectorCalculation.model';
-import {ActivatedRoute, Router} from "@angular/router";
-import {SignalRService} from "@data/services/SignalRService";
-import {CookieService} from "ngx-cookie-service";
-import {PlayerService} from "@data/services/player.service";
-import {Round} from "@data/interfaces/round.model";
-import {
-  BehaviorSubject,
-  catchError,
-  debounceTime,
-  distinctUntilChanged,
-  map,
-  Observable, of,
-  switchMap, tap,
-  window
-} from "rxjs";
-import {Answer} from "@data/interfaces/answer.model";
-import {HttpErrorResponse} from "@angular/common/http";
-import {HostService} from "@data/services/host.service";
-import {QuizService} from "@data/services/quiz.service";
+import { ActivatedRoute, Router } from "@angular/router";
+import { SignalRService } from "@data/services/SignalRService";
+import { CookieService } from "ngx-cookie-service";
+import { PlayerService } from "@data/services/player.service";
+import { catchError, debounceTime, distinctUntilChanged, of, switchMap, tap } from "rxjs";
+import { Answer } from "@data/interfaces/answer.model";
+import { HttpErrorResponse } from "@angular/common/http";
+import { QuizService } from "@data/services/quiz.service";
 
 @Component({
   selector: 'app-word-calc',

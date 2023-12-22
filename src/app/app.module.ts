@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreModule } from '@core/core.module';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { NgxQrcodeStylingModule } from 'ngx-qrcode-styling';
 
 import { JoinComponent } from '@layout/join/join.component';
@@ -24,7 +23,6 @@ import { CommonModule } from '@angular/common';
     FooterComponent
   ],
   imports: [
-    MatSlideToggleModule,
     CommonModule,
     BrowserModule,
     AppRoutingModule,
