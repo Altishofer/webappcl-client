@@ -6,7 +6,7 @@ import {LoginComponent} from "@modules/host/pages/login/login.component";
 import {LobbyComponent} from "@modules/host/pages/lobby/lobby.component";
 import {RoundMainComponent} from "@modules/host/pages/round-main/round-main.component";
 import {ResultsComponent} from "@modules/host/pages/results/results.component";
-import {authenticationGuard, loggedInGuard} from "@data/guards/authentication.guard";
+import {authGuard, loggedInGuard} from "@data/guards/authentication.guard";
 
 const routes: Routes = [
   {
@@ -22,27 +22,27 @@ const routes: Routes = [
   {
     path:':hostId/selection',
     component:QuizSelectionComponent,
-    canActivate: [authenticationGuard]
+    canActivate: [authGuard]
   },
   {
     path:':hostId/lobby/:quizId',
     component: LobbyComponent,
-    canActivate: [authenticationGuard]
+    canActivate: [authGuard]
   },
   {
     path:':hostId/round/:quizId/:roundId',
     component: RoundMainComponent,
-    canActivate: [authenticationGuard]
+    canActivate: [authGuard]
   },
   {
     path:':hostId/results/:quizId/:roundId',
     component: ResultsComponent,
-    canActivate: [authenticationGuard]
+    canActivate: [authGuard]
   },
   {
     path:':hostId/results/:quizId',
     component: ResultsComponent,
-    canActivate: [authenticationGuard]
+    canActivate: [authGuard]
   }
   ];
 
