@@ -11,7 +11,8 @@
     <h1>{{getHostName()}}</h1>
   </div>
   <div class="buttons-top-right">
-    <button mat-mini-fab color="positive" routerLink="/host" routerLinkActive="active">
+    <button mat-mini-fab color="positive" (click)="doLogout()"
+            matTooltip="Logout" matTooltipPosition="left">
       <mat-icon>directions_run</mat-icon>
     </button>
   </div>

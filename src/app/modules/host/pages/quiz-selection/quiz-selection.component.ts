@@ -121,6 +121,13 @@ export class QuizSelectionComponent implements OnInit,AfterViewInit {
     console.log(`Theoretically saving newly created quiz...`);
   }
 
+  doLogout() {
+    this._cookieService.delete('token');
+    localStorage.removeItem('hostName');
+    localStorage.removeItem('hostId');
+    this.router.navigate(['/host']);
+  }
+
 
   //tsParticles definition
   id = "tsparticles-overlay";

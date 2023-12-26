@@ -6,31 +6,43 @@ import {LoginComponent} from "@modules/host/pages/login/login.component";
 import {LobbyComponent} from "@modules/host/pages/lobby/lobby.component";
 import {RoundMainComponent} from "@modules/host/pages/round-main/round-main.component";
 import {ResultsComponent} from "@modules/host/pages/results/results.component";
+import {authenticationGuard, loggedInGuard} from "@data/guards/authentication.guard";
 
 const routes: Routes = [
   {
-    path:'', redirectTo: 'login', pathMatch: "prefix"
+    path:'',
+    redirectTo: 'login',
+    pathMatch: "prefix"
   },
   {
-    path:'login', component:LoginComponent
+    path:'login',
+    component:LoginComponent,
+    canActivate: [loggedInGuard]
   },
   {
-    path:':hostId/selection', component:QuizSelectionComponent
+    path:':hostId/selection',
+    component:QuizSelectionComponent,
+    canActivate: [authenticationGuard]
   },
   {
-    path:':hostId/preview/:quizId', component: QuizPreviewComponent
+    path:':hostId/lobby/:quizId',
+    component: LobbyComponent,
+    canActivate: [authenticationGuard]
   },
   {
-    path:':hostId/lobby/:quizId', component: LobbyComponent
+    path:':hostId/round/:quizId/:roundId',
+    component: RoundMainComponent,
+    canActivate: [authenticationGuard]
   },
   {
-    path:':hostId/round/:quizId/:roundId', component: RoundMainComponent
+    path:':hostId/results/:quizId/:roundId',
+    component: ResultsComponent,
+    canActivate: [authenticationGuard]
   },
   {
-    path:':hostId/results/:quizId/:roundId', component: ResultsComponent
-  },
-  {
-    path:':hostId/results/:quizId', component: ResultsComponent
+    path:':hostId/results/:quizId',
+    component: ResultsComponent,
+    canActivate: [authenticationGuard]
   }
   ];
 
