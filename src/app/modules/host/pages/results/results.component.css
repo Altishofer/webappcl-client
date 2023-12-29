@@ -6,7 +6,6 @@
   margin-left: auto;
   margin-right: auto;
   padding: 20px 10%;
-  background-color: transparent; /* Todo: maybe remove this, maybe keep this... */
 }
 .btn-block {
   width: fit-content;

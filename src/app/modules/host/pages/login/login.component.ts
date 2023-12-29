@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Host } from "app/data/interfaces/host.model";
 import { HostService } from "app/data/services/host.service";
 import { CookieService } from "ngx-cookie-service";
@@ -7,8 +7,8 @@ import { Router } from '@angular/router';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { HttpErrorResponse } from "@angular/common/http";
 import { Md5 } from "ts-md5";
-import {ClickMode, Container, Engine, HoverMode, MoveDirection, OutMode} from "tsparticles-engine";
-import {loadSlim} from "tsparticles-slim";
+import { ClickMode, Container, Engine, HoverMode, MoveDirection, OutMode } from "tsparticles-engine";
+import { loadSlim } from "tsparticles-slim";
 
 @Component({
   selector: 'app-login',

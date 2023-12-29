@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
-import {SignalRService} from "@data/services/SignalRService";
-import {ActivatedRoute, Router} from "@angular/router";
-import {CookieService} from "ngx-cookie-service";
-import {HostService} from "@data/services/host.service";
+import { SignalRService } from "@data/services/SignalRService";
+import { ActivatedRoute, Router } from "@angular/router";
+import { CookieService } from "ngx-cookie-service";
+import { HostService } from "@data/services/host.service";
 import { Options } from 'ngx-qrcode-styling';
-import {catchError} from "rxjs";
-import {HttpErrorResponse} from "@angular/common/http";
+import { catchError} from "rxjs";
+import { HttpErrorResponse } from "@angular/common/http";
+import { ClickMode, Container, Engine, HoverMode, MoveDirection, OutMode } from "tsparticles-engine";
+import { loadSlim } from "tsparticles-slim";
 
 @Component({
   selector: 'app-lobby',
@@ -158,6 +160,84 @@ export class LobbyComponent {
           console.log("ERROR: updating rounds via REST");
         }
       });
+  }
+
+
+  //tsParticles definition
+  id = "tsparticles-overlay";
+
+  particlesOptions = {
+    background: {
+      opacity: 0
+    },
+    fpsLimit: 60,
+    interactivity: {
+      events: {
+        onClick: {
+          enable: false,
+          mode: ClickMode.push,
+        },
+        onHover: {
+          enable: true,
+          mode: HoverMode.repulse,
+        },
+        resize: true,
+      },
+      modes: {
+        push: {
+          quantity: 4,
+        },
+        repulse: {
+          distance: 200,
+          duration: 0.4,
+        },
+      },
+    },
+    particles: {
+      color: {
+        value: "#ffffff"
+      },
+      links: {
+        color: "#ffffff",
+        distance: 150,
+        enable: true,
+        opacity: 0.3,
+        width: 1,
+      },
+      move: {
+        direction: MoveDirection.none,
+        enable: true,
+        outModes: {
+          default: OutMode.bounce,
+        },
+        random: true,
+        speed: {min: 1, max: 6},
+        straight: false,
+      },
+      number: {
+        density: {
+          enable: true,
+          area: 800,
+        },
+        value: 50,
+      },
+      opacity: {
+        value: 0.4,
+      },
+      shape: {
+        type: "circle",
+      },
+      size: {
+        value: { min: 1, max: 5 },
+      },
+    },
+    detectRetina: true,
+  };
+
+  particlesLoaded(container: Container): void {}
+
+  async particlesInit(engine: Engine): Promise<void> {
+    await loadSlim(engine);
   }
 
   protected readonly URL = URL;
