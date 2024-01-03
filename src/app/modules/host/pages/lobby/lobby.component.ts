@@ -162,6 +162,10 @@ export class LobbyComponent {
       });
   }
 
+  isLobbyJoined(): boolean {
+    return this.players.length !== 0;
+  }
+
 
   //tsParticles definition
   id = "tsparticles-overlay";

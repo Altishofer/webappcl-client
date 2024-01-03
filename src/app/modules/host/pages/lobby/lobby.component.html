@@ -27,7 +27,7 @@
       </div>
 
       <h2 class="between-title-grid">
-        List of not your friends:
+        {{ isLobbyJoined() ? 'Currently in the lobby:' : 'Waiting for players...' }}
       </h2>
 
       <div class="players-grid">
