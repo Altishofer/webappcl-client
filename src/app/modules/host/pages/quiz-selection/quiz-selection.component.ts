@@ -76,7 +76,12 @@ export class QuizSelectionComponent implements OnInit,AfterViewInit {
   }
 
   getHostName(): string {
-    return this._cookieService.get('hostName');
+    const hostName = localStorage.getItem('hostName');
+    if (hostName) {
+      return hostName;
+    } else {
+      return ''
+    }
   }
 
   redirect(quizId: number) {
