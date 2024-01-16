@@ -11,7 +11,7 @@ import {Router} from "@angular/router";
 import {Round} from "@data/interfaces/round.model";
 import {AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {QuizWithRound} from "@data/interfaces/QuizWithRound";
-import {catchError, debounceTime, distinctUntilChanged, of, switchMap, tap} from "rxjs";
+import {catchError, debounceTime, distinctUntilChanged, Observable, of, switchMap, tap} from "rxjs";
 import {HttpErrorResponse} from "@angular/common/http";
 import {MatDialog} from "@angular/material/dialog";
 import {DeleteDialogComponent} from "@layout/delete-dialog/delete-dialog.component";
@@ -168,9 +168,13 @@ export class QuizPreviewComponent implements OnInit{
     return item;
   }
 
-  start() : void {
-    this.saveChanges();
-    this.startQuiz.emit(this.selectedQuizId);
+  async start(): Promise<void> {
+    try {
+      this.selectedQuizId = await this.saveChanges();
+      this.startQuiz.emit(this.selectedQuizId);
+    } catch (error) {
+      console.error('An error occurred while saving changes:', error);
+    }
   }
 
   roundAllOk(roundId : string): boolean {
@@ -208,69 +212,66 @@ export class QuizPreviewComponent implements OnInit{
     this.previewClosed.emit(true);
   }
 
-  saveChanges(): void {
-    this.selectedQuizRounds.forEach((round: Round) => {
-      let formArray = this.forbiddenWordsForm.get(round.id.toString()) as FormArray;
-      round.forbiddenWords = formArray.controls.map(control => control.value.word);
-      formArray = this.targetWordForm.get(round.id.toString()) as FormArray;
-      round.roundTarget = formArray.value.word;
+
+  async saveChanges(): Promise<number> {
+    return new Promise<number>((resolve, reject) => {
+      this.selectedQuizRounds.forEach((round: Round) => {
+        let formArray = this.forbiddenWordsForm.get(round.id.toString()) as FormArray;
+        round.forbiddenWords = formArray.controls.map(control => control.value.word);
+        formArray = this.targetWordForm.get(round.id.toString()) as FormArray;
+        round.roundTarget = formArray.value.word;
+      });
+
+      let quiz: QuizWithRound = {
+        quizId: this.selectedQuizId,
+        hostId: this.selectedHostId,
+        title: this.selectedQuizTitle,
+        rounds: this.selectedQuizRounds,
+      };
+
+      let saveChangesObservable: Observable<any>;
+
+      if (this.selectedQuizId == -1) {
+        saveChangesObservable = this._quizService.createQuiz(quiz);
+      } else {
+        saveChangesObservable = this._quizService.updateQuiz(quiz);
+      }
+
+      saveChangesObservable
+        .pipe(
+          catchError((error: HttpErrorResponse) => {
+            console.log(JSON.stringify(error.error));
+            if (error.status != 500) {
+              this.errorMsg = error.error;
+            } else {
+              this.errorMsg = this.unexpectedErrorMsg;
+            }
+            reject(error);
+            return [];
+          })
+        )
+        .subscribe(
+          (response: any): void => {
+            if ((response.status >= 200 && response.status < 300) || response.status == 304) {
+              this.selectedQuizRounds = response.body.rounds;
+              this.selectedQuizId = response.body.quizId;
+              this.unsavedChanges = false;
+              //this.closePreview.emit(true);
+              this.closePreview();
+              resolve(response.body.quizId);
+            } else {
+              this.errorMsg = this.unexpectedErrorMsg;
+              reject('Unexpected response status');
+            }
+          },
+          (error : any) => {
+            console.error('An error occurred while saving changes:', error);
+            reject(error);
+          }
+        );
     });
+  }
 
-    let quiz: QuizWithRound = {
-      quizId : this.selectedQuizId,
-      hostId : this.selectedHostId,
-      title : this.selectedQuizTitle,
-      rounds : this.selectedQuizRounds
-    }
-
-    if (this.selectedQuizId == -1) {
-      this.selectedQuizId = -1;
-      this._quizService.createQuiz(quiz)
-        .pipe(
-          catchError((error: HttpErrorResponse) => {
-            console.log(JSON.stringify(error.error));
-            if (error.status != 500) {
-              this.errorMsg = error.error;
-            } else {
-              this.errorMsg = this.unexpectedErrorMsg;
-            }
-            return[];
-          })
-        )
-        .subscribe((response: any): void => {
-        if ((response.status >= 200 && response.status < 300) || response.status == 304) {
-          this.selectedQuizRounds = response.body.rounds;
-          this.selectedQuizId = response.body.quizId;
-          this.closePreview();
-        } else {
-          this.errorMsg = this.unexpectedErrorMsg;
-        }
-      });
-    } else {
-      this._quizService.updateQuiz(quiz)
-        .pipe(
-          catchError((error: HttpErrorResponse) => {
-            console.log(JSON.stringify(error.error));
-            if (error.status != 500) {
-              this.errorMsg = error.error;
-            } else {
-              this.errorMsg = this.unexpectedErrorMsg;
-            }
-            return[];
-          })
-        )
-        .subscribe((response: any): void => {
-        if ((response.status >= 200 && response.status < 300) || response.status == 304) {
-          this.selectedQuizRounds = response.body.rounds;
-          this.unsavedChanges = false;
-          //this.closePreview.emit(true);
-          this.closePreview();
-        } else {
-          this.errorMsg = this.unexpectedErrorMsg;
-        }
-      });
-    }
-    }
 
   saveTitle(event: any) {
     const title = event.target?.textContent;

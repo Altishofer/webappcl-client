@@ -45,5 +45,5 @@
 </div>
 
 <ng-template #quizPreviewContent>
-  <app-quiz-preview [selectedQuizId]="selectedQuizId" [selectedQuizTitle]="selectedQuizTitle" [selectedQuizRounds]="getSelectedQuizRounds(selectedQuizId)" [selectedHostId]="selectedQuizHostId" (previewClosed)="refresh()" (startQuiz)="startQuiz()"></app-quiz-preview>
+  <app-quiz-preview [selectedQuizId]="selectedQuizId" [selectedQuizTitle]="selectedQuizTitle" [selectedQuizRounds]="getSelectedQuizRounds(selectedQuizId)" [selectedHostId]="selectedQuizHostId" (previewClosed)="refresh()" (startQuiz)="startQuiz($event)"></app-quiz-preview>
 </ng-template>
