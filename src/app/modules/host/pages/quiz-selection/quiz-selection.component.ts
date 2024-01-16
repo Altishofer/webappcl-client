@@ -76,7 +76,8 @@ export class QuizSelectionComponent implements OnInit,AfterViewInit {
   }
 
   getHostName(): string {
-    return this._cookieService.get('hostName');
+    let name : string | null = localStorage.getItem('hostName');
+    return name ? name : "";
   }
 
   redirect(quizId: number) {
@@ -113,7 +114,8 @@ export class QuizSelectionComponent implements OnInit,AfterViewInit {
     this.ngAfterViewInit();
   }
 
-  startQuiz() {
+  startQuiz(selectedQuizId : number) {
+    this.selectedQuizId = selectedQuizId;
     this.router.navigate(['/host', this.hostId, 'lobby', this.selectedQuizId]);
   }
 

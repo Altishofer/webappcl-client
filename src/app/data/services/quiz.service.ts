@@ -45,7 +45,7 @@ export class QuizService {
         return false
       }
       if (response.status === 200) {
-        // console.log(`check for ${word} -> ${response.body}`)
+        // console.log(`check for ${word} -> ${response.body}`);
         if (response?.body == null) {
           return false;
         }
